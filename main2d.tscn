@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=4 uid="uid://decrhuj8ncsgc"]
+
+[ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://tileset.tres" id="1_b6gu2"]
+
+[node name="Main2d" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAAAP//lAADAAAAAAD//wAAlAABAAMAAAD+/wAAlAADAAAAAAD9/wEAlAADAAAAAAD9/wIAlAADAAAAAAD8/wMAlAADAAEAAAD9/wMAlAADAAAAAAD+/wMAlAADAAAAAAD+/wIAkAACAAEAAAD+/wEAlAADAAAAAAD//wEAlAABAAMAAAD//wIAlAABAAMAAAAAAAAAlAADAAAAAAAAAAEAlAADAAAAAAD8/wIAkAACAAEAAAABAP//kAACAAEAAAAAAAIAkAACAAEAAAD//wMAkAADAAEAAAD//wQAkAADAAAAAAD9/wQAkAAEAAEAAAD8/wQAkAABAAEAAAD8/wUAkAAAAAEAAAABAAAAkAACAAAAAAD+////kAAAAAAAAAD+/wQAkAACAAAAABD8/wEAkAACAAAAABD7/wEAkAACAAEAAAD7/wIAkAACAAEAAAD6/wMAkAACAAEAAAA=")
+tile_set = ExtResource("1_b6gu2")
+occlusion_enabled = false
+collision_enabled = false
