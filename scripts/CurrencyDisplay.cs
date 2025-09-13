@@ -1,0 +1,36 @@
+using System.Collections.Generic;
+using Godot;
+
+public partial class CurrencyDisplay : Control
+{
+    [Export]
+    private Godot.Collections.Dictionary<CurrencyType, Resource> currencyIcons;
+
+    public void DisplayCurrencyAmount(Dictionary<CurrencyType, int> currencyAmounts)
+    {
+        foreach (var kvp in currencyAmounts)
+        {
+            var currencyType = kvp.Key;
+            var amount = kvp.Value;
+            
+            var textureRect = new TextureRect();
+            textureRect.Texture = currencyIcons[currencyType] as Texture2D;
+            textureRect.CustomMinimumSize = Vector2.One * 80;
+            textureRect.ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
+            this.AddChild(textureRect);
+
+            var label = new Label();
+            label.LabelSettings = new LabelSettings() { FontSize = 20 };
+            label.Text = amount.ToString();
+            this.AddChild(label);
+        }
+    }
+
+    public void Cleanup()
+    {
+        for (int i = this.GetChildCount() - 1; i >= 0; i--)
+        {
+            this.RemoveChild(this.GetChild(i));
+        }
+    }
+}

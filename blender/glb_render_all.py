@@ -9,6 +9,8 @@ def set_render_self_and_children(glb, show):
 
 glbs = list(bpy.data.collections["GLBs"].all_objects)
 
+object = None
+
 for glb in glbs:
     set_render_self_and_children(glb, True)
     

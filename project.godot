@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="HexBuilder"
-config/features=PackedStringArray("4.4", "Mobile")
+run/main_scene="uid://decrhuj8ncsgc"
+config/features=PackedStringArray("4.4", "C#", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
 
 [dotnet]
 

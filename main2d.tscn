@@ -1,12 +1,240 @@
-[gd_scene load_steps=2 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=14 format=4 uid="uid://decrhuj8ncsgc"]
 
-[ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://tileset.tres" id="1_b6gu2"]
+[ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
+[ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
+[ext_resource type="Script" uid="uid://dymo2w1h17tkh" path="res://scripts/InventoryManager.cs" id="2_j1s7q"]
+[ext_resource type="Script" uid="uid://44qulkptwyjg" path="res://scripts/MapController.cs" id="2_m3sjc"]
+[ext_resource type="TileSet" uid="uid://dyh6lwi880plh" path="res://assets/locked_overlay_tileset.tres" id="5_2ntku"]
+[ext_resource type="Script" uid="uid://iflp0ejf4lyl" path="res://scripts/MapInputProcessor.cs" id="5_b68g4"]
+[ext_resource type="Script" uid="uid://qmsdrailj53" path="res://scripts/UnlockedCellPopup.cs" id="6_1mh2o"]
+[ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://currency_display.tscn" id="6_bn7pe"]
+[ext_resource type="Script" uid="uid://5ns5k1qjdur6" path="res://scripts/LockedCellPopup.cs" id="7_bn7pe"]
 
-[node name="Main2d" type="Node2D"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j1s7q"]
+size = Vector2(50, 50)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[sub_resource type="Gradient" id="Gradient_1mh2o"]
+colors = PackedColorArray(0, 0, 0, 0.670588, 0.223529, 0.223529, 0.223529, 0.670588)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bn7pe"]
+gradient = SubResource("Gradient_1mh2o")
+width = 400
+use_hdr = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_1mh2o"]
+font_size = 24
+
+[node name="Main2d" type="Node2D" node_paths=PackedStringArray("mapController", "inventoryManager")]
+script = ExtResource("1_vlfvj")
+mapController = NodePath("MapController")
+inventoryManager = NodePath("InventoryManager")
+
+[node name="InventoryManager" type="Node2D" parent="." node_paths=PackedStringArray("inventoryDisplay")]
+script = ExtResource("2_j1s7q")
+inventoryDisplay = NodePath("../CanvasLayer/UIMain/CurrencyDisplay")
+startAmounts = Dictionary[int, int]({
+0: 10,
+1: 10,
+2: 5,
+3: 5
+})
+
+[node name="MapController" type="Node2D" parent="." node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer")]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAAAP//lAADAAAAAAD//wAAlAABAAMAAAD+/wAAlAADAAAAAAD9/wEAlAADAAAAAAD9/wIAlAADAAAAAAD8/wMAlAADAAEAAAD9/wMAlAADAAAAAAD+/wMAlAADAAAAAAD+/wIAkAACAAEAAAD+/wEAlAADAAAAAAD//wEAlAABAAMAAAD//wIAlAABAAMAAAAAAAAAlAADAAAAAAAAAAEAlAADAAAAAAD8/wIAkAACAAEAAAABAP//kAACAAEAAAAAAAIAkAACAAEAAAD//wMAkAADAAEAAAD//wQAkAADAAAAAAD9/wQAkAAEAAEAAAD8/wQAkAABAAEAAAD8/wUAkAAAAAEAAAABAAAAkAACAAAAAAD+////kAAAAAAAAAD+/wQAkAACAAAAABD8/wEAkAACAAAAABD7/wEAkAACAAEAAAD7/wIAkAACAAEAAAD6/wMAkAACAAEAAAA=")
+script = ExtResource("2_m3sjc")
+baseMapLayer = NodePath("TileMapLayer")
+lockedOverlayLayer = NodePath("LockedOverlayTileMapLayer")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="MapController"]
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAABAP//AAADAAAAAAAAAP//AAADAAAAAAD//wAAAAADAAAAAAD//wEAAAADAAAAAAABAAAAAAADAAAAAAAAAAEAAAADAAAAAAA=")
 tile_set = ExtResource("1_b6gu2")
 occlusion_enabled = false
-collision_enabled = false
+navigation_enabled = false
+
+[node name="LockedOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
+tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAA=")
+tile_set = ExtResource("5_2ntku")
+occlusion_enabled = false
+navigation_enabled = false
+
+[node name="MapInputDetector" type="Node2D" parent="MapController" node_paths=PackedStringArray("lockedCellPopup", "unlockedCellPopup")]
+script = ExtResource("5_b68g4")
+lockedCellPopup = NodePath("../../PopupLayer/LockedCellPopup")
+unlockedCellPopup = NodePath("../../PopupLayer/UnlockedCellPopup")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+editor_draw_limits = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+offset = Vector2(-960, -540)
+transform = Transform2D(1, 0, 0, 1, -960, -540)
+follow_viewport_enabled = true
+
+[node name="UIMain" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CurrencyDisplay" parent="CanvasLayer/UIMain" instance=ExtResource("6_bn7pe")]
+layout_mode = 1
+offset_bottom = 20.0
+
+[node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -31.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Next turn"
+icon = SubResource("PlaceholderTexture2D_j1s7q")
+
+[node name="PopupLayer" type="CanvasLayer" parent="."]
+layer = 2
+offset = Vector2(-960, -540)
+transform = Transform2D(1, 0, 0, 1, -960, -540)
+follow_viewport_enabled = true
+
+[node name="UnlockedCellPopup" type="Control" parent="PopupLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -350.0
+offset_right = 250.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_1mh2o")
+
+[node name="BackgroundTexture" type="TextureRect" parent="PopupLayer/UnlockedCellPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_bn7pe")
+
+[node name="CloseButton" type="Button" parent="PopupLayer/UnlockedCellPopup"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 10.0
+offset_right = -8.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "X"
+
+[node name="LockedCellPopup" type="Control" parent="PopupLayer" node_paths=PackedStringArray("priceDisplay", "confirmButton")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -350.0
+offset_right = 250.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_bn7pe")
+priceDisplay = NodePath("CurrencyDisplay")
+confirmButton = NodePath("ConfirmButton")
+
+[node name="BackgroundTexture" type="TextureRect" parent="PopupLayer/LockedCellPopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_bn7pe")
+
+[node name="Label" type="Label" parent="PopupLayer/LockedCellPopup"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.3
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unlock?"
+label_settings = SubResource("LabelSettings_1mh2o")
+
+[node name="CurrencyDisplay" parent="PopupLayer/LockedCellPopup" instance=ExtResource("6_bn7pe")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_top = -25.0
+offset_right = 0.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConfirmButton" type="Button" parent="PopupLayer/LockedCellPopup"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.7
+anchor_right = 0.5
+anchor_bottom = 0.7
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OK"
+
+[node name="CloseButton" type="Button" parent="PopupLayer/LockedCellPopup"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = 10.0
+offset_right = -8.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "X"
+
+[connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
+[connection signal="pressed" from="PopupLayer/UnlockedCellPopup/CloseButton" to="PopupLayer/UnlockedCellPopup" method="Close"]
+[connection signal="pressed" from="PopupLayer/LockedCellPopup/ConfirmButton" to="PopupLayer/LockedCellPopup" method="ConfirmUnlock"]
+[connection signal="pressed" from="PopupLayer/LockedCellPopup/CloseButton" to="PopupLayer/LockedCellPopup" method="Close"]
