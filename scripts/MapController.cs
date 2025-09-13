@@ -5,6 +5,7 @@ public partial class MapController : Node2D, IInjectable
 {
     [Export]
     private TileMapLayer baseMapLayer;
+    public TileMapLayer BaseMapLayer => baseMapLayer; 
 
     [Export]
     private TileMapLayer lockedOverlayLayer;
@@ -20,6 +21,13 @@ public partial class MapController : Node2D, IInjectable
     {
         base._EnterTree();
         InjectionManager.Register(this);
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        var tileDatabase = InjectionManager.Get<TileDatabase>();
+        tileDatabase.AddTileSetTileData(baseMapLayer.TileSet);
     }
 
     public void OnNewGame()
@@ -76,5 +84,10 @@ public partial class MapController : Node2D, IInjectable
             baseMapLayer.SetCell(surroundingCell, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), defaultUnlockedTileAtlasCoords);
             lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
         }
+    }
+
+    public void SetCell(Vector2I cell, TileDatabase.TileInfo tileToSet)
+    {
+        baseMapLayer.SetCell(cell, baseMapLayer.TileSet.GetSourceId(tileToSet.sourceId), tileToSet.tileCoords);
     }
 }

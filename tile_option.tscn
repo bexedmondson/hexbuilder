@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://uffj30rhdgvw"]
+
+[ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://tileSelectButtonGroup.tres" id="1_whmtt"]
+[ext_resource type="Script" uid="uid://cois7vh5ul7c7" path="res://scripts/TileOptionUI.cs" id="2_tjxx3"]
+[ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://currency_display.tscn" id="3_6d75x"]
+
+[node name="TileOption" type="Button" node_paths=PackedStringArray("textureRect", "currencyDisplay")]
+custom_minimum_size = Vector2(175, 200)
+toggle_mode = true
+button_group = ExtResource("1_whmtt")
+script = ExtResource("2_tjxx3")
+textureRect = NodePath("MarginContainer/TileTexture")
+currencyDisplay = NodePath("MarginContainer/CurrencyDisplay")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(175, 200)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TileTexture" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+expand_mode = 3
+
+[node name="CurrencyDisplay" parent="MarginContainer" instance=ExtResource("3_6d75x")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8

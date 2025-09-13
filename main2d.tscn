@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=16 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://qmsdrailj53" path="res://scripts/UnlockedCellPopup.cs" id="6_1mh2o"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://currency_display.tscn" id="6_bn7pe"]
 [ext_resource type="Script" uid="uid://5ns5k1qjdur6" path="res://scripts/LockedCellPopup.cs" id="7_bn7pe"]
+[ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://tile_option.tscn" id="9_hp2ex"]
+[ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://tileSelectButtonGroup.tres" id="10_dppk6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j1s7q"]
 size = Vector2(50, 50)
@@ -114,8 +116,7 @@ offset = Vector2(-960, -540)
 transform = Transform2D(1, 0, 0, 1, -960, -540)
 follow_viewport_enabled = true
 
-[node name="UnlockedCellPopup" type="Control" parent="PopupLayer"]
-visible = false
+[node name="UnlockedCellPopup" type="Control" parent="PopupLayer" node_paths=PackedStringArray("tileSelector", "confirmButton")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -129,6 +130,10 @@ offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_1mh2o")
+tileSelector = NodePath("ScrollContainer/TileSelectionGrid")
+tileScene = ExtResource("9_hp2ex")
+tileSelectionGroup = ExtResource("10_dppk6")
+confirmButton = NodePath("ConfirmButton")
 
 [node name="BackgroundTexture" type="TextureRect" parent="PopupLayer/UnlockedCellPopup"]
 layout_mode = 1
@@ -151,7 +156,37 @@ offset_bottom = 50.0
 grow_horizontal = 0
 text = "X"
 
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.2
+anchor_right = 0.85
+anchor_bottom = 0.8
+horizontal_scroll_mode = 0
+
+[node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "OK"
+
 [node name="LockedCellPopup" type="Control" parent="PopupLayer" node_paths=PackedStringArray("priceDisplay", "confirmButton")]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -236,5 +271,6 @@ text = "X"
 
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/CloseButton" to="PopupLayer/UnlockedCellPopup" method="Close"]
+[connection signal="pressed" from="PopupLayer/UnlockedCellPopup/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="OnConfirmButton"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/ConfirmButton" to="PopupLayer/LockedCellPopup" method="ConfirmUnlock"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/CloseButton" to="PopupLayer/LockedCellPopup" method="Close"]

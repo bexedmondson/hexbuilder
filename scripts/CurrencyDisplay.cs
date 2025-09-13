@@ -30,7 +30,7 @@ public partial class CurrencyDisplay : Control
     {
         for (int i = this.GetChildCount() - 1; i >= 0; i--)
         {
-            this.RemoveChild(this.GetChild(i));
+            this.GetChild(i).QueueFree();
         }
     }
 }

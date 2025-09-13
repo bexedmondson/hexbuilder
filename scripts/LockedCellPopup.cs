@@ -38,8 +38,8 @@ public partial class LockedCellPopup : Control
             return;
 
         mapController.UnlockCell(cell);
+        inventoryManager.SpendCurrency(cellUnlockCost);
         Close();
-        //inventoryManager.SpendCurrency(cellUnlockCost);
     }
 
     public void Close()

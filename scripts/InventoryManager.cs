@@ -35,4 +35,15 @@ public partial class InventoryManager : Node2D, IInjectable
 
         return true;
     }
+    
+    public void SpendCurrency(Dictionary<CurrencyType, int> price)
+    {
+        foreach (var kvp in price)
+        {
+            inventory[kvp.Key] -= kvp.Value;
+        }
+        
+        inventoryDisplay.Cleanup(); //obviously temporary
+        inventoryDisplay.DisplayCurrencyAmount(inventory);
+    }
 }

@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=13 format=3 uid="uid://wb0h503pab2p"]
 
 [ext_resource type="Resource" uid="uid://dri684d2te7kl" path="res://data/village.tres" id="1_155r3"]
-[ext_resource type="Texture2D" uid="uid://ijyhohnvt3g2" path="res://assets/all_2d_buildings.png" id="2_beawo"]
 [ext_resource type="Texture2D" uid="uid://qg38agffxc77" path="res://assets/all_2d_paths.png" id="2_hn6ub"]
 [ext_resource type="Texture2D" uid="uid://c0rw7c4po7men" path="res://assets/all_2d_rivers.png" id="3_02kee"]
+[ext_resource type="Texture2D" uid="uid://ijyhohnvt3g2" path="res://assets/all_2d_buildings.png" id="4_beawo"]
 [ext_resource type="Texture2D" uid="uid://ddu2nvd4l4ofw" path="res://assets/all_2d_units.png" id="4_fjia6"]
 [ext_resource type="Texture2D" uid="uid://c524fo71mhsbt" path="res://assets/all_2d_terrain.png" id="5_3lysa"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/grass.tres" id="6_ls0l7"]
@@ -44,7 +44,7 @@ texture_region_size = Vector2i(480, 480)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fk0lh"]
 resource_name = "buildings"
-texture = ExtResource("2_beawo")
+texture = ExtResource("4_beawo")
 texture_region_size = Vector2i(480, 480)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 69)

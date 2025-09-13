@@ -38,7 +38,7 @@ public partial class MapInputProcessor : Node2D
             }
             else
             {
-                unlockedCellPopup.SetCell(cell);
+                unlockedCellPopup.SetCell(mapController.BaseMapLayer, cell);
                 unlockedCellPopup.SetVisible(true);
                 lockedCellPopup.SetVisible(false);
             }
