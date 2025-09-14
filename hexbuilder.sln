@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexBuilder", "HexBuilder.csproj", "{66427883-A049-4560-98CD-BEE878F31CC7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hexbuilder", "hexbuilder.csproj", "{66427883-A049-4560-98CD-BEE878F31CC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

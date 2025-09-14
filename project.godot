@@ -23,7 +23,7 @@ window/stretch/mode="viewport"
 
 [dotnet]
 
-project/assembly_name="HexBuilder"
+project/assembly_name="hexbuilder"
 
 [rendering]
 
