@@ -71,9 +71,9 @@ public partial class MapController : Node2D, IInjectable
         return CellStatus.Hidden;
     }
 
-    public Dictionary<CurrencyType, int> GetCellUnlockCost(Vector2I cell)
+    public CurrencySum GetCellUnlockCost(Vector2I cell)
     {
-        return new Dictionary<CurrencyType, int>() {
+        return new CurrencySum() {
             { CurrencyType.Person, 1 }
         };
     }

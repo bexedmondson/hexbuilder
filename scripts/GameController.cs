@@ -21,5 +21,13 @@ public partial class GameController : Node2D
     public void NextTurn()
     {
         
+        
+        foreach (var cell in mapController.BaseMapLayer.GetUsedCells())
+        {
+            if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
+                continue;
+
+            var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
+        }
     }
 }

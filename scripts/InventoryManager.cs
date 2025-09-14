@@ -9,7 +9,7 @@ public partial class InventoryManager : Node2D, IInjectable
     [Export]
     private Godot.Collections.Dictionary<CurrencyType, int> startAmounts;
 
-    private Dictionary<CurrencyType, int> inventory = new();
+    private CurrencySum inventory = new();
 
     public override void _EnterTree()
     {
@@ -20,12 +20,12 @@ public partial class InventoryManager : Node2D, IInjectable
     public void OnNewGame()
     {
         inventory.Clear();
-        inventory = new Dictionary<CurrencyType, int>(startAmounts);
+        inventory = new CurrencySum(startAmounts);
         
         inventoryDisplay.DisplayCurrencyAmount(inventory);
     }
 
-    public bool CanAfford(Dictionary<CurrencyType, int> price)
+    public bool CanAfford(CurrencySum price)
     {
         foreach (var kvp in price)
         {
@@ -36,7 +36,7 @@ public partial class InventoryManager : Node2D, IInjectable
         return true;
     }
     
-    public void SpendCurrency(Dictionary<CurrencyType, int> price)
+    public void SpendCurrency(CurrencySum price)
     {
         foreach (var kvp in price)
         {

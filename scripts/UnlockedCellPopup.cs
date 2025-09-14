@@ -59,7 +59,7 @@ public partial class UnlockedCellPopup : Control
         mapController.SetCell(cell, selectedTileInfo);
 
         var inventoryManager = InjectionManager.Get<InventoryManager>();
-        inventoryManager.SpendCurrency(new Dictionary<CurrencyType, int>(selectedTileInfo.tileData.price));
+        inventoryManager.SpendCurrency(new CurrencySum(selectedTileInfo.tileData.price));
         Close();
     }
 

@@ -6,9 +6,9 @@ public partial class CurrencyDisplay : Control
     [Export]
     private Godot.Collections.Dictionary<CurrencyType, Resource> currencyIcons;
 
-    public void DisplayCurrencyAmount(Dictionary<CurrencyType, int> currencyAmounts)
+    public void DisplayCurrencyAmount(CurrencySum currencySum)
     {
-        foreach (var kvp in currencyAmounts)
+        foreach (var kvp in currencySum)
         {
             var currencyType = kvp.Key;
             var amount = kvp.Value;

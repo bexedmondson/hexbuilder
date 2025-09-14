@@ -16,7 +16,7 @@ public partial class TileOptionUI : Button
         tileInfo = setTileInfo;
         textureRect.Texture = tileInfo.tileTexture;
 
-        var tilePrice = new Dictionary<CurrencyType, int>(tileInfo.tileData.price);
+        var tilePrice = new CurrencySum(tileInfo.tileData.price);
         currencyDisplay.DisplayCurrencyAmount(tilePrice);
 
         var inventoryManager = InjectionManager.Get<InventoryManager>();
