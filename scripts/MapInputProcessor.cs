@@ -22,8 +22,6 @@ public partial class MapInputProcessor : Node2D
             && eventMouseButton.ButtonIndex == MouseButton.Left
             && !eventMouseButton.Pressed)
         {
-            GD.Print(eventMouseButton.AsText());
-
             var cell = mapController.GetCellUnderMouse();
             var cellStatus = mapController.GetCellStatus(cell);
             

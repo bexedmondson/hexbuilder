@@ -46,4 +46,13 @@ public partial class InventoryManager : Node2D, IInjectable
         inventoryDisplay.Cleanup(); //obviously temporary
         inventoryDisplay.DisplayCurrencyAmount(inventory);
     }
+
+    //TODO want to combine this with above method but i couldn't think of a good name for the method lol
+    public void OnNextTurn(CurrencySum currencyDelta)
+    {
+        inventory.Add(currencyDelta);
+        
+        inventoryDisplay.Cleanup(); //obviously temporary
+        inventoryDisplay.DisplayCurrencyAmount(inventory);
+    }
 }
