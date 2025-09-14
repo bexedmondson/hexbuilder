@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CustomTileData" load_steps=2 format=3 uid="uid://8m4fhhljy05o"]
+
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/CustomTileData.cs" id="1_54yph"]
+
+[resource]
+script = ExtResource("1_54yph")
+canBePlacedOn = null
+price = null
+baseTurnCurrencyChange = null
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

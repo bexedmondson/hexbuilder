@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://currency_display.tscn" id="3_6d75x"]
 
 [node name="TileOption" type="Button" node_paths=PackedStringArray("textureRect", "currencyDisplay")]
-custom_minimum_size = Vector2(175, 200)
+custom_minimum_size = Vector2(170, 200)
 toggle_mode = true
 button_group = ExtResource("1_whmtt")
 script = ExtResource("2_tjxx3")

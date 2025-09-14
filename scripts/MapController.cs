@@ -37,15 +37,23 @@ public partial class MapController : Node2D, IInjectable
         
         visibleCellUnlockStates.Clear();
         visibleCellUnlockStates[Vector2I.Zero] = true;
+
+        var defaultUnlockedTileSource = baseMapLayer.TileSet.GetSource(defaultUnlockedTileSourceIndex) as TileSetAtlasSource;
         
         baseMapLayer.SetCell(Vector2I.Zero, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), defaultUnlockedTileAtlasCoords);
         
         foreach (var surroundingCell in baseMapLayer.GetSurroundingCells(Vector2I.Zero))
         {
             visibleCellUnlockStates[surroundingCell] = false;
-            baseMapLayer.SetCell(surroundingCell, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), defaultUnlockedTileAtlasCoords);
+            baseMapLayer.SetCell(surroundingCell, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), GetRandomTile(defaultUnlockedTileSource));
             lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
         }
+    }
+
+    private Vector2I GetRandomTile(TileSetAtlasSource atlasSource)
+    {
+        int tileCount = atlasSource.GetTilesCount();
+        return atlasSource.GetTileId((int)(GD.Randi() % tileCount));
     }
 
     public Vector2I GetCellUnderMouse()
@@ -75,13 +83,15 @@ public partial class MapController : Node2D, IInjectable
         visibleCellUnlockStates[cell] = true;
         lockedOverlayLayer.EraseCell(cell);
         
+        var defaultUnlockedTileSource = baseMapLayer.TileSet.GetSource(defaultUnlockedTileSourceIndex) as TileSetAtlasSource;
+        
         foreach (var surroundingCell in baseMapLayer.GetSurroundingCells(cell))
         {
             if (visibleCellUnlockStates.ContainsKey(surroundingCell))
                 continue;
             
             visibleCellUnlockStates[surroundingCell] = false;
-            baseMapLayer.SetCell(surroundingCell, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), defaultUnlockedTileAtlasCoords);
+            baseMapLayer.SetCell(surroundingCell, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), GetRandomTile(defaultUnlockedTileSource));
             lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
         }
     }

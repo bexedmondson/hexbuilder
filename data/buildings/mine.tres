@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CustomTileData" load_steps=5 format=3 uid="uid://b26b1kiyr2vjc"]
+
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Resource" uid="uid://dylx1bgqm5eh3" path="res://data/terrain/hill.tres" id="1_aomn4"]
+[ext_resource type="Resource" uid="uid://bp787dbrt1226" path="res://data/terrain/mountain.tres" id="2_c4fns"]
+[ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="3_s3scp"]
+
+[resource]
+script = ExtResource("1_24cbf")
+canBePlacedOn = Array[Object]([ExtResource("1_aomn4"), ExtResource("2_c4fns"), ExtResource("3_s3scp")])
+price = {
+1: 2
+}
+baseTurnCurrencyChange = {
+0: -1,
+3: 1
+}
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="CustomTileData" load_steps=3 format=3 uid="uid://dri684d2te7kl"]
+[gd_resource type="Resource" script_class="CustomTileData" load_steps=2 format=3 uid="uid://cksbfb33kjift"]
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/CustomTileData.cs" id="1_24cbf"]
-[ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/grass.tres" id="2_hxx2q"]
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = Array[Object]([ExtResource("2_hxx2q")])
+canBePlacedOn = Array[Object]([])
 price = {
 1: 2
 }
