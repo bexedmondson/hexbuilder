@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_54yph")
-canBePlacedOn = null
-price = null
-baseTurnCurrencyChange = null
+canBePlacedOn = []
+price = {}
+baseTurnCurrencyChange = {}
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

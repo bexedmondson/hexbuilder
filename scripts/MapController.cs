@@ -100,4 +100,36 @@ public partial class MapController : Node2D, IInjectable
     {
         baseMapLayer.SetCell(cell, baseMapLayer.TileSet.GetSourceId(tileToSet.sourceId), tileToSet.tileCoords);
     }
+
+    public Dictionary<Vector2I, int> GetSurroundingCellsUpToDistance(Vector2I centreCell, int maxDistance)
+    {
+        Dictionary<Vector2I, int> neighbourDistanceDict = new(){
+            { centreCell, 0 }
+        };
+
+        List<Vector2I> seenCells = new() { centreCell };
+        List<Vector2I> newCellsFound = new();
+
+        for (int dist = 0; dist < maxDistance; dist++)
+        {
+            newCellsFound.Clear();
+            for (int i = 0; i < seenCells.Count; i++)
+            {
+                var seenCell = seenCells[i];
+                foreach (var neighbour in baseMapLayer.GetSurroundingCells(seenCell))
+                {
+                    //only make a change if this cell isn't already in the dict
+                    bool added = neighbourDistanceDict.TryAdd(neighbour, dist + 1);
+                    
+                    if (added)
+                        newCellsFound.Add(neighbour);
+                }
+            }
+
+            seenCells.Clear();
+            seenCells.AddRange(newCellsFound);
+        }
+        
+        return neighbourDistanceDict;
+    }
 }

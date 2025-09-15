@@ -14,8 +14,8 @@
 [ext_resource type="Resource" uid="uid://8m4fhhljy05o" path="res://data/terrain/water.tres" id="7_ctfve"]
 [ext_resource type="Resource" uid="uid://dylx1bgqm5eh3" path="res://data/terrain/hill.tres" id="8_b6r2m"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="9_rx844"]
-[ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="10_8bx14"]
-[ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/island.tres" id="11_040ux"]
+[ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="10_5kckd"]
+[ext_resource type="Resource" uid="uid://ckghrlsbr2sq4" path="res://data/terrain/island.tres" id="11_040ux"]
 [ext_resource type="Resource" uid="uid://dri684d2te7kl" path="res://data/buildings/village.tres" id="13_4fte4"]
 [ext_resource type="Resource" uid="uid://bhdo22lh6munn" path="res://data/buildings/bridge.tres" id="13_5kckd"]
 [ext_resource type="Resource" uid="uid://b2tu1kvag36kv" path="res://data/buildings/archer_camp.tres" id="14_o04i8"]
@@ -52,7 +52,7 @@ texture_region_size = Vector2i(480, 480)
 2:0/0/custom_data_0 = ExtResource("8_b6r2m")
 3:0/0 = 0
 3:0/0/texture_origin = Vector2i(0, 69)
-3:0/0/custom_data_0 = ExtResource("10_8bx14")
+3:0/0/custom_data_0 = ExtResource("10_5kckd")
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 69)
 0:1/0/custom_data_0 = ExtResource("2_ww03b")
