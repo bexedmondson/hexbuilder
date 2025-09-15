@@ -1,22 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://hst2gqk22rpc"]
+[gd_scene load_steps=7 format=3 uid="uid://hst2gqk22rpc"]
 
 [ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/CurrencyDisplay.cs" id="1_efedh"]
-[ext_resource type="Texture2D" uid="uid://b6t1k8y5jr7k1" path="res://assets/2d/unit-mill.png" id="2_65s6i"]
-[ext_resource type="Texture2D" uid="uid://cbuc6i26f5kns" path="res://assets/2d/unit-tree.png" id="3_j38ae"]
-[ext_resource type="Texture2D" uid="uid://bul7pf63ijai0" path="res://assets/2d/unit-ship.png" id="5_4vja0"]
-[ext_resource type="Texture2D" uid="uid://cmmr6ixcatlfv" path="res://assets/2d/unit-wall-tower.png" id="5_65s6i"]
+[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_kbswh"]
 
-[node name="CurrencyDisplay" type="HBoxContainer"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqiv7"]
+atlas = ExtResource("2_kbswh")
+region = Rect2(2432, 1152, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uy8d2"]
+atlas = ExtResource("2_kbswh")
+region = Rect2(384, 1280, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65s6i"]
+atlas = ExtResource("2_kbswh")
+region = Rect2(128, 1280, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbswh"]
+atlas = ExtResource("2_kbswh")
+region = Rect2(2560, 0, 128, 128)
+
+[node name="CurrencyDisplay" type="HFlowContainer"]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 70.0
 size_flags_horizontal = 6
 size_flags_vertical = 4
+last_wrap_alignment = 2
 script = ExtResource("1_efedh")
 currencyIcons = Dictionary[int, Resource]({
-0: ExtResource("2_65s6i"),
-1: ExtResource("3_j38ae"),
-2: ExtResource("5_65s6i"),
-3: ExtResource("5_4vja0")
+0: SubResource("AtlasTexture_fqiv7"),
+1: SubResource("AtlasTexture_uy8d2"),
+2: SubResource("AtlasTexture_65s6i"),
+3: SubResource("AtlasTexture_kbswh")
 })

@@ -15,13 +15,13 @@ public partial class CurrencyDisplay : Control
             
             var textureRect = new TextureRect();
             textureRect.Texture = currencyIcons[currencyType] as Texture2D;
-            textureRect.CustomMinimumSize = Vector2.One * 80;
+            textureRect.CustomMinimumSize = Vector2.One * 40;
             textureRect.ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
             this.AddChild(textureRect);
 
             var label = new Label();
-            label.LabelSettings = new LabelSettings() { FontSize = 20 };
-            label.Text = amount.ToString();
+            label.LabelSettings = new LabelSettings() { FontSize = 25 };
+            label.Text = amount.ToString() + "   ";
             this.AddChild(label);
         }
     }

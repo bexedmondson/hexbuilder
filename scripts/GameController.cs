@@ -24,15 +24,12 @@ public partial class GameController : Node2D
         
         foreach (var cell in mapController.BaseMapLayer.GetUsedCells())
         {
-            GD.Print(mapController.GetCellStatus(cell));
             if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
                 continue;
 
             var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
             totalCurrencyChange.Add(cellTileData.baseTurnCurrencyChange);
         }
-
-        GD.Print(totalCurrencyChange.ToString());
         
         inventoryManager.OnNextTurn(totalCurrencyChange);
     }
