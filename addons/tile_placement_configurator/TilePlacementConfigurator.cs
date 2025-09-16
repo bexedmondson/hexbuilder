@@ -10,9 +10,7 @@ public partial class TilePlacementConfigurator : EditorPlugin
 	public override void _EnterTree()
 	{
 		mainPanelInstance = (Control)mainPanelScene.Instantiate();
-		// Add the main panel to the editor's main viewport.
 		EditorInterface.Singleton.GetEditorMainScreen().AddChild(mainPanelInstance);
-		// Hide the main panel. Very much required.
 		_MakeVisible(false);
 	}
 

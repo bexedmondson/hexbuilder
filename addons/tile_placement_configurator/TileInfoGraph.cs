@@ -1,51 +1,101 @@
-using System.Collections.Generic;
-using Godot;
 
-namespace hexbuilder.addons.tile_placement_configurator;
+using System.Linq;
+using Godot;
 
 [Tool]
 public partial class TileInfoGraph : GraphEdit
 {
+    [Export]
+    private PackedScene tileGraphNodeScene;
+
+    private TileInfoMainNode tileGraphMainNode;
+
     public void OnTreeItemSelected(CustomTileData selectedTileData)
     {
+        this.ClearConnections();
         for (int i = this.GetChildCount() - 1; i >= 0; i--)
         {
-            if (this.GetChild(i) is GraphNode)
+            if (this.GetChild(i) is TileInfoGraphNode)
                 this.GetChild(i).QueueFree();
         }
-        
-        GraphNode mainNode = AddTileNode(selectedTileData);
 
-        Label mainLabel = new Label();
-        mainLabel.Text = "can be placed on";
-        mainNode.AddChild(mainLabel);
+        tileGraphMainNode = tileGraphNodeScene.Instantiate() as TileInfoMainNode;
+        string fileName = selectedTileData.ResourcePath.GetFile();
+        fileName = fileName.TrimSuffix("." + selectedTileData.ResourcePath.GetFile().GetExtension());
+        tileGraphMainNode.Title = fileName;
+        tileGraphMainNode.customTileData = selectedTileData;
+        tileGraphMainNode.Setup(this);
+        tileGraphMainNode.ResetSize();
+        this.AddChild(tileGraphMainNode);
         
-        mainNode.SetSlotEnabledRight(0, true);
-        
-        foreach (var canBePlacedOn in selectedTileData.canBePlacedOn)
+        tileGraphMainNode.SetSlotEnabledRight(0, true);
+
+        TileInfoGraphNode firstNode = null;
+        TileInfoGraphNode lastNode = null;
+
+        for (int i = 0; i < selectedTileData.canBePlacedOn.Count; i++)
         {
+            var canBePlacedOn = selectedTileData.canBePlacedOn[i];
             var placedOnNode = AddTileNode(canBePlacedOn);
 
-            Label acceptsLabel = new Label();
-            acceptsLabel.Text = "accepts";
-            placedOnNode.AddChild(acceptsLabel);
-            
-            placedOnNode.SetSlotEnabledLeft(0, true);
-
-            this.ConnectNode(mainNode.Name, 0, placedOnNode.Name, 0);
+            if (i == 0)
+                firstNode = placedOnNode;
+            else if (i == selectedTileData.canBePlacedOn.Count - 1)
+                lastNode = placedOnNode;
         }
         
         ArrangeNodes();
+
+        if (firstNode != null && lastNode != null)
+        {
+            tileGraphMainNode.PositionOffset = new Vector2(tileGraphMainNode.PositionOffset.X, (lastNode.PositionOffset.Y - firstNode.PositionOffset.Y) / 2 + firstNode.PositionOffset.Y);
+        }
     }
 
-    private GraphNode AddTileNode(CustomTileData customTileData)
+    private TileInfoGraphNode AddTileNode(CustomTileData customTileData)
     {
-        GraphNode mainNode = new GraphNode();
+        TileInfoGraphNode graphNode = new TileInfoGraphNode();
         string fileName = customTileData.ResourcePath.GetFile();
         fileName = fileName.TrimSuffix("." + customTileData.ResourcePath.GetFile().GetExtension());
-        mainNode.Title = fileName;
-        mainNode.ResetSize();
-        this.AddChild(mainNode);
-        return mainNode;
+        graphNode.Title = fileName;
+        graphNode.customTileData = customTileData;
+        graphNode.ResetSize();
+        this.AddChild(graphNode);
+            
+        Label acceptsLabel = new Label();
+        acceptsLabel.Text = "accepts";
+        graphNode.AddChild(acceptsLabel);
+
+        graphNode.SetSlotEnabledLeft(0, true);
+
+        this.ConnectNode(tileGraphMainNode.Name, 0, graphNode.Name, 0);
+        return graphNode;
+    }
+
+    public void OnPlacedOnUpdated()
+    {
+        var connectionListFromNode = GetConnectionListFromNode(tileGraphMainNode.Name);
+        foreach (var canBePlacedOn in tileGraphMainNode.customTileData.canBePlacedOn)
+        {
+            bool hasConnection = false;
+            foreach (var connection in connectionListFromNode)
+            {
+                var foundChild = this.GetChildren().FirstOrDefault(child => child.Equals(connection["to_node"].Obj));
+                if (foundChild == null)
+                {
+                    //TODO remove connection
+                }
+                else
+                {
+                    hasConnection = true;
+                    break;
+                }
+            }
+
+            if (!hasConnection)
+                AddTileNode(canBePlacedOn);
+        }
+        
+        ArrangeNodes();
     }
 }
