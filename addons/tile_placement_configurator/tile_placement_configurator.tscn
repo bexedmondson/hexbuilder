@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cli7ggd2tdl06"]
+
+[ext_resource type="Script" uid="uid://yrup3vuubmo5" path="res://addons/tile_placement_configurator/TileSelectionTree.cs" id="1_dlr7g"]
+[ext_resource type="Script" uid="uid://dxcvu45irx2bb" path="res://addons/tile_placement_configurator/TileInfoGraph.cs" id="2_3q7qa"]
+
+[node name="TilePlacementConfigurator" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+split_offset = 200
+
+[node name="Tree" type="Tree" parent="HSplitContainer" node_paths=PackedStringArray("tileInfoGraph")]
+layout_mode = 2
+hide_root = true
+scroll_horizontal_enabled = false
+script = ExtResource("1_dlr7g")
+tileInfoGraph = NodePath("../GraphEdit")
+
+[node name="GraphEdit" type="GraphEdit" parent="HSplitContainer"]
+layout_mode = 2
+minimap_enabled = false
+show_menu = false
+script = ExtResource("2_3q7qa")
+
+[connection signal="item_selected" from="HSplitContainer/Tree" to="HSplitContainer/Tree" method="OnTreeItemSelected"]

@@ -1,0 +1,48 @@
+#if TOOLS
+using Godot;
+
+[Tool]
+public partial class TilePlacementConfigurator : EditorPlugin
+{
+	private PackedScene mainPanelScene = ResourceLoader.Load<PackedScene>("res://addons/tile_placement_configurator/tile_placement_configurator.tscn");
+	private Control mainPanelInstance;
+	
+	public override void _EnterTree()
+	{
+		mainPanelInstance = (Control)mainPanelScene.Instantiate();
+		// Add the main panel to the editor's main viewport.
+		EditorInterface.Singleton.GetEditorMainScreen().AddChild(mainPanelInstance);
+		// Hide the main panel. Very much required.
+		_MakeVisible(false);
+	}
+
+	public override void _ExitTree()
+	{
+		if (mainPanelInstance != null)
+			mainPanelInstance.QueueFree();
+	}
+
+	public override bool _HasMainScreen()
+	{
+		return true;
+	}
+
+	public override void _MakeVisible(bool visible)
+	{
+		if (mainPanelInstance != null)
+		{
+			mainPanelInstance.Visible = visible;
+		}
+	}
+
+	public override string _GetPluginName()
+	{
+		return "Tiles";
+	}
+
+	public override Texture2D _GetPluginIcon()
+	{
+		return GD.Load<Texture2D>("res://addons/tile_placement_configurator/icon.svg");
+	}
+}
+#endif
