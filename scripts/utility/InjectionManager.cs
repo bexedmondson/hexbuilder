@@ -1,12 +1,6 @@
 using System;
 using System.Collections.Generic;
-
 using Godot;
-
-public interface IInjectable
-{
-    
-}
 
 [Tool]
 public class InjectionManager

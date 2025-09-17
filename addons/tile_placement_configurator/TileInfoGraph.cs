@@ -6,6 +6,9 @@ using Godot;
 public partial class TileInfoGraph : GraphEdit
 {
     [Export]
+    private PackedScene tileGraphMainNodeScene;
+
+    [Export]
     private PackedScene tileGraphNodeScene;
 
     private TileInfoMainNode tileGraphMainNode;
@@ -16,16 +19,12 @@ public partial class TileInfoGraph : GraphEdit
         for (int i = this.GetChildCount() - 1; i >= 0; i--)
         {
             if (this.GetChild(i) is TileInfoGraphNode)
-                this.GetChild(i).QueueFree();
+                this.GetChild(i).Free();
         }
 
-        tileGraphMainNode = tileGraphNodeScene.Instantiate() as TileInfoMainNode;
-        string fileName = selectedTileData.ResourcePath.GetFile();
-        fileName = fileName.TrimSuffix("." + selectedTileData.ResourcePath.GetFile().GetExtension());
-        tileGraphMainNode.Title = fileName;
+        tileGraphMainNode = tileGraphMainNodeScene.Instantiate() as TileInfoMainNode;
         tileGraphMainNode.customTileData = selectedTileData;
-        tileGraphMainNode.Setup(this);
-        tileGraphMainNode.AddTexture();
+        tileGraphMainNode.SetupOptionDropdown(this);
         tileGraphMainNode.ResetSize();
         this.AddChild(tileGraphMainNode);
         
@@ -55,12 +54,8 @@ public partial class TileInfoGraph : GraphEdit
 
     private TileInfoGraphNode AddTileNode(CustomTileData customTileData)
     {
-        TileInfoGraphNode graphNode = new TileInfoGraphNode();
-        string fileName = customTileData.ResourcePath.GetFile();
-        fileName = fileName.TrimSuffix("." + customTileData.ResourcePath.GetFile().GetExtension());
-        graphNode.Title = fileName;
+        TileInfoGraphNode graphNode = tileGraphNodeScene.Instantiate() as TileInfoGraphNode;
         graphNode.customTileData = customTileData;
-        graphNode.AddTexture();
         graphNode.ResetSize();
         this.AddChild(graphNode);
 

@@ -1,22 +1,19 @@
 using Godot;
-using hexbuilder.addons.tile_placement_configurator;
 
 [Tool]
 public partial class TileInfoMainNode : TileInfoGraphNode
 {
     [Export]
-    private Button addCanPlaceOnButton;
-
-    [Export]
     private OptionButton optionButton;
 
     private TileInfoGraph graph;
 
-    public void Setup(TileInfoGraph graphEdit)
+    public void SetupOptionDropdown(TileInfoGraph graphEdit)
     {
         graph = graphEdit;
         var dataDir = DirAccess.Open("res://data");
         this.optionButton.AddItem("");
+        optionButton.SetItemDisabled(0, true);
         DirContents(dataDir);
     }
     
@@ -53,6 +50,9 @@ public partial class TileInfoMainNode : TileInfoGraphNode
 
     public void OnAddCanPlaceOnButton()
     {
+        if (optionButton.IsItemDisabled(optionButton.GetSelected()))
+            return;
+        
         var selectedTileData = optionButton.GetSelectedMetadata().Obj as CustomTileData;
         customTileData.canBePlacedOn.Add(selectedTileData);
         ResourceSaver.Save(customTileData);

@@ -11,4 +11,9 @@ public partial class CustomTileData : Resource
 
     [Export]
     public Godot.Collections.Dictionary<CurrencyType, int> baseTurnCurrencyChange;
+
+    public string GetFileName()
+    {
+        return ResourcePath.GetFile().TrimSuffix("." + ResourcePath.GetFile().GetExtension());
+    }
 }

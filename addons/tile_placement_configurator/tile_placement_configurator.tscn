@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cli7ggd2tdl06"]
+[gd_scene load_steps=6 format=3 uid="uid://cli7ggd2tdl06"]
 
 [ext_resource type="Script" uid="uid://yrup3vuubmo5" path="res://addons/tile_placement_configurator/TileSelectionTree.cs" id="1_dlr7g"]
 [ext_resource type="Script" uid="uid://dxcvu45irx2bb" path="res://addons/tile_placement_configurator/TileInfoGraph.cs" id="2_3q7qa"]
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="2_dw6tw"]
-[ext_resource type="PackedScene" uid="uid://dok2gkkf4d57c" path="res://addons/tile_placement_configurator/tile_selection_node.tscn" id="3_xwp5v"]
+[ext_resource type="PackedScene" uid="uid://g3v3g6so7qp5" path="res://addons/tile_placement_configurator/tile_selection_node_main.tscn" id="3_xwp5v"]
+[ext_resource type="PackedScene" uid="uid://dok2gkkf4d57c" path="res://addons/tile_placement_configurator/tile_selection_node.tscn" id="5_8j5c5"]
 
 [node name="TilePlacementConfigurator" type="MarginContainer"]
 anchors_preset = 15
@@ -34,6 +35,7 @@ layout_mode = 2
 minimap_enabled = false
 show_menu = false
 script = ExtResource("2_3q7qa")
-tileGraphNodeScene = ExtResource("3_xwp5v")
+tileGraphMainNodeScene = ExtResource("3_xwp5v")
+tileGraphNodeScene = ExtResource("5_8j5c5")
 
 [connection signal="item_selected" from="HSplitContainer/Tree" to="HSplitContainer/Tree" method="OnTreeItemSelected"]

@@ -1,16 +1,25 @@
 using Godot;
 
+[Tool]
 public partial class TileInfoGraphNode : GraphNode
 {
-    public CustomTileData customTileData;
+    [Export]
+    private TextureRect textureRect;
 
-    public void AddTexture()
+    private CustomTileData tileData;
+    public CustomTileData customTileData
     {
-        TextureRect textureRect = new TextureRect();
+        get => tileData;
+        set
+        {
+            tileData = value;
+            OnCustomTileDataSet();
+        }
+    }
+
+    public void OnCustomTileDataSet()
+    {
+        Title = customTileData.GetFileName();
         textureRect.Texture = InjectionManager.Get<TileDatabase>().GetTileTexture(customTileData);
-        textureRect.ExpandMode = TextureRect.ExpandModeEnum.FitWidthProportional;
-        textureRect.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
-        textureRect.CustomMinimumSize = Vector2.One * 100;
-        this.AddChild(textureRect);
     }
 }
