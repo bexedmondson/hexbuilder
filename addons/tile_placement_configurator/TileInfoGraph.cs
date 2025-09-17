@@ -25,6 +25,7 @@ public partial class TileInfoGraph : GraphEdit
         tileGraphMainNode.Title = fileName;
         tileGraphMainNode.customTileData = selectedTileData;
         tileGraphMainNode.Setup(this);
+        tileGraphMainNode.AddTexture();
         tileGraphMainNode.ResetSize();
         this.AddChild(tileGraphMainNode);
         
@@ -59,12 +60,9 @@ public partial class TileInfoGraph : GraphEdit
         fileName = fileName.TrimSuffix("." + customTileData.ResourcePath.GetFile().GetExtension());
         graphNode.Title = fileName;
         graphNode.customTileData = customTileData;
+        graphNode.AddTexture();
         graphNode.ResetSize();
         this.AddChild(graphNode);
-            
-        Label acceptsLabel = new Label();
-        acceptsLabel.Text = "accepts";
-        graphNode.AddChild(acceptsLabel);
 
         graphNode.SetSlotEnabledLeft(0, true);
 

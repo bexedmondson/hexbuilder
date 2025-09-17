@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
+[Tool]
 public class TileDatabase : IInjectable
 {
     public record TileInfo
@@ -54,5 +55,16 @@ public class TileDatabase : IInjectable
                 compatibleTileInfos.Add(tileInfo);
         }
         return compatibleTileInfos;
+    }
+
+    public AtlasTexture GetTileTexture(CustomTileData customTileData)
+    {
+        foreach (var tileInfo in tileInfos)
+        {
+            if (tileInfo.tileData == customTileData)
+                return tileInfo.tileTexture;
+        }
+
+        return null;
     }
 }

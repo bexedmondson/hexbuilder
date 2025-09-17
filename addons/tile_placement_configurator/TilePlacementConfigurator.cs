@@ -6,9 +6,13 @@ public partial class TilePlacementConfigurator : EditorPlugin
 {
 	private PackedScene mainPanelScene = ResourceLoader.Load<PackedScene>("res://addons/tile_placement_configurator/tile_placement_configurator.tscn");
 	private Control mainPanelInstance;
+
+	private TileDatabase tileDatabase;
 	
 	public override void _EnterTree()
 	{
+		tileDatabase = new TileDatabase();
+		
 		mainPanelInstance = (Control)mainPanelScene.Instantiate();
 		EditorInterface.Singleton.GetEditorMainScreen().AddChild(mainPanelInstance);
 		_MakeVisible(false);
@@ -18,6 +22,8 @@ public partial class TilePlacementConfigurator : EditorPlugin
 	{
 		if (mainPanelInstance != null)
 			mainPanelInstance.QueueFree();
+		
+		InjectionManager.Deregister(tileDatabase);
 	}
 
 	public override bool _HasMainScreen()

@@ -7,10 +7,15 @@ public partial class TileSelectionTree : Tree
 {
     [Export]
     private TileInfoGraph tileInfoGraph;
+
+    [Export]
+    private TileSet tileSet;
     
     public override void _Ready()
     {
         base._Ready();
+        
+        InjectionManager.Get<TileDatabase>().AddTileSetTileData(tileSet);
 
         var dataDir = DirAccess.Open("res://data");
         var root = this.CreateItem();

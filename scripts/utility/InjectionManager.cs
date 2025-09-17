@@ -8,6 +8,7 @@ public interface IInjectable
     
 }
 
+[Tool]
 public class InjectionManager
 {
     private static InjectionManager s_instance;
