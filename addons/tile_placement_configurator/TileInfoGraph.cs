@@ -1,6 +1,7 @@
 
 using System.Linq;
 using Godot;
+using Godot.Collections;
 
 [Tool]
 public partial class TileInfoGraph : GraphEdit
@@ -23,8 +24,9 @@ public partial class TileInfoGraph : GraphEdit
         }
 
         tileGraphMainNode = tileGraphMainNodeScene.Instantiate() as TileInfoMainNode;
+        tileGraphMainNode.graph = this;
         tileGraphMainNode.customTileData = selectedTileData;
-        tileGraphMainNode.SetupOptionDropdown(this);
+        tileGraphMainNode.SetupOptionDropdown();
         tileGraphMainNode.ResetSize();
         this.AddChild(tileGraphMainNode);
         
@@ -55,6 +57,8 @@ public partial class TileInfoGraph : GraphEdit
     private TileInfoGraphNode AddTileNode(CustomTileData customTileData)
     {
         TileInfoGraphNode graphNode = tileGraphNodeScene.Instantiate() as TileInfoGraphNode;
+        graphNode.graph = this;
+        graphNode.selectedTileData = tileGraphMainNode.customTileData;
         graphNode.customTileData = customTileData;
         graphNode.ResetSize();
         this.AddChild(graphNode);
@@ -65,30 +69,49 @@ public partial class TileInfoGraph : GraphEdit
         return graphNode;
     }
 
-    public void OnPlacedOnUpdated()
+    public void OnPlacedOnUpdated(TileInfoGraphNode updateSourceNode)
     {
         var connectionListFromNode = GetConnectionListFromNode(tileGraphMainNode.Name);
         foreach (var canBePlacedOn in tileGraphMainNode.customTileData.canBePlacedOn)
         {
-            bool hasConnection = false;
+            Dictionary foundConnection = null;
             foreach (var connection in connectionListFromNode)
             {
-                var foundChild = this.GetChildren().FirstOrDefault(child => child.Equals(connection["to_node"].Obj));
-                if (foundChild == null)
+                var obj = connection["to_node"].Obj;
+                var foundChild = this.GetChildren().FirstOrDefault(child => child.Name.Equals(connection["to_node"].Obj));
+                if (foundChild == null || foundChild is not TileInfoGraphNode tileInfoGraphNode)
                 {
-                    //TODO remove connection
+                    //TODO remove?? how did we get here
                 }
-                else
+                else if (tileInfoGraphNode.customTileData == canBePlacedOn)
                 {
-                    hasConnection = true;
+                    foundConnection = connection;
                     break;
                 }
             }
 
-            if (!hasConnection)
+            if (foundConnection != null)
+                connectionListFromNode.Remove(foundConnection);
+            else
                 AddTileNode(canBePlacedOn);
+        }
+
+        foreach (var leftoverConnection in connectionListFromNode)
+        {
+            var foundChild = this.GetChildren().FirstOrDefault(child => child.Name.Equals(leftoverConnection["to_node"].Obj));
+            if (foundChild == null || foundChild is not TileInfoGraphNode tileInfoGraphNode)
+            {
+                DisconnectNode((StringName)leftoverConnection["from_node"], (int)leftoverConnection["from_port"], (StringName)leftoverConnection["to_node"], (int)leftoverConnection["to_port"]);
+            }
+            else
+            {
+                this.RemoveChild(tileInfoGraphNode);
+                tileInfoGraphNode.QueueFree();
+            }
         }
         
         ArrangeNodes();
+        
+        tileGraphMainNode.OnCanPlacedOnUpdated();
     }
 }

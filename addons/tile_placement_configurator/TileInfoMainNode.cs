@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 [Tool]
@@ -6,11 +7,8 @@ public partial class TileInfoMainNode : TileInfoGraphNode
     [Export]
     private OptionButton optionButton;
 
-    private TileInfoGraph graph;
-
-    public void SetupOptionDropdown(TileInfoGraph graphEdit)
+    public void SetupOptionDropdown()
     {
-        graph = graphEdit;
         var dataDir = DirAccess.Open("res://data");
         this.optionButton.AddItem("");
         optionButton.SetItemDisabled(0, true);
@@ -48,6 +46,14 @@ public partial class TileInfoMainNode : TileInfoGraphNode
         }
     }
 
+    public void OnCanPlacedOnUpdated()
+    {
+        for (int i = 0; i < optionButton.ItemCount; i++)
+        {
+            optionButton.SetItemDisabled(i, customTileData.canBePlacedOn.Contains(optionButton.GetItemMetadata(i).Obj as CustomTileData));
+        }
+    }
+
     public void OnAddCanPlaceOnButton()
     {
         if (optionButton.IsItemDisabled(optionButton.GetSelected()))
@@ -57,8 +63,8 @@ public partial class TileInfoMainNode : TileInfoGraphNode
         customTileData.canBePlacedOn.Add(selectedTileData);
         ResourceSaver.Save(customTileData);
 
-        graph.OnPlacedOnUpdated();
+        graph.OnPlacedOnUpdated(this);
 
-        optionButton.SetItemDisabled(optionButton.GetSelected(), true);
+        OnCanPlacedOnUpdated();
     }
 }
