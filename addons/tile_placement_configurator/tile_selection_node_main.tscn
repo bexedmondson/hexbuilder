@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://3lb8wqmku7cf" path="res://addons/tile_placement_configurator/TileInfoMainNode.cs" id="1_w3j40"]
 
 [node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("optionButton", "textureRect")]
+custom_minimum_size = Vector2(300, 0)
+offset_right = 300.0
+offset_bottom = 213.0
 title = "example"
 ignore_invalid_connection_type = true
 slot/0/left_enabled = false
@@ -37,7 +40,7 @@ optionButton = NodePath("HBoxContainer/OptionButton")
 textureRect = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 5

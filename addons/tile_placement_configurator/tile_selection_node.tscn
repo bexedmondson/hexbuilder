@@ -3,9 +3,12 @@
 [ext_resource type="Script" uid="uid://buix2g2wqnprb" path="res://addons/tile_placement_configurator/TileInfoGraphNode.cs" id="1_quxkt"]
 
 [node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("textureRect")]
+custom_minimum_size = Vector2(300, 0)
+offset_right = 300.0
+offset_bottom = 188.0
 title = "example"
 ignore_invalid_connection_type = true
-slot/0/left_enabled = false
+slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)
 slot/0/left_icon = null
@@ -27,7 +30,7 @@ script = ExtResource("1_quxkt")
 textureRect = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
