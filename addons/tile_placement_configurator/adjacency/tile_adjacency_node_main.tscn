@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcoyh6o3odmvx"]
+
+[ext_resource type="Script" uid="uid://cfvsti1luatbu" path="res://addons/tile_placement_configurator/adjacency/TileAdjacencyMainNode.cs" id="1_4fr6r"]
+
+[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("textureRect", "optionButton")]
+custom_minimum_size = Vector2(300, 0)
+offset_right = 300.0
+offset_bottom = 213.0
+title = "example"
+ignore_invalid_connection_type = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+script = ExtResource("1_4fr6r")
+textureRect = NodePath("TextureRect")
+optionButton = NodePath("HBoxContainer/OptionButton")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ConnectionLabel" type="Label" parent="."]
+layout_mode = 2
+text = "affected by adjacent:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+fit_to_longest_item = false
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = " + "
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="OnAddAdjacencyButton"]

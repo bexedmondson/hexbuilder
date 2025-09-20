@@ -1,22 +1,15 @@
 using Godot;
 
-namespace hexbuilder.addons.tile_placement_configurator;
-
 [Tool]
 public partial class TileSelectionTree : Tree
 {
     [Export]
-    private TileInfoGraph tileInfoGraph;
+    private AbstractTileGraph tileGraph;
 
-    [Export]
-    private TileSet tileSet;
-    
-    public override void _Ready()
+    public override void _EnterTree()
     {
-        base._Ready();
+        base._EnterTree();
         
-        InjectionManager.Get<TileDatabase>().AddTileSetTileData(tileSet);
-
         var dataDir = DirAccess.Open("res://data");
         var root = this.CreateItem();
         DirContents(dataDir, root);
@@ -54,6 +47,6 @@ public partial class TileSelectionTree : Tree
         if (metadata is not CustomTileData tileData)
             return;
         
-        tileInfoGraph.OnTreeItemSelected(tileData);
+        tileGraph.OnTreeItemSelected(tileData);
     }
 }

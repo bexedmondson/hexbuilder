@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using Godot;
 
 [Tool]
-public partial class TileInfoGraphNode : GraphNode
+public partial class TileAdjacencyGraphNode : GraphNode
 {
     [Export]
     private TextureRect textureRect;
 
-    public TileInfoGraph graph;
+    public TileAdjacencyGraph graph;
 
     public CustomTileData selectedTileData;
 
     private Dictionary<string, EditorProperty> propertyEditors = new();
 
-    private CustomTileData tileData;
-    public CustomTileData customTileData
+    private AdjacencyConfig config;
+    public AdjacencyConfig adjacencyConfig
     {
-        get => tileData;
+        get => config;
         set
         {
-            tileData = value;
-            OnCustomTileDataSet();
+            config = value;
+            OnAdjacencyConfigSet();
         }
     }
     
-    public void OnCustomTileDataSet()
+    public void OnAdjacencyConfigSet()
     {
-        Title = customTileData.GetFileName();
-        textureRect.Texture = InjectionManager.Get<TileDatabase>().GetTileTexture(customTileData);
+        Title = adjacencyConfig.requiredTile.GetFileName();
+        textureRect.Texture = InjectionManager.Get<TileDatabase>().GetTileTexture(adjacencyConfig.requiredTile);
 
         foreach (var kvp in propertyEditors)
         {
@@ -36,17 +36,17 @@ public partial class TileInfoGraphNode : GraphNode
         }
         propertyEditors.Clear();
 
-        var props = customTileData.GetPropertyList();
+        var props = adjacencyConfig.GetPropertyList();
 
         foreach (var prop in props)
         {
             var nameProperty = (string)prop["name"].Obj;
-            if (nameProperty == "price" || nameProperty == "baseTurnCurrencyChange")
+            if (nameProperty == "distance" || nameProperty == "currencyEffect")
             {
-                var editor = EditorInspector.InstantiatePropertyEditor(customTileData, (Variant.Type)prop["type"].Obj, nameProperty, (PropertyHint)prop["hint"].Obj, (string)prop["hint_string"].Obj, Convert.ToUInt32(prop["usage"].Obj));
+                var editor = EditorInspector.InstantiatePropertyEditor(adjacencyConfig, (Variant.Type)prop["type"].Obj, nameProperty, (PropertyHint)prop["hint"].Obj, (string)prop["hint_string"].Obj, Convert.ToUInt32(prop["usage"].Obj));
                 this.AddChild(editor);
 
-                editor.SetObjectAndProperty(customTileData, nameProperty);
+                editor.SetObjectAndProperty(adjacencyConfig, nameProperty);
                 editor.Label = nameProperty;
                 editor.PropertyChanged += OnPropChanged;
                 editor.Selected += OnPropSelected;
@@ -58,7 +58,7 @@ public partial class TileInfoGraphNode : GraphNode
 
     private void OnPropChanged(StringName property, Variant value, StringName field, bool changing)
     {
-        customTileData.Set(property, value);
+        adjacencyConfig.Set(property, value);
         
         if (value.VariantType >= Variant.Type.Dictionary)
             propertyEditors[property].UpdateProperty();
@@ -75,9 +75,9 @@ public partial class TileInfoGraphNode : GraphNode
     
     public void OnDeleteButton()
     {
-        selectedTileData.canBePlacedOn.Remove(tileData);
+        selectedTileData.adjacencies.Remove(config);
         ResourceSaver.Save(selectedTileData);
 
-        graph.OnPlacedOnUpdated(this);
+        graph.OnAdjacencyUpdated();
     }
 }

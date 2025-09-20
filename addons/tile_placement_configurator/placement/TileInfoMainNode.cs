@@ -63,7 +63,7 @@ public partial class TileInfoMainNode : TileInfoGraphNode
         customTileData.canBePlacedOn.Add(selectedTileData);
         ResourceSaver.Save(customTileData);
 
-        graph.OnPlacedOnUpdated(this);
+        graph.OnAdjacencyUpdated();
 
         OnCanPlacedOnUpdated();
     }

@@ -1,10 +1,25 @@
-[gd_resource type="Resource" script_class="CustomTileData" load_steps=6 format=3 uid="uid://c42v6g70vxci2"]
+[gd_resource type="Resource" script_class="CustomTileData" load_steps=11 format=3 uid="uid://c42v6g70vxci2"]
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="1_h6ctf"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/AdjacencyConfig.cs" id="2_uw7xw"]
+[ext_resource type="Resource" uid="uid://cc5jv204rhvnk" path="res://data/buildings/tower.tres" id="3_58okd"]
 [ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="3_h6ctf"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_k53h4"]
+[ext_resource type="Resource" uid="uid://b8hvwxf5jgsix" path="res://data/buildings/wall.tres" id="3_uw7xw"]
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="4_f5q5i"]
+
+[sub_resource type="Resource" id="Resource_s5lrj"]
+script = ExtResource("2_uw7xw")
+requiredTile = ExtResource("3_uw7xw")
+distance = 2
+currencyEffect = {}
+
+[sub_resource type="Resource" id="Resource_uw7xw"]
+script = ExtResource("2_uw7xw")
+requiredTile = ExtResource("3_58okd")
+distance = 1
+currencyEffect = null
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -16,4 +31,5 @@ baseTurnCurrencyChange = {
 0: -1,
 3: 1
 }
+adjacencies = Array[Object]([SubResource("Resource_s5lrj"), SubResource("Resource_uw7xw")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

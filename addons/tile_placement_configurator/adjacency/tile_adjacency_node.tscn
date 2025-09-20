@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dok2gkkf4d57c"]
+[gd_scene load_steps=2 format=3 uid="uid://d1esbhagclee1"]
 
-[ext_resource type="Script" uid="uid://buix2g2wqnprb" path="res://addons/tile_placement_configurator/TileInfoGraphNode.cs" id="1_quxkt"]
+[ext_resource type="Script" uid="uid://cogs6kji671yj" path="res://addons/tile_placement_configurator/adjacency/TileAdjacencyGraphNode.cs" id="1_g8lkq"]
 
-[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("textureRect")]
+[node name="TileAdjacencyNode" type="GraphNode" node_paths=PackedStringArray("textureRect")]
 custom_minimum_size = Vector2(300, 0)
 offset_right = 300.0
 offset_bottom = 188.0
@@ -26,7 +26,7 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
-script = ExtResource("1_quxkt")
+script = ExtResource("1_g8lkq")
 textureRect = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]

@@ -1,6 +1,7 @@
 using Godot;
 
-[GlobalClass][Tool]
+[GlobalClass]
+[Tool]
 public partial class CustomTileData : Resource
 {
     [Export]
@@ -11,6 +12,9 @@ public partial class CustomTileData : Resource
 
     [Export]
     public Godot.Collections.Dictionary<CurrencyType, int> baseTurnCurrencyChange;
+
+    [Export]
+    public Godot.Collections.Array<AdjacencyConfig> adjacencies;
 
     public string GetFileName()
     {

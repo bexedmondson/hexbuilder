@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://g3v3g6so7qp5"]
 
-[ext_resource type="Script" uid="uid://3lb8wqmku7cf" path="res://addons/tile_placement_configurator/TileInfoMainNode.cs" id="1_w3j40"]
+[ext_resource type="Script" uid="uid://3lb8wqmku7cf" path="res://addons/tile_placement_configurator/placement/TileInfoMainNode.cs" id="1_w3j40"]
 
 [node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("optionButton", "textureRect")]
 custom_minimum_size = Vector2(300, 0)

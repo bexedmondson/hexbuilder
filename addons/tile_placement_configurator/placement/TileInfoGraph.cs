@@ -4,7 +4,7 @@ using Godot;
 using Godot.Collections;
 
 [Tool]
-public partial class TileInfoGraph : GraphEdit
+public partial class TileInfoGraph : AbstractTileGraph
 {
     [Export]
     private PackedScene tileGraphMainNodeScene;
@@ -14,7 +14,7 @@ public partial class TileInfoGraph : GraphEdit
 
     private TileInfoMainNode tileGraphMainNode;
 
-    public void OnTreeItemSelected(CustomTileData selectedTileData)
+    public override void OnTreeItemSelected(CustomTileData selectedTileData)
     {
         this.ClearConnections();
         for (int i = this.GetChildCount() - 1; i >= 0; i--)
@@ -69,7 +69,7 @@ public partial class TileInfoGraph : GraphEdit
         return graphNode;
     }
 
-    public void OnPlacedOnUpdated(TileInfoGraphNode updateSourceNode)
+    public override void OnAdjacencyUpdated()
     {
         var connectionListFromNode = GetConnectionListFromNode(tileGraphMainNode.Name);
         foreach (var canBePlacedOn in tileGraphMainNode.customTileData.canBePlacedOn)

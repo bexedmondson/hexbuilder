@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cli7ggd2tdl06"]
+[gd_scene load_steps=10 format=3 uid="uid://cli7ggd2tdl06"]
 
 [ext_resource type="Script" uid="uid://yrup3vuubmo5" path="res://addons/tile_placement_configurator/TileSelectionTree.cs" id="1_dlr7g"]
-[ext_resource type="Script" uid="uid://dxcvu45irx2bb" path="res://addons/tile_placement_configurator/TileInfoGraph.cs" id="2_3q7qa"]
+[ext_resource type="Script" uid="uid://tjgc7dt1jv3g" path="res://addons/tile_placement_configurator/TilePluginParentNode.cs" id="1_fdmax"]
+[ext_resource type="Script" uid="uid://dxcvu45irx2bb" path="res://addons/tile_placement_configurator/placement/TileInfoGraph.cs" id="2_3q7qa"]
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="2_dw6tw"]
-[ext_resource type="PackedScene" uid="uid://g3v3g6so7qp5" path="res://addons/tile_placement_configurator/tile_selection_node_main.tscn" id="3_xwp5v"]
-[ext_resource type="PackedScene" uid="uid://dok2gkkf4d57c" path="res://addons/tile_placement_configurator/tile_selection_node.tscn" id="5_8j5c5"]
+[ext_resource type="PackedScene" uid="uid://g3v3g6so7qp5" path="res://addons/tile_placement_configurator/placement/tile_selection_node_main.tscn" id="3_xwp5v"]
+[ext_resource type="PackedScene" uid="uid://dok2gkkf4d57c" path="res://addons/tile_placement_configurator/placement/tile_selection_node.tscn" id="5_8j5c5"]
+[ext_resource type="Script" uid="uid://do1wkryukvcsc" path="res://addons/tile_placement_configurator/adjacency/TileAdjacencyGraph.cs" id="7_g3dy6"]
+[ext_resource type="PackedScene" uid="uid://dcoyh6o3odmvx" path="res://addons/tile_placement_configurator/adjacency/tile_adjacency_node_main.tscn" id="8_l4udw"]
+[ext_resource type="PackedScene" uid="uid://d1esbhagclee1" path="res://addons/tile_placement_configurator/adjacency/tile_adjacency_node.tscn" id="9_slyvr"]
 
 [node name="TilePlacementConfigurator" type="MarginContainer"]
 anchors_preset = 15
@@ -13,24 +17,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+script = ExtResource("1_fdmax")
+tileSet = ExtResource("2_dw6tw")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+tab_alignment = 1
+current_tab = 0
+
+[node name="Placement" type="HSplitContainer" parent="TabContainer"]
 layout_mode = 2
 split_offset = 200
+metadata/_tab_index = 0
 
-[node name="Tree" type="Tree" parent="HSplitContainer" node_paths=PackedStringArray("tileInfoGraph")]
+[node name="Tree" type="Tree" parent="TabContainer/Placement" node_paths=PackedStringArray("tileGraph")]
 layout_mode = 2
 hide_root = true
 scroll_horizontal_enabled = false
 script = ExtResource("1_dlr7g")
-tileInfoGraph = NodePath("../GraphEdit")
-tileSet = ExtResource("2_dw6tw")
+tileGraph = NodePath("../GraphEdit")
 
-[node name="GraphEdit" type="GraphEdit" parent="HSplitContainer"]
+[node name="GraphEdit" type="GraphEdit" parent="TabContainer/Placement"]
 layout_mode = 2
 minimap_enabled = false
 show_menu = false
@@ -38,4 +45,26 @@ script = ExtResource("2_3q7qa")
 tileGraphMainNodeScene = ExtResource("3_xwp5v")
 tileGraphNodeScene = ExtResource("5_8j5c5")
 
-[connection signal="item_selected" from="HSplitContainer/Tree" to="HSplitContainer/Tree" method="OnTreeItemSelected"]
+[node name="Adjacency" type="HSplitContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+split_offset = 200
+metadata/_tab_index = 1
+
+[node name="Tree" type="Tree" parent="TabContainer/Adjacency" node_paths=PackedStringArray("tileGraph")]
+layout_mode = 2
+hide_root = true
+scroll_horizontal_enabled = false
+script = ExtResource("1_dlr7g")
+tileGraph = NodePath("../GraphEdit")
+
+[node name="GraphEdit" type="GraphEdit" parent="TabContainer/Adjacency"]
+layout_mode = 2
+minimap_enabled = false
+show_menu = false
+script = ExtResource("7_g3dy6")
+tileAdjacencyMainNodeScene = ExtResource("8_l4udw")
+tileAdjacencyNodeScene = ExtResource("9_slyvr")
+
+[connection signal="item_selected" from="TabContainer/Placement/Tree" to="TabContainer/Placement/Tree" method="OnTreeItemSelected"]
+[connection signal="item_selected" from="TabContainer/Adjacency/Tree" to="TabContainer/Adjacency/Tree" method="OnTreeItemSelected"]

@@ -4,6 +4,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="addons\tile_placement_configurator\placement\" />
     <Folder Include="assets\" />
   </ItemGroup>
 </Project>
