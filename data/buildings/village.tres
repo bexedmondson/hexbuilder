@@ -15,4 +15,5 @@ baseTurnCurrencyChange = {
 0: -2,
 3: 3
 }
+adjacencies = Array[Object]([])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

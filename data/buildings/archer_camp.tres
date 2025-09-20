@@ -16,4 +16,5 @@ price = {
 baseTurnCurrencyChange = {
 3: -1
 }
+adjacencies = Array[Object]([])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
