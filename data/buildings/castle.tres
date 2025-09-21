@@ -19,7 +19,9 @@ currencyEffect = {}
 script = ExtResource("2_uw7xw")
 requiredTile = ExtResource("3_58okd")
 distance = 1
-currencyEffect = {}
+currencyEffect = {
+3: 1
+}
 
 [resource]
 script = ExtResource("1_24cbf")
