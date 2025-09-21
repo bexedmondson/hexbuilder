@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="6_bn7pe"]
 [ext_resource type="Script" uid="uid://5ns5k1qjdur6" path="res://scripts/ui/LockedCellPopup.cs" id="7_bn7pe"]
 [ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="9_hp2ex"]
-[ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://tileSelectButtonGroup.tres" id="10_dppk6"]
+[ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="10_dppk6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j1s7q"]
 size = Vector2(50, 50)
