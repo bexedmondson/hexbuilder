@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CustomTileData" load_steps=2 format=3 uid="uid://bu8ba7i0khny4"]
 
-[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/CustomTileData.cs" id="1_54yph"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_54yph"]
 
 [resource]
 script = ExtResource("1_54yph")

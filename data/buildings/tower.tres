@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CustomTileData" load_steps=5 format=3 uid="uid://cc5jv204rhvnk"]
 
-[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_x8ft0"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_i4mag"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_305jr"]

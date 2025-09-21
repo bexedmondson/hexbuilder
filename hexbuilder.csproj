@@ -6,5 +6,6 @@
   <ItemGroup>
     <Folder Include="addons\tile_placement_configurator\placement\" />
     <Folder Include="assets\" />
+    <Folder Include="scripts\ui\" />
   </ItemGroup>
 </Project>

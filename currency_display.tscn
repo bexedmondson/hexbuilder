@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://hst2gqk22rpc"]
 
-[ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/CurrencyDisplay.cs" id="1_efedh"]
+[ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="1_efedh"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_kbswh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fqiv7"]

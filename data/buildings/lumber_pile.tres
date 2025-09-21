@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CustomTileData" load_steps=3 format=3 uid="uid://de8ocg7h3ig78"]
 
 [ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="1_7jax1"]
-[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 
 [resource]
 script = ExtResource("1_24cbf")
