@@ -66,5 +66,6 @@ public partial class UnlockedCellPopup : Control
     public void Close()
     {
         this.SetVisible(false);
+        InjectionManager.Get<MapHighlightController>().Clear();
     }
 }

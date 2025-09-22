@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=18 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -7,6 +7,8 @@
 [ext_resource type="TileSet" uid="uid://dyh6lwi880plh" path="res://assets/locked_overlay_tileset.tres" id="5_2ntku"]
 [ext_resource type="Script" uid="uid://iflp0ejf4lyl" path="res://scripts/MapInputProcessor.cs" id="5_b68g4"]
 [ext_resource type="Script" uid="uid://qmsdrailj53" path="res://scripts/ui/UnlockedCellPopup.cs" id="6_1mh2o"]
+[ext_resource type="TileSet" uid="uid://81kcplaq2lst" path="res://assets/highlight_overlay_tileset.tres" id="6_7log7"]
+[ext_resource type="Script" uid="uid://cf7fm30ln5neo" path="res://scripts/MapHighlightController.cs" id="6_a6mti"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="6_bn7pe"]
 [ext_resource type="Script" uid="uid://5ns5k1qjdur6" path="res://scripts/ui/LockedCellPopup.cs" id="7_bn7pe"]
 [ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="9_hp2ex"]
@@ -65,6 +67,15 @@ tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAABAP//AAAAAAA
 tile_set = ExtResource("5_2ntku")
 occlusion_enabled = false
 navigation_enabled = false
+
+[node name="HighlightOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
+z_as_relative = false
+y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
+tile_set = ExtResource("6_7log7")
+occlusion_enabled = false
+navigation_enabled = false
+script = ExtResource("6_a6mti")
 
 [node name="MapInputDetector" type="Node2D" parent="MapController" node_paths=PackedStringArray("lockedCellPopup", "unlockedCellPopup")]
 script = ExtResource("5_b68g4")

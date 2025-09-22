@@ -46,5 +46,6 @@ public partial class LockedCellPopup : Control
     {
         this.SetVisible(false);
         priceDisplay.Cleanup();
+        InjectionManager.Get<MapHighlightController>().Clear();
     }
 }

@@ -9,11 +9,13 @@ public partial class MapInputProcessor : Node2D
     private UnlockedCellPopup unlockedCellPopup;
 
     private MapController mapController;
+    private MapHighlightController mapHighlightController;
 
     public override void _Ready()
     {
         base._Ready();
         mapController = InjectionManager.Get<MapController>();
+        mapHighlightController = InjectionManager.Get<MapHighlightController>();
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -27,6 +29,8 @@ public partial class MapInputProcessor : Node2D
             
             if (cellStatus == CellStatus.Hidden)
                 return;
+            
+            mapHighlightController.OnSelectTile(cell);
 
             if (cellStatus == CellStatus.Locked)
             {
