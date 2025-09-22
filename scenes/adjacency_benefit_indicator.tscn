@@ -1,0 +1,118 @@
+[gd_scene load_steps=12 format=3 uid="uid://dusngu1tduntl"]
+
+[ext_resource type="Texture2D" uid="uid://bj70g64x02teo" path="res://assets/2d/selection_overlay.png" id="1_02kcd"]
+[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_l16v4"]
+
+[sub_resource type="Animation" id="Animation_l16v4"]
+resource_name = "benefit_indicator_animation"
+length = 2.0
+loop_mode = 1
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Sprite2D:self_modulate:a")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(-2, 2, -2),
+"update": 0,
+"values": [0.5, 0.75, 0.5]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.73333335, 0.0148181915, 1.5, -0.23333335, -0.0115737915, 0.43333328, -0.0115737915, 1, -0.5666667, 0.008418083, 0.267, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+
+[sub_resource type="Animation" id="Animation_ikuiw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.6117647]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_781y5"]
+_data = {
+&"RESET": SubResource("Animation_ikuiw"),
+&"benefit_indicator_animation": SubResource("Animation_l16v4")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikuiw"]
+atlas = ExtResource("2_l16v4")
+region = Rect2(1664, 1024, 128, 128)
+
+[sub_resource type="Curve" id="Curve_781y5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.37124467, 0.79216635), 0.89204407, 0.89204407, 0, 0, Vector2(0.74248934, 0.8129498), -1.0153689, -1.0153689, 0, 0, Vector2(0.9978542, 0.0075939894), -1.9370102, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_0kpx0"]
+curve = SubResource("Curve_781y5")
+
+[sub_resource type="Curve" id="Curve_r5j3w"]
+_data = [Vector2(0, 0.597), 0.0, 0.0, 0, 0, Vector2(0.5085837, 0.7090329), 0.0, 0.0, 0, 0, Vector2(1, 0.51678663), -0.19765425, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f7h81"]
+width = 251
+curve = SubResource("Curve_r5j3w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nvc4h"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -22.02, 0)
+emission_shape_scale = Vector3(2.145, 1, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 98.88
+emission_ring_inner_radius = 92.95
+emission_ring_cone_angle = 90.0
+angle_min = 90.000015
+angle_max = 90.000015
+direction = Vector3(0, 0, 0)
+spread = 0.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, -25, 0)
+damping_min = 0.1
+damping_max = 0.1
+scale_curve = SubResource("CurveTexture_f7h81")
+color = Color(0.32075825, 1.523889, 0.7257144, 1)
+alpha_curve = SubResource("CurveTexture_0kpx0")
+
+[node name="AdjacencyBenefitIndicator" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.17254902, 1, 0.5372549, 0.6117647)
+position = Vector2(0, -69)
+texture = ExtResource("1_02kcd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_781y5")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -9)
+amount = 4
+texture = SubResource("AtlasTexture_ikuiw")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_nvc4h")
