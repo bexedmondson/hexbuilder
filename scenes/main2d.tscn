@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=19 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="6_bn7pe"]
 [ext_resource type="Script" uid="uid://5ns5k1qjdur6" path="res://scripts/ui/LockedCellPopup.cs" id="7_bn7pe"]
 [ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="9_hp2ex"]
+[ext_resource type="Script" uid="uid://dbb83rw27f0g2" path="res://scripts/MapCameraController.cs" id="9_k5e1m"]
 [ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="10_dppk6"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j1s7q"]
@@ -51,7 +52,6 @@ baseMapLayer = NodePath("TileMapLayer")
 lockedOverlayLayer = NodePath("LockedOverlayTileMapLayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="MapController"]
-z_as_relative = false
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAABAP//AAADAAAAAAAAAP//AAADAAAAAAD//wAAAAADAAAAAAD//wEAAAADAAAAAAABAAAAAAADAAAAAAAAAAEAAAADAAAAAAA=")
@@ -60,7 +60,6 @@ occlusion_enabled = false
 navigation_enabled = false
 
 [node name="LockedOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
-z_as_relative = false
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAA=")
@@ -69,13 +68,14 @@ occlusion_enabled = false
 navigation_enabled = false
 
 [node name="HighlightOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
-z_as_relative = false
+z_index = 1
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 tile_set = ExtResource("6_7log7")
 occlusion_enabled = false
 navigation_enabled = false
 script = ExtResource("6_a6mti")
+adjacencySourceId = 1
 
 [node name="MapInputDetector" type="Node2D" parent="MapController" node_paths=PackedStringArray("lockedCellPopup", "unlockedCellPopup")]
 script = ExtResource("5_b68g4")
@@ -83,12 +83,12 @@ lockedCellPopup = NodePath("../../PopupLayer/LockedCellPopup")
 unlockedCellPopup = NodePath("../../PopupLayer/UnlockedCellPopup")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_smoothed = true
+position_smoothing_speed = 20.0
 editor_draw_limits = true
+script = ExtResource("9_k5e1m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-offset = Vector2(-960, -540)
-transform = Transform2D(1, 0, 0, 1, -960, -540)
-follow_viewport_enabled = true
 
 [node name="UIMain" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -123,9 +123,6 @@ icon = SubResource("PlaceholderTexture2D_j1s7q")
 
 [node name="PopupLayer" type="CanvasLayer" parent="."]
 layer = 2
-offset = Vector2(-960, -540)
-transform = Transform2D(1, 0, 0, 1, -960, -540)
-follow_viewport_enabled = true
 
 [node name="UnlockedCellPopup" type="Control" parent="PopupLayer" node_paths=PackedStringArray("tileSelector", "confirmButton")]
 layout_mode = 3
@@ -134,9 +131,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
+offset_left = 250.0
 offset_top = -350.0
-offset_right = 250.0
+offset_right = 750.0
 offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -199,16 +196,15 @@ grow_vertical = 2
 text = "OK"
 
 [node name="LockedCellPopup" type="Control" parent="PopupLayer" node_paths=PackedStringArray("priceDisplay", "confirmButton")]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
+offset_left = 250.0
 offset_top = -350.0
-offset_right = 250.0
+offset_right = 750.0
 offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
