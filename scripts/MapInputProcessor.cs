@@ -2,6 +2,7 @@ using Godot;
 
 public partial class MapInputProcessor : Node2D
 {
+    //relocate in future - works for now though
     [Export]
     private LockedCellPopup lockedCellPopup;
 

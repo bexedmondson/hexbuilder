@@ -89,6 +89,8 @@ limit_smoothed = true
 position_smoothing_speed = 20.0
 editor_draw_limits = true
 script = ExtResource("9_k5e1m")
+minZoom = 0.3
+maxZoom = 3.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
