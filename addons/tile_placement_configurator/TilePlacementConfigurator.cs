@@ -23,7 +23,8 @@ public partial class TilePlacementConfigurator : EditorPlugin
 		if (mainPanelInstance != null)
 			mainPanelInstance.QueueFree();
 		
-		InjectionManager.Deregister(tileDatabase);
+		if (InjectionManager.Has<TileDatabase>())
+			InjectionManager.Deregister(tileDatabase);
 	}
 
 	public override bool _HasMainScreen()

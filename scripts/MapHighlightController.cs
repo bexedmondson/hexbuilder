@@ -13,6 +13,8 @@ public partial class MapHighlightController : TileMapLayer, IInjectable
     private int adjacencySourceId;
     [Export]
     private int adjacencyBenefitSceneIndex;
+    [Export]
+    private int adjacencyDrawbackSceneIndex;
     
     public override void _EnterTree()
     {
@@ -27,7 +29,12 @@ public partial class MapHighlightController : TileMapLayer, IInjectable
 
     public void OnHighlightBenefitTile(Vector2I cell)
     {
-        SetCell(cell, TileSet.GetSourceId(adjacencySourceId), Vector2I.Zero, alternativeTile:adjacencyBenefitSceneIndex);
+        SetCell(cell, TileSet.GetSourceId(adjacencySourceId), Vector2I.Zero, adjacencyBenefitSceneIndex);
+    }
+    
+    public void OnHighlightDrawbackTile(Vector2I cell)
+    {
+        SetCell(cell, TileSet.GetSourceId(adjacencySourceId), Vector2I.Zero, adjacencyDrawbackSceneIndex);
     }
 
     public void ClearAllExcept(Vector2I cell)

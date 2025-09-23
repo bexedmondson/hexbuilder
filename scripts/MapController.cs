@@ -156,9 +156,17 @@ public partial class MapController : Node2D, IInjectable
             
             foreach (var adjacency in neighbourTileData.adjacencies)
             {
-                if (adjacency.requiredTile == selectedTileInfo.tileData)
+                if (adjacency.requiredTile != selectedTileInfo.tileData)
+                    continue;
+
+                //don't want to do a foreach here but this will do for now, until i find a nice way to show
+                //the affected currency with the indicators
+                foreach (var kvp in adjacency.currencyEffect)
                 {
-                    highlightController.OnHighlightBenefitTile(neighbour);
+                    if (kvp.Value > 0)
+                        highlightController.OnHighlightBenefitTile(neighbour);
+                    else
+                        highlightController.OnHighlightDrawbackTile(neighbour);
                     break;
                 }
             }

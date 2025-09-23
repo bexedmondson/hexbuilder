@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy2wuyld13juk"]
+
+[ext_resource type="PackedScene" uid="uid://dusngu1tduntl" path="res://scenes/adjacency_benefit_indicator.tscn" id="1_0521p"]
+
+[sub_resource type="Curve" id="Curve_781y5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.367893, 0.6278626), 0.89204407, 0.89204407, 0, 0, Vector2(0.742475, 0.6361323), -1.0153689, -1.0153689, 0, 0, Vector2(0.9978542, 0.0075939894), -1.9370102, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_0kpx0"]
+curve = SubResource("Curve_781y5")
+
+[sub_resource type="Curve" id="Curve_r5j3w"]
+_data = [Vector2(0, 0.397), 0.0, 0.0, 0, 0, Vector2(0.509, 0.509), 0.0, 0.0, 0, 0, Vector2(1, 0.317), -0.19765425, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f7h81"]
+width = 251
+curve = SubResource("Curve_r5j3w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a45o7"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -60, 0)
+emission_shape_scale = Vector3(2.145, 1, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 98.88
+emission_ring_inner_radius = 92.95
+emission_ring_cone_angle = 90.0
+angle_min = -89.99999
+angle_max = -89.99999
+direction = Vector3(0, 0, 0)
+spread = 0.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, 25, 0)
+damping_min = 0.1
+damping_max = 0.1
+scale_curve = SubResource("CurveTexture_f7h81")
+color = Color(0.98315436, 0.5118389, 0.47980303, 1)
+alpha_curve = SubResource("CurveTexture_0kpx0")
+
+[node name="AdjacencyBenefitIndicator" instance=ExtResource("1_0521p")]
+
+[node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 0.20784314, 0.21960784, 0.6117647)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "benefit_indicator_animation"
+
+[node name="GPUParticles2D" parent="." index="2"]
+process_material = SubResource("ParticleProcessMaterial_a45o7")

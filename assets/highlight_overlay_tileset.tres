@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://81kcplaq2lst"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://81kcplaq2lst"]
 
 [ext_resource type="Texture2D" uid="uid://bj70g64x02teo" path="res://assets/2d/selection_overlay.png" id="1_u8fgd"]
 [ext_resource type="PackedScene" uid="uid://dusngu1tduntl" path="res://scenes/adjacency_benefit_indicator.tscn" id="2_bxljk"]
+[ext_resource type="PackedScene" uid="uid://dy2wuyld13juk" path="res://scenes/adjacency_drawback_indicator.tscn" id="3_gut6m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxljk"]
 texture = ExtResource("1_u8fgd")
@@ -11,6 +12,7 @@ texture_region_size = Vector2i(480, 480)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_gut6m"]
 scenes/1/scene = ExtResource("2_bxljk")
+scenes/2/scene = ExtResource("3_gut6m")
 
 [resource]
 tile_shape = 3
