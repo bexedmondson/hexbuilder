@@ -58,14 +58,14 @@ atlas = ExtResource("2_l16v4")
 region = Rect2(1664, 1024, 128, 128)
 
 [sub_resource type="Curve" id="Curve_781y5"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.37124467, 0.79216635), 0.89204407, 0.89204407, 0, 0, Vector2(0.74248934, 0.8129498), -1.0153689, -1.0153689, 0, 0, Vector2(0.9978542, 0.0075939894), -1.9370102, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.367893, 0.6278626), 0.89204407, 0.89204407, 0, 0, Vector2(0.742475, 0.6361323), -1.0153689, -1.0153689, 0, 0, Vector2(0.9978542, 0.0075939894), -1.9370102, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_0kpx0"]
 curve = SubResource("Curve_781y5")
 
 [sub_resource type="Curve" id="Curve_r5j3w"]
-_data = [Vector2(0, 0.597), 0.0, 0.0, 0, 0, Vector2(0.5085837, 0.7090329), 0.0, 0.0, 0, 0, Vector2(1, 0.51678663), -0.19765425, 0.0, 0, 0]
+_data = [Vector2(0, 0.397), 0.0, 0.0, 0, 0, Vector2(0.509, 0.509), 0.0, 0.0, 0, 0, Vector2(1, 0.317), -0.19765425, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_f7h81"]

@@ -76,6 +76,7 @@ occlusion_enabled = false
 navigation_enabled = false
 script = ExtResource("6_a6mti")
 adjacencySourceId = 1
+adjacencyBenefitSceneIndex = 1
 
 [node name="MapInputDetector" type="Node2D" parent="MapController" node_paths=PackedStringArray("lockedCellPopup", "unlockedCellPopup")]
 script = ExtResource("5_b68g4")

@@ -34,15 +34,13 @@ public partial class MapInputProcessor : Node2D
 
             if (cellStatus == CellStatus.Locked)
             {
-                lockedCellPopup.SetCell(cell);
-                lockedCellPopup.SetVisible(true);
-                unlockedCellPopup.SetVisible(false);
+                lockedCellPopup.ShowForCell(cell);
+                unlockedCellPopup.Close();
             }
             else
             {
-                unlockedCellPopup.SetCell(mapController.BaseMapLayer, cell);
-                unlockedCellPopup.SetVisible(true);
-                lockedCellPopup.SetVisible(false);
+                unlockedCellPopup.ShowForCell(mapController.BaseMapLayer, cell);
+                lockedCellPopup.Close();
             }
         }
     }

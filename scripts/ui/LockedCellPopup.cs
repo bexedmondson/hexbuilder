@@ -20,7 +20,7 @@ public partial class LockedCellPopup : Control
         inventoryManager = InjectionManager.Get<InventoryManager>();
     }
 
-    public void SetCell(Vector2I setCell)
+    public void ShowForCell(Vector2I setCell)
     {
         cell = setCell;
         var cellUnlockCost = mapController.GetCellUnlockCost(cell);
@@ -29,6 +29,8 @@ public partial class LockedCellPopup : Control
 
         bool canAfford = inventoryManager.CanAfford(cellUnlockCost);
         confirmButton.Disabled = !canAfford;
+        
+        this.SetVisible(true);
     }
 
     public void ConfirmUnlock()

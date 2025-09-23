@@ -14,8 +14,6 @@ public partial class MapHighlightController : TileMapLayer, IInjectable
     [Export]
     private int adjacencyBenefitSceneIndex;
     
-    private Vector2I adjacencyTileCoords = Vector2I.Zero; //SetCell docs specify this for scene tiles
-    
     public override void _EnterTree()
     {
         InjectionManager.Register(this);
@@ -29,6 +27,15 @@ public partial class MapHighlightController : TileMapLayer, IInjectable
 
     public void OnHighlightBenefitTile(Vector2I cell)
     {
-        SetCell(cell, TileSet.GetSourceId(selectionSourceId), selectionTileCoords);
+        SetCell(cell, TileSet.GetSourceId(adjacencySourceId), Vector2I.Zero, alternativeTile:adjacencyBenefitSceneIndex);
+    }
+
+    public void ClearAllExcept(Vector2I cell)
+    {
+        foreach (var usedCell in GetUsedCells())
+        {
+            if (usedCell != cell)
+                EraseCell(cell);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -17,12 +18,16 @@ public partial class UnlockedCellPopup : Control
     
     private Vector2I cell;
 
+    private MapController mapController;
+
     public override void _Ready()
     {
         this.SetVisible(false);
+        
+        mapController = InjectionManager.Get<MapController>();
     }
     
-    public void SetCell(TileMapLayer baseMapLayer, Vector2I setCell)
+    public void ShowForCell(TileMapLayer baseMapLayer, Vector2I setCell)
     {
         cell = setCell;
 
@@ -43,6 +48,17 @@ public partial class UnlockedCellPopup : Control
             tileOptionUI.SetButtonGroup(tileSelectionGroup);
             tileSelector.AddChild(tileOptionUI);
         }
+
+        tileSelectionGroup.Pressed += OnSelectionChanged;
+        
+        this.SetVisible(true);
+    }
+
+    private void OnSelectionChanged(BaseButton selectedButton)
+    {
+        var selectedOption = selectedButton as TileOptionUI;
+
+        mapController.HighlightNeighbourEffects(cell, selectedOption.tileInfo);
     }
 
     public void OnConfirmButton()
@@ -67,5 +83,8 @@ public partial class UnlockedCellPopup : Control
     {
         this.SetVisible(false);
         InjectionManager.Get<MapHighlightController>().Clear();
+
+        if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count > 0)
+            tileSelectionGroup.Pressed -= OnSelectionChanged;
     }
 }

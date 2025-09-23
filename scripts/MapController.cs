@@ -17,6 +17,8 @@ public partial class MapController : Node2D, IInjectable
     private int defaultUnlockedTileSourceIndex = 0;
     private Vector2I defaultUnlockedTileAtlasCoords = Vector2I.Right * 3;
 
+    private MapHighlightController highlightController;
+
     public override void _EnterTree()
     {
         base._EnterTree();
@@ -131,5 +133,35 @@ public partial class MapController : Node2D, IInjectable
         }
         
         return neighbourDistanceDict;
+    }
+
+    public void HighlightNeighbourEffects(Vector2I cell, TileDatabase.TileInfo selectedTileInfo)
+    {
+        //show effects on immediate neighbours, for now (TODO: should check for effects on further away tiles also)
+
+        highlightController ??= InjectionManager.Get<MapHighlightController>();
+
+        highlightController.ClearAllExcept(cell);
+
+        var neighbours = baseMapLayer.GetSurroundingCells(cell);
+
+        foreach (var neighbour in neighbours)
+        {
+            if (GetCellStatus(neighbour) != CellStatus.Unlocked)
+                continue;
+            
+            var neighbourTileData = baseMapLayer.GetCellCustomData(neighbour);
+            if (neighbourTileData?.adjacencies == null)
+                continue;
+            
+            foreach (var adjacency in neighbourTileData.adjacencies)
+            {
+                if (adjacency.requiredTile == selectedTileInfo.tileData)
+                {
+                    highlightController.OnHighlightBenefitTile(neighbour);
+                    break;
+                }
+            }
+        }
     }
 }
