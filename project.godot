@@ -15,6 +15,10 @@ run/main_scene="uid://decrhuj8ncsgc"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -25,9 +29,14 @@ window/stretch/mode="viewport"
 
 project/assembly_name="hexbuilder"
 
+[editor]
+
+better_terrain/min_zoom_amount=0.1
+better_terrain/max_zoom_amount=4.0
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/tile_placement_configurator/plugin.cfg")
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg", "res://addons/tile_placement_configurator/plugin.cfg")
 
 [input_devices]
 

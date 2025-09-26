@@ -12,6 +12,9 @@ public partial class MapController : Node2D, IInjectable
 
     private Dictionary<Vector2I, bool> visibleCellUnlockStates = new();
 
+    [Export]
+    private MapGenerator mapGenerator;
+
     private int defaultLockedTileSourceIndex = 0;
     private Vector2I defaultLockedTileAtlasCoords = Vector2I.Zero;
     private int defaultUnlockedTileSourceIndex = 0;
@@ -30,6 +33,7 @@ public partial class MapController : Node2D, IInjectable
         base._Ready();
         var tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase.AddTileSetTileData(baseMapLayer.TileSet);
+        mapGenerator.Setup();
     }
 
     public void OnNewGame()
@@ -40,16 +44,18 @@ public partial class MapController : Node2D, IInjectable
         visibleCellUnlockStates.Clear();
         visibleCellUnlockStates[Vector2I.Zero] = true;
 
+        mapGenerator.Generate(Vector2I.One * -10, Vector2I.One * 10); //temporarily, for testing
+
         var defaultUnlockedTileSource = baseMapLayer.TileSet.GetSource(defaultUnlockedTileSourceIndex) as TileSetAtlasSource;
         
-        baseMapLayer.SetCell(Vector2I.Zero, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), defaultUnlockedTileAtlasCoords);
+        //baseMapLayer.SetCell(Vector2I.Zero, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), defaultUnlockedTileAtlasCoords);
         
-        foreach (var surroundingCell in baseMapLayer.GetSurroundingCells(Vector2I.Zero))
+        /*foreach (var surroundingCell in baseMapLayer.GetSurroundingCells(Vector2I.Zero))
         {
             visibleCellUnlockStates[surroundingCell] = false;
             baseMapLayer.SetCell(surroundingCell, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), GetRandomTile(defaultUnlockedTileSource));
             lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
-        }
+        }*/
     }
 
     private Vector2I GetRandomTile(TileSetAtlasSource atlasSource)

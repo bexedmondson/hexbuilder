@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=27 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -11,9 +11,47 @@
 [ext_resource type="Script" uid="uid://cf7fm30ln5neo" path="res://scripts/MapHighlightController.cs" id="6_a6mti"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="6_bn7pe"]
 [ext_resource type="Script" uid="uid://5ns5k1qjdur6" path="res://scripts/ui/LockedCellPopup.cs" id="7_bn7pe"]
+[ext_resource type="Script" uid="uid://bs00038rrkovu" path="res://scripts/MapGenerator.cs" id="9_b0365"]
 [ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="9_hp2ex"]
 [ext_resource type="Script" uid="uid://dbb83rw27f0g2" path="res://scripts/MapCameraController.cs" id="9_k5e1m"]
 [ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="10_dppk6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
+noise_type = 0
+frequency = 0.03
+fractal_lacunarity = 4.0
+fractal_ping_pong_strength = 1.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2gw4c"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_b0365")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2gw4c"]
+noise_type = 0
+seed = 1
+frequency = 0.0135
+fractal_lacunarity = 4.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c25qt"]
+noise = SubResource("FastNoiseLite_2gw4c")
+seamless = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nkuak"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_b0365")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_77sti"]
+noise_type = 0
+seed = 3
+frequency = 0.0061
+fractal_type = 3
+fractal_lacunarity = 4.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mcgvi"]
+noise = SubResource("FastNoiseLite_77sti")
+seamless = true
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j1s7q"]
 size = Vector2(50, 50)
@@ -45,11 +83,12 @@ startAmounts = Dictionary[int, int]({
 3: 5
 })
 
-[node name="MapController" type="Node2D" parent="." node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer")]
+[node name="MapController" type="Node2D" parent="." node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer", "mapGenerator")]
 y_sort_enabled = true
 script = ExtResource("2_m3sjc")
 baseMapLayer = NodePath("TileMapLayer")
 lockedOverlayLayer = NodePath("LockedOverlayTileMapLayer")
+mapGenerator = NodePath("MapGenerator")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="MapController"]
 y_sort_enabled = true
@@ -84,6 +123,31 @@ script = ExtResource("5_b68g4")
 lockedCellPopup = NodePath("../../PopupLayer/LockedCellPopup")
 unlockedCellPopup = NodePath("../../PopupLayer/UnlockedCellPopup")
 
+[node name="MapGenerator" type="Node2D" parent="MapController" node_paths=PackedStringArray("baseMapLayer")]
+script = ExtResource("9_b0365")
+baseMapLayer = NodePath("../TileMapLayer")
+noiseSampleScale = 5
+rockyUpperThreshold = 0.3
+sandyUpperThreshold = 0.37
+vegetationGrassLowerThreshold = 0.4
+vegetationTreesLowerThreshold = 0.72
+heightHillLowerThreshold = 0.7
+stoneCoords = Vector2i(2, 2)
+grassCoords = Vector2i(3, 0)
+forestCoords = Vector2i(1, 0)
+waterCoords = Vector2i(1, 3)
+waterRocksCoords = Vector2i(0, 3)
+sandCoords = Vector2i(2, 1)
+sandPlantsCoords = Vector2i(0, 1)
+sandRocksCoords = Vector2i(1, 1)
+hillRockCoords = Vector2i(3, 1)
+hillForestCoords = Vector2i(2, 0)
+mountainCoords = Vector2i(0, 2)
+heightNoise = SubResource("NoiseTexture2D_2gw4c")
+rockyNoise = SubResource("NoiseTexture2D_c25qt")
+sandyNoise = SubResource("NoiseTexture2D_nkuak")
+vegetationNoise = SubResource("NoiseTexture2D_mcgvi")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_smoothed = true
 position_smoothing_speed = 20.0
@@ -91,6 +155,7 @@ editor_draw_limits = true
 script = ExtResource("9_k5e1m")
 minZoom = 0.3
 maxZoom = 3.0
+scrollZoomIncrement = 0.1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
