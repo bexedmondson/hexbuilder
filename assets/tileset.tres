@@ -47,6 +47,9 @@ texture_region_size = Vector2i(480, 480)
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 69)
 1:0/0/custom_data_0 = ExtResource("62_1rlvu")
+1:0/0/metadata/_better_terrain = {
+&"type": 1
+}
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 69)
 2:0/0/custom_data_0 = ExtResource("8_b6r2m")
@@ -59,6 +62,9 @@ texture_region_size = Vector2i(480, 480)
 1:1/0 = 0
 1:1/0/texture_origin = Vector2i(0, 69)
 1:1/0/custom_data_0 = ExtResource("10_5kckd")
+1:1/0/metadata/_better_terrain = {
+&"type": 1
+}
 2:1/0 = 0
 2:1/0/texture_origin = Vector2i(0, 69)
 2:1/0/custom_data_0 = ExtResource("2_ww03b")
@@ -68,6 +74,9 @@ texture_region_size = Vector2i(480, 480)
 0:2/0 = 0
 0:2/0/texture_origin = Vector2i(0, 69)
 0:2/0/custom_data_0 = ExtResource("2_ww03b")
+0:2/0/metadata/_better_terrain = {
+&"type": 2
+}
 1:2/0 = 0
 1:2/0/texture_origin = Vector2i(0, 69)
 1:2/0/custom_data_0 = ExtResource("8_b6r2m")
@@ -83,12 +92,27 @@ texture_region_size = Vector2i(480, 480)
 1:3/0 = 0
 1:3/0/texture_origin = Vector2i(0, 69)
 1:3/0/custom_data_0 = ExtResource("11_040ux")
+1:3/0/metadata/_better_terrain = {
+2: [3],
+4: [3],
+6: [3],
+10: [3],
+12: [3],
+14: [3],
+&"type": 2
+}
 2:3/0 = 0
 2:3/0/texture_origin = Vector2i(0, 69)
 2:3/0/custom_data_0 = ExtResource("7_ctfve")
+2:3/0/metadata/_better_terrain = {
+&"type": 3
+}
 3:3/0 = 0
 3:3/0/texture_origin = Vector2i(0, 69)
 3:3/0/custom_data_0 = ExtResource("7_ctfve")
+3:3/0/metadata/_better_terrain = {
+&"type": 3
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_131hj"]
 resource_name = "buildings"
@@ -97,12 +121,30 @@ texture_region_size = Vector2i(480, 480)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 69)
 0:0/0/custom_data_0 = ExtResource("13_5kckd")
+0:0/0/metadata/_better_terrain = {
+4: [0],
+12: [0],
+&"symmetry": 1,
+&"type": 4
+}
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 69)
 1:0/0/custom_data_0 = ExtResource("13_5kckd")
+1:0/0/metadata/_better_terrain = {
+2: [0],
+10: [0],
+&"symmetry": 1,
+&"type": 4
+}
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 69)
 2:0/0/custom_data_0 = ExtResource("13_5kckd")
+2:0/0/metadata/_better_terrain = {
+6: [0],
+14: [0],
+&"symmetry": 1,
+&"type": 4
+}
 3:0/0 = 0
 3:0/0/texture_origin = Vector2i(0, 69)
 3:0/0/custom_data_0 = ExtResource("14_o04i8")
@@ -624,6 +666,15 @@ metadata/_better_terrain = {
 &"path": "res://addons/better-terrain/icons/Decoration.svg"
 }],
 &"terrains": [["river", Color(0.09411764, 0.9882353, 0.9882353, 1), 0, [], {
+&"path": ""
+}], ["grass", Color(0, 1, 0.1796875, 1), 0, [], {
+&"path": ""
+}], ["sand", Color(1, 0.9609375, 0, 1), 0, [], {
+&"path": ""
+}], ["ocean", Color(0.03125, 0, 1, 1), 2, [], {
+&"coord": Vector2i(3, 3),
+&"source_id": 0
+}], ["bridge", Color(0.23828125, 0.23828125, 0.23828125, 1), 0, [], {
 &"path": ""
 }]],
 &"version": "0.2"

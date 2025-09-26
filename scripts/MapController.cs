@@ -44,7 +44,7 @@ public partial class MapController : Node2D, IInjectable
         visibleCellUnlockStates.Clear();
         visibleCellUnlockStates[Vector2I.Zero] = true;
 
-        mapGenerator.Generate(Vector2I.One * -10, Vector2I.One * 10); //temporarily, for testing
+        mapGenerator.Generate(new Rect2I(Vector2I.One * -10, Vector2I.One * 20)); //temporarily, for testing
 
         var defaultUnlockedTileSource = baseMapLayer.TileSet.GetSource(defaultUnlockedTileSourceIndex) as TileSetAtlasSource;
         

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class MapGenerator : Node
@@ -10,6 +11,9 @@ public partial class MapGenerator : Node
 
     [Export]
     public int noiseSampleScale = 10;
+
+    [Export]
+    private CustomTileData waterCustomTileData;
 
     [ExportGroup("Thresholds")]
     [Export(PropertyHint.Range, "0.0,1.0,")]
@@ -62,10 +66,25 @@ public partial class MapGenerator : Node
     private Vector2I hillRockCoords;
 
     [Export]
+    private Vector2I hillGrassCoords;
+
+    [Export]
     private Vector2I hillForestCoords;
     
     [Export]
     private Vector2I mountainCoords;
+
+    [ExportGroup("Terrain Indices")]
+    [Export]
+    private int riverTerrain;
+    [Export]
+    private int grassTerrain;
+    [Export]
+    private int sandTerrain;
+    [Export]
+    private int oceanTerrain;
+    [Export]
+    private int bridgeTerrain;
     
     [ExportGroup("Noise")]
     [Export]
@@ -77,14 +96,12 @@ public partial class MapGenerator : Node
     [Export]
     private NoiseTexture2D vegetationNoise;
 
+    private BetterTerrain bt;
+
     public void Setup()
     {
-        //get tile data etc and map to the matching tile indices so getting a random tile of type whatever is easier
-
-        //waterNoise = new NoiseTexture2D();
-        //waterNoise.Seamless = true;
-        //waterNoise.Noise = new FastNoiseLite();
-
+        bt = new BetterTerrain(baseMapLayer);
+        
         int seedChange = GD.RandRange(0, 1000);
 
         (heightNoise.Noise as FastNoiseLite).Seed += seedChange;
@@ -93,26 +110,26 @@ public partial class MapGenerator : Node
         (vegetationNoise.Noise as FastNoiseLite).Seed += seedChange;
     }
 
-    public void Generate(Vector2I minPoint, Vector2I maxPoint) //testing only at the moment
+    public void Generate(Rect2I area) //testing only at the moment
     {
         if (heightNoise.GetImage() == null)
         {
-            heightNoise.Changed += () => Generate(minPoint, maxPoint);
+            heightNoise.Changed += () => Generate(area);
             return;
         }
         if (rockyNoise.GetImage() == null)
         {
-            rockyNoise.Changed += () => Generate(minPoint, maxPoint);
+            rockyNoise.Changed += () => Generate(area);
             return;
         }
         if (sandyNoise.GetImage() == null)
         {
-            sandyNoise.Changed += () => Generate(minPoint, maxPoint);
+            sandyNoise.Changed += () => Generate(area);
             return;
         }
         if (vegetationNoise.GetImage() == null)
         {
-            vegetationNoise.Changed += () => Generate(minPoint, maxPoint);
+            vegetationNoise.Changed += () => Generate(area);
             return;
         }
 
@@ -121,16 +138,16 @@ public partial class MapGenerator : Node
         var sandinessNoiseImage = sandyNoise.GetImage();
         var vegetationNoiseImage = vegetationNoise.GetImage();
 
-        for (int x = minPoint.X; x < maxPoint.X; x++)
+        for (int x = area.Position.X; x < area.End.X; x++)
         {
-            for (int y = minPoint.Y; y < maxPoint.Y; y++)
+            for (int y = area.Position.Y; y < area.End.Y; y++)
             {
                 var cell = new Vector2I(x, y);
                 
-                var height = GetPixelSample(heightNoiseImage, cell);//.GetPixel(x * noiseSampleScale % heightNoiseImage.GetWidth(), y * noiseSampleScale % heightNoiseImage.GetHeight()).R);
-                var rockiness = GetPixelSample(rockinessNoiseImage, cell);// rockinessNoiseImage.GetPixel(x * noiseSampleScale % rockinessNoiseImage.GetWidth(), y * noiseSampleScale % rockinessNoiseImage.GetHeight()).R;
-                var sandiness = GetPixelSample(sandinessNoiseImage, cell);//;sandinessNoiseImage.GetPixel(x * noiseSampleScale % sandinessNoiseImage.GetWidth(), y * noiseSampleScale % sandinessNoiseImage.GetHeight()).R);
-                var vegetation = GetPixelSample(vegetationNoiseImage, cell);//vegetationNoiseImage.GetPixel(x * noiseSampleScale % vegetationNoiseImage.GetWidth(), y * noiseSampleScale % vegetationNoiseImage.GetHeight()).R);
+                var height = GetPixelSample(heightNoiseImage, cell);
+                var rockiness = GetPixelSample(rockinessNoiseImage, cell);
+                var sandiness = GetPixelSample(sandinessNoiseImage, cell);
+                var vegetation = GetPixelSample(vegetationNoiseImage, cell);
                 
                 if (height < heightWaterUpperThreshold)
                     SetWater(cell, rockiness, sandiness, vegetation);
@@ -142,6 +159,10 @@ public partial class MapGenerator : Node
                     SetFlat(cell, rockiness, sandiness, vegetation);
             }
         }
+
+        FindRiverTiles();
+        
+        bt.UpdateTerrainArea(area);
     }
 
     private float GetPixelSample(Image image, Vector2I cell)
@@ -157,13 +178,16 @@ public partial class MapGenerator : Node
 
     private void SetWater(Vector2I cell, float rockiness, float sandiness, float vegetation)
     {
+        bt.SetCell(cell, oceanTerrain);
         baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? waterRocksCoords : waterCoords);
     }
 
     private void SetHill(Vector2I cell, float rockiness, float sandiness, float vegetation)
     {
-        baseMapLayer.SetCell(cell, 0, vegetation > vegetationTreesLowerThreshold ? hillRockCoords : hillForestCoords);
-        //TODO make a new grass hill tile and incorporate here
+        if (vegetation < vegetationGrassLowerThreshold)
+            baseMapLayer.SetCell(cell, 0, hillRockCoords);
+        
+        baseMapLayer.SetCell(cell, 0, vegetation > vegetationTreesLowerThreshold ? hillGrassCoords : hillForestCoords);
     }
 
     private void SetFlat(Vector2I cell, float rockiness, float sandiness, float vegetation)
@@ -176,15 +200,67 @@ public partial class MapGenerator : Node
             
         if (vegetation < vegetationGrassLowerThreshold)
             baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? stoneCoords : dirtCoords);
+        else if (vegetation > vegetationTreesLowerThreshold)
+            baseMapLayer.SetCell(cell, 0, forestCoords);
         else
-            baseMapLayer.SetCell(cell, 0, vegetation < vegetationTreesLowerThreshold ? grassCoords : forestCoords);
+        {
+            bt.SetCell(cell, grassTerrain);
+        }
     }
 
     private void SetSand(Vector2I cell, float rockiness, float vegetation)
     {
+        //2 = sand terrain, setup in editor. maybe should move this to an export or get it dynamically? this works for now though
+        bt.SetCell(cell, sandTerrain);
+        
         if (vegetation > vegetationTreesLowerThreshold)
             baseMapLayer.SetCell(cell, 0, sandPlantsCoords);
-        else //TODO set plain sand with terrain so islands generate
+        else
             baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? sandRocksCoords : sandCoords);
+    }
+    
+    private void FindRiverTiles()
+    {
+        var usedCells = baseMapLayer.GetUsedCells();
+
+        List<Vector2I> riverCells = new();
+
+        foreach (var usedCell in usedCells)
+        {
+            if (baseMapLayer.GetCellCustomData(usedCell) != waterCustomTileData)
+                continue;
+            
+            var neighbours = baseMapLayer.GetSurroundingCells(usedCell);
+            bool isRiver = true;
+            int waterNeighbourCount = 0;
+            
+            //all neighbouring water tiles should have non-water neighbours either side
+            for (int i = 0; i < neighbours.Count; i++)
+            {
+                var neighbourToCheck = neighbours[i];
+                if (baseMapLayer.GetCellCustomData(neighbourToCheck) != waterCustomTileData)
+                    continue;
+
+                waterNeighbourCount++;
+                
+                Vector2I neighbourBefore = i > 0 ? neighbours[i - 1] : neighbours[^1];
+                Vector2I neighbourAfter = i < neighbours.Count - 1 ? neighbours[i + 1] : neighbours[0];
+                
+                if (baseMapLayer.GetCellCustomData(neighbourBefore) == waterCustomTileData
+                    || baseMapLayer.GetCellCustomData(neighbourAfter) == waterCustomTileData)
+                    isRiver = false;
+            }
+
+            if (waterNeighbourCount == 0)
+                continue;
+
+            if (isRiver)
+                riverCells.Add(usedCell); //don't set it here so this cell's water data value can be used to check if other cells are rivers
+        }
+
+        foreach (var riverCell in riverCells)
+        {
+            bt.SetCell(riverCell, riverTerrain);
+        }
     }
 }
