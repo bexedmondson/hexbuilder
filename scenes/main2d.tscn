@@ -93,7 +93,7 @@ mapGenerator = NodePath("MapGenerator")
 [node name="TileMapLayer" type="TileMapLayer" parent="MapController"]
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAABAP//AAADAAAAAAAAAP//AAADAAAAAAD//wAAAAADAAAAAAD//wEAAAADAAAAAAABAAAAAAADAAAAAAAAAAEAAAADAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAABAP//AAADAAAAAAAAAP//AAADAAAAAAD//wAAAAADAAAAAAD//wEAAAADAAAAAAABAAAAAAADAAAAAAAAAAEAAAADAAAAAAACABQAAwAAAAEAABDv/x4AAwAAAAUAABDv/x8AAwAAAAAAAADu/yAAAwACAAEAABA=")
 tile_set = ExtResource("1_b6gu2")
 occlusion_enabled = false
 navigation_enabled = false
