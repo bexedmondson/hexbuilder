@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -89,14 +90,19 @@ public partial class MapGenerator : Node
     [ExportGroup("Noise")]
     [Export]
     private NoiseTexture2D heightNoise;
+    private Image heightNoiseImage;
     [Export]
     private NoiseTexture2D rockyNoise;
+    private Image rockyNoiseImage;
     [Export]
     private NoiseTexture2D sandyNoise;
+    private Image sandyNoiseImage;
     [Export]
     private NoiseTexture2D vegetationNoise;
+    private Image vegetationNoiseImage;
 
     private BetterTerrain bt;
+    private MapController mapController;
 
     public void Setup()
     {
@@ -110,59 +116,104 @@ public partial class MapGenerator : Node
         (vegetationNoise.Noise as FastNoiseLite).Seed += seedChange;
     }
 
-    public void Generate(Rect2I area) //testing only at the moment
+    //will call immediately if all noise images are already good to go
+    public void SubscribeIsReady(Action onReadyAction)
     {
-        if (heightNoise.GetImage() == null)
+        //i kinda hate this but it's the most straightforward way to wait until noise images exist
+        heightNoiseImage = heightNoise.GetImage();
+        if (heightNoiseImage == null)
         {
-            heightNoise.Changed += () => Generate(area);
+            heightNoise.Changed += () => SubscribeIsReady(onReadyAction);
             return;
         }
-        if (rockyNoise.GetImage() == null)
-        {
-            rockyNoise.Changed += () => Generate(area);
-            return;
-        }
-        if (sandyNoise.GetImage() == null)
-        {
-            sandyNoise.Changed += () => Generate(area);
-            return;
-        }
-        if (vegetationNoise.GetImage() == null)
-        {
-            vegetationNoise.Changed += () => Generate(area);
-            return;
-        }
-
-        var heightNoiseImage = heightNoise.GetImage();
-        var rockinessNoiseImage = rockyNoise.GetImage();
-        var sandinessNoiseImage = sandyNoise.GetImage();
-        var vegetationNoiseImage = vegetationNoise.GetImage();
-
-        for (int x = area.Position.X; x < area.End.X; x++)
-        {
-            for (int y = area.Position.Y; y < area.End.Y; y++)
-            {
-                var cell = new Vector2I(x, y);
-                
-                var height = GetPixelSample(heightNoiseImage, cell);
-                var rockiness = GetPixelSample(rockinessNoiseImage, cell);
-                var sandiness = GetPixelSample(sandinessNoiseImage, cell);
-                var vegetation = GetPixelSample(vegetationNoiseImage, cell);
-                
-                if (height < heightWaterUpperThreshold)
-                    SetWater(cell, rockiness, sandiness, vegetation);
-                else if (height > heightMountainLowerThreshold)
-                    baseMapLayer.SetCell(new Vector2I(x, y), 0, mountainCoords);
-                else if (height > heightHillLowerThreshold)
-                    SetHill(cell, rockiness, sandiness, vegetation);
-                else
-                    SetFlat(cell, rockiness, sandiness, vegetation);
-            }
-        }
-
-        FindRiverTiles();
         
-        bt.UpdateTerrainArea(area);
+        rockyNoiseImage = rockyNoise.GetImage();
+        if (rockyNoiseImage == null)
+        {
+            rockyNoise.Changed += () => SubscribeIsReady(onReadyAction);
+            return;
+        }
+
+        sandyNoiseImage = sandyNoise.GetImage();
+        if (sandyNoiseImage == null)
+        {
+            sandyNoise.Changed += () => SubscribeIsReady(onReadyAction);
+            return;
+        }
+
+        vegetationNoiseImage = vegetationNoise.GetImage();
+        if (vegetationNoiseImage == null)
+        {
+            vegetationNoise.Changed += () => SubscribeIsReady(onReadyAction);
+            return;
+        }
+        
+        onReadyAction?.Invoke();
+    }
+    
+    public void OnCellUnlocked(Vector2I centreCell) //only call this after calling Setup and coming back from SubscribeIsReady!
+    {
+        //if centre cell is currently empty, set it with generate function
+        //then for each surrounding cell, do the same
+        //then for each cell surrounding those, do the same
+        //then run the river check
+        //then call update terrain cells for all cells in the above list - just to be safe, ensure cell isn't visible before doing this
+
+        HashSet<Vector2I> allAffectedCells = [ centreCell ];
+        foreach (var immediateNeighbour in baseMapLayer.GetSurroundingCells(centreCell))
+        {
+            //updating neighbours-of-neighbours so that later on, neighbours can correctly check if they should be rivers or not
+            //don't need to add neighbour itself - will be added because neighbours are also neighbours of each other
+            allAffectedCells.UnionWith(baseMapLayer.GetSurroundingCells(immediateNeighbour));
+        }
+
+        foreach (var affectedCell in allAffectedCells)
+        {
+            if (baseMapLayer.IsCellEmpty(affectedCell))
+                GenerateCell(affectedCell);
+        }
+        
+        FindRiverTiles();
+
+        mapController ??= InjectionManager.Get<MapController>();
+        
+        //don't want to update cells that the player can see, but will update all other cells to make sure rivers etc are updated right
+        List<Vector2I> allCellsToUpdate = new();
+        foreach (var affectedCell in allAffectedCells)
+        {
+            if (mapController.GetCellStatus(affectedCell) == CellStatus.Hidden)
+                allCellsToUpdate.Add(affectedCell);
+        }
+        
+        bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate));
+    }
+
+    private void GenerateCell(Vector2I cell)
+    {
+        var height = GetPixelSample(heightNoiseImage, cell);
+        var rockiness = GetPixelSample(rockyNoiseImage, cell);
+                
+        if (height < heightWaterUpperThreshold)
+        {
+            SetWater(cell, rockiness);
+            return;
+        }
+        if (height > heightMountainLowerThreshold)
+        {
+            baseMapLayer.SetCell(cell, 0, mountainCoords);
+            return;
+        }
+        
+        var vegetation = GetPixelSample(vegetationNoiseImage, cell);
+        
+        if (height > heightHillLowerThreshold)
+        {
+            SetHill(cell, vegetation);
+            return;
+        }
+        
+        var sandiness = GetPixelSample(sandyNoiseImage, cell);
+        SetFlat(cell, rockiness, sandiness, vegetation);
     }
 
     private float GetPixelSample(Image image, Vector2I cell)
@@ -176,13 +227,13 @@ public partial class MapGenerator : Node
         return image.GetPixel(xSample, ySample).R; //r, g, b all identical with noise like this
     }
 
-    private void SetWater(Vector2I cell, float rockiness, float sandiness, float vegetation)
+    private void SetWater(Vector2I cell, float rockiness)
     {
         bt.SetCell(cell, oceanTerrain);
         baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? waterRocksCoords : waterCoords);
     }
 
-    private void SetHill(Vector2I cell, float rockiness, float sandiness, float vegetation)
+    private void SetHill(Vector2I cell, float vegetation)
     {
         if (vegetation < vegetationGrassLowerThreshold)
             baseMapLayer.SetCell(cell, 0, hillRockCoords);
@@ -210,7 +261,6 @@ public partial class MapGenerator : Node
 
     private void SetSand(Vector2I cell, float rockiness, float vegetation)
     {
-        //2 = sand terrain, setup in editor. maybe should move this to an export or get it dynamically? this works for now though
         bt.SetCell(cell, sandTerrain);
         
         if (vegetation > vegetationTreesLowerThreshold)

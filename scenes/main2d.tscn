@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=30 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://44qulkptwyjg" path="res://scripts/MapController.cs" id="2_m3sjc"]
 [ext_resource type="TileSet" uid="uid://dyh6lwi880plh" path="res://assets/locked_overlay_tileset.tres" id="5_2ntku"]
 [ext_resource type="Script" uid="uid://iflp0ejf4lyl" path="res://scripts/MapInputProcessor.cs" id="5_b68g4"]
+[ext_resource type="Script" uid="uid://dg45uh37x1ltw" path="res://scripts/VisualTileMapLayer.cs" id="5_c25qt"]
+[ext_resource type="Script" uid="uid://bmee1aa6tujj3" path="res://scripts/BaseTileMapLayer.cs" id="5_m7ly0"]
 [ext_resource type="Script" uid="uid://qmsdrailj53" path="res://scripts/ui/UnlockedCellPopup.cs" id="6_1mh2o"]
 [ext_resource type="TileSet" uid="uid://81kcplaq2lst" path="res://assets/highlight_overlay_tileset.tres" id="6_7log7"]
 [ext_resource type="Script" uid="uid://cf7fm30ln5neo" path="res://scripts/MapHighlightController.cs" id="6_a6mti"]
@@ -87,17 +89,28 @@ startAmounts = Dictionary[int, int]({
 [node name="MapController" type="Node2D" parent="." node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer", "mapGenerator")]
 y_sort_enabled = true
 script = ExtResource("2_m3sjc")
-baseMapLayer = NodePath("TileMapLayer")
+baseMapLayer = NodePath("BaseTileMapLayer")
 lockedOverlayLayer = NodePath("LockedOverlayTileMapLayer")
 mapGenerator = NodePath("MapGenerator")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="MapController"]
+[node name="BaseTileMapLayer" type="TileMapLayer" parent="MapController"]
+visible = false
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAABAP//AAABAAEAAAAAAP//AAABAAEAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAABAAAAAAABAAEAAAAAAAEAAAABAAEAAAA=")
 tile_set = ExtResource("1_b6gu2")
 occlusion_enabled = false
 navigation_enabled = false
+script = ExtResource("5_m7ly0")
+
+[node name="VisibleTileMapLayer" type="TileMapLayer" parent="MapController" node_paths=PackedStringArray("tileMapLayerToEcho")]
+y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
+tile_set = ExtResource("1_b6gu2")
+occlusion_enabled = false
+navigation_enabled = false
+script = ExtResource("5_c25qt")
+tileMapLayerToEcho = NodePath("../BaseTileMapLayer")
 
 [node name="LockedOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
 y_sort_enabled = true
@@ -126,7 +139,7 @@ unlockedCellPopup = NodePath("../../PopupLayer/UnlockedCellPopup")
 
 [node name="MapGenerator" type="Node2D" parent="MapController" node_paths=PackedStringArray("baseMapLayer")]
 script = ExtResource("9_b0365")
-baseMapLayer = NodePath("../TileMapLayer")
+baseMapLayer = NodePath("../BaseTileMapLayer")
 noiseSampleScale = 5
 waterCustomTileData = ExtResource("10_2gw4c")
 rockyUpperThreshold = 0.3

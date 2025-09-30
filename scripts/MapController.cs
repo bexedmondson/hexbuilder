@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class MapController : Node2D, IInjectable
@@ -17,8 +18,6 @@ public partial class MapController : Node2D, IInjectable
 
     private int defaultLockedTileSourceIndex = 0;
     private Vector2I defaultLockedTileAtlasCoords = Vector2I.Zero;
-    private int defaultUnlockedTileSourceIndex = 0;
-    private Vector2I defaultUnlockedTileAtlasCoords = Vector2I.Right * 3;
 
     private MapHighlightController highlightController;
 
@@ -28,7 +27,7 @@ public partial class MapController : Node2D, IInjectable
         InjectionManager.Register(this);
     }
 
-    public override void _Ready()
+    public override void _Ready() //as this is a child of GameController, this will be called BEFORE GameController tries starting a new game or whatever, so setup is safe to do here
     {
         base._Ready();
         var tileDatabase = InjectionManager.Get<TileDatabase>();
@@ -43,25 +42,37 @@ public partial class MapController : Node2D, IInjectable
         
         visibleCellUnlockStates.Clear();
         visibleCellUnlockStates[Vector2I.Zero] = true;
-
-        mapGenerator.Generate(new Rect2I(Vector2I.One * -10, Vector2I.One * 20)); //temporarily, for testing
-
-        var defaultUnlockedTileSource = baseMapLayer.TileSet.GetSource(defaultUnlockedTileSourceIndex) as TileSetAtlasSource;
         
-        //baseMapLayer.SetCell(Vector2I.Zero, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), defaultUnlockedTileAtlasCoords);
-        
-        /*foreach (var surroundingCell in baseMapLayer.GetSurroundingCells(Vector2I.Zero))
-        {
-            visibleCellUnlockStates[surroundingCell] = false;
-            baseMapLayer.SetCell(surroundingCell, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), GetRandomTile(defaultUnlockedTileSource));
-            lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
-        }*/
+        mapGenerator.SubscribeIsReady(SetupInitialMap);
     }
 
-    private Vector2I GetRandomTile(TileSetAtlasSource atlasSource)
+    private void SetupInitialMap()
     {
-        int tileCount = atlasSource.GetTilesCount();
-        return atlasSource.GetTileId((int)(GD.Randi() % tileCount));
+        UnlockCell(Vector2I.Zero);
+    }
+
+    public void UnlockCell(Vector2I cell)
+    {
+        mapGenerator.OnCellUnlocked(cell);
+        
+        //updating surrounding cells after the above, so that in the above call, relevant tiles can be updated by checking GetCellStatus == Hidden
+        //before they're made visible
+        visibleCellUnlockStates[cell] = true;
+        lockedOverlayLayer.EraseCell(cell);
+        
+        foreach (var surroundingCell in baseMapLayer.GetSurroundingCells(cell))
+        {
+            if (visibleCellUnlockStates.ContainsKey(surroundingCell))
+                continue;
+            
+            visibleCellUnlockStates[surroundingCell] = false;
+            lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
+        }
+    }
+
+    public void SetCell(Vector2I cell, TileDatabase.TileInfo tileToSet)
+    {
+        baseMapLayer.SetCell(cell, baseMapLayer.TileSet.GetSourceId(tileToSet.sourceId), tileToSet.tileCoords);
     }
 
     public Vector2I GetCellUnderMouse()
@@ -79,34 +90,16 @@ public partial class MapController : Node2D, IInjectable
         return CellStatus.Hidden;
     }
 
+    public Vector2I[] GetVisibleCells()
+    {
+        return visibleCellUnlockStates.Keys.ToArray();
+    }
+
     public CurrencySum GetCellUnlockCost(Vector2I cell)
     {
         return new CurrencySum() {
             { CurrencyType.Person, 1 }
         };
-    }
-
-    public void UnlockCell(Vector2I cell)
-    {
-        visibleCellUnlockStates[cell] = true;
-        lockedOverlayLayer.EraseCell(cell);
-        
-        var defaultUnlockedTileSource = baseMapLayer.TileSet.GetSource(defaultUnlockedTileSourceIndex) as TileSetAtlasSource;
-        
-        foreach (var surroundingCell in baseMapLayer.GetSurroundingCells(cell))
-        {
-            if (visibleCellUnlockStates.ContainsKey(surroundingCell))
-                continue;
-            
-            visibleCellUnlockStates[surroundingCell] = false;
-            baseMapLayer.SetCell(surroundingCell, baseMapLayer.TileSet.GetSourceId(defaultUnlockedTileSourceIndex), GetRandomTile(defaultUnlockedTileSource));
-            lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
-        }
-    }
-
-    public void SetCell(Vector2I cell, TileDatabase.TileInfo tileToSet)
-    {
-        baseMapLayer.SetCell(cell, baseMapLayer.TileSet.GetSourceId(tileToSet.sourceId), tileToSet.tileCoords);
     }
 
     public Dictionary<Vector2I, int> GetSurroundingCellsUpToDistance(Vector2I centreCell, int maxDistance)

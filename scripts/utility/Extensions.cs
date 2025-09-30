@@ -16,4 +16,15 @@ public static class Extensions
         
         return null;
     }
+
+    public static bool IsCellEmpty(this TileMapLayer tileMapLayer, Vector2I cell)
+    {
+        //as per https://docs.godotengine.org/en/4.4/classes/class_tilemaplayer.html:
+        //"A cell is considered empty if its source identifier equals -1, its atlas coordinate identifier is Vector2(-1, -1)
+        //and its alternative identifier is -1."
+
+        return tileMapLayer.GetCellSourceId(cell) == -1
+               && tileMapLayer.GetCellAtlasCoords(cell) == (Vector2I.One * -1)
+               && tileMapLayer.GetCellAlternativeTile(cell) == -1;
+    }
 }

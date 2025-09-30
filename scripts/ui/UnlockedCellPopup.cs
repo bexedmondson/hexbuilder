@@ -58,6 +58,7 @@ public partial class UnlockedCellPopup : Control
     {
         var selectedOption = selectedButton as TileOptionUI;
 
+        //TODO: hate that there is so much controlled from this class!! but works for now at least
         mapController.HighlightNeighbourEffects(cell, selectedOption.tileInfo);
     }
 

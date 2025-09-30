@@ -9,8 +9,6 @@ public partial class GameController : Node2D
     [Export]
     private InventoryManager inventoryManager;
 
-    private TileDatabase tileDatabase = new TileDatabase();
-
     public override void _Ready()
     {
         base._Ready();
