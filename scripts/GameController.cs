@@ -19,7 +19,7 @@ public partial class GameController : Node2D
 
     public void NextTurn()
     {
-        CurrencySum totalCurrencyChange = new CurrencySum();
+        List<CurrencySum> allCurrencyChanges = new();
         
         foreach (var cell in mapController.BaseMapLayer.GetUsedCells())
         {
@@ -27,12 +27,12 @@ public partial class GameController : Node2D
                 continue;
 
             var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
-            totalCurrencyChange.Add(cellTileData.baseTurnCurrencyChange);
+            allCurrencyChanges.Add(new CurrencySum(cellTileData.baseTurnCurrencyChange));
             
-            totalCurrencyChange.Add(CalculateAdjacencyEffects(cell, cellTileData));
+            allCurrencyChanges.Add(CalculateAdjacencyEffects(cell, cellTileData));
         }
         
-        inventoryManager.OnNextTurn(totalCurrencyChange);
+        inventoryManager.OnNextTurn(allCurrencyChanges.ToArray());
     }
 
     private CurrencySum CalculateAdjacencyEffects(Vector2I centreCell, CustomTileData centreTileData)

@@ -11,12 +11,24 @@ public partial class InventoryManager : Node2D, IInjectable
 
     private CurrencySum inventory = new();
 
+    private InventoryStatsTracker statsTracker;
+
     public override void _EnterTree()
     {
         base._EnterTree();
         InjectionManager.Register(this);
+
+        statsTracker = new InventoryStatsTracker();
     }
-    
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        InjectionManager.Deregister(this);
+        statsTracker = null;
+    }
+
     public void OnNewGame()
     {
         inventory.Clear();
@@ -38,20 +50,20 @@ public partial class InventoryManager : Node2D, IInjectable
     
     public void SpendCurrency(CurrencySum price)
     {
-        foreach (var kvp in price)
-        {
-            inventory[kvp.Key] -= kvp.Value;
-        }
+        inventory.Subtract(price);
         
-        inventoryDisplay.Cleanup(); //obviously temporary
+        inventoryDisplay.Cleanup(); //obviously temporary, this is a horrendously inefficient way to handle this
         inventoryDisplay.DisplayCurrencyAmount(inventory);
     }
 
-    //TODO want to combine this with above method but i couldn't think of a good name for the method lol
-    public void OnNextTurn(CurrencySum currencyDelta)
+    public void OnNextTurn(CurrencySum[] allCurrencyChanges)
     {
-        inventory.Add(currencyDelta);
-        
+        foreach (var currencyChange in allCurrencyChanges)
+        {
+            inventory.Add(currencyChange);
+            statsTracker.OnCurrencyChange(currencyChange);
+        }
+
         inventoryDisplay.Cleanup(); //obviously temporary
         inventoryDisplay.DisplayCurrencyAmount(inventory);
     }
