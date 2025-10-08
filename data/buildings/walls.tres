@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="CustomTileData" load_steps=2 format=3 uid="uid://d1qikhlvit8wo"]
+[gd_resource type="Resource" script_class="CustomTileData" load_steps=3 format=3 uid="uid://d1qikhlvit8wo"]
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Resource" uid="uid://b8hvwxf5jgsix" path="res://data/buildings/wall.tres" id="1_xombo"]
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = []
+canBePlacedOn = [ExtResource("1_xombo")]
 price = {
-1: 2
+1: 2,
+2: 8
 }
 baseTurnCurrencyChange = {
 0: -1,
