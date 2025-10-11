@@ -31,6 +31,7 @@ public partial class MapController : Node2D, IInjectable
     {
         base._Ready();
         var tileDatabase = InjectionManager.Get<TileDatabase>();
+        tileDatabase ??= new TileDatabase();
         tileDatabase.AddTileSetTileData(baseMapLayer.TileSet);
         mapGenerator.Setup();
     }

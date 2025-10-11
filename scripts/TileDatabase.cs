@@ -12,12 +12,16 @@ public class TileDatabase : IInjectable
         public AtlasTexture tileTexture;
         public CustomTileData tileData;
     }
+
+    private TileUnlockManager tileUnlockManager;
     
     private List<TileInfo> tileInfos = new();
     
     public TileDatabase()
     {
         InjectionManager.Register(this);
+
+        tileUnlockManager = new TileUnlockManager(this);
     }
 
     public void AddTileSetTileData(TileSet tileSet)
@@ -51,8 +55,13 @@ public class TileDatabase : IInjectable
         List<TileInfo> compatibleTileInfos = new();
         foreach (var tileInfo in tileInfos)
         {
-            if (tileInfo.tileData?.canBePlacedOn?.Contains(customTileData) == true)
-                compatibleTileInfos.Add(tileInfo);
+            if (tileInfo.tileData?.canBePlacedOn?.Contains(customTileData) != true)
+                continue;
+
+            if (!tileInfo.tileData.IsUnlocked())
+                continue;
+            
+            compatibleTileInfos.Add(tileInfo);
         }
         return compatibleTileInfos;
     }

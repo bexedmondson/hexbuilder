@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+
 public class InventoryStatsTracker : IInjectable
 {
     public InventoryStatsTracker()
@@ -23,5 +25,15 @@ public class InventoryStatsTracker : IInjectable
             else
                 usedStats.Add(kvp.Key, kvp.Value);
         }
+    }
+
+    public int GetGainedAmount(CurrencyType currency)
+    {
+        return gainedStats.GetValueOrDefault(currency);
+    }
+    
+    public int GetUsedAmount(CurrencyType currency)
+    {
+        return usedStats.GetValueOrDefault(currency);
     }
 }

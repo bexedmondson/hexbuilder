@@ -1,7 +1,6 @@
 using Godot;
 
-[GlobalClass]
-[Tool]
+[GlobalClass][Tool]
 public partial class CustomTileData : Resource
 {
     [Export]
@@ -15,6 +14,22 @@ public partial class CustomTileData : Resource
 
     [Export]
     public Godot.Collections.Array<AdjacencyConfig> adjacencies;
+
+    [Export] //all requirements must be satisfied - AnyOf unlock requirement to be implemented when needed
+    public Godot.Collections.Array<UnlockRequirement> unlockRequirements;
+
+    public bool IsUnlocked()
+    {
+        if (unlockRequirements == null)
+            return true;
+        
+        foreach (var unlockRequirement in unlockRequirements)
+        {
+            if (!unlockRequirement.IsSatisfied())
+                return false;
+        }
+        return true;
+    }
 
     public string GetFileName()
     {
