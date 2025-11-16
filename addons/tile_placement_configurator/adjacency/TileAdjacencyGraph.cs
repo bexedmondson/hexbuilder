@@ -18,7 +18,7 @@ public partial class TileAdjacencyGraph : AbstractTileGraph
         this.ClearConnections();
         for (int i = this.GetChildCount() - 1; i >= 0; i--)
         {
-            if (this.GetChild(i) is TileAdjacencyGraphNode)
+            if (this.GetChild(i) is TileAdjacencyGraphNode || this.GetChild(i) is TileAdjacencyMainNode)
                 this.GetChild(i).Free();
         }
 

@@ -11,20 +11,43 @@ public partial class TilePlacementConfigurator : EditorPlugin
 	
 	public override void _EnterTree()
 	{
-		tileDatabase = new TileDatabase();
+		HandleTileDB(true);
 		
 		mainPanelInstance = (Control)mainPanelScene.Instantiate();
 		EditorInterface.Singleton.GetEditorMainScreen().AddChild(mainPanelInstance);
 		_MakeVisible(false);
 	}
 
+	public override void _EnablePlugin()
+	{
+		base._EnablePlugin();
+		HandleTileDB(true);
+	}
+	
+	public override void _DisablePlugin()
+	{
+		base._DisablePlugin();
+		HandleTileDB(false);
+	}
+
 	public override void _ExitTree()
 	{
+		HandleTileDB(false);
 		if (mainPanelInstance != null)
 			mainPanelInstance.QueueFree();
-		
-		if (InjectionManager.Has<TileDatabase>())
+	}
+
+	private void HandleTileDB(bool shouldDbExist)
+	{
+		if (shouldDbExist && tileDatabase == null)
+		{
+			tileDatabase = new TileDatabase();
+		}
+		else if (tileDatabase != null && InjectionManager.Has<TileDatabase>())
+		{
 			InjectionManager.Deregister(tileDatabase);
+			tileDatabase = null;
+		}
 	}
 
 	public override bool _HasMainScreen()

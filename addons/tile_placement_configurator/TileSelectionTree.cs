@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [Tool]
@@ -13,6 +14,7 @@ public partial class TileSelectionTree : Tree
         var dataDir = DirAccess.Open("res://data");
         var root = this.CreateItem();
         DirContents(dataDir, root);
+        SortTree(root);
     }
     
     public void DirContents(DirAccess dir, TreeItem parent)
@@ -23,9 +25,10 @@ public partial class TileSelectionTree : Tree
             string fileName = dir.GetNext();
             while (fileName != "")
             {
-                var treeItem = CreateItem(parent);
+                int index = GetNewItemIndex(parent, fileName);
+                var treeItem = CreateItem(parent, index);
                 treeItem.SetText(0, fileName.TrimSuffix("." + fileName.GetExtension()));
-                
+
                 if (dir.CurrentIsDir())
                     DirContents(DirAccess.Open(dir.GetCurrentDir() +"/"+ fileName), treeItem);
                 else
@@ -37,6 +40,34 @@ public partial class TileSelectionTree : Tree
         else
         {
             GD.Print("An error occurred when trying to access the path.");
+        }
+    }
+
+    private int GetNewItemIndex(TreeItem parent, string newItemName)
+    {
+        var items = parent.GetChildren();
+        int i = 0;
+        for (; i < items.Count; i++)
+        {
+            var sibling = items[i];
+            if (string.Compare(sibling.GetText(0), (newItemName), StringComparison.InvariantCultureIgnoreCase) > 0)
+                break;
+        }
+
+        return i;
+    }
+
+    private void SortTree(TreeItem parent)
+    {
+        if (parent.GetMetadata(0).Obj is CustomTileData tileData) 
+            GD.Print("sorting " + tileData.GetFileName());
+        var children = parent.GetChildren();
+        
+        children.Sort();
+        
+        foreach (var childItem in children)
+        {
+            SortTree(childItem);
         }
     }
 
