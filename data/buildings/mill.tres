@@ -1,19 +1,19 @@
 [gd_resource type="Resource" script_class="CustomTileData" load_steps=8 format=3 uid="uid://cj02mf2c7m6bl"]
 
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_8uj3x"]
-[ext_resource type="Resource" uid="uid://cc5jv204rhvnk" path="res://data/buildings/tower.tres" id="1_qw1qp"]
+[ext_resource type="Resource" uid="uid://chwut76ukbrlw" path="res://data/buildings/field.tres" id="1_qw1qp"]
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_j5x2k"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_nky1h"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_qw1qp"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="6_hv1c6"]
 
-[sub_resource type="Resource" id="Resource_3iw88"]
+[sub_resource type="Resource" id="Resource_j5x2k"]
 script = ExtResource("2_j5x2k")
 requiredTile = ExtResource("1_qw1qp")
 distance = 1
-currencyEffect = {
-0: -1
-}
+currencyEffect = Dictionary[int, int]({
+0: 2
+})
 
 [resource]
 script = ExtResource("6_hv1c6")
@@ -22,8 +22,9 @@ price = {
 1: 2
 }
 baseTurnCurrencyChange = {
-0: -1,
-3: 1
+0: 2,
+3: -1
 }
-adjacencies = Array[Object]([SubResource("Resource_3iw88")])
+adjacencies = Array[Object]([SubResource("Resource_j5x2k")])
+unlockRequirements = []
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

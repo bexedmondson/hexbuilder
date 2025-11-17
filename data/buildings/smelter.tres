@@ -10,7 +10,9 @@
 script = ExtResource("2_ljri3")
 requiredTile = ExtResource("1_8qq32")
 distance = 1
-currencyEffect = null
+currencyEffect = {
+2: 1
+}
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -23,4 +25,5 @@ baseTurnCurrencyChange = {
 3: -1
 }
 adjacencies = Array[Object]([SubResource("Resource_mkh37")])
+unlockRequirements = []
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

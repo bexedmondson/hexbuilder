@@ -1,7 +1,14 @@
-[gd_resource type="Resource" script_class="CustomTileData" load_steps=3 format=3 uid="uid://de8ocg7h3ig78"]
+[gd_resource type="Resource" script_class="CustomTileData" load_steps=5 format=3 uid="uid://de8ocg7h3ig78"]
 
 [ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="1_7jax1"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_6lq31"]
+
+[sub_resource type="Resource" id="Resource_g314a"]
+script = ExtResource("2_6lq31")
+requiredTile = ExtResource("1_7jax1")
+distance = 1
+currencyEffect = null
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -9,9 +16,7 @@ canBePlacedOn = Array[Object]([ExtResource("1_7jax1")])
 price = {
 1: 2
 }
-baseTurnCurrencyChange = {
-0: -1,
-3: 1
-}
-adjacencies = Array[Object]([])
+baseTurnCurrencyChange = {}
+adjacencies = Array[Object]([SubResource("Resource_g314a")])
+unlockRequirements = null
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CustomTileData" load_steps=3 format=3 uid="uid://dri684d2te7kl"]
 
-[ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="1_hk2dp"]
+[ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/house.tres" id="1_hk2dp"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="2_n4ucp"]
 
 [resource]
@@ -16,4 +16,5 @@ baseTurnCurrencyChange = {
 3: 3
 }
 adjacencies = Array[Object]([])
+unlockRequirements = null
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
