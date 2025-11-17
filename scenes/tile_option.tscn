@@ -5,42 +5,57 @@
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="3_6d75x"]
 [ext_resource type="Texture2D" uid="uid://byfu2r5i3mr06" path="res://assets/2d/building-castle.png" id="3_wgdtb"]
 
-[node name="TileOption" type="Button" node_paths=PackedStringArray("textureRect", "currencyDisplay")]
-custom_minimum_size = Vector2(170, 170)
+[node name="TileOption" type="Button" node_paths=PackedStringArray("textureRect", "nameLabel", "currencyDisplay")]
+custom_minimum_size = Vector2(300, 170)
 offset_right = 170.0
 offset_bottom = 170.0
 size_flags_horizontal = 3
-size_flags_vertical = 0
+size_flags_vertical = 2
 toggle_mode = true
 button_group = ExtResource("1_whmtt")
 script = ExtResource("2_tjxx3")
-textureRect = NodePath("Container/TileTexture")
-currencyDisplay = NodePath("Container/CurrencyDisplay")
+textureRect = NodePath("MarginContainer/Container/TileTexture")
+nameLabel = NodePath("MarginContainer/Container/VBoxContainer/NameDisplay")
+currencyDisplay = NodePath("MarginContainer/Container/VBoxContainer/CurrencyDisplay")
 
-[node name="Container" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(155, 155)
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = 169.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="TileTexture" type="TextureRect" parent="Container"]
-custom_minimum_size = Vector2(170, 0)
+[node name="Container" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TileTexture" type="TextureRect" parent="MarginContainer/Container"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 texture = ExtResource("3_wgdtb")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="CurrencyDisplay" parent="Container" instance=ExtResource("3_6d75x")]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameDisplay" type="Label" parent="MarginContainer/Container/VBoxContainer"]
+layout_mode = 2
+text = "placeholder"
+
+[node name="CurrencyDisplay" parent="MarginContainer/Container/VBoxContainer" instance=ExtResource("3_6d75x")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 5
-alignment = 1
+last_wrap_alignment = 1

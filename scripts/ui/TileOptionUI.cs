@@ -7,6 +7,9 @@ public partial class TileOptionUI : Button
     private TextureRect textureRect;
 
     [Export]
+    private Label nameLabel;
+
+    [Export]
     private CurrencyDisplay currencyDisplay;
     
     public TileDatabase.TileInfo tileInfo { get; private set; }
@@ -14,6 +17,7 @@ public partial class TileOptionUI : Button
     public void SetTile(TileDatabase.TileInfo setTileInfo)
     {
         tileInfo = setTileInfo;
+        nameLabel.Text = setTileInfo.tileData.GetFileName();
         textureRect.Texture = tileInfo.tileTexture;
 
         var tilePrice = new CurrencySum(tileInfo.tileData.price);

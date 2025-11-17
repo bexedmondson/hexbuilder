@@ -126,6 +126,7 @@ y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 tile_set = ExtResource("6_7log7")
 occlusion_enabled = false
+y_sort_origin = 1
 navigation_enabled = false
 script = ExtResource("6_a6mti")
 adjacencySourceId = 1
@@ -192,6 +193,7 @@ mouse_filter = 2
 [node name="CurrencyDisplay" parent="CanvasLayer/UIMain" instance=ExtResource("6_bn7pe")]
 layout_mode = 1
 offset_bottom = 20.0
+showTurnChange = true
 
 [node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain"]
 layout_mode = 1
@@ -269,7 +271,7 @@ vertical_scroll_mode = 4
 [node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 
 [node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup"]
 layout_mode = 1
