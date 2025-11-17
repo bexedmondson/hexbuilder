@@ -50,29 +50,51 @@ public partial class TileAdjacencyMainNode : GraphNode
         if (dir != null)
         {
             dir.ListDirBegin();
+
+            Dictionary<string, CustomTileData> optionsToSort = new();
+            
             string fileName = dir.GetNext();
             while (fileName != "")
             {
                 if (dir.CurrentIsDir())
                 {
+                    AddSortedOptions(optionsToSort, optionButton, adjacentTileData);
+                    
                     optionButton.AddSeparator(fileName);
                     DirContents(DirAccess.Open(dir.GetCurrentDir() +"/"+ fileName));
+                    optionsToSort.Clear();
                 }
                 else
                 {
-                    optionButton.AddItem(fileName.TrimSuffix("." + fileName.GetExtension()));
                     var tileDataResource = ResourceLoader.Load(dir.GetCurrentDir() + "/" + fileName) as CustomTileData;
-                    optionButton.SetItemMetadata(optionButton.ItemCount - 1, tileDataResource);
-                    if (adjacentTileData.Contains(tileDataResource))
-                        optionButton.SetItemDisabled(optionButton.ItemCount - 1, true);
+                    optionsToSort[fileName.TrimSuffix("." + fileName.GetExtension())] = tileDataResource;
                 }
 
                 fileName = dir.GetNext();
+            }
+            
+            if (optionsToSort.Count > 0)
+            {
+                AddSortedOptions(optionsToSort, optionButton, adjacentTileData);
             }
         }
         else
         {
             GD.Print("An error occurred when trying to access the path.");
+        }
+    }
+
+    private void AddSortedOptions(Dictionary<string, CustomTileData> optionsToSort, OptionButton button, List<CustomTileData> adjacentTileData)
+    {
+        List<string> sortedOptions = new List<string>(optionsToSort.Keys);
+        sortedOptions.Sort();
+                    
+        foreach (var option in sortedOptions)
+        {
+            button.AddItem(option);
+            button.SetItemMetadata(button.ItemCount - 1, optionsToSort[option]);
+            if (adjacentTileData.Contains(optionsToSort[option]))
+                button.SetItemDisabled(button.ItemCount - 1, true);
         }
     }
 

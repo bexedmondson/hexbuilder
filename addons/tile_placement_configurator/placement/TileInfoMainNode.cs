@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 [Tool]
 public partial class TileInfoMainNode : TileInfoGraphNode
@@ -20,29 +21,51 @@ public partial class TileInfoMainNode : TileInfoGraphNode
         if (dir != null)
         {
             dir.ListDirBegin();
+            
+            System.Collections.Generic.Dictionary<string, CustomTileData> optionsToSort = new();
+            
             string fileName = dir.GetNext();
             while (fileName != "")
             {
                 if (dir.CurrentIsDir())
                 {
+                    AddSortedOptions(optionsToSort, optionButton, customTileData.canBePlacedOn);
+                    
                     optionButton.AddSeparator(fileName);
                     DirContents(DirAccess.Open(dir.GetCurrentDir() +"/"+ fileName));
+                    optionsToSort.Clear();
                 }
                 else
                 {
-                    optionButton.AddItem(fileName.TrimSuffix("." + fileName.GetExtension()));
                     var tileDataResource = ResourceLoader.Load(dir.GetCurrentDir() + "/" + fileName) as CustomTileData;
-                    optionButton.SetItemMetadata(optionButton.ItemCount - 1, tileDataResource);
-                    if (customTileData.canBePlacedOn.Contains(tileDataResource))
-                        optionButton.SetItemDisabled(optionButton.ItemCount - 1, true);
+                    optionsToSort[fileName.TrimSuffix("." + fileName.GetExtension())] = tileDataResource;
                 }
 
                 fileName = dir.GetNext();
+            }
+            
+            if (optionsToSort.Count > 0)
+            {
+                AddSortedOptions(optionsToSort, optionButton, customTileData.canBePlacedOn);
             }
         }
         else
         {
             GD.Print("An error occurred when trying to access the path.");
+        }
+    }
+    
+    private void AddSortedOptions(System.Collections.Generic.Dictionary<string, CustomTileData> optionsToSort, OptionButton button, Array<CustomTileData> canBePlacedOnTileData)
+    {
+        List<string> sortedOptions = new List<string>(optionsToSort.Keys);
+        sortedOptions.Sort();
+                    
+        foreach (var option in sortedOptions)
+        {
+            button.AddItem(option);
+            button.SetItemMetadata(button.ItemCount - 1, optionsToSort[option]);
+            if (canBePlacedOnTileData.Contains(optionsToSort[option]))
+                button.SetItemDisabled(button.ItemCount - 1, true);
         }
     }
 

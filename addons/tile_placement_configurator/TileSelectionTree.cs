@@ -59,10 +59,7 @@ public partial class TileSelectionTree : Tree
 
     private void SortTree(TreeItem parent)
     {
-        if (parent.GetMetadata(0).Obj is CustomTileData tileData) 
-            GD.Print("sorting " + tileData.GetFileName());
         var children = parent.GetChildren();
-        
         children.Sort();
         
         foreach (var childItem in children)
