@@ -16,6 +16,28 @@ public partial class CurrencyDisplay : Control
 
     private Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+        if (showTurnChange)
+        {
+            var eventDispatcher = InjectionManager.Get<EventDispatcher>();
+            eventDispatcher.Add<MapUpdatedEvent>(OnMapUpdated);
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        if (showTurnChange)
+        {
+            var eventDispatcher = InjectionManager.Get<EventDispatcher>();
+            eventDispatcher.Remove<MapUpdatedEvent>(OnMapUpdated);
+        }
+    }
+
     public void DisplayCurrencyAmount(CurrencySum currencySum)
     {
         CurrencySum turnChange = new();
@@ -62,6 +84,12 @@ public partial class CurrencyDisplay : Control
                 existingSingleCurrencyDisplay.ShowDelta(false);
             }
         }
+    }
+
+    private void OnMapUpdated(MapUpdatedEvent mapUpdatedEvent)
+    {
+        //TODO
+        GD.Print("map updated!");
     }
 
     public void Cleanup()

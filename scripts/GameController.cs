@@ -10,10 +10,13 @@ public partial class GameController : Node2D
     private InventoryManager inventoryManager;
 
     private TileDatabase tileDatabase;
+    private EventDispatcher eventDispatcher;
 
     public override void _EnterTree()
     {
         base._EnterTree();
+
+        eventDispatcher = new EventDispatcher();
 
         tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase ??= new TileDatabase();

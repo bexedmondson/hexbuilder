@@ -20,6 +20,7 @@ public partial class MapController : Node2D, IInjectable
     private Vector2I defaultLockedTileAtlasCoords = Vector2I.Zero;
 
     private MapHighlightController highlightController;
+    private EventDispatcher eventDispatcher;
 
     public override void _EnterTree()
     {
@@ -30,6 +31,7 @@ public partial class MapController : Node2D, IInjectable
     public override void _Ready() //as this is a child of GameController, this will be called BEFORE GameController tries starting a new game or whatever, so setup is safe to do here
     {
         base._Ready();
+        eventDispatcher = InjectionManager.Get<EventDispatcher>();
         var tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase ??= new TileDatabase();
         tileDatabase.AddTileSetTileData(baseMapLayer.TileSet);
@@ -69,11 +71,15 @@ public partial class MapController : Node2D, IInjectable
             visibleCellUnlockStates[surroundingCell] = false;
             lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
         }
+        
+        eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
     public void SetCell(Vector2I cell, TileDatabase.TileInfo tileToSet)
     {
         baseMapLayer.SetCell(cell, baseMapLayer.TileSet.GetSourceId(tileToSet.sourceId), tileToSet.tileCoords);
+        
+        eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
     public Vector2I GetCellUnderMouse()

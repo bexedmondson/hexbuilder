@@ -50,6 +50,20 @@ public class InjectionManager
         }
         return default(T);
     }
+    
+    //only use this if the injectable deregisters itself!
+    public static T GetOrCreate<T>() where T : IInjectable, new()
+    {
+        if (s_injectableMap.TryGetValue(typeof(T), out IInjectable injectableT))
+        {
+            return (T)injectableT;
+        }
+        
+        var newT = new T();
+        s_injectableMap.Add(typeof(T), newT);
+        
+        return newT;
+    }
 
     public static bool Has<T>() where T : IInjectable
     {
