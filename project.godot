@@ -38,6 +38,10 @@ better_terrain/max_zoom_amount=4.0
 
 enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg", "res://addons/tile_placement_configurator/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://c42r8558dvmyi"
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
