@@ -61,29 +61,6 @@ public partial class CurrencyDisplay : Control
                 existingSingleCurrencyDisplay.Set(currencyIcons[currencyType] as Texture2D, amount);
                 existingSingleCurrencyDisplay.ShowDelta(false);
             }
-            
-            /*var textureRect = new TextureRect();
-            textureRect.Texture = currencyIcons[currencyType] as Texture2D;
-            textureRect.CustomMinimumSize = Vector2.One * 40;
-            textureRect.ExpandMode = TextureRect.ExpandModeEnum.FitHeightProportional;
-            this.AddChild(textureRect);
-
-            var label = new Label();
-            label.LabelSettings = new LabelSettings() { FontSize = 25 };
-            label.Text = amount.ToString() + "   ";
-            this.AddChild(label);
-
-            if (showTurnChange)
-            {
-                var changeLabel = new Label();
-                changeLabel.LabelSettings = new LabelSettings() { FontSize = 25 };
-                
-                int delta = 0;
-                turnChange.TryGetValue(kvp.Key, out delta);
-                string prefix = delta < 0 ? "-" : "+";
-                changeLabel.Text = $"({prefix}{delta})";
-                this.AddChild(changeLabel);
-            }*/
         }
     }
 
