@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjdcf535b0agr"]
+
+[ext_resource type="Script" uid="uid://bni0n2i0y4vao" path="res://scripts/ui/SingleCurrencyDisplay.cs" id="1_qis18"]
+
+[node name="SingleCurrencyDisplay" type="HBoxContainer" node_paths=PackedStringArray("icon", "quantityLabel", "changeLabel")]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 70.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+script = ExtResource("1_qis18")
+icon = NodePath("TextureRect")
+quantityLabel = NodePath("Label")
+changeLabel = NodePath("Label2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
