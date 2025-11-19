@@ -2,13 +2,8 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-public interface IInjectable
-{
-    
-}
-
 [Tool]
-public class InjectionManager
+public partial class InjectionManager : Node
 {
     private static InjectionManager s_instance;
     public static InjectionManager Instance()

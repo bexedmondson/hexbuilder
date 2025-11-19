@@ -43,9 +43,10 @@ public partial class TilePlacementConfigurator : EditorPlugin
 		{
 			tileDatabase = new TileDatabase();
 		}
-		else if (tileDatabase != null && InjectionManager.Has<TileDatabase>())
+		else if (tileDatabase != null)
 		{
-			InjectionManager.Deregister(tileDatabase);
+			if (InjectionManager.Has<TileDatabase>())
+				InjectionManager.Deregister(tileDatabase);
 			tileDatabase = null;
 		}
 	}
