@@ -11,6 +11,7 @@ public partial class GameController : Node2D
 
     private TileDatabase tileDatabase;
     private EventDispatcher eventDispatcher;
+    private MapCurrencyChangeAnalyser mapCurrencyChangeAnalyser;
 
     public override void _EnterTree()
     {
@@ -32,19 +33,8 @@ public partial class GameController : Node2D
 
     public void NextTurn()
     {
-        List<CurrencySum> allCurrencyChanges = new();
-        
-        foreach (var cell in mapController.BaseMapLayer.GetUsedCells())
-        {
-            if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
-                continue;
-
-            var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
-            if (cellTileData?.baseTurnCurrencyChange != null)
-                allCurrencyChanges.Add(new CurrencySum(cellTileData.baseTurnCurrencyChange));
-            
-            allCurrencyChanges.Add(mapController.CalculateAdjacencyEffects(cell, cellTileData));
-        }
+        mapCurrencyChangeAnalyser ??= InjectionManager.Get<MapCurrencyChangeAnalyser>();
+        List<CurrencySum> allCurrencyChanges = mapCurrencyChangeAnalyser.GetFullCurrencyTurnDeltas();
         
         inventoryManager.OnNextTurn(allCurrencyChanges.ToArray());
     }

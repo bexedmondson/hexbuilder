@@ -20,6 +20,7 @@ public partial class MapController : Node2D, IInjectable
     private Vector2I defaultLockedTileAtlasCoords = Vector2I.Zero;
 
     private MapHighlightController highlightController;
+    private MapCurrencyChangeAnalyser currencyChangeAnalyser;
     private EventDispatcher eventDispatcher;
 
     public override void _EnterTree()
@@ -32,6 +33,7 @@ public partial class MapController : Node2D, IInjectable
     {
         base._Ready();
         eventDispatcher = InjectionManager.Get<EventDispatcher>();
+        currencyChangeAnalyser = new MapCurrencyChangeAnalyser(this);
         var tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase ??= new TileDatabase();
         tileDatabase.AddTileSetTileData(baseMapLayer.TileSet);
@@ -177,52 +179,5 @@ public partial class MapController : Node2D, IInjectable
                 }
             }
         }
-    }
-    
-    public CurrencySum CalculateAdjacencyEffects(Vector2I centreCell, CustomTileData centreTileData)
-    {
-        CurrencySum adjacencyEffects = new();
-
-        Dictionary<int, Dictionary<CustomTileData, AdjacencyConfig>> adjacenciesByDistance = new();
-
-        if (centreTileData?.adjacencies == null)
-            return adjacencyEffects;
-        
-        
-        foreach (var adjacency in centreTileData.adjacencies)
-        {
-            if (adjacenciesByDistance.ContainsKey(adjacency.distance))
-            {
-                adjacenciesByDistance[adjacency.distance].Add(adjacency.requiredTile, adjacency);
-            }
-            else
-            {
-                adjacenciesByDistance[adjacency.distance] = new(){
-                    { adjacency.requiredTile, adjacency }
-                };
-            }
-        }
-
-        foreach (var kvp in adjacenciesByDistance)
-        {
-            var distance = kvp.Key;
-            var relevantAdjacenciesByAdjacentData = kvp.Value;
-            
-            var neighboursByDistance = GetSurroundingCellsUpToDistance(centreCell, distance);
-
-            foreach (var neighbour in neighboursByDistance.Keys)
-            {
-                var neighbourData = BaseMapLayer.GetCellCustomData(neighbour);
-                if (neighbourData == null) 
-                    continue;
-                
-                if (relevantAdjacenciesByAdjacentData.TryGetValue(neighbourData, out var relevantAdjacency))
-                {
-                    adjacencyEffects.Add(relevantAdjacency.currencyEffect);
-                }
-            }
-        }
-        
-        return adjacencyEffects;
     }
 }

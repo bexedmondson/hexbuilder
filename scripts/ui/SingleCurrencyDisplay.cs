@@ -15,11 +15,16 @@ public partial class SingleCurrencyDisplay : Control
     private readonly string plusPrefix = "+";
     private readonly string minusPrefix = "-";
 
-    public void Set(Texture2D iconTexture, int quantity, int delta = 0)
+    public void SetCurrency(Texture2D iconTexture, int quantity, int delta = 0)
     {
         icon.Texture = iconTexture;
         quantityLabel.Text = quantity.ToString();
         SetDelta(delta);
+    }
+
+    public void SetIconColor(Color color)
+    {
+        icon.SelfModulate = color;
     }
 
     public void ShowDelta(bool showDelta)

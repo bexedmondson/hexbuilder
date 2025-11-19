@@ -12,7 +12,10 @@ public partial class CurrencyDisplay : Control
     [Export]
     private PackedScene singleCurrencyDisplayScene;
 
-    private MapController mapController;
+    [Export]
+    private Color iconColor = new Color(255, 255, 255);
+
+    private MapCurrencyChangeAnalyser mapCurrencyChangeAnalyser;
 
     private Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
 
@@ -43,18 +46,8 @@ public partial class CurrencyDisplay : Control
         CurrencySum turnChange = new();
         if (showTurnChange)
         {
-            mapController ??= InjectionManager.Get<MapController>();
-            foreach (var cell in mapController.BaseMapLayer.GetUsedCells())
-            {
-                if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
-                    continue;
-
-                var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
-                if (cellTileData?.baseTurnCurrencyChange != null)
-                    turnChange.Add(new CurrencySum(cellTileData.baseTurnCurrencyChange));
-            
-                turnChange.Add(mapController.CalculateAdjacencyEffects(cell, cellTileData));
-            }
+            mapCurrencyChangeAnalyser ??= InjectionManager.Get<MapCurrencyChangeAnalyser>();
+            turnChange = mapCurrencyChangeAnalyser.GetOverallTurnDelta();
         }
         
         foreach (var kvp in currencySum)
@@ -67,6 +60,7 @@ public partial class CurrencyDisplay : Control
             if (!hasDisplay)
             {
                 existingSingleCurrencyDisplay = singleCurrencyDisplayScene.Instantiate<SingleCurrencyDisplay>();
+                existingSingleCurrencyDisplay.SetIconColor(iconColor);
                 currencyDisplays[currencyType] = existingSingleCurrencyDisplay;
                 this.AddChild(existingSingleCurrencyDisplay);
             }
@@ -75,12 +69,12 @@ public partial class CurrencyDisplay : Control
             {
                 int delta = 0;
                 turnChange.TryGetValue(kvp.Key, out delta);
-                existingSingleCurrencyDisplay.Set(currencyIcons[currencyType] as Texture2D, amount, delta);
+                existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount, delta);
                 existingSingleCurrencyDisplay.ShowDelta(true);
             }
             else
             {
-                existingSingleCurrencyDisplay.Set(currencyIcons[currencyType] as Texture2D, amount);
+                existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount);
                 existingSingleCurrencyDisplay.ShowDelta(false);
             }
         }
@@ -88,8 +82,15 @@ public partial class CurrencyDisplay : Control
 
     private void OnMapUpdated(MapUpdatedEvent mapUpdatedEvent)
     {
-        //TODO
-        GD.Print("map updated!");
+        if (!showTurnChange)
+            return;
+
+        var turnDelta = mapCurrencyChangeAnalyser.GetOverallTurnDelta();
+
+        foreach (var kvp in currencyDisplays)
+        {
+            kvp.Value.SetDelta(turnDelta.GetValueOrDefault(kvp.Key, 0));
+        }
     }
 
     public void Cleanup()
