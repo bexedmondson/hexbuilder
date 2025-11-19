@@ -28,7 +28,7 @@ public partial class TileInfoGraphNode : GraphNode
     public void OnCustomTileDataSet()
     {
         Title = customTileData.GetFileName();
-        textureRect.Texture = InjectionManager.Get<TileDatabase>().GetTileTexture(customTileData);
+        textureRect.Texture ??= InjectionManager.Get<TileDatabase>().GetTileTexture(customTileData);
 
         foreach (var kvp in propertyEditors)
         {

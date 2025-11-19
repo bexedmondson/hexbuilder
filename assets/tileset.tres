@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=41 format=3 uid="uid://wb0h503pab2p"]
+[gd_resource type="TileSet" load_steps=42 format=3 uid="uid://wb0h503pab2p"]
 
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_xcxv2"]
 [ext_resource type="Texture2D" uid="uid://qg38agffxc77" path="res://assets/all_2d_paths.png" id="2_hn6ub"]
@@ -27,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://dem8cmagy7vqr" path="res://data/buildings/port.tres" id="25_xfaqi"]
 [ext_resource type="Resource" uid="uid://d1qikhlvit8wo" path="res://data/buildings/walls.tres" id="26_sn60b"]
 [ext_resource type="Resource" uid="uid://chwut76ukbrlw" path="res://data/buildings/field.tres" id="27_7ply4"]
+[ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="28_5kckd"]
 [ext_resource type="Resource" uid="uid://c4sgkb7bwedw5" path="res://data/buildings/sheep.tres" id="28_fjnr0"]
 [ext_resource type="Resource" uid="uid://caf21i351x6aa" path="res://data/buildings/watermill.tres" id="29_8nlen"]
 [ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/house.tres" id="30_67nna"]
@@ -204,6 +205,9 @@ texture_region_size = Vector2i(480, 480)
 2:4/0 = 0
 2:4/0/texture_origin = Vector2i(0, 69)
 2:4/0/custom_data_0 = ExtResource("23_bcm11")
+3:4/0 = 0
+3:4/0/texture_origin = Vector2i(0, 69)
+3:4/0/custom_data_0 = ExtResource("28_5kckd")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ap1my"]
 resource_name = "paths"
