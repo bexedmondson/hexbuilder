@@ -18,6 +18,9 @@ public partial class CustomTileData : Resource
     [Export] //all requirements must be satisfied - AnyOf unlock requirement to be implemented when needed
     public Godot.Collections.Array<UnlockRequirement> unlockRequirements;
 
+    [Export]
+    public int residentCapacity;
+
     public bool IsUnlocked()
     {
         if (unlockRequirements == null)

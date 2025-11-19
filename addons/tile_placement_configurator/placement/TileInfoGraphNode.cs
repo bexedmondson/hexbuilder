@@ -41,7 +41,7 @@ public partial class TileInfoGraphNode : GraphNode
         foreach (var prop in props)
         {
             var nameProperty = (string)prop["name"].Obj;
-            if (nameProperty == "price" || nameProperty == "baseTurnCurrencyChange" || nameProperty == "unlockRequirements")
+            if (nameProperty is "price" or "baseTurnCurrencyChange" or "unlockRequirements" or "residentCapacity")
             {
                 var editor = EditorInspector.InstantiatePropertyEditor(customTileData, (Variant.Type)prop["type"].Obj, nameProperty, (PropertyHint)prop["hint"].Obj, (string)prop["hint_string"].Obj, Convert.ToUInt32(prop["usage"].Obj));
                 this.AddChild(editor);

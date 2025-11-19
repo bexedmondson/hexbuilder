@@ -21,6 +21,8 @@ public partial class MapController : Node2D, IInjectable
 
     private MapHighlightController highlightController;
     private MapCurrencyChangeAnalyser currencyChangeAnalyser;
+    private ResidentManager residentManager;
+    private HousingManager housingManager;
     private EventDispatcher eventDispatcher;
 
     public override void _EnterTree()
@@ -34,10 +36,14 @@ public partial class MapController : Node2D, IInjectable
         base._Ready();
         eventDispatcher = InjectionManager.Get<EventDispatcher>();
         currencyChangeAnalyser = new MapCurrencyChangeAnalyser(this);
+        housingManager = new HousingManager(this);
+        residentManager = new ResidentManager(this);
+        
         var tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase ??= new TileDatabase();
         tileDatabase.AddTileSetTileData(baseMapLayer.TileSet);
         mapGenerator.Setup();
+        
     }
 
     public void OnNewGame()
@@ -54,6 +60,9 @@ public partial class MapController : Node2D, IInjectable
     private void SetupInitialMap()
     {
         UnlockCell(Vector2I.Zero);
+
+        housingManager.OnNewGame();
+        residentManager.OnNewGame();
     }
 
     public void UnlockCell(Vector2I cell)
@@ -106,6 +115,7 @@ public partial class MapController : Node2D, IInjectable
 
     public CurrencySum GetCellUnlockCost(Vector2I cell)
     {
+        //TODO change
         return new CurrencySum() {
             { CurrencyType.Person, 1 }
         };

@@ -33,4 +33,5 @@ baseTurnCurrencyChange = {
 }
 adjacencies = Array[Object]([SubResource("Resource_s5lrj"), SubResource("Resource_uw7xw")])
 unlockRequirements = []
+residentCapacity = 6
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

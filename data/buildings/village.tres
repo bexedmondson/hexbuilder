@@ -16,5 +16,6 @@ baseTurnCurrencyChange = {
 3: 3
 }
 adjacencies = Array[Object]([])
-unlockRequirements = null
+unlockRequirements = []
+residentCapacity = 4
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

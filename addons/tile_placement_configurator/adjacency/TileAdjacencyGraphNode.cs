@@ -41,7 +41,7 @@ public partial class TileAdjacencyGraphNode : GraphNode
         foreach (var prop in props)
         {
             var nameProperty = (string)prop["name"].Obj;
-            if (nameProperty == "distance" || nameProperty == "currencyEffect")
+            if (nameProperty is "distance" or "currencyEffect")
             {
                 var editor = EditorInspector.InstantiatePropertyEditor(adjacencyConfig, (Variant.Type)prop["type"].Obj, nameProperty, (PropertyHint)prop["hint"].Obj, (string)prop["hint_string"].Obj, Convert.ToUInt32(prop["usage"].Obj));
                 this.AddChild(editor);
