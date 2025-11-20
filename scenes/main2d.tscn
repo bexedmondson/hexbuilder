@@ -19,6 +19,8 @@
 [ext_resource type="Resource" uid="uid://8m4fhhljy05o" path="res://data/terrain/water.tres" id="10_2gw4c"]
 [ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="10_dppk6"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="15_nkuak"]
+[ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/HousingInfoPopup.cs" id="20_77sti"]
+[ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/house_info_ui.tscn" id="21_mcgvi"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
 noise_type = 0
@@ -59,16 +61,7 @@ seamless = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_77sti"]
 atlas = ExtResource("15_nkuak")
-region = Rect2(1920, 1152, 128, 128)
-
-[sub_resource type="Gradient" id="Gradient_1mh2o"]
-colors = PackedColorArray(0, 0, 0, 0.670588, 0.223529, 0.223529, 0.223529, 0.670588)
-metadata/_snap_enabled = true
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_bn7pe"]
-gradient = SubResource("Gradient_1mh2o")
-width = 400
-use_hdr = true
+region = Rect2(2048, 0, 128, 128)
 
 [node name="Main2d" type="Node2D" node_paths=PackedStringArray("mapController", "inventoryManager")]
 script = ExtResource("1_vlfvj")
@@ -128,8 +121,6 @@ occlusion_enabled = false
 y_sort_origin = 1
 navigation_enabled = false
 script = ExtResource("6_a6mti")
-selectionSourceId = null
-selectionTileCoords = null
 adjacencySourceId = 1
 adjacencyBenefitSceneIndex = 1
 adjacencyDrawbackSceneIndex = 2
@@ -142,7 +133,6 @@ unlockedCellPopup = NodePath("../../PopupLayer/UnlockedCellPopup")
 [node name="MapGenerator" type="Node2D" parent="MapController" node_paths=PackedStringArray("baseMapLayer")]
 script = ExtResource("9_b0365")
 baseMapLayer = NodePath("../BaseTileMapLayer")
-terrainAtlasSourceIndex = null
 noiseSampleScale = 5
 waterCustomTileData = ExtResource("10_2gw4c")
 rockyUpperThreshold = 0.3
@@ -151,8 +141,6 @@ vegetationGrassLowerThreshold = 0.4
 vegetationTreesLowerThreshold = 0.72
 heightWaterUpperThreshold = 0.323
 heightHillLowerThreshold = 0.7
-heightMountainLowerThreshold = null
-dirtCoords = null
 stoneCoords = Vector2i(0, 3)
 grassCoords = Vector2i(1, 0)
 forestCoords = Vector2i(3, 0)
@@ -165,7 +153,6 @@ hillRockCoords = Vector2i(1, 2)
 hillGrassCoords = Vector2i(0, 1)
 hillForestCoords = Vector2i(2, 0)
 mountainCoords = Vector2i(2, 2)
-riverTerrain = null
 grassTerrain = 1
 sandTerrain = 2
 oceanTerrain = 3
@@ -199,7 +186,6 @@ mouse_filter = 2
 layout_mode = 1
 offset_bottom = 20.0
 showTurnChange = true
-iconColor = null
 
 [node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain"]
 layout_mode = 1
@@ -221,10 +207,31 @@ text = "Next turn"
 icon = SubResource("AtlasTexture_77sti")
 expand_icon = true
 
+[node name="HousingInfoButton" type="Button" parent="CanvasLayer/UIMain"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1783.0
+offset_top = -90.0
+offset_right = -1603.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Housing"
+icon = SubResource("AtlasTexture_77sti")
+expand_icon = true
+
 [node name="PopupLayer" type="CanvasLayer" parent="."]
 layer = 2
 
 [node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("tileSelector", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -241,17 +248,6 @@ tileSelector = NodePath("ScrollContainer/TileSelectionGrid")
 tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
 confirmButton = NodePath("ConfirmButton")
-
-[node name="BackgroundTexture" type="TextureRect" parent="PopupLayer/UnlockedCellPopup"]
-visible = false
-layout_mode = 0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 488.0
-offset_bottom = 788.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_bn7pe")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/UnlockedCellPopup"]
 custom_minimum_size = Vector2(50, 50)
@@ -299,6 +295,7 @@ grow_vertical = 0
 text = "OK"
 
 [node name="LockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("priceDisplay", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -313,16 +310,6 @@ grow_vertical = 2
 script = ExtResource("7_bn7pe")
 priceDisplay = NodePath("CurrencyDisplay")
 confirmButton = NodePath("ConfirmButton")
-
-[node name="BackgroundTexture" type="TextureRect" parent="PopupLayer/LockedCellPopup"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture1D_bn7pe")
 
 [node name="Label" type="Label" parent="PopupLayer/LockedCellPopup"]
 layout_mode = 1
@@ -351,7 +338,6 @@ offset_right = 0.0
 offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-showTurnChange = null
 iconColor = Color(0, 0, 0, 1)
 
 [node name="ConfirmButton" type="Button" parent="PopupLayer/LockedCellPopup"]
@@ -382,8 +368,50 @@ offset_bottom = 68.0
 grow_horizontal = 0
 text = "X"
 
+[node name="HousingInfoPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("houseInfoContainer")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("20_77sti")
+houseInfoContainer = NodePath("ScrollContainer/VBoxContainer")
+houseInfoScene = ExtResource("21_mcgvi")
+
+[node name="CloseButton" type="Button" parent="PopupLayer/HousingInfoPopup"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/HousingInfoPopup"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/HousingInfoPopup/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
+[connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/CloseButton" to="PopupLayer/UnlockedCellPopup" method="Close"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="OnConfirmButton"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/ConfirmButton" to="PopupLayer/LockedCellPopup" method="ConfirmUnlock"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/CloseButton" to="PopupLayer/LockedCellPopup" method="Close"]
+[connection signal="visibility_changed" from="PopupLayer/HousingInfoPopup" to="PopupLayer/HousingInfoPopup" method="OnVisibilityChanged"]
+[connection signal="pressed" from="PopupLayer/HousingInfoPopup/CloseButton" to="PopupLayer/HousingInfoPopup" method="Close"]

@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class MapCameraController : Camera2D
+public partial class MapCameraController : Camera2D, IInjectable
 {
     [Export]
     private float minZoom;
@@ -10,7 +10,18 @@ public partial class MapCameraController : Camera2D
 
     [Export]
     private float scrollZoomIncrement = 0.3f;
-    
+
+    [Export]
+    private Curve flyCurve;
+
+    private Tween activeFlyTween;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        InjectionManager.Register(this);
+    }
+
     public override void _UnhandledInput(InputEvent @event)
     {
         if (@event is InputEventScreenDrag dragEvent)
@@ -40,5 +51,16 @@ public partial class MapCameraController : Camera2D
             zoomScale = Mathf.Min(zoomScale + factor, maxZoom);
 
         Zoom = Vector2.One * zoomScale;
+    }
+
+    public void FlyTo(Vector2 worldPosition)
+    {
+        if (activeFlyTween != null && activeFlyTween.IsRunning())
+            activeFlyTween.Kill();
+        
+        activeFlyTween = CreateTween();
+        activeFlyTween.SetEase(Tween.EaseType.InOut);
+        activeFlyTween.TweenProperty(this, "position", worldPosition, 0.5);
+        activeFlyTween.Play();
     }
 }

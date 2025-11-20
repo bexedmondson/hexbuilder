@@ -34,6 +34,6 @@ public partial class SingleCurrencyDisplay : Control
 
     public void SetDelta(int delta)
     {
-        changeLabel.Text = $"({(delta < 0 ? minusPrefix : plusPrefix)}{delta})";
+        changeLabel.Text = $"({(delta < 0 ? string.Empty : plusPrefix)}{delta})";
     }
 }

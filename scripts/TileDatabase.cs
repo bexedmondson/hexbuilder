@@ -13,7 +13,7 @@ public class TileDatabase : IInjectable
         public CustomTileData tileData;
     }
 
-    private TileUnlockManager tileUnlockManager;
+    private TileOptionUnlockManager tileOptionUnlockManager;
     
     private List<TileInfo> tileInfos = new();
     
@@ -21,7 +21,7 @@ public class TileDatabase : IInjectable
     {
         InjectionManager.Register(this);
 
-        tileUnlockManager = new TileUnlockManager(this);
+        tileOptionUnlockManager = new TileOptionUnlockManager(this);
     }
 
     public void AddTileSetTileData(TileSet tileSet)

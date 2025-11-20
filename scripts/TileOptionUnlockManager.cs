@@ -1,16 +1,16 @@
 using Godot;
 
-public partial class TileUnlockManager : IInjectable
+public partial class TileOptionUnlockManager : IInjectable
 {
     private TileDatabase tileDatabase;
     
-    public TileUnlockManager(TileDatabase tileDatabase)
+    public TileOptionUnlockManager(TileDatabase tileDatabase)
     {
         this.tileDatabase = tileDatabase;
         InjectionManager.Register(this);
     }
 
-    ~TileUnlockManager()
+    ~TileOptionUnlockManager()
     {
         InjectionManager.Deregister(this);
     }
