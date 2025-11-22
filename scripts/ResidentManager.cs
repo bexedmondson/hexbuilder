@@ -9,6 +9,7 @@ public class ResidentManager : IInjectable
     private HousingManager housingManager;
 
     private List<ResidentData> residents = new();
+    public ResidentData[] AllResidents => residents.ToArray();
 
     private string[] names;
     

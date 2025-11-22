@@ -29,6 +29,7 @@ public class HousingManager : IInjectable
 
     private void OnMapUpdated(MapUpdatedEvent _)
     {
+        bool housesChanged = false;
         var usedCells = mapController.BaseMapLayer.GetUsedCells();
         
         List<Vector2I> existingMapHouseCoords = new();
@@ -49,14 +50,21 @@ public class HousingManager : IInjectable
                 continue;
             
             houseDatas[cell] = new HouseData(cell, cellData.residentCapacity);
+            housesChanged = true;
         }
 
         foreach (var houseData in houseDatas)
         {
             if (existingMapHouseCoords.Contains(houseData.Key))
                 continue;
-            
+
+            housesChanged = true;
             //TODO clean up here - move residents?
+        }
+
+        if (housesChanged)
+        {
+            //TODO event to prompt redistribution of residents into houses
         }
     }
 

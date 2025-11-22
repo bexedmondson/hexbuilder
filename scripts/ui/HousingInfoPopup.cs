@@ -1,5 +1,3 @@
-
-using System.Text;
 using Godot;
 
 public partial class HousingInfoPopup : Control
