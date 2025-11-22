@@ -20,4 +20,9 @@ public class HouseData
         var mapController = InjectionManager.Get<MapController>();
         return mapController.BaseMapLayer.ToGlobal(mapController.BaseMapLayer.MapToLocal(location));
     }
+
+    public void AddOccupant(ResidentData resident)
+    {
+        _occupants.Add(resident);
+    }
 }

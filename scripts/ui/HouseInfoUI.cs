@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Godot;
 
 public partial class HouseInfoUI : Control
@@ -13,7 +14,13 @@ public partial class HouseInfoUI : Control
     {
         this.houseData = houseData;
         this.onGoToButtonAction = onGoToButtonAction;
-        residenceLabel.Text = $"{houseData.location}: {houseData.occupants.Length}/{houseData.capacity}";
+        StringBuilder sb = new StringBuilder($"{houseData.location}: {houseData.occupants.Length}/{houseData.capacity}");
+
+        foreach (var occupant in houseData.occupants)
+        {
+            sb.Append($" {occupant.Name}");
+        }
+        residenceLabel.Text = sb.ToString();
     }
 
     public void OnGoToButton()

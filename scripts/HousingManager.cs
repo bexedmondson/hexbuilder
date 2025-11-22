@@ -10,6 +10,8 @@ public class HousingManager : IInjectable
 
     private Dictionary<Vector2I, HouseData> houseDatas = new();
     public HouseData[] AllHouseDatas => houseDatas.Values.ToArray();
+
+    private Dictionary<ResidentData, HouseData> residentHousingMap = new();
     
     public HousingManager(MapController mapController)
     {
@@ -21,6 +23,7 @@ public class HousingManager : IInjectable
     {
         tileDatabase = InjectionManager.Get<TileDatabase>();
 
+        OnMapUpdated(null);
         InjectionManager.Get<EventDispatcher>().Add<MapUpdatedEvent>(OnMapUpdated);
     }
 
@@ -55,5 +58,29 @@ public class HousingManager : IInjectable
             
             //TODO clean up here - move residents?
         }
+    }
+
+    public bool TryAssignResidentToHouse(ResidentData resident)
+    {
+        List<HouseData> availableHouses = new();
+        foreach (var houseData in AllHouseDatas)
+        {
+            if (houseData.occupants.Length < houseData.capacity)
+                availableHouses.Add(houseData);
+        }
+
+        if (availableHouses.Count == 0)
+            return false;
+
+        var chosenHouse = availableHouses[GD.RandRange(0, availableHouses.Count - 1)];
+        chosenHouse.AddOccupant(resident);
+        
+        residentHousingMap[resident] = chosenHouse; //TODO consider removing duplicate data here? update map from HouseData method?? hmm
+        return true;
+    }
+
+    public bool TryGetHouseForResident(ResidentData resident, out HouseData houseData)
+    {
+        return residentHousingMap.TryGetValue(resident, out houseData);
     }
 }

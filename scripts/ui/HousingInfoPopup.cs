@@ -21,7 +21,7 @@ public partial class HousingInfoPopup : Control
     public void ShowPopup()
     {
         housingManager ??= InjectionManager.Get<HousingManager>();
-
+        
         foreach (var houseData in housingManager.AllHouseDatas)
         {
             var houseInfoUI = houseInfoScene.Instantiate<HouseInfoUI>();
@@ -34,6 +34,10 @@ public partial class HousingInfoPopup : Control
 
     public void Close()
     {
+        for (int i = houseInfoContainer.GetChildCount() - 1; i >= 0; i--)
+        {
+            houseInfoContainer.RemoveChild(houseInfoContainer.GetChild(i));
+        }
         this.Visible = false;
     }
 }

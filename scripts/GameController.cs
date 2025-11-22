@@ -37,5 +37,7 @@ public partial class GameController : Node2D
         List<CurrencySum> allCurrencyChanges = mapCurrencyChangeAnalyser.GetFullCurrencyTurnDeltas();
         
         inventoryManager.OnNextTurn(allCurrencyChanges.ToArray());
+
+        InjectionManager.Get<ResidentManager>().OnNextTurn();
     }
 }

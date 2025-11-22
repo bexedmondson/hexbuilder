@@ -16,6 +16,16 @@ public partial class MapController : Node2D, IInjectable
     [Export]
     private MapGenerator mapGenerator;
 
+    [ExportCategory("Default Setup")]
+    [Export]
+    private int defaultCentreTileSourceIndex;
+    
+    [Export]
+    private Vector2I defaultCentreTileCoords;
+    
+    [Export]
+    private int defaultResidentCount;
+
     private int defaultLockedTileSourceIndex = 0;
     private Vector2I defaultLockedTileAtlasCoords = Vector2I.Zero;
 
@@ -60,9 +70,13 @@ public partial class MapController : Node2D, IInjectable
     private void SetupInitialMap()
     {
         UnlockCell(Vector2I.Zero);
-
+        
+        baseMapLayer.SetCell(Vector2I.Zero, defaultCentreTileSourceIndex, defaultCentreTileCoords);
+        
         housingManager.OnNewGame();
         residentManager.OnNewGame();
+
+        residentManager.CreateResident();
     }
 
     public void UnlockCell(Vector2I cell)

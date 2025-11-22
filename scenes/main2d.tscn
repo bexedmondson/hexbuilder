@@ -84,6 +84,9 @@ script = ExtResource("2_m3sjc")
 baseMapLayer = NodePath("BaseTileMapLayer")
 lockedOverlayLayer = NodePath("LockedOverlayTileMapLayer")
 mapGenerator = NodePath("MapGenerator")
+defaultCentreTileSourceIndex = 1
+defaultCentreTileCoords = Vector2i(3, 4)
+defaultResidentCount = 1
 
 [node name="BaseTileMapLayer" type="TileMapLayer" parent="MapController"]
 visible = false
