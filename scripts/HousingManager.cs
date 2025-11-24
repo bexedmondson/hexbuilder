@@ -51,14 +51,13 @@ public class HousingManager : IInjectable
                 if (existingHouseData.capacity == cellData.residentCapacity)
                     continue;
 
-                var newHouse = new HouseData(cell, cellData.residentCapacity); //TODO is there a better way of doing this?
-                                        //maybe a new parameter in constructor?
-                foreach (var occupant in existingHouseData.occupants)
+                existingHouseData.ChangeCapacity(cellData.residentCapacity, out List<ResidentData> kickedOutResidents);
+
+                foreach (var kickedOutResident in kickedOutResidents)
                 {
-                    newHouse.AddOccupant(occupant);
+                    residentHousingMap.Remove(kickedOutResident);
                 }
                 
-                houseDatas[cell] = newHouse;
                 housesChanged = true;
 
             }
@@ -75,7 +74,6 @@ public class HousingManager : IInjectable
                 continue;
 
             housesChanged = true;
-            //TODO clean up here - move residents?
         }
 
         if (housesChanged)
@@ -97,7 +95,7 @@ public class HousingManager : IInjectable
             return false;
 
         var chosenHouse = availableHouses[GD.RandRange(0, availableHouses.Count - 1)];
-        chosenHouse.AddOccupant(resident);
+        chosenHouse.TryAddOccupant(resident);
         
         residentHousingMap[resident] = chosenHouse; //TODO consider removing duplicate data here? update map from HouseData method?? hmm
         return true;
