@@ -46,11 +46,27 @@ public class HousingManager : IInjectable
             
             existingMapHouseCoords.Add(cell);
 
-            if (houseDatas.ContainsKey(cell))
-                continue;
-            
-            houseDatas[cell] = new HouseData(cell, cellData.residentCapacity);
-            housesChanged = true;
+            if (houseDatas.TryGetValue(cell, out var existingHouseData))
+            {
+                if (existingHouseData.capacity == cellData.residentCapacity)
+                    continue;
+
+                var newHouse = new HouseData(cell, cellData.residentCapacity); //TODO is there a better way of doing this?
+                                        //maybe a new parameter in constructor?
+                foreach (var occupant in existingHouseData.occupants)
+                {
+                    newHouse.AddOccupant(occupant);
+                }
+                
+                houseDatas[cell] = newHouse;
+                housesChanged = true;
+
+            }
+            else
+            {
+                houseDatas[cell] = new HouseData(cell, cellData.residentCapacity);
+                housesChanged = true;
+            }
         }
 
         foreach (var houseData in houseDatas)
@@ -64,7 +80,7 @@ public class HousingManager : IInjectable
 
         if (housesChanged)
         {
-            //TODO event to prompt redistribution of residents into houses
+            InjectionManager.Get<EventDispatcher>().Dispatch(new HousingUpdatedEvent());
         }
     }
 

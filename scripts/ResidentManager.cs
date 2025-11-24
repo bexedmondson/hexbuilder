@@ -25,6 +25,7 @@ public class ResidentManager : IInjectable
     public void OnNewGame()
     {
         housingManager ??= InjectionManager.Get<HousingManager>();
+        InjectionManager.Get<EventDispatcher>().Add<HousingUpdatedEvent>(UpdateResidentHousing);
     }
 
     public void OnNextTurn()
@@ -52,7 +53,7 @@ public class ResidentManager : IInjectable
         return newResident;
     }
 
-    private void UpdateResidentHousing(MapUpdatedEvent e = null)
+    private void UpdateResidentHousing(IEvent e = null)
     {
         foreach (var resident in residents)
         {
