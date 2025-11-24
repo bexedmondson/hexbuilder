@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
-InjectionManager="*res://scripts/utility/InjectionManager.cs"
 
 [display]
 
