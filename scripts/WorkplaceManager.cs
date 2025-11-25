@@ -82,22 +82,27 @@ public class WorkplaceManager : IInjectable
         }
     }
 
-    public bool TryAssignResidentToWorkplace(ResidentData resident)
+    public bool TryAssignResidentToWorkplace(WorkplaceData workplaceData)
     {
-        List<WorkplaceData> availableWorkplaces = new();
-        foreach (var workplaceData in AllWorkplaceDatas)
-        {
-            if (workplaceData.workers.Length < workplaceData.capacity)
-                availableWorkplaces.Add(workplaceData);
-        }
-
-        if (availableWorkplaces.Count == 0)
+        ResidentManager residentManager = InjectionManager.Get<ResidentManager>();
+        if (!residentManager.TryGetFirstResidentWithoutWorkplace(out var chosenResident))
             return false;
 
-        var chosenWorkplace = availableWorkplaces[GD.RandRange(0, availableWorkplaces.Count - 1)];
-        chosenWorkplace.TryAddWorker(resident);
+        if (!workplaceData.TryAddWorker(chosenResident))
+            return false;
         
-        residentWorkplaceMap[resident] = chosenWorkplace; //TODO consider removing duplicate data here? update map from WorkplaceData method?? hmm
+        residentWorkplaceMap[chosenResident] = workplaceData; //TODO consider removing duplicate data here? update map from WorkplaceData method?? hmm
+        return true;
+    }
+
+    public bool TryRemoveResidentFromWorkplace(WorkplaceData workplaceData)
+    {
+        if (workplaceData.workers.Length == 0)
+            return false;
+
+        if (!workplaceData.TryRemoveWorker(out _))
+            return false;
+
         return true;
     }
 

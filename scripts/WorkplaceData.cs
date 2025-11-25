@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using Godot;
 
-public class WorkplaceData(Vector2I location, int capacity, string name, Texture iconTexture)
+public class WorkplaceData(Vector2I location, int capacity, string name, Texture2D iconTexture)
 {
     public Vector2I location { get; private set; } = location;
     public int capacity { get; private set; } = capacity;
     public string name { get; private set; } = name;
-    public Texture iconTexture { get; private set; } = iconTexture;
+    public Texture2D iconTexture { get; private set; } = iconTexture;
 
     private List<ResidentData> _workers = new();
     public ResidentData[] workers => _workers.ToArray();
@@ -23,6 +23,19 @@ public class WorkplaceData(Vector2I location, int capacity, string name, Texture
             return false;
         
         _workers.Add(resident);
+        return true;
+    }
+    
+    public bool TryRemoveWorker(out ResidentData resident)
+    {
+        if (_workers.Count <= 0)
+        {
+            resident = null;
+            return false;
+        }
+
+        resident = _workers[^1];
+        _workers.RemoveAt(_workers.Count - 1);
         return true;
     }
 

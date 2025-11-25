@@ -26,7 +26,6 @@ public class ResidentManager : IInjectable
         housingManager ??= InjectionManager.Get<HousingManager>();
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
         InjectionManager.Get<EventDispatcher>().Add<HouseUpdatedEvent>(UpdateResidentHousing);
-        InjectionManager.Get<EventDispatcher>().Add<WorkplaceUpdatedEvent>(UpdateResidentWorkplace);
     }
 
     public void OnNextTurn()
@@ -71,15 +70,29 @@ public class ResidentManager : IInjectable
             }
         }
     }
+
+    private ResidentData[] GetResidentsWithoutWorkplaces()
+    {
+        List<ResidentData> unemployedResidents = new();
+        foreach (var resident in residents)
+        {
+            if (!resident.HasWorkplace)
+                unemployedResidents.Add(resident);
+        }
+        return unemployedResidents.ToArray();
+    }
     
-    private void UpdateResidentWorkplace(IEvent e = null)
+    public bool TryGetFirstResidentWithoutWorkplace(out ResidentData residentData)
     {
         foreach (var resident in residents)
         {
-            if (resident.HasWorkplace)
-                continue;
-            
-            workplaceManager.TryAssignResidentToWorkplace(resident);
+            if (!resident.HasWorkplace)
+            {
+                residentData = resident;
+                return true;
+            }
         }
+        residentData = null;
+        return false;
     }
 }
