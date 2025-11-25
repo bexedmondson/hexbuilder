@@ -63,6 +63,7 @@ public class HousingManager : IInjectable
             }
             else
             {
+                //TODO pass in CustomTileData instead?
                 houseDatas[cell] = new HouseData(cell, cellData.residentCapacity);
                 housesChanged = true;
             }
@@ -78,7 +79,7 @@ public class HousingManager : IInjectable
 
         if (housesChanged)
         {
-            InjectionManager.Get<EventDispatcher>().Dispatch(new HousingUpdatedEvent());
+            InjectionManager.Get<EventDispatcher>().Dispatch(new HouseUpdatedEvent());
         }
     }
 

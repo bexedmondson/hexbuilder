@@ -20,7 +20,7 @@ public partial class ResidentInfoPopup : Control
         foreach (var residentData in residentManager.AllResidents)
         {
             Label residentLabel = new Label();
-            residentLabel.Text = $"{residentData.Name}{(residentData.HasHouse ? string.Empty : " - no house! :(")}";
+            residentLabel.Text = $"{residentData.Name}{(residentData.HasHouse ? string.Empty : " - no house! :(")} - {(residentData.HasWorkplace ? $"is employed at {residentData.GetWorkplaceName()}" : "is not employed")}";
                 
             residentInfoContainer.AddChild(residentLabel);
         }

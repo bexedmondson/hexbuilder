@@ -10,12 +10,10 @@
 script = ExtResource("1_24cbf")
 canBePlacedOn = Array[Object]([ExtResource("1_3l8dh"), ExtResource("2_b0ko3"), ExtResource("3_6sccn"), ExtResource("4_cfeew")])
 price = {
-1: 2,
-3: 1
+1: 2
 }
-baseTurnCurrencyChange = {
-3: -1
-}
+baseTurnCurrencyChange = {}
 adjacencies = Array[Object]([])
-unlockRequirements = null
+unlockRequirements = []
+workerCapacity = 2
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

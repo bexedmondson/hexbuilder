@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=35 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -22,6 +22,8 @@
 [ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/HousingInfoPopup.cs" id="20_77sti"]
 [ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/house_info_ui.tscn" id="21_mcgvi"]
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/ResidentInfoPopup.cs" id="22_1w2nm"]
+[ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/WorkplaceInfoPopup.cs" id="22_tacgk"]
+[ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
 noise_type = 0
@@ -63,6 +65,10 @@ seamless = true
 [sub_resource type="AtlasTexture" id="AtlasTexture_77sti"]
 atlas = ExtResource("15_nkuak")
 region = Rect2(2048, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipk01"]
+atlas = ExtResource("15_nkuak")
+region = Rect2(1920, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1w2nm"]
 atlas = ExtResource("15_nkuak")
@@ -235,6 +241,26 @@ text = "Housing"
 icon = SubResource("AtlasTexture_77sti")
 expand_icon = true
 
+[node name="WorkplaceInfoButton2" type="Button" parent="CanvasLayer/UIMain"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1582.0
+offset_top = -90.0
+offset_right = -1382.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Workplaces"
+icon = SubResource("AtlasTexture_ipk01")
+expand_icon = true
+
 [node name="ResidentInfoButton2" type="Button" parent="CanvasLayer/UIMain"]
 layout_mode = 1
 anchors_preset = -1
@@ -242,9 +268,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1577.0
+offset_left = -1358.0
 offset_top = -90.0
-offset_right = -1397.0
+offset_right = -1178.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -437,6 +463,45 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="WorkplaceInfoPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("workplaceInfoContainer")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("22_tacgk")
+workplaceInfoContainer = NodePath("ScrollContainer/VBoxContainer")
+workplaceInfoScene = ExtResource("23_2dmcc")
+
+[node name="CloseButton" type="Button" parent="PopupLayer/WorkplaceInfoPopup"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/WorkplaceInfoPopup"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/WorkplaceInfoPopup/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="ResidentInfoPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("residentInfoContainer")]
 visible = false
 anchors_preset = -1
@@ -477,6 +542,7 @@ size_flags_horizontal = 3
 
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
 [connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]
+[connection signal="pressed" from="CanvasLayer/UIMain/WorkplaceInfoButton2" to="PopupLayer/WorkplaceInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="CanvasLayer/UIMain/ResidentInfoButton2" to="PopupLayer/ResidentInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/CloseButton" to="PopupLayer/UnlockedCellPopup" method="Close"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="OnConfirmButton"]
@@ -484,5 +550,7 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/CloseButton" to="PopupLayer/LockedCellPopup" method="Close"]
 [connection signal="visibility_changed" from="PopupLayer/HousingInfoPopup" to="PopupLayer/HousingInfoPopup" method="OnVisibilityChanged"]
 [connection signal="pressed" from="PopupLayer/HousingInfoPopup/CloseButton" to="PopupLayer/HousingInfoPopup" method="Close"]
+[connection signal="visibility_changed" from="PopupLayer/WorkplaceInfoPopup" to="PopupLayer/WorkplaceInfoPopup" method="OnVisibilityChanged"]
+[connection signal="pressed" from="PopupLayer/WorkplaceInfoPopup/CloseButton" to="PopupLayer/WorkplaceInfoPopup" method="Close"]
 [connection signal="visibility_changed" from="PopupLayer/ResidentInfoPopup" to="PopupLayer/ResidentInfoPopup" method="OnVisibilityChanged"]
 [connection signal="pressed" from="PopupLayer/ResidentInfoPopup/CloseButton" to="PopupLayer/ResidentInfoPopup" method="Close"]

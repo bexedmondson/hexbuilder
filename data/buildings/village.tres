@@ -8,12 +8,10 @@ script = ExtResource("2_n4ucp")
 canBePlacedOn = Array[Object]([ExtResource("1_hk2dp")])
 price = {
 1: 3,
-2: 1,
-3: 2
+2: 1
 }
 baseTurnCurrencyChange = {
-0: -2,
-3: 3
+0: -2
 }
 adjacencies = Array[Object]([])
 unlockRequirements = []

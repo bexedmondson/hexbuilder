@@ -15,21 +15,17 @@ currencyEffect = {}
 script = ExtResource("2_uw7xw")
 requiredTile = ExtResource("3_58okd")
 distance = 1
-currencyEffect = {
-3: 1
-}
+currencyEffect = {}
 
 [resource]
 script = ExtResource("8_58okd")
 canBePlacedOn = Array[Object]([])
 price = {
 1: 2,
-2: 12,
-3: 10
+2: 12
 }
 baseTurnCurrencyChange = {
-0: -2,
-3: 4
+0: -2
 }
 adjacencies = Array[Object]([SubResource("Resource_s5lrj"), SubResource("Resource_uw7xw")])
 unlockRequirements = []

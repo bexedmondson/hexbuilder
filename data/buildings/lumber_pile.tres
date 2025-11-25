@@ -8,7 +8,9 @@
 script = ExtResource("2_6lq31")
 requiredTile = ExtResource("1_7jax1")
 distance = 1
-currencyEffect = {}
+currencyEffect = {
+1: 1
+}
 
 [resource]
 script = ExtResource("1_24cbf")

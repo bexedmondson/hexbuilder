@@ -20,6 +20,9 @@ public partial class CustomTileData : Resource
 
     [Export]
     public int residentCapacity;
+    
+    [Export]
+    public int workerCapacity;
 
     public bool IsUnlocked()
     {

@@ -25,4 +25,28 @@ public class ResidentData(string name)
     {
         TurnsWithoutHouse = 0;
     }
+    
+    private WorkplaceManager workplaceManager;
+    
+    public bool HasWorkplace
+    {
+        get
+        {
+            workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
+            return workplaceManager.TryGetWorkplaceForResident(this, out _);
+        }
+    }
+
+    public string GetWorkplaceName()
+    {
+        workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
+        if (workplaceManager.TryGetWorkplaceForResident(this, out var workplace))
+        {
+            return workplace.name;
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
 }

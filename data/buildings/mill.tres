@@ -22,9 +22,9 @@ price = {
 1: 2
 }
 baseTurnCurrencyChange = {
-0: 2,
-3: -1
+0: 2
 }
 adjacencies = Array[Object]([SubResource("Resource_j5x2k")])
 unlockRequirements = []
+workerCapacity = 1
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -33,6 +33,7 @@ public partial class MapController : Node2D, IInjectable
     private MapCurrencyChangeAnalyser currencyChangeAnalyser;
     private ResidentManager residentManager;
     private HousingManager housingManager;
+    private WorkplaceManager workplaceManager;
     private EventDispatcher eventDispatcher;
 
     public override void _EnterTree()
@@ -47,6 +48,7 @@ public partial class MapController : Node2D, IInjectable
         eventDispatcher = InjectionManager.Get<EventDispatcher>();
         currencyChangeAnalyser = new MapCurrencyChangeAnalyser(this);
         housingManager = new HousingManager(this);
+        workplaceManager = new WorkplaceManager(this);
         residentManager = new ResidentManager(this);
         
         var tileDatabase = InjectionManager.Get<TileDatabase>();
@@ -74,6 +76,7 @@ public partial class MapController : Node2D, IInjectable
         baseMapLayer.SetCell(Vector2I.Zero, defaultCentreTileSourceIndex, defaultCentreTileCoords);
         
         housingManager.OnNewGame();
+        workplaceManager.OnNewGame();
         residentManager.OnNewGame();
 
         residentManager.CreateResident();

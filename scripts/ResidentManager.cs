@@ -1,5 +1,3 @@
-
-using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -7,6 +5,7 @@ public class ResidentManager : IInjectable
 {
     private MapController mapController;
     private HousingManager housingManager;
+    private WorkplaceManager workplaceManager;
 
     private List<ResidentData> residents = new();
     public ResidentData[] AllResidents => residents.ToArray();
@@ -25,7 +24,9 @@ public class ResidentManager : IInjectable
     public void OnNewGame()
     {
         housingManager ??= InjectionManager.Get<HousingManager>();
-        InjectionManager.Get<EventDispatcher>().Add<HousingUpdatedEvent>(UpdateResidentHousing);
+        workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
+        InjectionManager.Get<EventDispatcher>().Add<HouseUpdatedEvent>(UpdateResidentHousing);
+        InjectionManager.Get<EventDispatcher>().Add<WorkplaceUpdatedEvent>(UpdateResidentWorkplace);
     }
 
     public void OnNextTurn()
@@ -68,6 +69,17 @@ public class ResidentManager : IInjectable
             {
                 resident.ResetNoHouseTracking();
             }
+        }
+    }
+    
+    private void UpdateResidentWorkplace(IEvent e = null)
+    {
+        foreach (var resident in residents)
+        {
+            if (resident.HasWorkplace)
+                continue;
+            
+            workplaceManager.TryAssignResidentToWorkplace(resident);
         }
     }
 }

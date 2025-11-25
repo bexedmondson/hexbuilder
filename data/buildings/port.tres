@@ -10,9 +10,9 @@ price = {
 }
 baseTurnCurrencyChange = {
 1: 1,
-2: 1,
-3: -1
+2: 1
 }
 adjacencies = Array[Object]([])
-unlockRequirements = null
+unlockRequirements = []
+workerCapacity = 1
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
