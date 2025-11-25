@@ -47,7 +47,7 @@ public partial class WorkplaceInfoUI : Control
         }
         workerNamesLabel.Text = sb.ToString();
         
-        int current = workplaceData.workers.Length;
+        int current = workplaceData.workerCount;
         int max = workplaceData.capacity;
 
         minusButton.Disabled = current <= 0;

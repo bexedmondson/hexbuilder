@@ -26,7 +26,8 @@ public partial class CurrencyDisplay : Control
         if (showTurnChange)
         {
             var eventDispatcher = InjectionManager.Get<EventDispatcher>();
-            eventDispatcher.Add<MapUpdatedEvent>(OnMapUpdated);
+            eventDispatcher.Add<MapUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
+            eventDispatcher.Add<WorkplaceUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
         }
     }
 
@@ -37,7 +38,8 @@ public partial class CurrencyDisplay : Control
         if (showTurnChange)
         {
             var eventDispatcher = InjectionManager.Get<EventDispatcher>();
-            eventDispatcher.Remove<MapUpdatedEvent>(OnMapUpdated);
+            eventDispatcher.Remove<MapUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
+            eventDispatcher.Remove<WorkplaceUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
         }
     }
 
@@ -80,7 +82,7 @@ public partial class CurrencyDisplay : Control
         }
     }
 
-    private void OnMapUpdated(MapUpdatedEvent mapUpdatedEvent)
+    private void OnCurrencyChangePossiblyUpdated(IEvent _)
     {
         if (!showTurnChange)
             return;

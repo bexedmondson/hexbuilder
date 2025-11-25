@@ -92,22 +92,30 @@ public class WorkplaceManager : IInjectable
             return false;
         
         residentWorkplaceMap[chosenResident] = workplaceData; //TODO consider removing duplicate data here? update map from WorkplaceData method?? hmm
+        InjectionManager.Get<EventDispatcher>().Dispatch(new WorkplaceUpdatedEvent());
         return true;
     }
 
     public bool TryRemoveResidentFromWorkplace(WorkplaceData workplaceData)
     {
-        if (workplaceData.workers.Length == 0)
+        if (workplaceData.workerCount == 0)
             return false;
 
-        if (!workplaceData.TryRemoveWorker(out _))
+        if (!workplaceData.TryRemoveWorker(out var resident))
             return false;
 
+        residentWorkplaceMap.Remove(resident);
+        InjectionManager.Get<EventDispatcher>().Dispatch(new WorkplaceUpdatedEvent());
         return true;
     }
 
     public bool TryGetWorkplaceForResident(ResidentData resident, out WorkplaceData workplaceData)
     {
         return residentWorkplaceMap.TryGetValue(resident, out workplaceData);
+    }
+
+    public bool TryGetWorkplaceAtLocation(Vector2I location, out WorkplaceData workplaceData)
+    {
+        return workplaceDatas.TryGetValue(location, out workplaceData);
     }
 }

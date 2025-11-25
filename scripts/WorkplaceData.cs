@@ -10,6 +10,7 @@ public class WorkplaceData(Vector2I location, int capacity, string name, Texture
 
     private List<ResidentData> _workers = new();
     public ResidentData[] workers => _workers.ToArray();
+    public int workerCount => workers.Length;
 
     public Vector2 GetCentreWorldPosition()
     {

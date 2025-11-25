@@ -4,15 +4,18 @@ using Godot;
 public class MapCurrencyChangeAnalyser : IInjectable
 {
     private MapController mapController;
+    private WorkplaceManager workplaceManager;
+    
     public MapCurrencyChangeAnalyser(MapController mapController)
     {
         this.mapController = mapController;
         InjectionManager.Register(this);
     }
 
-    //TODO: cache this and full turn change to minimise recalculation?
     public List<CurrencySum> GetFullCurrencyTurnDeltas()
     {
+        workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
+        
         List<CurrencySum> allCurrencyChanges = new();
         
         foreach (var cell in mapController.BaseMapLayer.GetUsedCells())
@@ -21,6 +24,15 @@ public class MapCurrencyChangeAnalyser : IInjectable
                 continue;
 
             var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
+
+            //TODO rework workerCount's effects on currency change?
+            if (workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplace) && workplace.workerCount <= 0)
+            {
+                continue;
+            }
+            //don't get regular effects nor adjacency benefits for unstaffed workplaces
+            //non-workplace tiles that have effects are fine though
+            
             if (cellTileData?.baseTurnCurrencyChange != null)
                 allCurrencyChanges.Add(new CurrencySum(cellTileData.baseTurnCurrencyChange));
             
@@ -32,19 +44,14 @@ public class MapCurrencyChangeAnalyser : IInjectable
 
     public CurrencySum GetOverallTurnDelta()
     {
+        var fullCurrencyTurnDeltas = GetFullCurrencyTurnDeltas();
+        
         CurrencySum turnChange = new();
-        foreach (var cell in mapController.BaseMapLayer.GetUsedCells())
+        foreach (var turnDelta in fullCurrencyTurnDeltas)
         {
-            if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
-                continue;
-
-            var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
-            if (cellTileData?.baseTurnCurrencyChange != null)
-                turnChange.Add(new CurrencySum(cellTileData.baseTurnCurrencyChange));
-            
-            turnChange.Add(CalculateAdjacencyEffects(cell, cellTileData));
+            turnChange.Add(turnDelta);
         }
-
+        
         return turnChange;
     }
     
