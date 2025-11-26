@@ -34,7 +34,9 @@ public partial class WorkplaceInfoPopup : Control
     {
         for (int i = workplaceInfoContainer.GetChildCount() - 1; i >= 0; i--)
         {
-            workplaceInfoContainer.RemoveChild(workplaceInfoContainer.GetChild(i));
+            var info = workplaceInfoContainer.GetChild(i);
+            workplaceInfoContainer.RemoveChild(info);
+            info.QueueFree();
         }
         this.Visible = false;
     }

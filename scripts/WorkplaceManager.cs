@@ -28,7 +28,7 @@ public class WorkplaceManager : IInjectable
 
     private void OnMapUpdated(MapUpdatedEvent _)
     {
-        bool workplacesChanged = false;
+        WorkplaceUpdatedEvent workplaceUpdatedEvent = new();
         var usedCells = mapController.BaseMapLayer.GetUsedCells();
         
         List<Vector2I> existingMapWorkplaceCoords = new();
@@ -57,28 +57,29 @@ public class WorkplaceManager : IInjectable
                     residentWorkplaceMap.Remove(removedWorker);
                 }
                 
-                workplacesChanged = true;
-
+                workplaceUpdatedEvent.newOrChangedWorkplaces.Add(existingWorkplaceData);
             }
             else
             {
                 //TODO pass in CustomTileData instead?
-                workplaceDatas[cell] = new WorkplaceData(cell, cellData.workerCapacity, cellData.GetFileName(), tileDatabase.GetTileTexture(cellData));
-                workplacesChanged = true;
+                var newWorkplace = new WorkplaceData(cell, cellData.workerCapacity, cellData.GetFileName(), tileDatabase.GetTileTexture(cellData));
+                workplaceDatas[cell] = newWorkplace;
+                workplaceUpdatedEvent.newOrChangedWorkplaces.Add(newWorkplace);
             }
         }
 
+        //check for removals
         foreach (var workplaceData in workplaceDatas)
         {
             if (existingMapWorkplaceCoords.Contains(workplaceData.Key))
                 continue;
 
-            workplacesChanged = true;
+            workplaceUpdatedEvent.removedWorkplaces.Add(workplaceData.Value);
         }
 
-        if (workplacesChanged)
+        if (workplaceUpdatedEvent.HasAnythingUpdated)
         {
-            InjectionManager.Get<EventDispatcher>().Dispatch(new WorkplaceUpdatedEvent());
+            InjectionManager.Get<EventDispatcher>().Dispatch(workplaceUpdatedEvent);
         }
     }
 
@@ -92,7 +93,9 @@ public class WorkplaceManager : IInjectable
             return false;
         
         residentWorkplaceMap[chosenResident] = workplaceData; //TODO consider removing duplicate data here? update map from WorkplaceData method?? hmm
-        InjectionManager.Get<EventDispatcher>().Dispatch(new WorkplaceUpdatedEvent());
+        var workplaceUpdatedEvent = new WorkplaceUpdatedEvent();
+        workplaceUpdatedEvent.newOrChangedWorkplaces.Add(workplaceData);
+        InjectionManager.Get<EventDispatcher>().Dispatch(workplaceUpdatedEvent);
         return true;
     }
 

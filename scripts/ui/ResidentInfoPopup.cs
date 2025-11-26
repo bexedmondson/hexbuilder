@@ -32,7 +32,9 @@ public partial class ResidentInfoPopup : Control
     {
         for (int i = residentInfoContainer.GetChildCount() - 1; i >= 0; i--)
         {
-            residentInfoContainer.RemoveChild(residentInfoContainer.GetChild(i));
+            var info = residentInfoContainer.GetChild(i);
+            residentInfoContainer.RemoveChild(info);
+            info.QueueFree();
         }
         this.Visible = false;
     }

@@ -1,0 +1,51 @@
+using System.Collections.Generic;
+using Godot;
+
+public partial class WorkplaceCellInfoUIContainer : Control
+{
+    [Export]
+    private TileMapLayer baseTileMapLayer;
+
+    [Export]
+    private PackedScene cellInfoUIScene;
+
+    private Dictionary<Vector2I, WorkplaceCellInfoUI> workplaceCellInfoUis = new();
+
+    public override void _Ready()
+    {
+        base._Ready();
+        InjectionManager.Get<EventDispatcher>().Add<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
+    }
+
+    private void OnWorkplaceUpdated(WorkplaceUpdatedEvent workplaceUpdatedEvent)
+    {
+        foreach (var removedWorkplace in workplaceUpdatedEvent.removedWorkplaces)
+        {
+            var removedWorkplaceLocation = removedWorkplace.location;
+            if (workplaceCellInfoUis.TryGetValue(removedWorkplaceLocation, out var removedWorkplaceInfoUI))
+            {
+                this.RemoveChild(removedWorkplaceInfoUI);
+                removedWorkplaceInfoUI.QueueFree();
+                workplaceCellInfoUis.Remove(removedWorkplaceLocation);
+            }
+        }
+
+        foreach (var workplace in workplaceUpdatedEvent.newOrChangedWorkplaces)
+        {
+            if (workplaceCellInfoUis.TryGetValue(workplace.location, out var changedWorkplaceUI))
+            {
+                changedWorkplaceUI.UpdateWorkerCountLabel(workplace.workerCount, workplace.capacity);
+            }
+            else
+            {
+                var newWorkplaceUI = cellInfoUIScene.Instantiate<WorkplaceCellInfoUI>();
+                newWorkplaceUI.UpdateWorkerCountLabel(workplace.workerCount, workplace.capacity);
+                newWorkplaceUI.GlobalPosition = baseTileMapLayer.ToGlobal(baseTileMapLayer.MapToLocal(workplace.location));
+                newWorkplaceUI.Size = Vector2I.Zero; //for some incomprehensible reason this keeps being given a 40x40 size. resetting here.
+                workplaceCellInfoUis[workplace.location] = newWorkplaceUI;
+                this.AddChild(newWorkplaceUI);
+            }
+        }
+    }
+}
+

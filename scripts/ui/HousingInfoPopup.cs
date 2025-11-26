@@ -34,7 +34,9 @@ public partial class HousingInfoPopup : Control
     {
         for (int i = houseInfoContainer.GetChildCount() - 1; i >= 0; i--)
         {
-            houseInfoContainer.RemoveChild(houseInfoContainer.GetChild(i));
+            var info = houseInfoContainer.GetChild(i);
+            houseInfoContainer.RemoveChild(info);
+            info.QueueFree();
         }
         this.Visible = false;
     }
