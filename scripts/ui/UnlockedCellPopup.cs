@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-public partial class UnlockedCellPopup : Control
+public partial class UnlockedCellPopup : Popup
 {
     [Export]
     private Control tileSelector;
@@ -62,7 +62,7 @@ public partial class UnlockedCellPopup : Control
         mapController.HighlightNeighbourEffects(cell, selectedOption.tileInfo);
     }
 
-    public void OnConfirmButton()
+    public override void Confirm ()
     {
         if (tileSelectionGroup.GetPressedButton() == null)
         {
@@ -80,9 +80,9 @@ public partial class UnlockedCellPopup : Control
         Close();
     }
 
-    public void Close()
+    public override void Close()
     {
-        this.SetVisible(false);
+        base.Close();
         InjectionManager.Get<MapHighlightController>().Clear();
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count > 0)

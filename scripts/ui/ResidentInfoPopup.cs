@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class ResidentInfoPopup : Control
+public partial class ResidentInfoPopup : Popup
 {
     [Export]
     private Control residentInfoContainer;
@@ -28,14 +28,14 @@ public partial class ResidentInfoPopup : Control
         this.Visible = true;
     }
 
-    public void Close()
+    public override void Close()
     {
+        base.Close();
         for (int i = residentInfoContainer.GetChildCount() - 1; i >= 0; i--)
         {
             var info = residentInfoContainer.GetChild(i);
             residentInfoContainer.RemoveChild(info);
             info.QueueFree();
         }
-        this.Visible = false;
     }
 }

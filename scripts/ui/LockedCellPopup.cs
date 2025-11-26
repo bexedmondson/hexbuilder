@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class LockedCellPopup : Control
+public partial class LockedCellPopup : Popup
 {
     [Export]
     private CurrencyDisplay priceDisplay;
@@ -33,7 +33,7 @@ public partial class LockedCellPopup : Control
         this.SetVisible(true);
     }
 
-    public void ConfirmUnlock()
+    public override void Confirm()
     {
         var cellUnlockCost = mapController.GetCellUnlockCost(cell);
         if (!inventoryManager.CanAfford(cellUnlockCost))
@@ -44,8 +44,9 @@ public partial class LockedCellPopup : Control
         Close();
     }
 
-    public void Close()
+    public override void Close()
     {
+        base.Close();
         this.SetVisible(false);
         priceDisplay.Cleanup();
         InjectionManager.Get<MapHighlightController>().Clear();

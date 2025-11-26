@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class WorkplaceInfoPopup : Control
+public partial class WorkplaceInfoPopup : Popup
 {
     [Export]
     private Control workplaceInfoContainer;
@@ -30,14 +30,14 @@ public partial class WorkplaceInfoPopup : Control
         this.Visible = true;
     }
 
-    public void Close()
+    public override void Close()
     {
+        base.Close();
         for (int i = workplaceInfoContainer.GetChildCount() - 1; i >= 0; i--)
         {
             var info = workplaceInfoContainer.GetChild(i);
             workplaceInfoContainer.RemoveChild(info);
             info.QueueFree();
         }
-        this.Visible = false;
     }
 }
