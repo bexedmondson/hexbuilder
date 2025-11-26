@@ -85,8 +85,7 @@ inventoryDisplay = NodePath("../CanvasLayer/UIMain/CurrencyDisplay")
 startAmounts = Dictionary[int, int]({
 0: 10,
 1: 10,
-2: 5,
-3: 5
+2: 5
 })
 
 [node name="MapController" type="Node2D" parent="." node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer", "mapGenerator")]

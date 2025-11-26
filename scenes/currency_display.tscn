@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://hst2gqk22rpc"]
+[gd_scene load_steps=7 format=3 uid="uid://hst2gqk22rpc"]
 
 [ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="1_efedh"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_kbswh"]
@@ -16,10 +16,6 @@ region = Rect2(384, 1280, 128, 128)
 atlas = ExtResource("2_kbswh")
 region = Rect2(128, 1280, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kbswh"]
-atlas = ExtResource("2_kbswh")
-region = Rect2(2560, 0, 128, 128)
-
 [node name="CurrencyDisplay" type="HFlowContainer"]
 offset_left = 20.0
 offset_top = 20.0
@@ -32,7 +28,6 @@ script = ExtResource("1_efedh")
 currencyIcons = Dictionary[int, Resource]({
 0: SubResource("AtlasTexture_fqiv7"),
 1: SubResource("AtlasTexture_uy8d2"),
-2: SubResource("AtlasTexture_65s6i"),
-3: SubResource("AtlasTexture_kbswh")
+2: SubResource("AtlasTexture_65s6i")
 })
 singleCurrencyDisplayScene = ExtResource("3_xcsyn")

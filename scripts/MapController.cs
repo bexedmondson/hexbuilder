@@ -134,7 +134,7 @@ public partial class MapController : Node2D, IInjectable
     {
         //TODO change
         return new CurrencySum() {
-            { CurrencyType.Person, 1 }
+            { CurrencyType.Stone, 1 }
         };
     }
 
