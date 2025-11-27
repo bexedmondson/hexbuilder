@@ -7,4 +7,30 @@
     <Folder Include="addons\tile_placement_configurator\placement\" />
     <Folder Include="assets\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\housing\HouseData.cs.uid" />
+    <Content Include="scripts\housing\HousingManager.cs.uid" />
+    <Content Include="scripts\inventory\InventoryManager.cs.uid" />
+    <Content Include="scripts\inventory\InventoryStatsTracker.cs.uid" />
+    <Content Include="scripts\map\BaseTileMapLayer.cs.uid" />
+    <Content Include="scripts\map\cells\CellStatus.cs.uid" />
+    <Content Include="scripts\map\cells\CellStatusManager.cs.uid" />
+    <Content Include="scripts\map\MapCameraController.cs.uid" />
+    <Content Include="scripts\map\MapController.cs.uid" />
+    <Content Include="scripts\map\MapCurrencyChangeAnalyser.cs.uid" />
+    <Content Include="scripts\map\MapGenerator.cs.uid" />
+    <Content Include="scripts\map\MapHighlightController.cs.uid" />
+    <Content Include="scripts\map\MapInputProcessor.cs.uid" />
+    <Content Include="scripts\map\VisualTileMapLayer.cs.uid" />
+    <Content Include="scripts\resident\ResidentData.cs.uid" />
+    <Content Include="scripts\resident\ResidentManager.cs.uid" />
+    <Content Include="scripts\tiles\TileDatabase.cs.uid" />
+    <Content Include="scripts\tiles\TileOptionUnlockManager.cs.uid" />
+    <Content Include="scripts\utility\events\EventDispatcher.cs.uid" />
+    <Content Include="scripts\utility\events\HouseUpdatedEvent.cs.uid" />
+    <Content Include="scripts\utility\events\MapUpdatedEvent.cs.uid" />
+    <Content Include="scripts\utility\events\WorkplaceUpdatedEvent.cs.uid" />
+    <Content Include="scripts\workplace\WorkplaceData.cs.uid" />
+    <Content Include="scripts\workplace\WorkplaceManager.cs.uid" />
+  </ItemGroup>
 </Project>
