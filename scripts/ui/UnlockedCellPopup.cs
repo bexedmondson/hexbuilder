@@ -62,7 +62,7 @@ public partial class UnlockedCellPopup : Popup
         mapController.HighlightNeighbourEffects(cell, selectedOption.tileInfo);
     }
 
-    public override void Confirm ()
+    public override void Confirm()
     {
         if (tileSelectionGroup.GetPressedButton() == null)
         {
