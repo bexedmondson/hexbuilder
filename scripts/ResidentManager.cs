@@ -71,22 +71,22 @@ public class ResidentManager : IInjectable
         }
     }
 
-    private ResidentData[] GetResidentsWithoutWorkplaces()
+    private ResidentData[] GetNotBusyResidents()
     {
         List<ResidentData> unemployedResidents = new();
         foreach (var resident in residents)
         {
-            if (!resident.HasWorkplace)
+            if (!resident.IsBusy)
                 unemployedResidents.Add(resident);
         }
         return unemployedResidents.ToArray();
     }
     
-    public bool TryGetFirstResidentWithoutWorkplace(out ResidentData residentData)
+    public bool TryGetFirstNotBusyResident(out ResidentData residentData)
     {
         foreach (var resident in residents)
         {
-            if (!resident.HasWorkplace)
+            if (!resident.IsBusy)
             {
                 residentData = resident;
                 return true;

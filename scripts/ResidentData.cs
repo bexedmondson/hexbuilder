@@ -28,7 +28,7 @@ public class ResidentData(string name)
     
     private WorkplaceManager workplaceManager;
     
-    public bool HasWorkplace
+    public bool IsBusy
     {
         get
         {

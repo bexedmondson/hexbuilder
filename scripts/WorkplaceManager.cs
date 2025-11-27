@@ -86,7 +86,7 @@ public class WorkplaceManager : IInjectable
     public bool TryAssignResidentToWorkplace(WorkplaceData workplaceData)
     {
         ResidentManager residentManager = InjectionManager.Get<ResidentManager>();
-        if (!residentManager.TryGetFirstResidentWithoutWorkplace(out var chosenResident))
+        if (!residentManager.TryGetFirstNotBusyResident(out var chosenResident))
             return false;
 
         if (!workplaceData.TryAddWorker(chosenResident))
