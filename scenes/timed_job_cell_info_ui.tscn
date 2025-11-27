@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://2crqakku64ae"]
+
+[ext_resource type="Script" uid="uid://njf8gojp3x73" path="res://scripts/ui/TimedJobCellInfoUI.cs" id="1_b8jlu"]
+[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_22lh2"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nma3w"]
+load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmpib"]
+atlas = SubResource("CompressedTexture2D_nma3w")
+region = Rect2(2560, 896, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5df6q"]
+atlas = ExtResource("2_22lh2")
+region = Rect2(1920, 1152, 128, 128)
+
+[node name="TimedJobCellInfoUi" type="Control" node_paths=PackedStringArray("workerCountLabel", "alert")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_b8jlu")
+workerCountLabel = NodePath("HBoxContainer/Label")
+alert = NodePath("Icon")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+text = "0/0"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
+layout_mode = 2
+texture = SubResource("AtlasTexture_rmpib")
+expand_mode = 3
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("AtlasTexture_5df6q")
+expand_mode = 3

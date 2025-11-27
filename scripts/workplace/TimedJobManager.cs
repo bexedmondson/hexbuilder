@@ -5,6 +5,7 @@ using Godot;
 public class TimedJobManager : IInjectable
 {
     private MapController mapController;
+    private EventDispatcher eventDispatcher;
 
     private Dictionary<Vector2I, TimedJobData> timedJobDatas = new();
 
@@ -38,12 +39,18 @@ public class TimedJobManager : IInjectable
         foreach (var locationOfJobToRemove in locationsOfJobsToRemove)
         {
             timedJobDatas.Remove(locationOfJobToRemove);
+            
+            eventDispatcher ??= InjectionManager.Get<EventDispatcher>();
+            eventDispatcher.Dispatch(new TimedJobEndedEvent(locationOfJobToRemove));
         }
     }
 
     public void AddNewTimedJob(TimedJobData newTimedJob)
     {
         timedJobDatas.Add(newTimedJob.location, newTimedJob);
+        
+        eventDispatcher ??= InjectionManager.Get<EventDispatcher>();
+        eventDispatcher.Dispatch(new TimedJobStartedEvent(newTimedJob.location));
     }
 
     public bool TryGetTimedJobAt(Vector2I cell, out TimedJobData timedJobData)

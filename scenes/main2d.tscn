@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=41 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://buovaj2q4fmqw" path="res://scenes/workplace_cell_info_ui.tscn" id="9_xvnm7"]
 [ext_resource type="Resource" uid="uid://8m4fhhljy05o" path="res://data/terrain/water.tres" id="10_2gw4c"]
 [ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="10_dppk6"]
+[ext_resource type="Script" uid="uid://syp320mudpff" path="res://scripts/ui/TimedJobCellInfoUIContainer.cs" id="10_mpwrp"]
+[ext_resource type="PackedScene" uid="uid://2crqakku64ae" path="res://scenes/timed_job_cell_info_ui.tscn" id="11_v8tdf"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="15_nkuak"]
 [ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/HousingInfoPopup.cs" id="20_77sti"]
 [ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/house_info_ui.tscn" id="21_mcgvi"]
@@ -139,6 +141,14 @@ anchors_preset = 0
 script = ExtResource("8_wa3gb")
 baseTileMapLayer = NodePath("../BaseTileMapLayer")
 cellInfoUIScene = ExtResource("9_xvnm7")
+
+[node name="TimedJobCellInfoContainer" type="Control" parent="MapController" node_paths=PackedStringArray("baseTileMapLayer")]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("10_mpwrp")
+baseTileMapLayer = NodePath("../BaseTileMapLayer")
+cellInfoUIScene = ExtResource("11_v8tdf")
 
 [node name="HighlightOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
 z_index = 1
@@ -365,6 +375,7 @@ grow_vertical = 0
 text = "OK"
 
 [node name="LockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("workerCountLabel", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
