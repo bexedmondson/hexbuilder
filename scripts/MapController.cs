@@ -79,6 +79,11 @@ public partial class MapController : Node2D, IInjectable
         residentManager.CreateResident();
     }
 
+    public void OnCellUnlockInitiated()
+    {
+        
+    }
+
     public void UnlockCell(Vector2I cell)
     {
         mapGenerator.OnCellUnlocked(cell);
