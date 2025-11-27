@@ -4,6 +4,9 @@ public partial class ResidentInfoPopup : Popup
 {
     [Export]
     private Control residentInfoContainer;
+
+    [Export]
+    private PackedScene residentInfoUIScene;
     
     private ResidentManager residentManager;
 
@@ -19,10 +22,9 @@ public partial class ResidentInfoPopup : Popup
         
         foreach (var residentData in residentManager.AllResidents)
         {
-            Label residentLabel = new Label();
-            residentLabel.Text = $"{residentData.Name}{(residentData.HasHouse ? string.Empty : " - no house! :(")} - {(residentData.HasWorkplace ? $"is employed at {residentData.GetWorkplaceName()}" : "is not employed")}";
-                
-            residentInfoContainer.AddChild(residentLabel);
+            var residentInfoUI = residentInfoUIScene.Instantiate<ResidentInfoUI>();
+            residentInfoUI.SetResident(residentData);
+            residentInfoContainer.AddChild(residentInfoUI);
         }
 
         this.Visible = true;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=38 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/ResidentInfoPopup.cs" id="22_1w2nm"]
 [ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/WorkplaceInfoPopup.cs" id="22_tacgk"]
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
+[ext_resource type="PackedScene" uid="uid://b5cjn1sgivxbt" path="res://scenes/resident_info_ui.tscn" id="27_xvnm7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
 noise_type = 0
@@ -522,6 +523,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("22_1w2nm")
 residentInfoContainer = NodePath("ScrollContainer/VBoxContainer")
+residentInfoUIScene = ExtResource("27_xvnm7")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/ResidentInfoPopup"]
 custom_minimum_size = Vector2(50, 50)

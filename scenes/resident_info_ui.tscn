@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5cjn1sgivxbt"]
+
+[ext_resource type="Script" uid="uid://cumathtplfne2" path="res://scripts/ui/ResidentInfoUI.cs" id="1_pyfhh"]
+
+[node name="ResidentInfo" type="Panel" node_paths=PackedStringArray("residentLabel")]
+custom_minimum_size = Vector2(0, 80)
+theme_type_variation = &"PanelEmbedded"
+script = ExtResource("1_pyfhh")
+residentLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 26.0
+offset_right = 106.0
+offset_bottom = 53.0
+size_flags_horizontal = 0
+text = "testing 1 2 3"
