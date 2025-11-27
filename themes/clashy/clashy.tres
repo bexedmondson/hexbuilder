@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://cijnbspbn0k6c" path="res://themes/clashy/graphics/button-disabled.svg" id="1_2vevx"]
 [ext_resource type="StyleBox" uid="uid://q222orvy57pf" path="res://themes/clashy/panels/clashButtonHover.tres" id="2_0hton"]
-[ext_resource type="FontFile" uid="uid://qq52okilox71" path="res://themes/clashy/Acme-Regular.ttf" id="2_1eokn"]
 [ext_resource type="Texture2D" uid="uid://dnnvgg848rp73" path="res://themes/clashy/graphics/panel.svg" id="3_i7pvi"]
 [ext_resource type="StyleBox" uid="uid://byx3e5blcxm1o" path="res://themes/clashy/panels/clashButton.tres" id="3_ih65r"]
 [ext_resource type="StyleBox" uid="uid://cxo32m6uciudf" path="res://themes/clashy/panels/clashButtonPress.tres" id="4_i7no0"]
@@ -29,6 +28,7 @@
 [ext_resource type="StyleBox" uid="uid://bw1fy6rgn16ft" path="res://themes/clashy/panels/clashy_ribbon.tres" id="26_iesbr"]
 [ext_resource type="StyleBox" uid="uid://b3bs0xywspv6c" path="res://themes/clashy/panels/successClashButton.tres" id="27_0wob6"]
 [ext_resource type="StyleBox" uid="uid://7gnfvusfrfqy" path="res://themes/clashy/panels/successClashButtonPress.tres" id="28_x27uw"]
+[ext_resource type="FontVariation" uid="uid://bbe5lqfpnh46x" path="res://themes/clashy/Acme-Regular-Variant.tres" id="29_j57xd"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o2rwg"]
 texture = ExtResource("1_2vevx")
@@ -66,10 +66,10 @@ texture_margin_bottom = 5.0
 
 [resource]
 default_base_scale = 1.0
-default_font = ExtResource("2_1eokn")
+default_font = ExtResource("29_j57xd")
 default_font_size = 20
-Button/colors/font_outline_color = Color(0.162066, 0.162066, 0.162066, 1)
-Button/constants/outline_size = 6
+Button/colors/font_outline_color = Color(0.21950114, 0.21950093, 0.21950102, 1)
+Button/constants/outline_size = 10
 Button/styles/disabled = SubResource("StyleBoxTexture_o2rwg")
 Button/styles/hover = ExtResource("2_0hton")
 Button/styles/normal = ExtResource("3_ih65r")
@@ -109,14 +109,14 @@ GreenButton/styles/pressed = ExtResource("20_7xukr")
 HBoxContainer/constants/separation = 8
 Label/colors/font_outline_color = Color(0.262932, 0.262932, 0.262932, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 6
+Label/constants/outline_size = 10
 Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 5
 Label/font_sizes/font_size = 20
-Label/fonts/font = ExtResource("2_1eokn")
 Label_Title/base_type = &"Label"
 Label_Title/font_sizes/font_size = 28
+LineEdit/colors/font_uneditable_color = Color(0.83497256, 0.8510168, 0.85637206, 1)
 MarginContainer/constants/margin_bottom = 12
 MarginContainer/constants/margin_left = 12
 MarginContainer/constants/margin_right = 12

@@ -40,6 +40,7 @@ enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg", "res://addon
 
 [gui]
 
+theme/default_font_multichannel_signed_distance_field=true
 theme/custom="uid://c42r8558dvmyi"
 
 [input_devices]
