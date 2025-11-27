@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 
 public partial class MapController : Node2D, IInjectable
@@ -10,8 +9,6 @@ public partial class MapController : Node2D, IInjectable
 
     [Export]
     private TileMapLayer lockedOverlayLayer;
-
-    private Dictionary<Vector2I, bool> visibleCellUnlockStates = new();
 
     [Export]
     private MapGenerator mapGenerator;
@@ -35,6 +32,7 @@ public partial class MapController : Node2D, IInjectable
     private HousingManager housingManager;
     private WorkplaceManager workplaceManager;
     private EventDispatcher eventDispatcher;
+    private CellStatusManager cellStatusManager;
 
     public override void _EnterTree()
     {
@@ -46,6 +44,7 @@ public partial class MapController : Node2D, IInjectable
     {
         base._Ready();
         eventDispatcher = InjectionManager.Get<EventDispatcher>();
+        cellStatusManager = new CellStatusManager();
         currencyChangeAnalyser = new MapCurrencyChangeAnalyser(this);
         housingManager = new HousingManager(this);
         workplaceManager = new WorkplaceManager(this);
@@ -62,10 +61,8 @@ public partial class MapController : Node2D, IInjectable
     {
         baseMapLayer.Clear();
         lockedOverlayLayer.Clear();
-        
-        visibleCellUnlockStates.Clear();
-        visibleCellUnlockStates[Vector2I.Zero] = true;
-        
+
+        cellStatusManager.OnNewGame();
         mapGenerator.SubscribeIsReady(SetupInitialMap);
     }
 
@@ -85,19 +82,14 @@ public partial class MapController : Node2D, IInjectable
     public void UnlockCell(Vector2I cell)
     {
         mapGenerator.OnCellUnlocked(cell);
-        
-        //updating surrounding cells after the above, so that in the above call, relevant tiles can be updated by checking GetCellStatus == Hidden
-        //before they're made visible
-        visibleCellUnlockStates[cell] = true;
+
         lockedOverlayLayer.EraseCell(cell);
         
-        foreach (var surroundingCell in baseMapLayer.GetSurroundingCells(cell))
+        List<Vector2I> newlyShownCells = cellStatusManager.OnCellUnlocked(cell, baseMapLayer.GetSurroundingCells(cell));
+
+        foreach (var newlyShownCell in newlyShownCells)
         {
-            if (visibleCellUnlockStates.ContainsKey(surroundingCell))
-                continue;
-            
-            visibleCellUnlockStates[surroundingCell] = false;
-            lockedOverlayLayer.SetCell(surroundingCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
+            lockedOverlayLayer.SetCell(newlyShownCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
         }
         
         eventDispatcher.Dispatch(new MapUpdatedEvent());
@@ -117,17 +109,12 @@ public partial class MapController : Node2D, IInjectable
 
     public CellStatus GetCellStatus(Vector2I cell)
     {
-        if (visibleCellUnlockStates.ContainsKey(cell))
-        {
-            return visibleCellUnlockStates[cell] ? CellStatus.Unlocked : CellStatus.Locked;
-        }
-
-        return CellStatus.Hidden;
+        return cellStatusManager.GetCellStatus(cell);
     }
 
     public Vector2I[] GetVisibleCells()
     {
-        return visibleCellUnlockStates.Keys.ToArray();
+        return cellStatusManager.GetVisibleCells();
     }
 
     public CurrencySum GetCellUnlockCost(Vector2I cell)
