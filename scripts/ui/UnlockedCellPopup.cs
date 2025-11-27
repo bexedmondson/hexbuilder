@@ -19,6 +19,7 @@ public partial class UnlockedCellPopup : Popup
     private Vector2I cell;
 
     private MapController mapController;
+    private InventoryManager inventoryManager;
 
     public override void _Ready()
     {
@@ -29,6 +30,9 @@ public partial class UnlockedCellPopup : Popup
     
     public void ShowForCell(TileMapLayer baseMapLayer, Vector2I setCell)
     {
+        inventoryManager ??= InjectionManager.Get<InventoryManager>();
+        confirmButton.Disabled = true;
+        
         cell = setCell;
 
         for (int i = tileSelector.GetChildCount() - 1; i >= 0; i--)
@@ -60,6 +64,8 @@ public partial class UnlockedCellPopup : Popup
 
         //TODO: hate that there is so much controlled from this class!! but works for now at least
         mapController.HighlightNeighbourEffects(cell, selectedOption.tileInfo);
+
+        confirmButton.Disabled = !inventoryManager.CanAfford(new CurrencySum(selectedOption.tileInfo.tileData.price));
     }
 
     public override void Confirm()
@@ -75,7 +81,7 @@ public partial class UnlockedCellPopup : Popup
         var mapController = InjectionManager.Get<MapController>();
         mapController.SetCell(cell, selectedTileInfo);
 
-        var inventoryManager = InjectionManager.Get<InventoryManager>();
+        inventoryManager ??= InjectionManager.Get<InventoryManager>();
         inventoryManager.SpendCurrency(new CurrencySum(selectedTileInfo.tileData.price));
         Close();
     }
@@ -87,5 +93,7 @@ public partial class UnlockedCellPopup : Popup
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count > 0)
             tileSelectionGroup.Pressed -= OnSelectionChanged;
+        
+        confirmButton.Disabled = true;
     }
 }
