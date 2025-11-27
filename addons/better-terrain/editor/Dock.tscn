@@ -1,11 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://de8b6h6ieal7r"]
+[gd_scene load_steps=32 format=3 uid="uid://de8b6h6ieal7r"]
 
-[ext_resource type="Script" path="res://addons/better-terrain/editor/Dock.gd" id="1_raoha"]
+[ext_resource type="Script" uid="uid://dc54568i01m8o" path="res://addons/better-terrain/editor/Dock.gd" id="1_raoha"]
 [ext_resource type="Texture2D" uid="uid://c6lxq2y7mpb18" path="res://addons/better-terrain/icons/EditType.svg" id="2_cpm2t"]
 [ext_resource type="Texture2D" uid="uid://y3xy6qdckht6" path="res://addons/better-terrain/icons/Replace.svg" id="2_fvmt6"]
 [ext_resource type="Texture2D" uid="uid://bo2cjv08jkvf8" path="res://addons/better-terrain/icons/EditTerrain.svg" id="3_pqb1p"]
 [ext_resource type="Texture2D" uid="uid://b0es228gfcykd" path="res://addons/better-terrain/icons/Warning.svg" id="4_6ahwe"]
-[ext_resource type="Script" path="res://addons/better-terrain/editor/TileView.gd" id="4_nqppq"]
+[ext_resource type="Script" uid="uid://dvhc8iku0tamk" path="res://addons/better-terrain/editor/TileView.gd" id="4_nqppq"]
 [ext_resource type="Texture2D" uid="uid://co6gwwmog0pjy" path="res://addons/better-terrain/icons/EditSymmetry.svg" id="5_kfjwu"]
 [ext_resource type="Texture2D" uid="uid://cs4mdmluiydj6" path="res://addons/better-terrain/icons/ShuffleRandom.svg" id="5_n3owo"]
 [ext_resource type="Texture2D" uid="uid://5hm3bfj3dvej" path="res://addons/better-terrain/icons/SymmetryMirror.svg" id="6_mofuh"]
@@ -27,17 +27,9 @@ unicode = 100
 [sub_resource type="Shortcut" id="Shortcut_3k2al"]
 events = [SubResource("InputEventKey_saph6")]
 
-[sub_resource type="Image" id="Image_3r1gs"]
-data = {
-"data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 94, 94, 127, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 231, 255, 94, 94, 54, 255, 94, 94, 57, 255, 93, 93, 233, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 97, 97, 42, 255, 93, 93, 233, 255, 93, 93, 232, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 44, 255, 255, 255, 0, 255, 97, 97, 42, 255, 97, 97, 42, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 96, 96, 45, 255, 93, 93, 235, 255, 94, 94, 234, 255, 95, 95, 43, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 93, 93, 235, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 233, 255, 95, 95, 59, 255, 96, 96, 61, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 93, 93, 255, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
-"format": "RGBA8",
-"height": 16,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="ImageTexture" id="ImageTexture_v6msm"]
-image = SubResource("Image_3r1gs")
+[sub_resource type="DPITexture" id="DPITexture_nkf6h"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#ff5d5d\" d=\"M2 1v8.586l1.293-1.293a1 1 0 0 1 1.414 0L7 10.587l2.293-2.293a1 1 0 0 1 1.414 0L13 10.586l1-1V6H9V1H2zm8 0v4h4zm-6 9.414-2 2V15h12v-2.586l-.293.293a1 1 0 0 1-1.414 0L10 10.414l-2.293 2.293a1 1 0 0 1-1.414 0L4 10.414z\"/></svg>
+"
 
 [sub_resource type="InputEventKey" id="InputEventKey_q1v0d"]
 device = -1
@@ -114,7 +106,7 @@ toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_aon7c")
 shortcut = SubResource("Shortcut_3k2al")
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="Line" type="Button" parent="VBox/Toolbar"]
@@ -123,7 +115,7 @@ tooltip_text = "Draw line"
 toggle_mode = true
 button_group = SubResource("ButtonGroup_aon7c")
 shortcut = SubResource("Shortcut_wc6bu")
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="Rectangle" type="Button" parent="VBox/Toolbar"]
@@ -132,7 +124,7 @@ tooltip_text = "Fill a rectangle of terrain"
 toggle_mode = true
 button_group = SubResource("ButtonGroup_aon7c")
 shortcut = SubResource("Shortcut_tcjet")
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="Fill" type="Button" parent="VBox/Toolbar"]
@@ -141,7 +133,7 @@ tooltip_text = "Bucket fill terrain"
 toggle_mode = true
 button_group = SubResource("ButtonGroup_aon7c")
 shortcut = SubResource("Shortcut_46fac")
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="Replace" type="Button" parent="VBox/Toolbar"]
@@ -159,7 +151,7 @@ layout_mode = 2
 tooltip_text = "Select"
 toggle_mode = true
 button_group = SubResource("ButtonGroup_3wrxn")
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="PaintType" type="Button" parent="VBox/Toolbar"]
@@ -255,27 +247,27 @@ layout_mode = 2
 [node name="LayerUp" type="Button" parent="VBox/Toolbar"]
 layout_mode = 2
 tooltip_text = "Select previous layer"
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="LayerDown" type="Button" parent="VBox/Toolbar"]
 layout_mode = 2
 tooltip_text = "Select next layer"
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="LayerHighlight" type="Button" parent="VBox/Toolbar"]
 layout_mode = 2
 tooltip_text = "Highlight selected layer"
 toggle_mode = true
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="LayerGrid" type="Button" parent="VBox/Toolbar"]
 layout_mode = 2
 tooltip_text = "Toggle grid visibility"
 toggle_mode = true
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="HSplit" type="HSplitContainer" parent="VBox"]
@@ -307,7 +299,7 @@ layout_mode = 2
 layout_mode = 2
 tooltip_text = "Toggle grid view"
 toggle_mode = true
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="QuickMode" type="Button" parent="VBox/HSplit/Terrains/LowerToolbar"]
@@ -315,7 +307,7 @@ auto_translate_mode = 1
 layout_mode = 2
 tooltip_text = "Toggle quick mode. Only shows paintable terrain types."
 toggle_mode = true
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="VSeparator" type="VSeparator" parent="VBox/HSplit/Terrains/LowerToolbar"]
@@ -329,38 +321,38 @@ alignment = 2
 [node name="AddTerrain" type="Button" parent="VBox/HSplit/Terrains/LowerToolbar/EditTools"]
 layout_mode = 2
 tooltip_text = "Add terrain type"
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="EditTerrain" type="Button" parent="VBox/HSplit/Terrains/LowerToolbar/EditTools"]
 layout_mode = 2
 tooltip_text = "Edit terrain type"
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="PickIcon" type="Button" parent="VBox/HSplit/Terrains/LowerToolbar/EditTools"]
 layout_mode = 2
 tooltip_text = "Pick terrain icon from tileset"
 toggle_mode = true
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="MoveUp" type="Button" parent="VBox/HSplit/Terrains/LowerToolbar/EditTools"]
 layout_mode = 2
 tooltip_text = "Move selected terrain up"
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="MoveDown" type="Button" parent="VBox/HSplit/Terrains/LowerToolbar/EditTools"]
 layout_mode = 2
 tooltip_text = "Move selected terrain down"
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="RemoveTerrain" type="Button" parent="VBox/HSplit/Terrains/LowerToolbar/EditTools"]
 layout_mode = 2
 tooltip_text = "Remove selected terrain type(s)"
-icon = SubResource("ImageTexture_v6msm")
+icon = SubResource("DPITexture_nkf6h")
 flat = true
 
 [node name="Panel" type="Panel" parent="VBox/HSplit"]

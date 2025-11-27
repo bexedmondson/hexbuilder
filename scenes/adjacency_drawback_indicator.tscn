@@ -47,8 +47,5 @@ alpha_curve = SubResource("CurveTexture_0kpx0")
 [node name="Sprite2D" parent="." index="0"]
 self_modulate = Color(1, 0.20784314, 0.21960784, 0.6117647)
 
-[node name="AnimationPlayer" parent="." index="1"]
-autoplay = "benefit_indicator_animation"
-
 [node name="GPUParticles2D" parent="." index="2"]
 process_material = SubResource("ParticleProcessMaterial_a45o7")

@@ -13,4 +13,5 @@ price = {
 }
 baseTurnCurrencyChange = {}
 adjacencies = Array[Object]([])
+unlockRequirements = null
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -1,6 +1,6 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bw1fy6rgn16ft"]
 
-[ext_resource type="Texture2D" uid="uid://dt73dtm5ex5jd" path="res://addons/Themey/themes/clashy/graphics/ribbon.png" id="1_07ljf"]
+[ext_resource type="Texture2D" uid="uid://dt73dtm5ex5jd" path="res://themes/clashy/graphics/ribbon.png" id="1_07ljf"]
 
 [resource]
 content_margin_left = 0.0
