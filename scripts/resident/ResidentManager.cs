@@ -71,7 +71,7 @@ public class ResidentManager : IInjectable
         }
     }
 
-    private ResidentData[] GetNotBusyResidents()
+    public ResidentData[] GetNotBusyResidents()
     {
         List<ResidentData> unemployedResidents = new();
         foreach (var resident in residents)
@@ -80,6 +80,17 @@ public class ResidentManager : IInjectable
                 unemployedResidents.Add(resident);
         }
         return unemployedResidents.ToArray();
+    }
+
+    public int GetNotBusyResidentCount()
+    {
+        int count = 0;
+        foreach (var resident in residents)
+        {
+            if (!resident.IsBusy)
+                count++;
+        }
+        return count;
     }
     
     public bool TryGetFirstNotBusyResident(out ResidentData residentData)

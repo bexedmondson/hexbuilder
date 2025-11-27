@@ -30,6 +30,11 @@ public class CellStatusManager
 
         return newlyShownCells;
     }
+
+    public void OnCellUnlockInitiated(Vector2I cell)
+    {
+        visibleCellUnlockStates[cell] = CellStatus.Unlocking;
+    }
     
     public CellStatus GetCellStatus(Vector2I cell)
     {

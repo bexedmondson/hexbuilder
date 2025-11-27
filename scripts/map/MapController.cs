@@ -31,6 +31,7 @@ public partial class MapController : Node2D, IInjectable
     private ResidentManager residentManager;
     private HousingManager housingManager;
     private WorkplaceManager workplaceManager;
+    private TimedJobManager timedJobManager;
     private EventDispatcher eventDispatcher;
     private CellStatusManager cellStatusManager;
 
@@ -48,6 +49,7 @@ public partial class MapController : Node2D, IInjectable
         currencyChangeAnalyser = new MapCurrencyChangeAnalyser(this);
         housingManager = new HousingManager(this);
         workplaceManager = new WorkplaceManager(this);
+        timedJobManager = new TimedJobManager(this);
         residentManager = new ResidentManager(this);
         
         var tileDatabase = InjectionManager.Get<TileDatabase>();
@@ -79,9 +81,26 @@ public partial class MapController : Node2D, IInjectable
         residentManager.CreateResident();
     }
 
-    public void OnCellUnlockInitiated()
+    public void OnCellUnlockInitiated(Vector2I cellToStartUnlock)
     {
+        if (residentManager.GetNotBusyResidentCount() == 0)
+            return;
+
+        //already doing something here, don't try to start anything new
+        if (timedJobManager.TryGetTimedJobAt(cellToStartUnlock, out _))
+            return;
+
+        //can't start the unlock if the cell isn't both visible and locked!
+        if (cellStatusManager.GetCellStatus(cellToStartUnlock) != CellStatus.Locked)
+            return;
         
+        //TODO configure?
+        var cellUnlockTimedJobData = new CellUnlockTimedJobData(cellToStartUnlock, 1, 1);
+        timedJobManager.AddNewTimedJob(cellUnlockTimedJobData);
+        timedJobManager.TryAssignResidentToTimedJob(cellUnlockTimedJobData);
+        
+        cellStatusManager.OnCellUnlockInitiated(cellToStartUnlock);
+        //TODO show unlocking icon
     }
 
     public void UnlockCell(Vector2I cell)
@@ -122,12 +141,10 @@ public partial class MapController : Node2D, IInjectable
         return cellStatusManager.GetVisibleCells();
     }
 
-    public CurrencySum GetCellUnlockCost(Vector2I cell)
+    public int GetCellUnlockCost(Vector2I cell)
     {
         //TODO change
-        return new CurrencySum() {
-            { CurrencyType.Stone, 1 }
-        };
+        return 1;
     }
 
     public Dictionary<Vector2I, int> GetSurroundingCellsUpToDistance(Vector2I centreCell, int maxDistance)

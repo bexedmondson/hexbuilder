@@ -3,13 +3,13 @@ using Godot;
 public partial class LockedCellPopup : Popup
 {
     [Export]
-    private CurrencyDisplay priceDisplay;
+    private Label workerCountLabel;
 
     [Export]
     private Button confirmButton;
 
     private MapController mapController;
-    private InventoryManager inventoryManager;
+    private ResidentManager residentManager;
     
     private Vector2I cell;
 
@@ -17,30 +17,32 @@ public partial class LockedCellPopup : Popup
     {
         this.SetVisible(false);
         mapController = InjectionManager.Get<MapController>();
-        inventoryManager = InjectionManager.Get<InventoryManager>();
+        residentManager = InjectionManager.Get<ResidentManager>();
     }
 
     public void ShowForCell(Vector2I setCell)
     {
         cell = setCell;
-        var cellUnlockCost = mapController.GetCellUnlockCost(cell);
+        int requiredWorkerCount = mapController.GetCellUnlockCost(cell);
+        int availableResidents = residentManager.GetNotBusyResidentCount();
         
-        priceDisplay.DisplayCurrencyAmount(cellUnlockCost);
+        workerCountLabel.Text = $"x{requiredWorkerCount}";
 
-        bool canAfford = inventoryManager.CanAfford(cellUnlockCost);
-        confirmButton.Disabled = !canAfford;
+        bool hasEnoughAvailableWorkers = requiredWorkerCount <= availableResidents;
+        confirmButton.Disabled = !hasEnoughAvailableWorkers;
         
         this.SetVisible(true);
+        InjectionManager.Get<MapHighlightController>().OnSelectTile(cell);
     }
 
     public override void Confirm()
     {
-        var cellUnlockCost = mapController.GetCellUnlockCost(cell);
-        if (!inventoryManager.CanAfford(cellUnlockCost))
+        int requiredWorkerCount = mapController.GetCellUnlockCost(cell);
+        int availableResidents = residentManager.GetNotBusyResidentCount();
+        if (requiredWorkerCount > availableResidents)
             return;
 
-        mapController.UnlockCell(cell);
-        inventoryManager.SpendCurrency(cellUnlockCost);
+        mapController.OnCellUnlockInitiated(cell);
         Close();
     }
 
@@ -48,7 +50,6 @@ public partial class LockedCellPopup : Popup
     {
         base.Close();
         this.SetVisible(false);
-        priceDisplay.Cleanup();
         InjectionManager.Get<MapHighlightController>().Clear();
     }
 }

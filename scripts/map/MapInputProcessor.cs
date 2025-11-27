@@ -38,7 +38,7 @@ public partial class MapInputProcessor : Node2D
                 lockedCellPopup.ShowForCell(cell);
                 unlockedCellPopup.Close();
             }
-            else
+            else //TODO handle what to do when in unlocking state
             {
                 unlockedCellPopup.ShowForCell(mapController.BaseMapLayer, cell);
                 lockedCellPopup.Close();

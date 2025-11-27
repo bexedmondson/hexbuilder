@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=39 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -76,6 +76,10 @@ region = Rect2(1920, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1w2nm"]
 atlas = ExtResource("15_nkuak")
 region = Rect2(2176, 896, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvnm7"]
+atlas = ExtResource("15_nkuak")
+region = Rect2(2560, 896, 128, 128)
 
 [node name="Main2d" type="Node2D" node_paths=PackedStringArray("mapController", "inventoryManager")]
 script = ExtResource("1_vlfvj")
@@ -360,8 +364,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "OK"
 
-[node name="LockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("priceDisplay", "confirmButton")]
-visible = false
+[node name="LockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("workerCountLabel", "confirmButton")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -374,10 +377,10 @@ offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_bn7pe")
-priceDisplay = NodePath("CurrencyDisplay")
+workerCountLabel = NodePath("PanelContainer/Panel2/WorkerCountContainer/WorkerCountLabel")
 confirmButton = NodePath("ConfirmButton")
 
-[node name="Label" type="Label" parent="PopupLayer/LockedCellPopup"]
+[node name="UnlockLabel" type="Label" parent="PopupLayer/LockedCellPopup"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -391,20 +394,39 @@ text = "Unlock?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CurrencyDisplay" parent="PopupLayer/LockedCellPopup" instance=ExtResource("6_bn7pe")]
+[node name="PanelContainer" type="PanelContainer" parent="PopupLayer/LockedCellPopup"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 0.0
-offset_top = -25.0
-offset_right = 0.0
-offset_bottom = 25.0
+offset_left = -44.5
+offset_top = -30.0
+offset_right = 44.5
+offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
-iconColor = Color(0, 0, 0, 1)
+theme_type_variation = &"PanelContainerEmbeddedLight"
+
+[node name="Panel2" type="MarginContainer" parent="PopupLayer/LockedCellPopup/PanelContainer"]
+layout_mode = 2
+
+[node name="WorkerCountContainer" type="HBoxContainer" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2/WorkerCountContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_xvnm7")
+expand_mode = 3
+
+[node name="WorkerCountLabel" type="Label" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2/WorkerCountContainer"]
+layout_mode = 2
+theme_type_variation = &"Label_Title"
+text = "x1"
+vertical_alignment = 1
 
 [node name="ConfirmButton" type="Button" parent="PopupLayer/LockedCellPopup"]
 layout_mode = 1

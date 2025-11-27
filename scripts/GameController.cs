@@ -12,6 +12,7 @@ public partial class GameController : Node2D
     private TileDatabase tileDatabase;
     private EventDispatcher eventDispatcher;
     private MapCurrencyChangeAnalyser mapCurrencyChangeAnalyser;
+    private TimedJobManager timedJobManager;
 
     public override void _EnterTree()
     {
@@ -37,7 +38,10 @@ public partial class GameController : Node2D
         List<CurrencySum> allCurrencyChanges = mapCurrencyChangeAnalyser.GetFullCurrencyTurnDeltas();
         
         inventoryManager.OnNextTurn(allCurrencyChanges.ToArray());
-
+        
         InjectionManager.Get<ResidentManager>().OnNextTurn();
+
+        timedJobManager ??= InjectionManager.Get<TimedJobManager>();
+        timedJobManager.OnNextTurn();
     }
 }

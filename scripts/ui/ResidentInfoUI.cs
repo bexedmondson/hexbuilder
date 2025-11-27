@@ -8,6 +8,6 @@ public partial class ResidentInfoUI : Control
     
     public void SetResident(ResidentData residentData)
     {
-        residentLabel.Text = $"{residentData.Name}{(residentData.HasHouse ? string.Empty : " - no house! :(")} - {(residentData.IsBusy ? $"is employed at {residentData.GetWorkplaceName()}" : "is not employed")}";
+        residentLabel.Text = $"{residentData.Name}{(residentData.HasHouse ? string.Empty : " - no house! :(")} - {(residentData.IsBusy ? $"is employed at {residentData.GetWorkplaceOrJobName()}" : "is not employed")}";
     }
 }

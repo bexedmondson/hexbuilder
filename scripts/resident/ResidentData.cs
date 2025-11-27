@@ -27,22 +27,35 @@ public class ResidentData(string name)
     }
     
     private WorkplaceManager workplaceManager;
+    private TimedJobManager timedJobManager;
     
     public bool IsBusy
     {
         get
         {
             workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
-            return workplaceManager.TryGetWorkplaceForResident(this, out _);
+            if (workplaceManager.TryGetWorkplaceForResident(this, out _))
+                return true;
+
+            timedJobManager ??= InjectionManager.Get<TimedJobManager>();
+            if (timedJobManager.TryGetTimedJobForResident(this, out _))
+                return true;
+
+            return false;
         }
     }
 
-    public string GetWorkplaceName()
+    public string GetWorkplaceOrJobName()
     {
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
+        timedJobManager ??= InjectionManager.Get<TimedJobManager>();
         if (workplaceManager.TryGetWorkplaceForResident(this, out var workplace))
         {
             return workplace.name;
+        }
+        else if (timedJobManager.TryGetTimedJobForResident(this, out var timedJob))
+        {
+            return timedJob.description;
         }
         else
         {
