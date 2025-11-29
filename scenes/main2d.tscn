@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=43 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -67,8 +67,15 @@ fractal_lacunarity = 4.0
 noise = SubResource("FastNoiseLite_77sti")
 seamless = true
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mpwrp"]
+load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_77sti"]
-atlas = ExtResource("15_nkuak")
+atlas = SubResource("CompressedTexture2D_mpwrp")
+region = Rect2(1664, 1024, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpwrp"]
+atlas = SubResource("CompressedTexture2D_mpwrp")
 region = Rect2(2048, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipk01"]
@@ -222,7 +229,14 @@ mouse_filter = 2
 
 [node name="CurrencyDisplay" parent="CanvasLayer/UIMain" instance=ExtResource("6_bn7pe")]
 layout_mode = 1
-offset_bottom = 20.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 10.0
+grow_horizontal = 0
 showTurnChange = true
 
 [node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain"]
@@ -240,6 +254,8 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_type_variation = &"Button_Success"
+theme_override_constants/h_separation = 10
 theme_override_font_sizes/font_size = 24
 text = "Next turn"
 icon = SubResource("AtlasTexture_77sti")
@@ -252,9 +268,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1783.0
+offset_left = -1910.0
 offset_top = -90.0
-offset_right = -1603.0
+offset_right = -1730.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -262,7 +278,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 text = "Housing"
-icon = SubResource("AtlasTexture_77sti")
+icon = SubResource("AtlasTexture_mpwrp")
 expand_icon = true
 
 [node name="WorkplaceInfoButton2" type="Button" parent="CanvasLayer/UIMain"]
@@ -272,9 +288,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1582.0
+offset_left = -1709.0
 offset_top = -90.0
-offset_right = -1382.0
+offset_right = -1509.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -292,9 +308,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1358.0
+offset_left = -1485.0
 offset_top = -90.0
-offset_right = -1178.0
+offset_right = -1305.0
 offset_bottom = -10.0
 grow_horizontal = 0
 grow_vertical = 0

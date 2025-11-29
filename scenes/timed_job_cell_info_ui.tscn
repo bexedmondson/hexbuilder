@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://2crqakku64ae"]
+[gd_scene load_steps=15 format=3 uid="uid://2crqakku64ae"]
 
 [ext_resource type="Script" uid="uid://njf8gojp3x73" path="res://scripts/ui/TimedJobCellInfoUI.cs" id="1_b8jlu"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_22lh2"]
@@ -12,9 +12,288 @@ region = Rect2(2560, 896, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5df6q"]
 atlas = ExtResource("2_22lh2")
+region = Rect2(0, 1024, 128, 128)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_22lh2"]
+load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1phq"]
+atlas = SubResource("CompressedTexture2D_22lh2")
+region = Rect2(1280, 384, 128, 128)
+
+[sub_resource type="Animation" id="Animation_5df6q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hourglass:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hourglass:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("AtlasTexture_5df6q")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Hourglass:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hourglass:self_modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lock:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Lock:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("AtlasTexture_j1phq")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Lock:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Lock:self_modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Lock:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofxbo"]
+atlas = SubResource("CompressedTexture2D_22lh2")
+region = Rect2(1152, 384, 128, 128)
+filter_clip = true
+
+[sub_resource type="Animation" id="Animation_qqk1h"]
+resource_name = "job_complete"
+length = 1.3
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hourglass:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333341),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hourglass:self_modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333341),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Lock:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.10000005),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Lock:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.10000005, 0.43333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("AtlasTexture_j1phq"), SubResource("AtlasTexture_ofxbo")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lock:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.10000005, 0.23333335, 0.53333336, 0.90000004, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 4, 0.5, 2, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1), Vector2(1.6, 1.6), Vector2(1.4, 1.4), Vector2(1.2, 1.2), Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Lock:self_modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.10000005, 0.3),
+"transitions": PackedFloat32Array(1, 1.5),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HBoxContainer:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.23333341),
+"transitions": PackedFloat32Array(1, 0.5),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HBoxContainer:modulate:a")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.23333341),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Lock:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.40000004, 0.5, 0.6666667, 0.7666667),
+"transitions": PackedFloat32Array(1, 0.5, -2, 0.5),
+"update": 0,
+"values": [0.0, 0.17453292519943295, -0.17453292519943295, 0.0]
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydj6s"]
+atlas = ExtResource("2_22lh2")
 region = Rect2(1920, 1152, 128, 128)
 
-[node name="TimedJobCellInfoUi" type="Control" node_paths=PackedStringArray("workerCountLabel", "alert")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_22lh2"]
+atlas = ExtResource("2_22lh2")
+region = Rect2(384, 1536, 128, 128)
+
+[sub_resource type="Animation" id="Animation_22lh2"]
+resource_name = "turn_hourglass"
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hourglass:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.9332, 0.93333334),
+"transitions": PackedFloat32Array(1, -2, 1, 1),
+"update": 0,
+"values": [0.0, 3.141592653589793, 3.141592653589793, 6.283185307179586]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hourglass:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.73333335, 0.93333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("AtlasTexture_5df6q"), SubResource("AtlasTexture_ydj6s"), SubResource("AtlasTexture_22lh2"), SubResource("AtlasTexture_5df6q")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j1phq"]
+_data = {
+&"RESET": SubResource("Animation_5df6q"),
+&"job_complete": SubResource("Animation_qqk1h"),
+&"turn_hourglass": SubResource("Animation_22lh2")
+}
+
+[node name="TimedJobCellInfoUi" type="Control" node_paths=PackedStringArray("workerCountLabel", "alert", "workerLabelContainer", "animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,10 +305,13 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_b8jlu")
-workerCountLabel = NodePath("HBoxContainer/Label")
-alert = NodePath("Icon")
+workerCountLabel = NodePath("HBoxContainer/WorkerCountLabel")
+alert = NodePath("Hourglass")
+workerLabelContainer = NodePath("HBoxContainer")
+animationPlayer = NodePath("AnimationPlayer")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -38,21 +320,22 @@ offset_left = -32.0
 offset_right = 32.0
 offset_bottom = 27.0
 grow_horizontal = 2
+scale = Vector2(1e-05, 1e-05)
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="WorkerCountLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"TooltipLabel"
 text = "0/0"
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="WorkerIcon" type="TextureRect" parent="HBoxContainer"]
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
 layout_mode = 2
 texture = SubResource("AtlasTexture_rmpib")
 expand_mode = 3
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="Hourglass" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -64,5 +347,28 @@ offset_top = -40.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(20, 20)
 texture = SubResource("AtlasTexture_5df6q")
 expand_mode = 3
+
+[node name="Lock" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(20, 20)
+texture = SubResource("AtlasTexture_j1phq")
+expand_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_j1phq")
+}

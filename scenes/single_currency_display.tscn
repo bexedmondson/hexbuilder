@@ -25,5 +25,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 
 [node name="Label2" type="Label" parent="."]
+self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25

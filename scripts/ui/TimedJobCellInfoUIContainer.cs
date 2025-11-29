@@ -37,10 +37,12 @@ public partial class TimedJobCellInfoUIContainer : Control
     {
         if (timedJobCellInfoUis.TryGetValue(timedJobEndedEvent.location, out var removedTimedJobInfoUI))
         {
-            //TODO animate?
-            this.RemoveChild(removedTimedJobInfoUI);
-            removedTimedJobInfoUI.QueueFree();
-            timedJobCellInfoUis.Remove(timedJobEndedEvent.location);
+            removedTimedJobInfoUI.AnimateOut(() =>
+            {
+                this.RemoveChild(removedTimedJobInfoUI);
+                removedTimedJobInfoUI.QueueFree();
+                timedJobCellInfoUis.Remove(timedJobEndedEvent.location);
+            });
         }
         else
         {
