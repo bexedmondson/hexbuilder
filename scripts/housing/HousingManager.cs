@@ -42,7 +42,10 @@ public class HousingManager : IInjectable
             var cellData = mapController.BaseMapLayer.GetCellCustomData(cell);
             
             if (cellData == null)
+            {
                 GD.Print($"cell at {cell} has null custom data??");
+                continue;
+            }
                 
             if (cellData.residentCapacity == 0)
                 continue;
