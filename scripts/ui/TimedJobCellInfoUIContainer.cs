@@ -28,7 +28,6 @@ public partial class TimedJobCellInfoUIContainer : Control
         var newTimedJobCellInfoUI = cellInfoUIScene.Instantiate<TimedJobCellInfoUI>();
         newTimedJobCellInfoUI.UpdateWorkerCountLabel(timedJobStartedEvent.workerCount, timedJobStartedEvent.capacity);
         newTimedJobCellInfoUI.GlobalPosition = baseTileMapLayer.ToGlobal(baseTileMapLayer.MapToLocal(timedJobStartedEvent.location));
-        //newTimedJobCellInfoUI.Size = Vector2I.Zero; //for some incomprehensible reason this keeps being given a 40x40 size. resetting here.
         timedJobCellInfoUis[timedJobStartedEvent.location] = newTimedJobCellInfoUI;
         this.AddChild(newTimedJobCellInfoUI);
     }
