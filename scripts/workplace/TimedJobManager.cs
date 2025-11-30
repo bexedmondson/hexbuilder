@@ -50,7 +50,7 @@ public class TimedJobManager : IInjectable
         timedJobDatas.Add(newTimedJob.location, newTimedJob);
         
         eventDispatcher ??= InjectionManager.Get<EventDispatcher>();
-        eventDispatcher.Dispatch(new TimedJobStartedEvent(newTimedJob.location));
+        eventDispatcher.Dispatch(new TimedJobStartedEvent(newTimedJob.location, newTimedJob.workerCount, newTimedJob.workerCountRequirement));
     }
 
     public bool TryGetTimedJobAt(Vector2I cell, out TimedJobData timedJobData)

@@ -10,9 +10,9 @@ public abstract class TimedJobData(Vector2I location, int turnDuration, int work
     private List<ResidentData> _workers = new();
     public ResidentData[] workers => _workers.ToArray();
     public int workerCount => workers.Length;
-    private int workerCountRequirement = workerCountRequirement;
+    public int workerCountRequirement { get; } = workerCountRequirement;
     
-    public int turnDuration { get; private set; } = turnDuration;
+    public int turnDuration { get; } = turnDuration;
     public int turnsElapsed { get; private set; }
     public bool HasFinished => turnsElapsed >= turnDuration;
 
