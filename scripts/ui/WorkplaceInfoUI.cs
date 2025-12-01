@@ -24,16 +24,16 @@ public partial class WorkplaceInfoUI : Control
 
     private WorkplaceManager workplaceManager;
 
-    private WorkplaceData workplaceData;
+    private WorkplaceState workplaceState;
     private Action onGoToButtonAction;
 
-    public void SetWorkplaceInfo(WorkplaceData workplaceData, Action onGoToButtonAction)
+    public void SetWorkplaceInfo(WorkplaceState workplaceState, Action onGoToButtonAction)
     {
-        this.workplaceData = workplaceData;
+        this.workplaceState = workplaceState;
         this.onGoToButtonAction = onGoToButtonAction;
-        workplaceInfoLabel.Text = $"{workplaceData.location} {workplaceData.name}";
+        workplaceInfoLabel.Text = $"{workplaceState.location} {workplaceState.name}";
 
-        workplaceIcon.Texture = workplaceData.iconTexture;
+        workplaceIcon.Texture = workplaceState.iconTexture;
         
         UpdateWorkerCountUI();
     }
@@ -41,14 +41,14 @@ public partial class WorkplaceInfoUI : Control
     private void UpdateWorkerCountUI()
     {
         StringBuilder sb = new StringBuilder();
-        foreach (var worker in workplaceData.workers)
+        foreach (var worker in workplaceState.workers)
         {
             sb.Append($"{worker.Name} ");
         }
         workerNamesLabel.Text = sb.ToString();
         
-        int current = workplaceData.workerCount;
-        int max = workplaceData.capacity;
+        int current = workplaceState.workerCount;
+        int max = workplaceState.capacity;
 
         minusButton.Disabled = current <= 0;
         plusButton.Disabled = current >= max;
@@ -58,21 +58,21 @@ public partial class WorkplaceInfoUI : Control
 
     public void OnGoToButton()
     {
-        InjectionManager.Get<MapCameraController>().FlyTo(workplaceData.GetCentreWorldPosition());
+        InjectionManager.Get<MapCameraController>().FlyTo(workplaceState.GetCentreWorldPosition());
         onGoToButtonAction?.Invoke();
     }
 
     public void OnMinusButton()
     {
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
-        workplaceManager.TryRemoveResidentFromWorkplace(workplaceData);
+        workplaceManager.TryRemoveResidentFromWorkplace(workplaceState);
         UpdateWorkerCountUI();
     }
 
     public void OnPlusButton()
     {
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
-        workplaceManager.TryAssignResidentToWorkplace(workplaceData);
+        workplaceManager.TryAssignResidentToWorkplace(workplaceState);
         UpdateWorkerCountUI();
     }
 }

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using Godot;
 
-public class HouseData
+public class HouseState
 {
     public Vector2I location { get; private set; }
     public int capacity { get; private set; }
-    private List<ResidentData> _occupants = new();
-    public ResidentData[] occupants => _occupants.ToArray();
+    private List<ResidentState> _occupants = new();
+    public ResidentState[] occupants => _occupants.ToArray();
     
-    public HouseData(Vector2I location, int capacity)
+    public HouseState(Vector2I location, int capacity)
     {
         this.location = location;
         this.capacity = capacity;
@@ -20,7 +20,7 @@ public class HouseData
         return mapController.BaseMapLayer.ToGlobal(mapController.BaseMapLayer.MapToLocal(location));
     }
 
-    public bool TryAddOccupant(ResidentData resident)
+    public bool TryAddOccupant(ResidentState resident)
     {
         if (_occupants.Count >= capacity)
             return false;
@@ -29,7 +29,7 @@ public class HouseData
         return true;
     }
 
-    public void ChangeCapacity(int newCapacity, out List<ResidentData> kickedOutResidents)
+    public void ChangeCapacity(int newCapacity, out List<ResidentState> kickedOutResidents)
     {
         kickedOutResidents = new();
         

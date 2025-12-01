@@ -95,7 +95,7 @@ public partial class MapController : Node2D, IInjectable
             return;
         
         //TODO configure?
-        var cellUnlockTimedJobData = new CellUnlockTimedJobData(cellToStartUnlock, 1, 1);
+        var cellUnlockTimedJobData = new CellUnlockTimedJobState(cellToStartUnlock, 1, 1);
         timedJobManager.AddNewTimedJob(cellUnlockTimedJobData);
         timedJobManager.TryAssignResidentToTimedJob(cellUnlockTimedJobData);
         

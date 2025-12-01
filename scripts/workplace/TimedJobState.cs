@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using Godot;
 
-public abstract class TimedJobData(Vector2I location, int turnDuration, int workerCountRequirement)
+public abstract class TimedJobState(Vector2I location, int turnDuration, int workerCountRequirement)
 {
     public Vector2I location { get; private set; } = location;
 
     public abstract string description { get; }
 
-    private List<ResidentData> _workers = new();
-    public ResidentData[] workers => _workers.ToArray();
+    private List<ResidentState> _workers = new();
+    public ResidentState[] workers => _workers.ToArray();
     public int workerCount => workers.Length;
     public int workerCountRequirement { get; } = workerCountRequirement;
     
@@ -26,7 +26,7 @@ public abstract class TimedJobData(Vector2I location, int turnDuration, int work
         return true;
     }
     
-    public bool TryAddWorker(ResidentData resident)
+    public bool TryAddWorker(ResidentState resident)
     {
         if (_workers.Count >= workerCountRequirement)
             return false;
@@ -35,7 +35,7 @@ public abstract class TimedJobData(Vector2I location, int turnDuration, int work
         return true;
     }
     
-    public bool TryRemoveWorker(out ResidentData resident)
+    public bool TryRemoveWorker(out ResidentState resident)
     {
         if (_workers.Count <= 0)
         {

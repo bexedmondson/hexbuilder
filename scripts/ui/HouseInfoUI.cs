@@ -7,16 +7,16 @@ public partial class HouseInfoUI : Control
     [Export]
     private Label residenceLabel;
 
-    private HouseData houseData;
+    private HouseState houseState;
     private Action onGoToButtonAction;
 
-    public void SetHouseInfo(HouseData houseData, Action onGoToButtonAction)
+    public void SetHouseInfo(HouseState houseState, Action onGoToButtonAction)
     {
-        this.houseData = houseData;
+        this.houseState = houseState;
         this.onGoToButtonAction = onGoToButtonAction;
-        StringBuilder sb = new StringBuilder($"{houseData.location}: {houseData.occupants.Length}/{houseData.capacity}");
+        StringBuilder sb = new StringBuilder($"{houseState.location}: {houseState.occupants.Length}/{houseState.capacity}");
 
-        foreach (var occupant in houseData.occupants)
+        foreach (var occupant in houseState.occupants)
         {
             sb.Append($" {occupant.Name}");
         }
@@ -25,7 +25,7 @@ public partial class HouseInfoUI : Control
 
     public void OnGoToButton()
     {
-        InjectionManager.Get<MapCameraController>().FlyTo(houseData.GetCentreWorldPosition());
+        InjectionManager.Get<MapCameraController>().FlyTo(houseState.GetCentreWorldPosition());
         onGoToButtonAction?.Invoke();
     }
 }

@@ -8,10 +8,10 @@ public class HousingManager : IInjectable
     private MapController mapController;
     private TileDatabase tileDatabase;
 
-    private Dictionary<Vector2I, HouseData> houseDatas = new();
-    public HouseData[] AllHouseDatas => houseDatas.Values.ToArray();
+    private Dictionary<Vector2I, HouseState> houseDatas = new();
+    public HouseState[] AllHouseDatas => houseDatas.Values.ToArray();
 
-    private Dictionary<ResidentData, HouseData> residentHousingMap = new();
+    private Dictionary<ResidentState, HouseState> residentHousingMap = new();
     
     public HousingManager(MapController mapController)
     {
@@ -57,7 +57,7 @@ public class HousingManager : IInjectable
                 if (existingHouseData.capacity == cellData.residentCapacity)
                     continue;
 
-                existingHouseData.ChangeCapacity(cellData.residentCapacity, out List<ResidentData> kickedOutResidents);
+                existingHouseData.ChangeCapacity(cellData.residentCapacity, out List<ResidentState> kickedOutResidents);
 
                 foreach (var kickedOutResident in kickedOutResidents)
                 {
@@ -70,7 +70,7 @@ public class HousingManager : IInjectable
             else
             {
                 //TODO pass in CustomTileData instead?
-                houseDatas[cell] = new HouseData(cell, cellData.residentCapacity);
+                houseDatas[cell] = new HouseState(cell, cellData.residentCapacity);
                 housesChanged = true;
             }
         }
@@ -89,9 +89,9 @@ public class HousingManager : IInjectable
         }
     }
 
-    public bool TryAssignResidentToHouse(ResidentData resident)
+    public bool TryAssignResidentToHouse(ResidentState resident)
     {
-        List<HouseData> availableHouses = new();
+        List<HouseState> availableHouses = new();
         foreach (var houseData in AllHouseDatas)
         {
             if (houseData.occupants.Length < houseData.capacity)
@@ -108,8 +108,8 @@ public class HousingManager : IInjectable
         return true;
     }
 
-    public bool TryGetHouseForResident(ResidentData resident, out HouseData houseData)
+    public bool TryGetHouseForResident(ResidentState resident, out HouseState houseState)
     {
-        return residentHousingMap.TryGetValue(resident, out houseData);
+        return residentHousingMap.TryGetValue(resident, out houseState);
     }
 }

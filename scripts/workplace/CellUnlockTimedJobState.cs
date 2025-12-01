@@ -1,7 +1,7 @@
 using Godot;
 
-public class CellUnlockTimedJobData(Vector2I location, int turnDuration, int workerCountRequirement) 
-    : TimedJobData(location, turnDuration, workerCountRequirement)
+public class CellUnlockTimedJobState(Vector2I location, int turnDuration, int workerCountRequirement) 
+    : TimedJobState(location, turnDuration, workerCountRequirement)
 {
     public override string description => "unlocking area";
 

@@ -1,5 +1,5 @@
 
-public class ResidentData(string name)
+public class ResidentState(string name)
 {
     private HousingManager housingManager;
     

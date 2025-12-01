@@ -7,8 +7,8 @@ public class ResidentManager : IInjectable
     private HousingManager housingManager;
     private WorkplaceManager workplaceManager;
 
-    private List<ResidentData> residents = new();
-    public ResidentData[] AllResidents => residents.ToArray();
+    private List<ResidentState> residents = new();
+    public ResidentState[] AllResidents => residents.ToArray();
 
     private string[] names;
     
@@ -43,9 +43,9 @@ public class ResidentManager : IInjectable
         CreateResident();
     }
 
-    public ResidentData CreateResident()
+    public ResidentState CreateResident()
     {
-        var newResident = new ResidentData(names[GD.RandRange(0, names.Length - 1)]);
+        var newResident = new ResidentState(names[GD.RandRange(0, names.Length - 1)]);
         residents.Add(newResident);
 
         UpdateResidentHousing();
@@ -71,9 +71,9 @@ public class ResidentManager : IInjectable
         }
     }
 
-    public ResidentData[] GetNotBusyResidents()
+    public ResidentState[] GetNotBusyResidents()
     {
-        List<ResidentData> unemployedResidents = new();
+        List<ResidentState> unemployedResidents = new();
         foreach (var resident in residents)
         {
             if (!resident.IsBusy)
@@ -93,17 +93,17 @@ public class ResidentManager : IInjectable
         return count;
     }
     
-    public bool TryGetFirstNotBusyResident(out ResidentData residentData)
+    public bool TryGetFirstNotBusyResident(out ResidentState residentState)
     {
         foreach (var resident in residents)
         {
             if (!resident.IsBusy)
             {
-                residentData = resident;
+                residentState = resident;
                 return true;
             }
         }
-        residentData = null;
+        residentState = null;
         return false;
     }
 }

@@ -7,10 +7,10 @@ public class WorkplaceManager : IInjectable
     private MapController mapController;
     private TileDatabase tileDatabase;
 
-    private Dictionary<Vector2I, WorkplaceData> workplaceDatas = new();
-    public WorkplaceData[] AllWorkplaceDatas => workplaceDatas.Values.ToArray();
+    private Dictionary<Vector2I, WorkplaceState> workplaceDatas = new();
+    public WorkplaceState[] AllWorkplaceDatas => workplaceDatas.Values.ToArray();
 
-    private Dictionary<ResidentData, WorkplaceData> residentWorkplaceMap = new();
+    private Dictionary<ResidentState, WorkplaceState> residentWorkplaceMap = new();
     
     public WorkplaceManager(MapController mapController)
     {
@@ -50,7 +50,7 @@ public class WorkplaceManager : IInjectable
                 if (existingWorkplaceData.capacity == cellData.workerCapacity)
                     continue;
 
-                existingWorkplaceData.ChangeCapacity(cellData.workerCapacity, out List<ResidentData> removedWorkers);
+                existingWorkplaceData.ChangeCapacity(cellData.workerCapacity, out List<ResidentState> removedWorkers);
 
                 foreach (var removedWorker in removedWorkers)
                 {
@@ -62,7 +62,7 @@ public class WorkplaceManager : IInjectable
             else
             {
                 //TODO pass in CustomTileData instead?
-                var newWorkplace = new WorkplaceData(cell, cellData.workerCapacity, cellData.GetFileName(), tileDatabase.GetTileTexture(cellData));
+                var newWorkplace = new WorkplaceState(cell, cellData.workerCapacity, cellData.GetFileName(), tileDatabase.GetTileTexture(cellData));
                 workplaceDatas[cell] = newWorkplace;
                 workplaceUpdatedEvent.newOrChangedWorkplaces.Add(newWorkplace);
             }
@@ -83,28 +83,28 @@ public class WorkplaceManager : IInjectable
         }
     }
 
-    public bool TryAssignResidentToWorkplace(WorkplaceData workplaceData)
+    public bool TryAssignResidentToWorkplace(WorkplaceState workplaceState)
     {
         ResidentManager residentManager = InjectionManager.Get<ResidentManager>();
         if (!residentManager.TryGetFirstNotBusyResident(out var chosenResident))
             return false;
 
-        if (!workplaceData.TryAddWorker(chosenResident))
+        if (!workplaceState.TryAddWorker(chosenResident))
             return false;
         
-        residentWorkplaceMap[chosenResident] = workplaceData; //TODO consider removing duplicate data here? update map from WorkplaceData method?? hmm
+        residentWorkplaceMap[chosenResident] = workplaceState; //TODO consider removing duplicate data here? update map from WorkplaceData method?? hmm
         var workplaceUpdatedEvent = new WorkplaceUpdatedEvent();
-        workplaceUpdatedEvent.newOrChangedWorkplaces.Add(workplaceData);
+        workplaceUpdatedEvent.newOrChangedWorkplaces.Add(workplaceState);
         InjectionManager.Get<EventDispatcher>().Dispatch(workplaceUpdatedEvent);
         return true;
     }
 
-    public bool TryRemoveResidentFromWorkplace(WorkplaceData workplaceData)
+    public bool TryRemoveResidentFromWorkplace(WorkplaceState workplaceState)
     {
-        if (workplaceData.workerCount == 0)
+        if (workplaceState.workerCount == 0)
             return false;
 
-        if (!workplaceData.TryRemoveWorker(out var resident))
+        if (!workplaceState.TryRemoveWorker(out var resident))
             return false;
 
         residentWorkplaceMap.Remove(resident);
@@ -112,13 +112,13 @@ public class WorkplaceManager : IInjectable
         return true;
     }
 
-    public bool TryGetWorkplaceForResident(ResidentData resident, out WorkplaceData workplaceData)
+    public bool TryGetWorkplaceForResident(ResidentState resident, out WorkplaceState workplaceState)
     {
-        return residentWorkplaceMap.TryGetValue(resident, out workplaceData);
+        return residentWorkplaceMap.TryGetValue(resident, out workplaceState);
     }
 
-    public bool TryGetWorkplaceAtLocation(Vector2I location, out WorkplaceData workplaceData)
+    public bool TryGetWorkplaceAtLocation(Vector2I location, out WorkplaceState workplaceState)
     {
-        return workplaceDatas.TryGetValue(location, out workplaceData);
+        return workplaceDatas.TryGetValue(location, out workplaceState);
     }
 }

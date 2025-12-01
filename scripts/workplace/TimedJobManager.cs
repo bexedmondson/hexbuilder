@@ -7,9 +7,9 @@ public class TimedJobManager : IInjectable
     private MapController mapController;
     private EventDispatcher eventDispatcher;
 
-    private Dictionary<Vector2I, TimedJobData> timedJobDatas = new();
+    private Dictionary<Vector2I, TimedJobState> timedJobDatas = new();
 
-    private Dictionary<ResidentData, TimedJobData> residentTimedJobMap = new();
+    private Dictionary<ResidentState, TimedJobState> residentTimedJobMap = new();
     
     public TimedJobManager(MapController mapController)
     {
@@ -45,7 +45,7 @@ public class TimedJobManager : IInjectable
         }
     }
 
-    public void AddNewTimedJob(TimedJobData newTimedJob)
+    public void AddNewTimedJob(TimedJobState newTimedJob)
     {
         timedJobDatas.Add(newTimedJob.location, newTimedJob);
         
@@ -53,38 +53,38 @@ public class TimedJobManager : IInjectable
         eventDispatcher.Dispatch(new TimedJobStartedEvent(newTimedJob.location, newTimedJob.workerCount, newTimedJob.workerCountRequirement));
     }
 
-    public bool TryGetTimedJobAt(Vector2I cell, out TimedJobData timedJobData)
+    public bool TryGetTimedJobAt(Vector2I cell, out TimedJobState timedJobState)
     {
-        return timedJobDatas.TryGetValue(cell, out timedJobData);
+        return timedJobDatas.TryGetValue(cell, out timedJobState);
     }
 
-    public bool TryAssignResidentToTimedJob(TimedJobData timedJobData)
+    public bool TryAssignResidentToTimedJob(TimedJobState timedJobState)
     {
         ResidentManager residentManager = InjectionManager.Get<ResidentManager>();
         if (!residentManager.TryGetFirstNotBusyResident(out var chosenResident))
             return false;
 
-        if (!timedJobData.TryAddWorker(chosenResident))
+        if (!timedJobState.TryAddWorker(chosenResident))
             return false;
         
-        residentTimedJobMap[chosenResident] = timedJobData; //TODO consider removing duplicate data here? update map from TimedJobData method?? hmm
+        residentTimedJobMap[chosenResident] = timedJobState; //TODO consider removing duplicate data here? update map from TimedJobData method?? hmm
         return true;
     }
 
-    public bool TryRemoveResidentFromTimedJob(TimedJobData timedJobData)
+    public bool TryRemoveResidentFromTimedJob(TimedJobState timedJobState)
     {
-        if (timedJobData.workerCount == 0)
+        if (timedJobState.workerCount == 0)
             return false;
 
-        if (!timedJobData.TryRemoveWorker(out var resident))
+        if (!timedJobState.TryRemoveWorker(out var resident))
             return false;
 
         residentTimedJobMap.Remove(resident);
         return true;
     }
 
-    public bool TryGetTimedJobForResident(ResidentData resident, out TimedJobData timedJobData)
+    public bool TryGetTimedJobForResident(ResidentState resident, out TimedJobState timedJobState)
     {
-        return residentTimedJobMap.TryGetValue(resident, out timedJobData);
+        return residentTimedJobMap.TryGetValue(resident, out timedJobState);
     }
 }

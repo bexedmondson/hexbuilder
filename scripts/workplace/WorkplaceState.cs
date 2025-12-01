@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using Godot;
 
-public class WorkplaceData(Vector2I location, int capacity, string name, Texture2D iconTexture)
+public class WorkplaceState(Vector2I location, int capacity, string name, Texture2D iconTexture)
 {
     public Vector2I location { get; private set; } = location;
     public int capacity { get; private set; } = capacity;
     public string name { get; private set; } = name;
     public Texture2D iconTexture { get; private set; } = iconTexture;
 
-    private List<ResidentData> _workers = new();
-    public ResidentData[] workers => _workers.ToArray();
+    private List<ResidentState> _workers = new();
+    public ResidentState[] workers => _workers.ToArray();
     public int workerCount => workers.Length;
 
     public Vector2 GetCentreWorldPosition()
@@ -18,7 +18,7 @@ public class WorkplaceData(Vector2I location, int capacity, string name, Texture
         return mapController.BaseMapLayer.ToGlobal(mapController.BaseMapLayer.MapToLocal(location));
     }
 
-    public bool TryAddWorker(ResidentData resident)
+    public bool TryAddWorker(ResidentState resident)
     {
         if (_workers.Count >= capacity)
             return false;
@@ -27,7 +27,7 @@ public class WorkplaceData(Vector2I location, int capacity, string name, Texture
         return true;
     }
     
-    public bool TryRemoveWorker(out ResidentData resident)
+    public bool TryRemoveWorker(out ResidentState resident)
     {
         if (_workers.Count <= 0)
         {
@@ -40,7 +40,7 @@ public class WorkplaceData(Vector2I location, int capacity, string name, Texture
         return true;
     }
 
-    public void ChangeCapacity(int newCapacity, out List<ResidentData> removedWorkers)
+    public void ChangeCapacity(int newCapacity, out List<ResidentState> removedWorkers)
     {
         removedWorkers = new();
         
