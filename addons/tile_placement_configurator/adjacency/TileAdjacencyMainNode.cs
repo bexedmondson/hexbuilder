@@ -28,7 +28,7 @@ public partial class TileAdjacencyMainNode : GraphNode
     public void OnCustomTileDataSet()
     {
         Title = tileData.GetFileName();
-        textureRect.Texture = InjectionManager.Get<TileDatabase>().GetTileTexture(tileData);
+        textureRect.Texture ??= InjectionManager.Get<TileDatabase>().GetTileTexture(customTileData);
     }
 
     public void SetupOptionDropdown()
@@ -124,7 +124,7 @@ public partial class TileAdjacencyMainNode : GraphNode
         customTileData.adjacencies.Add(newAdjacency);
         ResourceSaver.Save(customTileData);
 
-        graph.OnAdjacencyUpdated();
+        graph.OnNodeDataUpdated();
 
         OnAdjacenciesUpdated();
     }

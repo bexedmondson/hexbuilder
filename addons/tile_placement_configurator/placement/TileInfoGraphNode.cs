@@ -8,6 +8,9 @@ public partial class TileInfoGraphNode : GraphNode
     [Export]
     private TextureRect textureRect;
 
+    [Export]
+    private Button deleteButton;
+
     public TileInfoGraph graph;
 
     public CustomTileData selectedTileData;
@@ -50,10 +53,21 @@ public partial class TileInfoGraphNode : GraphNode
                 editor.Label = nameProperty;
                 editor.PropertyChanged += OnPropChanged;
                 editor.Selected += OnPropSelected;
+                editor.MinimumSizeChanged += OnPropSizeChanged;
                 editor.UpdateProperty();
                 propertyEditors[nameProperty] = editor;
             }
         }
+    }
+
+    public void SetupAsEditable(bool shouldBeEditable)
+    {
+        deleteButton.Visible = shouldBeEditable;
+    }
+
+    private void OnPropSizeChanged()
+    {
+        this.ResetSize();
     }
 
     private void OnPropChanged(StringName property, Variant value, StringName field, bool changing)
@@ -78,6 +92,12 @@ public partial class TileInfoGraphNode : GraphNode
         selectedTileData.canBePlacedOn.Remove(tileData);
         ResourceSaver.Save(selectedTileData);
 
-        graph.OnAdjacencyUpdated();
+        graph.OnNodeDataUpdated();
+    }
+
+    public void OnFocusButton()
+    {
+        graph.SelectItem(customTileData);
+        //this.QueueFree();
     }
 }

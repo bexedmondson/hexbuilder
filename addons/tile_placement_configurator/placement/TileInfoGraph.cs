@@ -14,13 +14,18 @@ public partial class TileInfoGraph : AbstractTileGraph
 
     private TileInfoMainNode tileGraphMainNode;
 
+    private Dictionary<CustomTileData, TileInfoGraphNode> nodes = new();
+
     public override void OnTreeItemSelected(CustomTileData selectedTileData)
     {
         this.ClearConnections();
         for (int i = this.GetChildCount() - 1; i >= 0; i--)
         {
-            if (this.GetChild(i) is TileInfoGraphNode)
+            if (this.GetChild(i) is TileInfoGraphNode graphNode)
+            {
+                nodes.Remove(graphNode.customTileData);
                 this.GetChild(i).Free();
+            }
         }
 
         tileGraphMainNode = tileGraphMainNodeScene.Instantiate() as TileInfoMainNode;
@@ -29,6 +34,7 @@ public partial class TileInfoGraph : AbstractTileGraph
         tileGraphMainNode.SetupOptionDropdown();
         tileGraphMainNode.ResetSize();
         this.AddChild(tileGraphMainNode);
+        nodes[selectedTileData] = tileGraphMainNode;
         
         tileGraphMainNode.SetSlotEnabledRight(0, true);
 
@@ -38,7 +44,7 @@ public partial class TileInfoGraph : AbstractTileGraph
         for (int i = 0; i < selectedTileData.canBePlacedOn.Count; i++)
         {
             var canBePlacedOn = selectedTileData.canBePlacedOn[i];
-            var placedOnNode = AddTileNode(canBePlacedOn);
+            var placedOnNode = AddTileNode(canBePlacedOn, tileGraphMainNode);
 
             if (i == 0)
                 firstNode = placedOnNode;
@@ -52,24 +58,55 @@ public partial class TileInfoGraph : AbstractTileGraph
         {
             tileGraphMainNode.PositionOffset = new Vector2(tileGraphMainNode.PositionOffset.X, (lastNode.PositionOffset.Y - firstNode.PositionOffset.Y) / 2 + firstNode.PositionOffset.Y);
         }
+
+        ResetView(tileGraphMainNode);
     }
 
-    private TileInfoGraphNode AddTileNode(CustomTileData customTileData)
+    private TileInfoGraphNode AddTileNode(CustomTileData customTileData, TileInfoGraphNode sourceNode, bool shouldBeEditable = true)
     {
-        TileInfoGraphNode graphNode = tileGraphNodeScene.Instantiate() as TileInfoGraphNode;
-        graphNode.graph = this;
-        graphNode.selectedTileData = tileGraphMainNode.customTileData;
-        graphNode.customTileData = customTileData;
-        graphNode.ResetSize();
-        this.AddChild(graphNode);
+        TileInfoGraphNode newGraphNode = tileGraphNodeScene.Instantiate() as TileInfoGraphNode;
+        newGraphNode.graph = this;
+        newGraphNode.selectedTileData = sourceNode.customTileData;
+        newGraphNode.customTileData = customTileData;
+        newGraphNode.SetupAsEditable(shouldBeEditable);
+        newGraphNode.ResetSize();
+        this.AddChild(newGraphNode);
+        nodes[customTileData] = newGraphNode;
 
-        graphNode.SetSlotEnabledLeft(0, true);
+        sourceNode.SetSlotEnabledRight(0, true);
+        newGraphNode.SetSlotEnabledLeft(0, true);
 
-        this.ConnectNode(tileGraphMainNode.Name, 0, graphNode.Name, 0);
-        return graphNode;
+        if (customTileData.canBePlacedOn == null || customTileData.canBePlacedOn.Count == 0)
+        {
+            this.ConnectNode(sourceNode.Name, 0, newGraphNode.Name, 0);
+            return newGraphNode;
+        }
+
+        foreach (var canBePlacedOn in customTileData.canBePlacedOn)
+        {
+            if (nodes.TryGetValue(canBePlacedOn, out var preexistingNode))
+            {
+                newGraphNode.SetSlotEnabledRight(0, true);
+                preexistingNode.SetSlotEnabledLeft(0, true);
+                this.ConnectNode(newGraphNode.Name, 0, preexistingNode.Name, 0);
+            }
+            else
+            {
+                AddTileNode(canBePlacedOn, newGraphNode, false);
+            }
+        }
+
+        this.ConnectNode(sourceNode.Name, 0, newGraphNode.Name, 0);
+        return newGraphNode;
     }
 
-    public override void OnAdjacencyUpdated()
+    private void ResetView(TileInfoMainNode mainNode)
+    {
+        Zoom = 0.8f;
+        ScrollOffset = Vector2.One * -10;
+    }
+
+    public override void OnNodeDataUpdated()
     {
         var connectionListFromNode = GetConnectionListFromNode(tileGraphMainNode.Name);
         foreach (var canBePlacedOn in tileGraphMainNode.customTileData.canBePlacedOn)
@@ -93,7 +130,7 @@ public partial class TileInfoGraph : AbstractTileGraph
             if (foundConnection != null)
                 connectionListFromNode.Remove(foundConnection);
             else
-                AddTileNode(canBePlacedOn);
+                AddTileNode(canBePlacedOn, tileGraphMainNode);
         }
 
         foreach (var leftoverConnection in connectionListFromNode)
@@ -106,6 +143,7 @@ public partial class TileInfoGraph : AbstractTileGraph
             else
             {
                 this.RemoveChild(tileInfoGraphNode);
+                nodes.Remove(tileInfoGraphNode.customTileData);
                 tileInfoGraphNode.QueueFree();
             }
         }

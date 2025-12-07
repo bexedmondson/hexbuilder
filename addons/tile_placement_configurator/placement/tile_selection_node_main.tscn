@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3lb8wqmku7cf" path="res://addons/tile_placement_configurator/placement/TileInfoMainNode.cs" id="1_w3j40"]
 
-[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("optionButton", "textureRect")]
+[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("optionButton", "textureRect", "deleteButton")]
 custom_minimum_size = Vector2(300, 0)
 offset_right = 300.0
 offset_bottom = 213.0
@@ -38,6 +38,7 @@ slot/2/draw_stylebox = true
 script = ExtResource("1_w3j40")
 optionButton = NodePath("HBoxContainer/OptionButton")
 textureRect = NodePath("TextureRect")
+deleteButton = NodePath("HBoxContainer/Button")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(70, 70)

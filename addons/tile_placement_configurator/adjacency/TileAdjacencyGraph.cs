@@ -68,7 +68,7 @@ public partial class TileAdjacencyGraph : AbstractTileGraph
         return graphNode;
     }
 
-    public override void OnAdjacencyUpdated()
+    public override void OnNodeDataUpdated()
     {
         var connectionListFromNode = GetConnectionListFromNode(tileAdjacencyMainNode.Name);
         foreach (var adjacency in tileAdjacencyMainNode.customTileData.adjacencies)

@@ -37,13 +37,15 @@ scroll_horizontal_enabled = false
 script = ExtResource("1_dlr7g")
 tileGraph = NodePath("../GraphEdit")
 
-[node name="GraphEdit" type="GraphEdit" parent="TabContainer/Placement"]
+[node name="GraphEdit" type="GraphEdit" parent="TabContainer/Placement" node_paths=PackedStringArray("tree")]
 layout_mode = 2
+panning_scheme = 1
 minimap_enabled = false
 show_menu = false
 script = ExtResource("2_3q7qa")
 tileGraphMainNodeScene = ExtResource("3_xwp5v")
 tileGraphNodeScene = ExtResource("5_8j5c5")
+tree = NodePath("../Tree")
 
 [node name="Adjacency" type="HSplitContainer" parent="TabContainer"]
 visible = false
@@ -58,13 +60,15 @@ scroll_horizontal_enabled = false
 script = ExtResource("1_dlr7g")
 tileGraph = NodePath("../GraphEdit")
 
-[node name="GraphEdit" type="GraphEdit" parent="TabContainer/Adjacency"]
+[node name="GraphEdit" type="GraphEdit" parent="TabContainer/Adjacency" node_paths=PackedStringArray("tree")]
 layout_mode = 2
+panning_scheme = 1
 minimap_enabled = false
 show_menu = false
 script = ExtResource("7_g3dy6")
 tileAdjacencyMainNodeScene = ExtResource("8_l4udw")
 tileAdjacencyNodeScene = ExtResource("9_slyvr")
+tree = NodePath("../Tree")
 
 [connection signal="item_selected" from="TabContainer/Placement/Tree" to="TabContainer/Placement/Tree" method="OnTreeItemSelected"]
 [connection signal="item_selected" from="TabContainer/Adjacency/Tree" to="TabContainer/Adjacency/Tree" method="OnTreeItemSelected"]

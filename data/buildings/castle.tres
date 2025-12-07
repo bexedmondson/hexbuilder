@@ -25,7 +25,7 @@ price = {
 2: 12
 }
 baseTurnCurrencyChange = {
-0: -2
+0: -4
 }
 adjacencies = Array[Object]([SubResource("Resource_s5lrj"), SubResource("Resource_uw7xw")])
 unlockRequirements = []

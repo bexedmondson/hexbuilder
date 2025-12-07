@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://dok2gkkf4d57c"]
+[gd_scene load_steps=4 format=3 uid="uid://dok2gkkf4d57c"]
 
 [ext_resource type="Script" uid="uid://buix2g2wqnprb" path="res://addons/tile_placement_configurator/placement/TileInfoGraphNode.cs" id="1_quxkt"]
+[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_2s6ji"]
 
-[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("textureRect")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0rcn"]
+atlas = ExtResource("2_2s6ji")
+region = Rect2(1280, 512, 128, 128)
+
+[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("textureRect", "deleteButton")]
 custom_minimum_size = Vector2(300, 0)
 offset_right = 300.0
 offset_bottom = 188.0
@@ -26,8 +31,27 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(1, 1, 1, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color(1, 1, 1, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
 script = ExtResource("1_quxkt")
 textureRect = NodePath("TextureRect")
+deleteButton = NodePath("Button")
+
+[node name="FocusButton" type="Button" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_type_variation = &"SuccessButton"
+icon = SubResource("AtlasTexture_x0rcn")
+expand_icon = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(70, 70)
@@ -38,6 +62,8 @@ stretch_mode = 5
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_type_variation = &"DangerButton"
 text = "  -  "
 
+[connection signal="pressed" from="FocusButton" to="." method="OnFocusButton"]
 [connection signal="pressed" from="Button" to="." method="OnDeleteButton"]

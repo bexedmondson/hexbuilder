@@ -50,10 +50,16 @@ public partial class TileAdjacencyGraphNode : GraphNode
                 editor.Label = nameProperty;
                 editor.PropertyChanged += OnPropChanged;
                 editor.Selected += OnPropSelected;
+                editor.MinimumSizeChanged += OnPropSizeChanged;
                 editor.UpdateProperty();
                 propertyEditors[nameProperty] = editor;
             }
         }
+    }
+
+    private void OnPropSizeChanged()
+    {
+        this.ResetSize();
     }
 
     private void OnPropChanged(StringName property, Variant value, StringName field, bool changing)
@@ -78,6 +84,6 @@ public partial class TileAdjacencyGraphNode : GraphNode
         selectedTileData.adjacencies.Remove(config);
         ResourceSaver.Save(selectedTileData);
 
-        graph.OnAdjacencyUpdated();
+        graph.OnNodeDataUpdated();
     }
 }
