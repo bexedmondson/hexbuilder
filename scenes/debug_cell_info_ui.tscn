@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://qa0ad2tdjmdu"]
+[gd_scene format=3 uid="uid://qa0ad2tdjmdu"]
 
 [ext_resource type="Script" uid="uid://dw6snh6awpsou" path="res://scripts/ui/DebugCellInfoUI.cs" id="1_n0ibl"]
 
-[node name="DebugCellInfoUi" type="Control" node_paths=PackedStringArray("label")]
+[node name="DebugCellInfoUi" type="Control" unique_id=359131576 node_paths=PackedStringArray("label")]
 modulate = Color(1, 0.3764706, 0.047058824, 1)
 layout_mode = 3
 anchors_preset = 15
@@ -17,7 +17,7 @@ size_flags_vertical = 4
 script = ExtResource("1_n0ibl")
 label = NodePath("Label")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1592853146]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dewga67neikey"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://dewga67neikey"]
 
 [ext_resource type="Texture2D" uid="uid://brnkqb5arufjm" path="res://themes/clashy/graphics/green-button-hover.png" id="1_l5ntn"]
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CustomTileData" load_steps=7 format=3 uid="uid://cv140bxpsbkar"]
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://cv140bxpsbkar"]
 
 [ext_resource type="Resource" uid="uid://b26b1kiyr2vjc" path="res://data/buildings/mine.tres" id="1_8qq32"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcoyh6o3odmvx"]
+[gd_scene format=3 uid="uid://dcoyh6o3odmvx"]
 
 [ext_resource type="Script" uid="uid://cfvsti1luatbu" path="res://addons/tile_placement_configurator/adjacency/TileAdjacencyMainNode.cs" id="1_4fr6r"]
 
-[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("textureRect", "optionButton")]
+[node name="TileSelectionNode" type="GraphNode" unique_id=1235936953 node_paths=PackedStringArray("textureRect", "optionButton")]
 custom_minimum_size = Vector2(300, 0)
 offset_right = 300.0
 offset_bottom = 213.0
@@ -39,25 +39,25 @@ script = ExtResource("1_4fr6r")
 textureRect = NodePath("TextureRect")
 optionButton = NodePath("HBoxContainer/OptionButton")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1721861930]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
 
-[node name="ConnectionLabel" type="Label" parent="."]
+[node name="ConnectionLabel" type="Label" parent="." unique_id=179915121]
 layout_mode = 2
 text = "affected by adjacent:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1337854796]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer" unique_id=1022652845]
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=1161249184]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4

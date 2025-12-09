@@ -12,7 +12,7 @@ config_version=5
 
 config/name="hexbuilder"
 run/main_scene="uid://decrhuj8ncsgc"
-config/features=PackedStringArray("4.5", "C#", "Mobile")
+config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]

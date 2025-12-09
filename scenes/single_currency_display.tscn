@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjdcf535b0agr"]
+[gd_scene format=3 uid="uid://bjdcf535b0agr"]
 
 [ext_resource type="Script" uid="uid://bni0n2i0y4vao" path="res://scripts/ui/SingleCurrencyDisplay.cs" id="1_qis18"]
 
-[node name="SingleCurrencyDisplay" type="HBoxContainer" node_paths=PackedStringArray("icon", "quantityLabel", "changeLabel")]
+[node name="SingleCurrencyDisplay" type="HBoxContainer" unique_id=913887442 node_paths=PackedStringArray("icon", "quantityLabel", "changeLabel")]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0
@@ -14,17 +14,17 @@ icon = NodePath("TextureRect")
 quantityLabel = NodePath("Label")
 changeLabel = NodePath("Label2")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=854191337]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=2097351834]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="." unique_id=839610596]
 self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25

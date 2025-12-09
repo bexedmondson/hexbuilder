@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://g3v3g6so7qp5"]
+[gd_scene format=3 uid="uid://g3v3g6so7qp5"]
 
 [ext_resource type="Script" uid="uid://3lb8wqmku7cf" path="res://addons/tile_placement_configurator/placement/TileInfoMainNode.cs" id="1_w3j40"]
 
-[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("optionButton", "textureRect", "deleteButton")]
+[node name="TileSelectionNode" type="GraphNode" unique_id=1291926310 node_paths=PackedStringArray("optionButton", "textureRect", "deleteButton")]
 custom_minimum_size = Vector2(300, 0)
 offset_right = 300.0
 offset_bottom = 213.0
@@ -40,25 +40,25 @@ optionButton = NodePath("HBoxContainer/OptionButton")
 textureRect = NodePath("TextureRect")
 deleteButton = NodePath("HBoxContainer/Button")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1679169488]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
 
-[node name="ConnectionLabel" type="Label" parent="."]
+[node name="ConnectionLabel" type="Label" parent="." unique_id=582199219]
 layout_mode = 2
 text = "can be placed on"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=421182809]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer" unique_id=638587920]
 layout_mode = 2
 size_flags_horizontal = 3
 fit_to_longest_item = false
 
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="Button" type="Button" parent="HBoxContainer" unique_id=761615910]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4

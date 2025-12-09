@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dusngu1tduntl"]
+[gd_scene format=3 uid="uid://dusngu1tduntl"]
 
 [ext_resource type="Texture2D" uid="uid://bj70g64x02teo" path="res://assets/2d/selection_overlay.png" id="1_02kcd"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_l16v4"]
@@ -97,21 +97,19 @@ scale_curve = SubResource("CurveTexture_f7h81")
 color = Color(0.32075825, 1.523889, 0.7257144, 1)
 alpha_curve = SubResource("CurveTexture_0kpx0")
 
-[node name="AdjacencyBenefitIndicator" type="Node2D"]
+[node name="AdjacencyBenefitIndicator" type="Node2D" unique_id=1105749018]
 y_sort_enabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1554092479]
 self_modulate = Color(0.17254902, 1, 0.5372549, 0.6117647)
 position = Vector2(0, -69)
 texture = ExtResource("1_02kcd")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_781y5")
-}
-autoplay = "benefit_indicator_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=245806212]
+libraries/ = SubResource("AnimationLibrary_781y5")
+autoplay = &"benefit_indicator_animation"
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1895176729]
 position = Vector2(0, -9)
 amount = 4
 texture = SubResource("AtlasTexture_ikuiw")

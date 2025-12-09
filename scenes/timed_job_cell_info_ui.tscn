@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://2crqakku64ae"]
+[gd_scene format=3 uid="uid://2crqakku64ae"]
 
 [ext_resource type="Script" uid="uid://njf8gojp3x73" path="res://scripts/ui/TimedJobCellInfoUI.cs" id="1_b8jlu"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_22lh2"]
@@ -305,7 +305,7 @@ _data = {
 &"turn_hourglass": SubResource("Animation_22lh2")
 }
 
-[node name="TimedJobCellInfoUi" type="Control" node_paths=PackedStringArray("workerCountLabel", "alert", "workerLabelContainer", "animationPlayer")]
+[node name="TimedJobCellInfoUi" type="Control" unique_id=1828724873 node_paths=PackedStringArray("workerCountLabel", "alert", "workerLabelContainer", "animationPlayer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -322,7 +322,7 @@ alert = NodePath("Hourglass")
 workerLabelContainer = NodePath("HBoxContainer")
 animationPlayer = NodePath("AnimationPlayer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1953915486]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -334,18 +334,18 @@ grow_horizontal = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="WorkerCountLabel" type="Label" parent="HBoxContainer"]
+[node name="WorkerCountLabel" type="Label" parent="HBoxContainer" unique_id=645735350]
 layout_mode = 2
 theme_type_variation = &"TooltipLabel"
 text = "0/0"
 
-[node name="WorkerIcon" type="TextureRect" parent="HBoxContainer"]
+[node name="WorkerIcon" type="TextureRect" parent="HBoxContainer" unique_id=120727205]
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
 layout_mode = 2
 texture = SubResource("AtlasTexture_rmpib")
 expand_mode = 3
 
-[node name="Hourglass" type="TextureRect" parent="."]
+[node name="Hourglass" type="TextureRect" parent="." unique_id=604358792]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -361,7 +361,7 @@ pivot_offset = Vector2(20, 20)
 texture = SubResource("AtlasTexture_5df6q")
 expand_mode = 3
 
-[node name="Lock" type="TextureRect" parent="."]
+[node name="Lock" type="TextureRect" parent="." unique_id=2139516824]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -378,7 +378,5 @@ pivot_offset = Vector2(20, 20)
 texture = SubResource("AtlasTexture_j1phq")
 expand_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_j1phq")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2076734321]
+libraries/ = SubResource("AnimationLibrary_j1phq")

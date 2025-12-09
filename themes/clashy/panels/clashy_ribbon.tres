@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bw1fy6rgn16ft"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://bw1fy6rgn16ft"]
 
 [ext_resource type="Texture2D" uid="uid://dt73dtm5ex5jd" path="res://themes/clashy/graphics/ribbon.png" id="1_07ljf"]
 

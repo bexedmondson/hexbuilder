@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dok2gkkf4d57c"]
+[gd_scene format=3 uid="uid://dok2gkkf4d57c"]
 
 [ext_resource type="Script" uid="uid://buix2g2wqnprb" path="res://addons/tile_placement_configurator/placement/TileInfoGraphNode.cs" id="1_quxkt"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_2s6ji"]
@@ -7,7 +7,7 @@
 atlas = ExtResource("2_2s6ji")
 region = Rect2(1280, 512, 128, 128)
 
-[node name="TileSelectionNode" type="GraphNode" node_paths=PackedStringArray("textureRect", "deleteButton")]
+[node name="TileSelectionNode" type="GraphNode" unique_id=1994503156 node_paths=PackedStringArray("textureRect", "deleteButton")]
 custom_minimum_size = Vector2(300, 0)
 offset_right = 300.0
 offset_bottom = 188.0
@@ -44,7 +44,7 @@ script = ExtResource("1_quxkt")
 textureRect = NodePath("TextureRect")
 deleteButton = NodePath("Button")
 
-[node name="FocusButton" type="Button" parent="."]
+[node name="FocusButton" type="Button" parent="." unique_id=705639764]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -53,13 +53,13 @@ theme_type_variation = &"SuccessButton"
 icon = SubResource("AtlasTexture_x0rcn")
 expand_icon = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1686377890]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1081456943]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"DangerButton"

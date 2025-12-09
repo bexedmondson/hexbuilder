@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dyh6lwi880plh"]
+[gd_resource type="TileSet" format=3 uid="uid://dyh6lwi880plh"]
 
 [ext_resource type="Texture2D" uid="uid://b07nkng7g2mey" path="res://assets/2d/locked_overlay.png" id="1_28ffm"]
 

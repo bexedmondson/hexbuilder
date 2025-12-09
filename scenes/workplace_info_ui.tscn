@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://rhtqjafh80s4"]
+[gd_scene format=3 uid="uid://rhtqjafh80s4"]
 
 [ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/WorkplaceInfoUI.cs" id="1_bn0rj"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_s6cp8"]
@@ -7,7 +7,7 @@
 atlas = ExtResource("2_s6cp8")
 region = Rect2(1408, 1024, 128, 128)
 
-[node name="WorkplaceInfo" type="Panel" node_paths=PackedStringArray("workplaceInfoLabel", "workplaceIcon", "workerNamesLabel", "workerCountLabel", "minusButton", "plusButton")]
+[node name="WorkplaceInfo" type="Panel" unique_id=509068780 node_paths=PackedStringArray("workplaceInfoLabel", "workplaceIcon", "workerNamesLabel", "workerCountLabel", "minusButton", "plusButton")]
 custom_minimum_size = Vector2(0, 80)
 theme_type_variation = &"PanelEmbedded"
 script = ExtResource("1_bn0rj")
@@ -18,7 +18,7 @@ workerCountLabel = NodePath("HBoxContainer/CountLabel")
 minusButton = NodePath("HBoxContainer/MinusButton")
 plusButton = NodePath("HBoxContainer/PlusButton")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1338087025]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,43 +27,43 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 18
 
-[node name="IconTextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="IconTextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1200367727]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 expand_mode = 5
 
-[node name="InfoLabel" type="Label" parent="HBoxContainer"]
+[node name="InfoLabel" type="Label" parent="HBoxContainer" unique_id=1623300351]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "testing 1 2 3"
 
-[node name="NamesLabel" type="Label" parent="HBoxContainer"]
+[node name="NamesLabel" type="Label" parent="HBoxContainer" unique_id=1882948535]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "testing 1 2 3"
 
-[node name="MinusButton" type="Button" parent="HBoxContainer"]
+[node name="MinusButton" type="Button" parent="HBoxContainer" unique_id=1302924539]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 text = "-"
 
-[node name="CountLabel" type="Label" parent="HBoxContainer"]
+[node name="CountLabel" type="Label" parent="HBoxContainer" unique_id=1351926437]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0/0"
 
-[node name="PlusButton" type="Button" parent="HBoxContainer"]
+[node name="PlusButton" type="Button" parent="HBoxContainer" unique_id=53966302]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 text = "+"
 
-[node name="GoToButton" type="Button" parent="HBoxContainer"]
+[node name="GoToButton" type="Button" parent="HBoxContainer" unique_id=1978602028]
 custom_minimum_size = Vector2(56, 58)
 layout_mode = 2
 size_flags_horizontal = 8

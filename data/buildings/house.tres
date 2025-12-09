@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CustomTileData" load_steps=3 format=3 uid="uid://8dv6hfd67ini"]
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://8dv6hfd67ini"]
 
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="1_22yc1"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]

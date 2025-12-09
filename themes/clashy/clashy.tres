@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=42 format=3 uid="uid://c42r8558dvmyi"]
+[gd_resource type="Theme" format=3 uid="uid://c42r8558dvmyi"]
 
 [ext_resource type="Texture2D" uid="uid://cijnbspbn0k6c" path="res://themes/clashy/graphics/button-disabled.svg" id="1_2vevx"]
 [ext_resource type="StyleBox" uid="uid://q222orvy57pf" path="res://themes/clashy/panels/clashButtonHover.tres" id="2_0hton"]

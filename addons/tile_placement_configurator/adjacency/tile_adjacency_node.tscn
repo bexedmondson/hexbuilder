@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1esbhagclee1"]
+[gd_scene format=3 uid="uid://d1esbhagclee1"]
 
 [ext_resource type="Script" uid="uid://cogs6kji671yj" path="res://addons/tile_placement_configurator/adjacency/TileAdjacencyGraphNode.cs" id="1_g8lkq"]
 
-[node name="TileAdjacencyNode" type="GraphNode" node_paths=PackedStringArray("textureRect")]
+[node name="TileAdjacencyNode" type="GraphNode" unique_id=80273969 node_paths=PackedStringArray("textureRect")]
 custom_minimum_size = Vector2(300, 0)
 offset_right = 300.0
 offset_bottom = 188.0
@@ -29,13 +29,13 @@ slot/1/draw_stylebox = true
 script = ExtResource("1_g8lkq")
 textureRect = NodePath("TextureRect")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=268869113]
 custom_minimum_size = Vector2(70, 70)
 layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1993489618]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "  -  "

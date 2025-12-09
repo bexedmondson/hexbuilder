@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://hst2gqk22rpc"]
+[gd_scene format=3 uid="uid://hst2gqk22rpc"]
 
 [ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="1_efedh"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_kbswh"]
@@ -16,7 +16,7 @@ region = Rect2(384, 1280, 128, 128)
 atlas = ExtResource("2_kbswh")
 region = Rect2(128, 1280, 128, 128)
 
-[node name="CurrencyDisplay" type="VBoxContainer"]
+[node name="CurrencyDisplay" type="VBoxContainer" unique_id=767577572]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0

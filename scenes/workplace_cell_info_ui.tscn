@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://buovaj2q4fmqw"]
+[gd_scene format=3 uid="uid://buovaj2q4fmqw"]
 
 [ext_resource type="Script" uid="uid://du33fkfjm2ema" path="res://scripts/ui/WorkplaceCellInfoUI.cs" id="1_rmpib"]
 
@@ -9,7 +9,7 @@ load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.
 atlas = SubResource("CompressedTexture2D_nma3w")
 region = Rect2(2560, 896, 128, 128)
 
-[node name="WorkplaceCellInfoUi" type="Control" node_paths=PackedStringArray("workerCountLabel", "alert")]
+[node name="WorkplaceCellInfoUi" type="Control" unique_id=560631437 node_paths=PackedStringArray("workerCountLabel", "alert")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +24,7 @@ script = ExtResource("1_rmpib")
 workerCountLabel = NodePath("HBoxContainer/Label")
 alert = NodePath("Label")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1097447016]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -36,18 +36,18 @@ grow_horizontal = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1086277598]
 layout_mode = 2
 theme_type_variation = &"TooltipLabel"
 text = "0/0"
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=238225894]
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
 layout_mode = 2
 texture = SubResource("AtlasTexture_rmpib")
 expand_mode = 3
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1672258222]
 self_modulate = Color(1, 0.08627451, 0.12941177, 1)
 layout_mode = 1
 anchors_preset = 7

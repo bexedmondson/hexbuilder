@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dy2wuyld13juk"]
+[gd_scene format=3 uid="uid://dy2wuyld13juk"]
 
 [ext_resource type="PackedScene" uid="uid://dusngu1tduntl" path="res://scenes/adjacency_benefit_indicator.tscn" id="1_0521p"]
 
@@ -42,10 +42,10 @@ scale_curve = SubResource("CurveTexture_f7h81")
 color = Color(0.98315436, 0.5118389, 0.47980303, 1)
 alpha_curve = SubResource("CurveTexture_0kpx0")
 
-[node name="AdjacencyBenefitIndicator" instance=ExtResource("1_0521p")]
+[node name="AdjacencyBenefitIndicator" unique_id=1166684438 instance=ExtResource("1_0521p")]
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0" unique_id=1554092479]
 self_modulate = Color(1, 0.20784314, 0.21960784, 0.6117647)
 
-[node name="GPUParticles2D" parent="." index="2"]
+[node name="GPUParticles2D" parent="." index="2" unique_id=1895176729]
 process_material = SubResource("ParticleProcessMaterial_a45o7")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -92,12 +92,12 @@ region = Rect2(2176, 896, 128, 128)
 atlas = ExtResource("15_nkuak")
 region = Rect2(2560, 896, 128, 128)
 
-[node name="Main2d" type="Node2D" node_paths=PackedStringArray("mapController", "inventoryManager")]
+[node name="Main2d" type="Node2D" unique_id=1053819598 node_paths=PackedStringArray("mapController", "inventoryManager")]
 script = ExtResource("1_vlfvj")
 mapController = NodePath("MapController")
 inventoryManager = NodePath("InventoryManager")
 
-[node name="InventoryManager" type="Node2D" parent="." node_paths=PackedStringArray("inventoryDisplay")]
+[node name="InventoryManager" type="Node2D" parent="." unique_id=1197391878 node_paths=PackedStringArray("inventoryDisplay")]
 script = ExtResource("2_j1s7q")
 inventoryDisplay = NodePath("../CanvasLayer/UIMain/CurrencyDisplay")
 startAmounts = Dictionary[int, int]({
@@ -106,7 +106,7 @@ startAmounts = Dictionary[int, int]({
 2: 5
 })
 
-[node name="MapController" type="Node2D" parent="." node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer", "mapGenerator")]
+[node name="MapController" type="Node2D" parent="." unique_id=1433828285 node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer", "mapGenerator")]
 y_sort_enabled = true
 script = ExtResource("2_m3sjc")
 baseMapLayer = NodePath("BaseTileMapLayer")
@@ -116,7 +116,7 @@ defaultCentreTileSourceIndex = 1
 defaultCentreTileCoords = Vector2i(3, 4)
 defaultResidentCount = 1
 
-[node name="BaseTileMapLayer" type="TileMapLayer" parent="MapController"]
+[node name="BaseTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=119494748]
 visible = false
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
@@ -126,7 +126,7 @@ occlusion_enabled = false
 navigation_enabled = false
 script = ExtResource("5_m7ly0")
 
-[node name="VisibleTileMapLayer" type="TileMapLayer" parent="MapController" node_paths=PackedStringArray("tileMapLayerToEcho")]
+[node name="VisibleTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=1233835194 node_paths=PackedStringArray("tileMapLayerToEcho")]
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 tile_set = ExtResource("1_b6gu2")
@@ -135,7 +135,7 @@ navigation_enabled = false
 script = ExtResource("5_c25qt")
 tileMapLayerToEcho = NodePath("../BaseTileMapLayer")
 
-[node name="LockedOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
+[node name="LockedOverlayTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=717388901]
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAA=")
@@ -143,7 +143,7 @@ tile_set = ExtResource("5_2ntku")
 occlusion_enabled = false
 navigation_enabled = false
 
-[node name="WorkplaceCellInfoContainer" type="Control" parent="MapController" node_paths=PackedStringArray("baseTileMapLayer")]
+[node name="WorkplaceCellInfoContainer" type="Control" parent="MapController" unique_id=1661475013 node_paths=PackedStringArray("baseTileMapLayer")]
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
@@ -151,7 +151,7 @@ script = ExtResource("8_wa3gb")
 baseTileMapLayer = NodePath("../BaseTileMapLayer")
 cellInfoUIScene = ExtResource("9_xvnm7")
 
-[node name="TimedJobCellInfoContainer" type="Control" parent="MapController" node_paths=PackedStringArray("baseTileMapLayer")]
+[node name="TimedJobCellInfoContainer" type="Control" parent="MapController" unique_id=105704156 node_paths=PackedStringArray("baseTileMapLayer")]
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
@@ -159,14 +159,14 @@ script = ExtResource("10_mpwrp")
 baseTileMapLayer = NodePath("../BaseTileMapLayer")
 cellInfoUIScene = ExtResource("11_v8tdf")
 
-[node name="DebugCellInfoContainer" type="Control" parent="MapController"]
+[node name="DebugCellInfoContainer" type="Control" parent="MapController" unique_id=2027750588]
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("12_745hd")
 debugCellInfoUIScene = ExtResource("13_cpah3")
 
-[node name="HighlightOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
+[node name="HighlightOverlayTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=2083917746]
 z_index = 1
 y_sort_enabled = true
 scale = Vector2(0.5, 0.5)
@@ -179,12 +179,12 @@ adjacencySourceId = 1
 adjacencyBenefitSceneIndex = 1
 adjacencyDrawbackSceneIndex = 2
 
-[node name="MapInputDetector" type="Node2D" parent="MapController" node_paths=PackedStringArray("lockedCellPopup", "unlockedCellPopup")]
+[node name="MapInputDetector" type="Node2D" parent="MapController" unique_id=573989490 node_paths=PackedStringArray("lockedCellPopup", "unlockedCellPopup")]
 script = ExtResource("5_b68g4")
 lockedCellPopup = NodePath("../../PopupLayer/LockedCellPopup")
 unlockedCellPopup = NodePath("../../PopupLayer/UnlockedCellPopup")
 
-[node name="MapGenerator" type="Node2D" parent="MapController" node_paths=PackedStringArray("baseMapLayer")]
+[node name="MapGenerator" type="Node2D" parent="MapController" unique_id=929422322 node_paths=PackedStringArray("baseMapLayer")]
 script = ExtResource("9_b0365")
 baseMapLayer = NodePath("../BaseTileMapLayer")
 noiseSampleScale = 5
@@ -216,7 +216,7 @@ rockyNoise = SubResource("NoiseTexture2D_c25qt")
 sandyNoise = SubResource("NoiseTexture2D_nkuak")
 vegetationNoise = SubResource("NoiseTexture2D_mcgvi")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1667094040]
 limit_smoothed = true
 position_smoothing_speed = 20.0
 editor_draw_limits = true
@@ -225,9 +225,9 @@ minZoom = 0.3
 maxZoom = 3.0
 scrollZoomIncrement = 0.1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=423575324]
 
-[node name="UIMain" type="Control" parent="CanvasLayer"]
+[node name="UIMain" type="Control" parent="CanvasLayer" unique_id=1709199597]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,7 +236,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CurrencyDisplay" parent="CanvasLayer/UIMain" instance=ExtResource("6_bn7pe")]
+[node name="CurrencyDisplay" parent="CanvasLayer/UIMain" unique_id=1653779922 instance=ExtResource("6_bn7pe")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -248,7 +248,7 @@ offset_bottom = 10.0
 grow_horizontal = 0
 showTurnChange = true
 
-[node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain"]
+[node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain" unique_id=468898507]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -270,7 +270,7 @@ text = "Next turn"
 icon = SubResource("AtlasTexture_77sti")
 expand_icon = true
 
-[node name="HousingInfoButton" type="Button" parent="CanvasLayer/UIMain"]
+[node name="HousingInfoButton" type="Button" parent="CanvasLayer/UIMain" unique_id=1534484854]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -290,7 +290,7 @@ text = "Housing"
 icon = SubResource("AtlasTexture_mpwrp")
 expand_icon = true
 
-[node name="WorkplaceInfoButton2" type="Button" parent="CanvasLayer/UIMain"]
+[node name="WorkplaceInfoButton2" type="Button" parent="CanvasLayer/UIMain" unique_id=2006043558]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -310,7 +310,7 @@ text = "Workplaces"
 icon = SubResource("AtlasTexture_ipk01")
 expand_icon = true
 
-[node name="ResidentInfoButton2" type="Button" parent="CanvasLayer/UIMain"]
+[node name="ResidentInfoButton2" type="Button" parent="CanvasLayer/UIMain" unique_id=1284482231]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -332,10 +332,10 @@ icon = SubResource("AtlasTexture_1w2nm")
 alignment = 2
 expand_icon = true
 
-[node name="PopupLayer" type="CanvasLayer" parent="."]
+[node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
 
-[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("infoContainer", "tileSelector", "confirmButton")]
+[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("infoContainer", "tileSelector", "confirmButton")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -355,7 +355,7 @@ tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
 confirmButton = NodePath("VBoxContainer/TileSelectorPanel/ConfirmButton")
 
-[node name="CloseButton" type="Button" parent="PopupLayer/UnlockedCellPopup"]
+[node name="CloseButton" type="Button" parent="PopupLayer/UnlockedCellPopup" unique_id=1763966649]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -369,7 +369,7 @@ grow_horizontal = 0
 theme_override_constants/h_separation = 0
 text = "X"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup" unique_id=632567158]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -379,13 +379,13 @@ anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InfoPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer"]
+[node name="InfoPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer" unique_id=1622472544]
 custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"PanelLightEmbedded"
 
-[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel"]
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel" unique_id=470061512]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -399,7 +399,7 @@ theme_type_variation = &"Label_Title"
 text = "Details"
 horizontal_alignment = 1
 
-[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel"]
+[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel" unique_id=765547949]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -411,7 +411,7 @@ offset_bottom = -22.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel/InfoSubpanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel/InfoSubpanel" unique_id=297073240]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -421,13 +421,13 @@ anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TileSelectorPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer"]
+[node name="TileSelectorPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer" unique_id=192113969]
 custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"PanelLightEmbedded"
 
-[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel"]
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel" unique_id=232935934]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -441,7 +441,7 @@ theme_type_variation = &"Label_Title"
 text = "Build Options"
 horizontal_alignment = 1
 
-[node name="ScrollPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel"]
+[node name="ScrollPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel" unique_id=1146177711]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -453,7 +453,7 @@ offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ScrollPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ScrollPanel" unique_id=452461522]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -463,12 +463,12 @@ grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 4
 
-[node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer"]
+[node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer" unique_id=443249669]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel"]
+[node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel" unique_id=248016104]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -483,7 +483,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "OK"
 
-[node name="LockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("workerCountLabel", "confirmButton")]
+[node name="LockedCellPopup" type="Panel" parent="PopupLayer" unique_id=332027100 node_paths=PackedStringArray("workerCountLabel", "confirmButton")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -500,7 +500,7 @@ script = ExtResource("7_bn7pe")
 workerCountLabel = NodePath("PanelContainer/Panel2/WorkerCountContainer/WorkerCountLabel")
 confirmButton = NodePath("ConfirmButton")
 
-[node name="UnlockLabel" type="Label" parent="PopupLayer/LockedCellPopup"]
+[node name="UnlockLabel" type="Label" parent="PopupLayer/LockedCellPopup" unique_id=961085592]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -514,7 +514,7 @@ text = "Unlock?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="PopupLayer/LockedCellPopup"]
+[node name="PanelContainer" type="PanelContainer" parent="PopupLayer/LockedCellPopup" unique_id=208590481]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -529,26 +529,26 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"PanelContainerEmbeddedLight"
 
-[node name="Panel2" type="MarginContainer" parent="PopupLayer/LockedCellPopup/PanelContainer"]
+[node name="Panel2" type="MarginContainer" parent="PopupLayer/LockedCellPopup/PanelContainer" unique_id=567307553]
 layout_mode = 2
 
-[node name="WorkerCountContainer" type="HBoxContainer" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2"]
+[node name="WorkerCountContainer" type="HBoxContainer" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2" unique_id=1726598082]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2/WorkerCountContainer"]
+[node name="TextureRect" type="TextureRect" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2/WorkerCountContainer" unique_id=233603291]
 layout_mode = 2
 texture = SubResource("AtlasTexture_xvnm7")
 expand_mode = 3
 
-[node name="WorkerCountLabel" type="Label" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2/WorkerCountContainer"]
+[node name="WorkerCountLabel" type="Label" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2/WorkerCountContainer" unique_id=283290819]
 layout_mode = 2
 theme_type_variation = &"Label_Title"
 text = "x1"
 vertical_alignment = 1
 
-[node name="ConfirmButton" type="Button" parent="PopupLayer/LockedCellPopup"]
+[node name="ConfirmButton" type="Button" parent="PopupLayer/LockedCellPopup" unique_id=1560979445]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -563,7 +563,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "OK"
 
-[node name="CloseButton" type="Button" parent="PopupLayer/LockedCellPopup"]
+[node name="CloseButton" type="Button" parent="PopupLayer/LockedCellPopup" unique_id=451375219]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -576,7 +576,7 @@ offset_bottom = 68.0
 grow_horizontal = 0
 text = "X"
 
-[node name="HousingInfoPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("houseInfoContainer")]
+[node name="HousingInfoPopup" type="Panel" parent="PopupLayer" unique_id=1914800696 node_paths=PackedStringArray("houseInfoContainer")]
 visible = false
 anchors_preset = -1
 anchor_left = 0.1
@@ -589,7 +589,7 @@ script = ExtResource("20_77sti")
 houseInfoContainer = NodePath("ScrollContainer/VBoxContainer")
 houseInfoScene = ExtResource("21_mcgvi")
 
-[node name="CloseButton" type="Button" parent="PopupLayer/HousingInfoPopup"]
+[node name="CloseButton" type="Button" parent="PopupLayer/HousingInfoPopup" unique_id=1178184510]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -602,7 +602,7 @@ offset_bottom = 68.0
 grow_horizontal = 0
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/HousingInfoPopup"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/HousingInfoPopup" unique_id=1939235562]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -611,11 +611,11 @@ anchor_right = 0.9
 anchor_bottom = 0.9
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/HousingInfoPopup/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/HousingInfoPopup/ScrollContainer" unique_id=594892982]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WorkplaceInfoPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("workplaceInfoContainer")]
+[node name="WorkplaceInfoPopup" type="Panel" parent="PopupLayer" unique_id=1396816767 node_paths=PackedStringArray("workplaceInfoContainer")]
 visible = false
 anchors_preset = -1
 anchor_left = 0.1
@@ -628,7 +628,7 @@ script = ExtResource("22_tacgk")
 workplaceInfoContainer = NodePath("ScrollContainer/VBoxContainer")
 workplaceInfoScene = ExtResource("23_2dmcc")
 
-[node name="CloseButton" type="Button" parent="PopupLayer/WorkplaceInfoPopup"]
+[node name="CloseButton" type="Button" parent="PopupLayer/WorkplaceInfoPopup" unique_id=684602166]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -641,7 +641,7 @@ offset_bottom = 68.0
 grow_horizontal = 0
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/WorkplaceInfoPopup"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/WorkplaceInfoPopup" unique_id=661434004]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -650,11 +650,11 @@ anchor_right = 0.9
 anchor_bottom = 0.9
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/WorkplaceInfoPopup/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/WorkplaceInfoPopup/ScrollContainer" unique_id=1837231326]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ResidentInfoPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("residentInfoContainer")]
+[node name="ResidentInfoPopup" type="Panel" parent="PopupLayer" unique_id=252073317 node_paths=PackedStringArray("residentInfoContainer")]
 visible = false
 anchors_preset = -1
 anchor_left = 0.1
@@ -667,7 +667,7 @@ script = ExtResource("22_1w2nm")
 residentInfoContainer = NodePath("ScrollContainer/VBoxContainer")
 residentInfoUIScene = ExtResource("27_xvnm7")
 
-[node name="CloseButton" type="Button" parent="PopupLayer/ResidentInfoPopup"]
+[node name="CloseButton" type="Button" parent="PopupLayer/ResidentInfoPopup" unique_id=1154121240]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = -1
@@ -680,7 +680,7 @@ offset_bottom = 68.0
 grow_horizontal = 0
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/ResidentInfoPopup"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/ResidentInfoPopup" unique_id=1406398073]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -689,7 +689,7 @@ anchor_right = 0.9
 anchor_bottom = 0.9
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/ResidentInfoPopup/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/ResidentInfoPopup/ScrollContainer" unique_id=781010187]
 layout_mode = 2
 size_flags_horizontal = 3
 

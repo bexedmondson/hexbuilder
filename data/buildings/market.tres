@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CustomTileData" load_steps=5 format=3 uid="uid://cd4473yab66g4"]
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://cd4473yab66g4"]
 
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_0pk3v"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]

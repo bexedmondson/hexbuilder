@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4jge416gxgmd"]
+[gd_scene format=3 uid="uid://b4jge416gxgmd"]
 
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="1_67grx"]
 [ext_resource type="Script" uid="uid://ce2k4fxtwokg2" path="res://scripts/ui/HouseInfoUI.cs" id="1_ci78h"]
@@ -7,13 +7,13 @@
 atlas = ExtResource("1_67grx")
 region = Rect2(1408, 1024, 128, 128)
 
-[node name="HouseInfo" type="Panel" node_paths=PackedStringArray("residenceLabel")]
+[node name="HouseInfo" type="Panel" unique_id=1826460449 node_paths=PackedStringArray("residenceLabel")]
 custom_minimum_size = Vector2(0, 80)
 theme_type_variation = &"PanelEmbedded"
 script = ExtResource("1_ci78h")
 residenceLabel = NodePath("Label")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=1217744984]
 custom_minimum_size = Vector2(56, 50)
 layout_mode = 0
 offset_left = 1160.0
@@ -28,7 +28,7 @@ icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1768077280]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 26.0
