@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://decrhuj8ncsgc"]
+[gd_scene load_steps=45 format=4 uid="uid://decrhuj8ncsgc"]
 
 [ext_resource type="TileSet" uid="uid://wb0h503pab2p" path="res://assets/tileset.tres" id="1_b6gu2"]
 [ext_resource type="Script" uid="uid://b7aji5k2ga2k5" path="res://scripts/GameController.cs" id="1_vlfvj"]
@@ -22,6 +22,8 @@
 [ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="10_dppk6"]
 [ext_resource type="Script" uid="uid://syp320mudpff" path="res://scripts/ui/TimedJobCellInfoUIContainer.cs" id="10_mpwrp"]
 [ext_resource type="PackedScene" uid="uid://2crqakku64ae" path="res://scenes/timed_job_cell_info_ui.tscn" id="11_v8tdf"]
+[ext_resource type="Script" uid="uid://bnrfvh3qds3dh" path="res://scripts/ui/DebugCellInfoUIContainer.cs" id="12_745hd"]
+[ext_resource type="PackedScene" uid="uid://qa0ad2tdjmdu" path="res://scenes/debug_cell_info_ui.tscn" id="13_cpah3"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="15_nkuak"]
 [ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/HousingInfoPopup.cs" id="20_77sti"]
 [ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/house_info_ui.tscn" id="21_mcgvi"]
@@ -156,6 +158,13 @@ anchors_preset = 0
 script = ExtResource("10_mpwrp")
 baseTileMapLayer = NodePath("../BaseTileMapLayer")
 cellInfoUIScene = ExtResource("11_v8tdf")
+
+[node name="DebugCellInfoContainer" type="Control" parent="MapController"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("12_745hd")
+debugCellInfoUIScene = ExtResource("13_cpah3")
 
 [node name="HighlightOverlayTileMapLayer" type="TileMapLayer" parent="MapController"]
 z_index = 1
@@ -326,7 +335,7 @@ expand_icon = true
 [node name="PopupLayer" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("tileSelector", "confirmButton")]
+[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" node_paths=PackedStringArray("infoContainer", "tileSelector", "confirmButton")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -340,10 +349,11 @@ offset_bottom = 450.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_1mh2o")
-tileSelector = NodePath("ScrollContainer/TileSelectionGrid")
+infoContainer = NodePath("VBoxContainer/InfoPanel/InfoSubpanel/VBoxContainer")
+tileSelector = NodePath("VBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer/TileSelectionGrid")
 tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
-confirmButton = NodePath("ConfirmButton")
+confirmButton = NodePath("VBoxContainer/TileSelectorPanel/ConfirmButton")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/UnlockedCellPopup"]
 custom_minimum_size = Vector2(50, 50)
@@ -359,24 +369,106 @@ grow_horizontal = 0
 theme_override_constants/h_separation = 0
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.15
+anchor_left = 0.05
 anchor_top = 0.1
-anchor_right = 0.85
-anchor_bottom = 0.8
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InfoPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 280)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"PanelLightEmbedded"
+
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_top = 20.0
+offset_right = 76.0
+offset_bottom = 56.166668
+grow_horizontal = 2
+theme_type_variation = &"Label_Title"
+text = "Details"
+horizontal_alignment = 1
+
+[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = -20.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel/InfoSubpanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileSelectorPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 280)
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"PanelLightEmbedded"
+
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_top = 20.0
+offset_right = 76.0
+offset_bottom = 56.166668
+grow_horizontal = 2
+theme_type_variation = &"Label_Title"
+text = "Build Options"
+horizontal_alignment = 1
+
+[node name="ScrollPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = -20.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ScrollPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 4
 
-[node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/ScrollContainer"]
+[node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup"]
+[node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -384,8 +476,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -50.0
+offset_top = -71.0
 offset_right = 50.0
-offset_bottom = -50.0
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "OK"
@@ -605,7 +698,7 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="CanvasLayer/UIMain/WorkplaceInfoButton2" to="PopupLayer/WorkplaceInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="CanvasLayer/UIMain/ResidentInfoButton2" to="PopupLayer/ResidentInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/CloseButton" to="PopupLayer/UnlockedCellPopup" method="Close"]
-[connection signal="pressed" from="PopupLayer/UnlockedCellPopup/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="Confirm"]
+[connection signal="pressed" from="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="Confirm"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/ConfirmButton" to="PopupLayer/LockedCellPopup" method="Confirm"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/CloseButton" to="PopupLayer/LockedCellPopup" method="Close"]
 [connection signal="visibility_changed" from="PopupLayer/HousingInfoPopup" to="PopupLayer/HousingInfoPopup" method="OnVisibilityChanged"]
