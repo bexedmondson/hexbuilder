@@ -305,6 +305,7 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_type_variation = &"<null>"
 theme_override_font_sizes/font_size = 24
 text = "Workplaces"
 icon = SubResource("AtlasTexture_ipk01")
@@ -325,6 +326,7 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_type_variation = &"FlatButton"
 theme_override_font_sizes/font_size = 24
 text = "Residents
 "
