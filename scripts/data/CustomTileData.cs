@@ -24,6 +24,21 @@ public partial class CustomTileData : Resource
     [Export]
     public int workerCapacity;
 
+    public bool TryGetAdjacencyEffectFromTileData(CustomTileData otherTile, out CurrencySum effect)
+    {
+        effect = new();
+        if (adjacencies == null || adjacencies.Count == 0)
+            return false;
+        
+        foreach (var adjacency in adjacencies)
+        {
+            if (adjacency.requiredTile == otherTile)
+                effect.Add(adjacency.currencyEffect);
+        }
+
+        return effect.Count == 0;
+    }
+
     public bool IsUnlocked()
     {
         if (unlockRequirements == null)

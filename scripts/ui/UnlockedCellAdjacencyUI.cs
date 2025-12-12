@@ -1,0 +1,53 @@
+using System.Collections.Generic;
+using Godot;
+
+public partial class UnlockedCellAdjacencyUI : Control
+{
+    [Export]
+    private Control effectGivenUI;
+    
+    [Export]
+    private Control effectReceivedUI;
+
+    [Export]
+    private Label name;
+
+    [Export]
+    private Label direction;
+
+    [Export]
+    private CurrencyDisplay giveEffectDisplay;
+    
+    [Export]
+    private CurrencyDisplay receiveEffectDisplay;
+
+    private readonly Dictionary<Vector2I, string> coordsToDirectionMap = new(){
+        { Vector2I.Down, "SW" },
+        { Vector2I.Left, "W"},
+        { Vector2I.Up, "NW"},
+        { Vector2I.Right, "E"},
+        { new Vector2I(1, -1), "NE"},
+        { new Vector2I(-1, 1), "SE"}
+    };
+
+    public void Setup(CustomTileData adjacentTileData, Vector2I centreCell, Vector2I adjacentCell)
+    {
+        name.Text = adjacentTileData.GetFileName();
+        direction.Text = coordsToDirectionMap[centreCell - adjacentCell];
+
+        effectGivenUI.Visible = false;
+        effectReceivedUI.Visible = false;
+    }
+
+    public void SetGivenEffects(CurrencySum givenEffects)
+    {
+        giveEffectDisplay.Visible = givenEffects.Count > 0;
+        giveEffectDisplay.DisplayCurrencyAmount(givenEffects);
+    }
+    
+    public void SetReceivedEffects(CurrencySum receivedEffects)
+    {
+        receiveEffectDisplay.Visible = receivedEffects.Count > 0;
+        receiveEffectDisplay.DisplayCurrencyAmount(receivedEffects);
+    }
+}

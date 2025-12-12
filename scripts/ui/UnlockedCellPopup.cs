@@ -7,6 +7,9 @@ public partial class UnlockedCellPopup : Popup
 {
     [Export]
     private Control infoContainer;
+
+    [Export]
+    private PackedScene unlockedCellAdjacencyUIScene;
     
     [Export]
     private Control tileSelector;
@@ -24,15 +27,6 @@ public partial class UnlockedCellPopup : Popup
 
     private MapController mapController;
     private InventoryManager inventoryManager;
-
-    private readonly Dictionary<Vector2I, string> coordsToDirectionMap = new(){
-        { Vector2I.Down, "SW" },
-        { Vector2I.Left, "W"},
-        { Vector2I.Up, "NW"},
-        { Vector2I.Right, "E"},
-        { new Vector2I(1, -1), "NE"},
-        { new Vector2I(-1, 1), "SE"}
-    };
 
     public override void _Ready()
     {
@@ -62,6 +56,7 @@ public partial class UnlockedCellPopup : Popup
         {
             infoContainer.GetChild(i).QueueFree();
         }
+        var adjacentCells = mapController.BaseMapLayer.GetSurroundingCells(cell);
         
         var label = new Label();
         StringBuilder sb = new StringBuilder("default:");
@@ -72,27 +67,25 @@ public partial class UnlockedCellPopup : Popup
         }
         
         label.Text = sb.ToString();
-        
         infoContainer.AddChild(label);
-
-        sb.Clear();
-        
-        var adjacentCells = mapController.BaseMapLayer.GetSurroundingCells(cell);
 
         foreach (var adjacentCell in adjacentCells)
         {
             var adjacentData = mapController.BaseMapLayer.GetCellCustomData(adjacentCell);
+            bool hasGivenEffect = cellCustomTileData.TryGetAdjacencyEffectFromTileData(adjacentData, out var givenEffect);
+            bool hasReceivedEffect = adjacentData.TryGetAdjacencyEffectFromTileData(cellCustomTileData, out var receivedEffect);
 
-            var newLabel = new Label();
-            sb.Append(coordsToDirectionMap[cell - adjacentCell]);
-            sb.Append($" {adjacentData.GetFileName()}");
-            newLabel.Text = sb.ToString();
-            infoContainer.AddChild(newLabel);
-            sb.Clear();
+            if (!hasGivenEffect && !hasReceivedEffect)
+                continue;
+            
+            var adjacencyEffectUI = unlockedCellAdjacencyUIScene.Instantiate<UnlockedCellAdjacencyUI>();
+            adjacencyEffectUI.Setup(adjacentData, cell, adjacentCell);
+            if (hasGivenEffect)
+                adjacencyEffectUI.SetGivenEffects(givenEffect);
+            if (hasReceivedEffect)
+                adjacencyEffectUI.SetReceivedEffects(receivedEffect);
+            infoContainer.AddChild(adjacencyEffectUI);
         }
-
-        //for each adjacent tile, check if tile data is on that tile is in adjacencies list
-        //similarly check if the current tile is in the adjacencies list of that tile
     }
 
     private void SetupTileSelector(CustomTileData cellCustomTileData)

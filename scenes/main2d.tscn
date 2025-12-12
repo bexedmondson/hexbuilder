@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/ResidentInfoPopup.cs" id="22_1w2nm"]
 [ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/WorkplaceInfoPopup.cs" id="22_tacgk"]
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
+[ext_resource type="PackedScene" uid="uid://nrnjv42wsci4" path="res://scenes/unlocked_cell_adjacency_info_ui.tscn" id="23_cpah3"]
 [ext_resource type="PackedScene" uid="uid://b5cjn1sgivxbt" path="res://scenes/resident_info_ui.tscn" id="27_xvnm7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
@@ -358,6 +359,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_1mh2o")
 infoContainer = NodePath("VBoxContainer/InfoPanel/InfoSubpanel/VBoxContainer")
+unlockedCellAdjacencyUIScene = ExtResource("23_cpah3")
 tileSelector = NodePath("VBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer/TileSelectionGrid")
 tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
