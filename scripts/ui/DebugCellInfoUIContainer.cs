@@ -41,7 +41,6 @@ public partial class DebugCellInfoUIContainer : Control
                 var newInfoUI = debugCellInfoUIScene.Instantiate<DebugCellInfoUI>();
                 newInfoUI.Update(mapLayer.GetCellCustomData(usedCell));
                 newInfoUI.GlobalPosition = mapLayer.ToGlobal(mapLayer.MapToLocal(usedCell));
-                newInfoUI.Size = Vector2I.Zero; //for some incomprehensible reason this keeps being given a 40x40 size. resetting here.
                 newInfoUI.Visible = isOn;
                 infoUIs[usedCell] = newInfoUI;
                 this.AddChild(newInfoUI);

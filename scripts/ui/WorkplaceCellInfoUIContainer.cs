@@ -41,7 +41,6 @@ public partial class WorkplaceCellInfoUIContainer : Control
                 var newWorkplaceUI = cellInfoUIScene.Instantiate<WorkplaceCellInfoUI>();
                 newWorkplaceUI.UpdateWorkerCountLabel(workplace.workerCount, workplace.capacity);
                 newWorkplaceUI.GlobalPosition = baseTileMapLayer.ToGlobal(baseTileMapLayer.MapToLocal(workplace.location));
-                newWorkplaceUI.Size = Vector2I.Zero; //for some incomprehensible reason this keeps being given a 40x40 size. resetting here.
                 workplaceCellInfoUis[workplace.location] = newWorkplaceUI;
                 this.AddChild(newWorkplaceUI);
             }

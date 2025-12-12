@@ -17,16 +17,16 @@
 [ext_resource type="Script" uid="uid://bs00038rrkovu" path="res://scripts/map/MapGenerator.cs" id="9_b0365"]
 [ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="9_hp2ex"]
 [ext_resource type="Script" uid="uid://dbb83rw27f0g2" path="res://scripts/map/MapCameraController.cs" id="9_k5e1m"]
-[ext_resource type="PackedScene" uid="uid://buovaj2q4fmqw" path="res://scenes/workplace_cell_info_ui.tscn" id="9_xvnm7"]
+[ext_resource type="PackedScene" uid="uid://buovaj2q4fmqw" path="res://scenes/cell_ui/workplace_cell_info_ui.tscn" id="9_xvnm7"]
 [ext_resource type="Resource" uid="uid://8m4fhhljy05o" path="res://data/terrain/water.tres" id="10_2gw4c"]
 [ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="10_dppk6"]
 [ext_resource type="Script" uid="uid://syp320mudpff" path="res://scripts/ui/TimedJobCellInfoUIContainer.cs" id="10_mpwrp"]
-[ext_resource type="PackedScene" uid="uid://2crqakku64ae" path="res://scenes/timed_job_cell_info_ui.tscn" id="11_v8tdf"]
+[ext_resource type="PackedScene" uid="uid://2crqakku64ae" path="res://scenes/cell_ui/timed_job_cell_info_ui.tscn" id="11_v8tdf"]
 [ext_resource type="Script" uid="uid://bnrfvh3qds3dh" path="res://scripts/ui/DebugCellInfoUIContainer.cs" id="12_745hd"]
-[ext_resource type="PackedScene" uid="uid://qa0ad2tdjmdu" path="res://scenes/debug_cell_info_ui.tscn" id="13_cpah3"]
+[ext_resource type="PackedScene" uid="uid://qa0ad2tdjmdu" path="res://scenes/cell_ui/debug_cell_info_ui.tscn" id="13_cpah3"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="15_nkuak"]
 [ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/HousingInfoPopup.cs" id="20_77sti"]
-[ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/house_info_ui.tscn" id="21_mcgvi"]
+[ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/cell_ui/house_info_ui.tscn" id="21_mcgvi"]
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/ResidentInfoPopup.cs" id="22_1w2nm"]
 [ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/WorkplaceInfoPopup.cs" id="22_tacgk"]
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
@@ -119,6 +119,7 @@ defaultResidentCount = 1
 [node name="BaseTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=119494748]
 visible = false
 y_sort_enabled = true
+position = Vector2(-120, -40)
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAABAP//AAABAAEAAAAAAP//AAABAAEAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAABAAAAAAABAAEAAAAAAAEAAAABAAEAAAA=")
 tile_set = ExtResource("1_b6gu2")
@@ -128,6 +129,7 @@ script = ExtResource("5_m7ly0")
 
 [node name="VisibleTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=1233835194 node_paths=PackedStringArray("tileMapLayerToEcho")]
 y_sort_enabled = true
+position = Vector2(-120, -40)
 scale = Vector2(0.5, 0.5)
 tile_set = ExtResource("1_b6gu2")
 occlusion_enabled = false
@@ -137,6 +139,7 @@ tileMapLayerToEcho = NodePath("../BaseTileMapLayer")
 
 [node name="LockedOverlayTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=717388901]
 y_sort_enabled = true
+position = Vector2(-120, -40)
 scale = Vector2(0.5, 0.5)
 tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAA=")
 tile_set = ExtResource("5_2ntku")
@@ -169,6 +172,7 @@ debugCellInfoUIScene = ExtResource("13_cpah3")
 [node name="HighlightOverlayTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=2083917746]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(-120, -40)
 scale = Vector2(0.5, 0.5)
 tile_set = ExtResource("6_7log7")
 occlusion_enabled = false
@@ -180,11 +184,13 @@ adjacencyBenefitSceneIndex = 1
 adjacencyDrawbackSceneIndex = 2
 
 [node name="MapInputDetector" type="Node2D" parent="MapController" unique_id=573989490 node_paths=PackedStringArray("lockedCellPopup", "unlockedCellPopup")]
+position = Vector2(-120, -40)
 script = ExtResource("5_b68g4")
 lockedCellPopup = NodePath("../../PopupLayer/LockedCellPopup")
 unlockedCellPopup = NodePath("../../PopupLayer/UnlockedCellPopup")
 
 [node name="MapGenerator" type="Node2D" parent="MapController" unique_id=929422322 node_paths=PackedStringArray("baseMapLayer")]
+position = Vector2(-120, -40)
 script = ExtResource("9_b0365")
 baseMapLayer = NodePath("../BaseTileMapLayer")
 noiseSampleScale = 5
