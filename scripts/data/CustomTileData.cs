@@ -36,7 +36,7 @@ public partial class CustomTileData : Resource
                 effect.Add(adjacency.currencyEffect);
         }
 
-        return effect.Count == 0;
+        return effect.Count != 0;
     }
 
     public bool IsUnlocked()

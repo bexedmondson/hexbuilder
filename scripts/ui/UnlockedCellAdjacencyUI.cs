@@ -41,13 +41,13 @@ public partial class UnlockedCellAdjacencyUI : Control
 
     public void SetGivenEffects(CurrencySum givenEffects)
     {
-        giveEffectDisplay.Visible = givenEffects.Count > 0;
+        effectGivenUI.Visible = givenEffects.Count > 0;
         giveEffectDisplay.DisplayCurrencyAmount(givenEffects);
     }
     
     public void SetReceivedEffects(CurrencySum receivedEffects)
     {
-        receiveEffectDisplay.Visible = receivedEffects.Count > 0;
+        effectReceivedUI.Visible = receivedEffects.Count > 0;
         receiveEffectDisplay.DisplayCurrencyAmount(receivedEffects);
     }
 }
