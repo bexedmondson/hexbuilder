@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="15_nkuak"]
 [ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/HousingInfoPopup.cs" id="20_77sti"]
 [ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/cell_ui/house_info_ui.tscn" id="21_mcgvi"]
+[ext_resource type="Script" uid="uid://b6lx4m4chnfrh" path="res://scripts/ui/MainUICurrencyDisplay.cs" id="21_wf2ql"]
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/ResidentInfoPopup.cs" id="22_1w2nm"]
 [ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/WorkplaceInfoPopup.cs" id="22_tacgk"]
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
@@ -69,6 +70,18 @@ fractal_lacunarity = 4.0
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mcgvi"]
 noise = SubResource("FastNoiseLite_77sti")
 seamless = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf2ql"]
+atlas = ExtResource("15_nkuak")
+region = Rect2(2432, 1152, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rn43n"]
+atlas = ExtResource("15_nkuak")
+region = Rect2(384, 1280, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3nqq"]
+atlas = ExtResource("15_nkuak")
+region = Rect2(128, 1280, 128, 128)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mpwrp"]
 load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
@@ -253,7 +266,12 @@ offset_top = 10.0
 offset_right = -10.0
 offset_bottom = 10.0
 grow_horizontal = 0
-showTurnChange = true
+script = ExtResource("21_wf2ql")
+currencyIcons = Dictionary[int, Resource]({
+0: SubResource("AtlasTexture_wf2ql"),
+1: SubResource("AtlasTexture_rn43n"),
+2: SubResource("AtlasTexture_l3nqq")
+})
 
 [node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain" unique_id=468898507]
 layout_mode = 1

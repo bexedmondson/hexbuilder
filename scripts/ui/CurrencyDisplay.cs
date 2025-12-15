@@ -4,54 +4,18 @@ using Godot;
 public partial class CurrencyDisplay : Control
 {
     [Export]
-    private Godot.Collections.Dictionary<CurrencyType, Resource> currencyIcons;
+    protected Godot.Collections.Dictionary<CurrencyType, Resource> currencyIcons;
 
     [Export]
-    private bool showTurnChange = false;
+    protected PackedScene singleCurrencyDisplayScene;
 
     [Export]
-    private PackedScene singleCurrencyDisplayScene;
+    protected Color iconColor = new Color(255, 255, 255);
 
-    [Export]
-    private Color iconColor = new Color(255, 255, 255);
+    protected Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
 
-    private MapCurrencyChangeAnalyser mapCurrencyChangeAnalyser;
-
-    private Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
-
-    public override void _EnterTree()
+    public virtual void DisplayCurrencyAmount(CurrencySum currencySum)
     {
-        base._EnterTree();
-
-        if (showTurnChange)
-        {
-            var eventDispatcher = InjectionManager.Get<EventDispatcher>();
-            eventDispatcher.Add<MapUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
-            eventDispatcher.Add<WorkplaceUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
-        }
-    }
-
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-
-        if (showTurnChange)
-        {
-            var eventDispatcher = InjectionManager.Get<EventDispatcher>();
-            eventDispatcher.Remove<MapUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
-            eventDispatcher.Remove<WorkplaceUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
-        }
-    }
-
-    public void DisplayCurrencyAmount(CurrencySum currencySum)
-    {
-        CurrencySum turnChange = new();
-        if (showTurnChange)
-        {
-            mapCurrencyChangeAnalyser ??= InjectionManager.Get<MapCurrencyChangeAnalyser>();
-            turnChange = mapCurrencyChangeAnalyser.GetOverallTurnDelta();
-        }
-        
         foreach (var kvp in currencySum)
         {
             var currencyType = kvp.Key;
@@ -66,32 +30,9 @@ public partial class CurrencyDisplay : Control
                 currencyDisplays[currencyType] = existingSingleCurrencyDisplay;
                 this.AddChild(existingSingleCurrencyDisplay);
             }
-
-            if (showTurnChange)
-            {
-                int delta = 0;
-                turnChange.TryGetValue(kvp.Key, out delta);
-                existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount, delta);
-                existingSingleCurrencyDisplay.ShowDelta(true);
-            }
-            else
-            {
-                existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount);
-                existingSingleCurrencyDisplay.ShowDelta(false);
-            }
-        }
-    }
-
-    private void OnCurrencyChangePossiblyUpdated(IEvent _)
-    {
-        if (!showTurnChange)
-            return;
-
-        var turnDelta = mapCurrencyChangeAnalyser.GetOverallTurnDelta();
-
-        foreach (var kvp in currencyDisplays)
-        {
-            kvp.Value.SetDelta(turnDelta.GetValueOrDefault(kvp.Key, 0));
+            
+            existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount);
+            existingSingleCurrencyDisplay.ShowDelta(false);
         }
     }
 
