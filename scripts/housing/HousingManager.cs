@@ -62,6 +62,7 @@ public class HousingManager : IInjectable
                 foreach (var kickedOutResident in kickedOutResidents)
                 {
                     residentHousingMap.Remove(kickedOutResident);
+                    InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdateedEvent(kickedOutResident));
                 }
                 
                 housesChanged = true;
