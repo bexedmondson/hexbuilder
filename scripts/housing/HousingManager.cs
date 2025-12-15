@@ -62,7 +62,7 @@ public class HousingManager : IInjectable
                 foreach (var kickedOutResident in kickedOutResidents)
                 {
                     residentHousingMap.Remove(kickedOutResident);
-                    InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdateedEvent(kickedOutResident));
+                    InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdatedEvent(kickedOutResident));
                 }
                 
                 housesChanged = true;
@@ -107,7 +107,7 @@ public class HousingManager : IInjectable
         
         residentHousingMap[resident] = chosenHouse; //TODO consider removing duplicate data here? update map from HouseData method?? hmm
         
-        InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdateedEvent(resident));
+        InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdatedEvent(resident));
         return true;
     }
 

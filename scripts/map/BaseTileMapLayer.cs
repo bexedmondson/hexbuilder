@@ -9,4 +9,9 @@ public partial class BaseTileMapLayer : TileMapLayer
     {
         EmitSignalChanged();
     }
+    
+    public Vector2 GetCellCentreWorldPosition(Vector2I cell)
+    {
+        return ToGlobal(MapToLocal(cell));
+    }
 }

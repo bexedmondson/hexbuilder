@@ -7,10 +7,10 @@ public partial class ResidentNoHomeWarningIndicator : Control
     public override void _EnterTree()
     {
         base._EnterTree();
-        InjectionManager.Get<EventDispatcher>().Add<ResidentHouseStateUpdateedEvent>(OnResidentHousingStateUpdated);
+        InjectionManager.Get<EventDispatcher>().Add<ResidentHouseStateUpdatedEvent>(OnResidentHousingStateUpdated);
     }
 
-    private void OnResidentHousingStateUpdated(ResidentHouseStateUpdateedEvent e)
+    private void OnResidentHousingStateUpdated(ResidentHouseStateUpdatedEvent e)
     {
         residentManager ??= InjectionManager.Get<ResidentManager>();
 

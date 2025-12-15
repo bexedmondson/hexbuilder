@@ -21,7 +21,7 @@ public partial class MapHighlightController : TileMapLayer, IInjectable
         InjectionManager.Register(this);
     }
 
-    public void OnSelectTile(Vector2I cell)
+    public void OnSelectCell(Vector2I cell)
     {
         Clear();
         SetCell(cell, TileSet.GetSourceId(selectionSourceId), selectionTileCoords);

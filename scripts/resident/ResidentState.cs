@@ -23,7 +23,7 @@ public class ResidentState(string name)
         TurnsWithoutHouse++;
         
         if (emit)
-            InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdateedEvent(this));
+            InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdatedEvent(this));
     }
 
     public void ResetNoHouseTracking()

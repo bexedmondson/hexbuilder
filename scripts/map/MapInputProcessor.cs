@@ -31,7 +31,7 @@ public partial class MapInputProcessor : Node2D
             if (cellStatus == CellStatus.Hidden)
                 return;
             
-            mapHighlightController.OnSelectTile(cell);
+            mapHighlightController.OnSelectCell(cell);
 
             if (cellStatus == CellStatus.Locked)
             {

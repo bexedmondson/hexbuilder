@@ -32,7 +32,7 @@ public partial class LockedCellPopup : Popup
         confirmButton.Disabled = !hasEnoughAvailableWorkers;
         
         this.SetVisible(true);
-        InjectionManager.Get<MapHighlightController>().OnSelectTile(cell);
+        InjectionManager.Get<MapHighlightController>().OnSelectCell(cell);
     }
 
     public override void Confirm()

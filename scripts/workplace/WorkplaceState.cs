@@ -15,7 +15,7 @@ public class WorkplaceState(Vector2I location, int capacity, string name, Textur
     public Vector2 GetCentreWorldPosition()
     {
         var mapController = InjectionManager.Get<MapController>();
-        return mapController.BaseMapLayer.ToGlobal(mapController.BaseMapLayer.MapToLocal(location));
+        return mapController.BaseMapLayer.GetCellCentreWorldPosition(location);
     }
 
     public bool TryAddWorker(ResidentState resident)

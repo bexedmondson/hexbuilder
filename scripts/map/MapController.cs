@@ -4,8 +4,8 @@ using Godot;
 public partial class MapController : Node2D, IInjectable
 {
     [Export]
-    private TileMapLayer baseMapLayer;
-    public TileMapLayer BaseMapLayer => baseMapLayer; 
+    private BaseTileMapLayer baseMapLayer;
+    public BaseTileMapLayer BaseMapLayer => baseMapLayer; 
 
     [Export]
     private TileMapLayer lockedOverlayLayer;
