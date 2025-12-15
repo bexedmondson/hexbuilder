@@ -106,4 +106,15 @@ public class ResidentManager : IInjectable
         residentState = null;
         return false;
     }
+    
+    public bool DoesResidentExistWithoutHouse()
+    {
+        foreach (var resident in AllResidents)
+        {
+            if (!resident.HasHouse)
+                return true;
+        }
+
+        return false;
+    }
 }

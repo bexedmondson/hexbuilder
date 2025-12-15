@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/WorkplaceInfoPopup.cs" id="22_tacgk"]
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
 [ext_resource type="PackedScene" uid="uid://nrnjv42wsci4" path="res://scenes/unlocked_cell_adjacency_info_ui.tscn" id="23_cpah3"]
+[ext_resource type="Script" uid="uid://fx01r1n7jd8" path="res://scripts/ui/ResidentNoHomeWarningIndicator.cs" id="23_rn43n"]
 [ext_resource type="PackedScene" uid="uid://b5cjn1sgivxbt" path="res://scenes/resident_info_ui.tscn" id="27_xvnm7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
@@ -101,6 +102,10 @@ region = Rect2(1920, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1w2nm"]
 atlas = ExtResource("15_nkuak")
 region = Rect2(2176, 896, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b3q0"]
+atlas = ExtResource("15_nkuak")
+region = Rect2(512, 1536, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvnm7"]
 atlas = ExtResource("15_nkuak")
@@ -336,7 +341,7 @@ text = "Workplaces"
 icon = SubResource("AtlasTexture_ipk01")
 expand_icon = true
 
-[node name="ResidentInfoButton2" type="Button" parent="CanvasLayer/UIMain" unique_id=1284482231]
+[node name="ResidentInfoButton" type="Button" parent="CanvasLayer/UIMain" unique_id=1284482231]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -358,6 +363,23 @@ text = "Residents
 icon = SubResource("AtlasTexture_1w2nm")
 alignment = 2
 expand_icon = true
+
+[node name="ExclamationMark" type="TextureRect" parent="CanvasLayer/UIMain/ResidentInfoButton" unique_id=388462247]
+visible = false
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 5.0
+offset_top = -35.0
+offset_right = 65.0
+offset_bottom = 25.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_4b3q0")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("23_rn43n")
 
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
@@ -724,7 +746,7 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
 [connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="CanvasLayer/UIMain/WorkplaceInfoButton2" to="PopupLayer/WorkplaceInfoPopup" method="ShowPopup"]
-[connection signal="pressed" from="CanvasLayer/UIMain/ResidentInfoButton2" to="PopupLayer/ResidentInfoPopup" method="ShowPopup"]
+[connection signal="pressed" from="CanvasLayer/UIMain/ResidentInfoButton" to="PopupLayer/ResidentInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/CloseButton" to="PopupLayer/UnlockedCellPopup" method="Close"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="Confirm"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/ConfirmButton" to="PopupLayer/LockedCellPopup" method="Confirm"]

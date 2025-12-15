@@ -18,7 +18,12 @@ public class ResidentState(string name)
 
     public void IncrementNoHouseTracking()
     {
+        bool emit = TurnsWithoutHouse == 0;
+        
         TurnsWithoutHouse++;
+        
+        if (emit)
+            InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdateedEvent(this));
     }
 
     public void ResetNoHouseTracking()

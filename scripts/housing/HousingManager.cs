@@ -105,6 +105,8 @@ public class HousingManager : IInjectable
         chosenHouse.TryAddOccupant(resident);
         
         residentHousingMap[resident] = chosenHouse; //TODO consider removing duplicate data here? update map from HouseData method?? hmm
+        
+        InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdateedEvent(resident));
         return true;
     }
 
