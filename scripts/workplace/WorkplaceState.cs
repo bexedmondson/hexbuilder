@@ -12,12 +12,6 @@ public class WorkplaceState(Vector2I location, int capacity, string name, Textur
     public ResidentState[] workers => _workers.ToArray();
     public int workerCount => workers.Length;
 
-    public Vector2 GetCentreWorldPosition()
-    {
-        var mapController = InjectionManager.Get<MapController>();
-        return mapController.BaseMapLayer.GetCellCentreWorldPosition(location);
-    }
-
     public bool TryAddWorker(ResidentState resident)
     {
         if (_workers.Count >= capacity)

@@ -53,14 +53,20 @@ public partial class MapCameraController : Camera2D, IInjectable
         Zoom = Vector2.One * zoomScale;
     }
 
-    public void FlyTo(Vector2 worldPosition)
+    public void FlyToCell(Vector2I cell, float duration = 0.5f)
+    {
+        var target = InjectionManager.Get<MapController>().BaseMapLayer.GetCellCentreWorldPosition(cell);
+        FlyToWorldPosition(target, duration);
+    }
+
+    public void FlyToWorldPosition(Vector2 worldPosition, float duration = 0.5f)
     {
         if (activeFlyTween != null && activeFlyTween.IsRunning())
             activeFlyTween.Kill();
         
         activeFlyTween = CreateTween();
         activeFlyTween.SetEase(Tween.EaseType.InOut);
-        activeFlyTween.TweenProperty(this, "position", worldPosition, 0.5);
+        activeFlyTween.TweenProperty(this, "position", worldPosition, duration);
         activeFlyTween.Play();
     }
 }

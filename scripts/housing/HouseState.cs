@@ -14,12 +14,6 @@ public class HouseState
         this.capacity = capacity;
     }
 
-    public Vector2 GetCentreWorldPosition()
-    {
-        var mapController = InjectionManager.Get<MapController>();
-        return mapController.BaseMapLayer.ToGlobal(mapController.BaseMapLayer.MapToLocal(location));
-    }
-
     public bool TryAddOccupant(ResidentState resident)
     {
         if (_occupants.Count >= capacity)

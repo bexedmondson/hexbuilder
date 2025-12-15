@@ -58,7 +58,7 @@ public partial class WorkplaceInfoUI : Control
 
     public void OnGoToButton()
     {
-        InjectionManager.Get<MapCameraController>().FlyTo(workplaceState.GetCentreWorldPosition());
+        InjectionManager.Get<MapCameraController>().FlyToCell(workplaceState.location);
         onGoToButtonAction?.Invoke();
     }
 

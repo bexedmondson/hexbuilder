@@ -25,7 +25,7 @@ public partial class HouseInfoUI : Control
 
     public void OnGoToButton()
     {
-        InjectionManager.Get<MapCameraController>().FlyTo(houseState.GetCentreWorldPosition());
+        InjectionManager.Get<MapCameraController>().FlyToCell(houseState.location);
         onGoToButtonAction?.Invoke();
     }
 }
