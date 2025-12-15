@@ -53,6 +53,12 @@ public partial class MapCameraController : Camera2D, IInjectable
         Zoom = Vector2.One * zoomScale;
     }
 
+    public void FlyToCellWithOffset(Vector2I cell, Vector2I screenOffset, float duration = 0.5f)
+    {
+        var target = InjectionManager.Get<MapController>().BaseMapLayer.GetCellCentreWorldPosition(cell);
+        FlyToWorldPosition(target + screenOffset, duration);
+    }
+
     public void FlyToCell(Vector2I cell, float duration = 0.5f)
     {
         var target = InjectionManager.Get<MapController>().BaseMapLayer.GetCellCentreWorldPosition(cell);
