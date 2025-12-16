@@ -384,26 +384,31 @@ script = ExtResource("23_rn43n")
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
 
-[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("infoContainer", "tileSelector", "confirmButton")]
-visible = false
+[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "leftPanel", "effectDetailsContainer", "effectInfoParent", "residentContainer", "residentDetailsParent", "tileSelector", "confirmButton")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 250.0
-offset_top = -350.0
-offset_right = 750.0
-offset_bottom = 450.0
+offset_left = 30.0
+offset_top = -420.0
+offset_right = 790.0
+offset_bottom = 420.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_1mh2o")
-infoContainer = NodePath("VBoxContainer/InfoPanel/InfoSubpanel/VBoxContainer")
+title = NodePath("Label")
+leftPanel = NodePath("HBoxContainer/VBoxContainer")
+effectDetailsContainer = NodePath("HBoxContainer/VBoxContainer/EffectInfoPanel")
+effectInfoParent = NodePath("HBoxContainer/VBoxContainer/EffectInfoPanel/InfoSubpanel/VBoxContainer")
+residentContainer = NodePath("HBoxContainer/VBoxContainer/HousingInfoPanel")
+residentDetailsParent = NodePath("HBoxContainer/VBoxContainer/HousingInfoPanel/ResidentSubpanel/VBoxContainer")
+residentInfoUIScene = ExtResource("27_xvnm7")
 unlockedCellAdjacencyUIScene = ExtResource("23_cpah3")
-tileSelector = NodePath("VBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer/TileSelectionGrid")
+tileSelector = NodePath("HBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer/TileSelectionGrid")
 tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
-confirmButton = NodePath("VBoxContainer/TileSelectorPanel/ConfirmButton")
+confirmButton = NodePath("HBoxContainer/TileSelectorPanel/ConfirmButton")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/UnlockedCellPopup" unique_id=1763966649]
 custom_minimum_size = Vector2(50, 50)
@@ -419,7 +424,21 @@ grow_horizontal = 0
 theme_override_constants/h_separation = 0
 text = "X"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup" unique_id=632567158]
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup" unique_id=1943958613]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_top = 25.0
+offset_right = 85.0
+offset_bottom = 61.0
+grow_horizontal = 2
+theme_type_variation = &"Label_Title"
+text = "tile name here"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup" unique_id=1281793294]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -429,13 +448,19 @@ anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InfoPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer" unique_id=1622472544]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/HBoxContainer" unique_id=943894368]
+custom_minimum_size = Vector2(338, 280)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="EffectInfoPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer" unique_id=1622472544]
 custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_type_variation = &"PanelLightEmbedded"
 
-[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel" unique_id=470061512]
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/EffectInfoPanel" unique_id=470061512]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -449,7 +474,7 @@ theme_type_variation = &"Label_Title"
 text = "Details"
 horizontal_alignment = 1
 
-[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel" unique_id=765547949]
+[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/EffectInfoPanel" unique_id=765547949]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -457,11 +482,11 @@ anchor_bottom = 1.0
 offset_left = 20.0
 offset_top = 80.0
 offset_right = -20.0
-offset_bottom = -22.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/InfoPanel/InfoSubpanel" unique_id=297073240]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/EffectInfoPanel/InfoSubpanel" unique_id=297073240]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -471,13 +496,56 @@ anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TileSelectorPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer" unique_id=192113969]
+[node name="HousingInfoPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer" unique_id=2003479124]
 custom_minimum_size = Vector2(0, 280)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"PanelLightEmbedded"
+
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/HousingInfoPanel" unique_id=489650760]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.0
+offset_top = 20.0
+offset_right = 76.0
+offset_bottom = 56.166668
+grow_horizontal = 2
+theme_type_variation = &"Label_Title"
+text = "Residents"
+horizontal_alignment = 1
+
+[node name="ResidentSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/HousingInfoPanel" unique_id=1503883920]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = -20.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/HousingInfoPanel/ResidentSubpanel" unique_id=673843590]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileSelectorPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/HBoxContainer" unique_id=192113969]
+custom_minimum_size = Vector2(338, 280)
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"PanelLightEmbedded"
 
-[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel" unique_id=232935934]
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/TileSelectorPanel" unique_id=232935934]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -491,7 +559,7 @@ theme_type_variation = &"Label_Title"
 text = "Build Options"
 horizontal_alignment = 1
 
-[node name="ScrollPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel" unique_id=1146177711]
+[node name="ScrollPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/TileSelectorPanel" unique_id=1146177711]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -503,7 +571,7 @@ offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ScrollPanel" unique_id=452461522]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/TileSelectorPanel/ScrollPanel" unique_id=452461522]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -513,12 +581,12 @@ grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 4
 
-[node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer" unique_id=443249669]
+[node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer" unique_id=443249669]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel" unique_id=248016104]
+[node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup/HBoxContainer/TileSelectorPanel" unique_id=248016104]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -748,7 +816,7 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="CanvasLayer/UIMain/WorkplaceInfoButton2" to="PopupLayer/WorkplaceInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="CanvasLayer/UIMain/ResidentInfoButton" to="PopupLayer/ResidentInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/CloseButton" to="PopupLayer/UnlockedCellPopup" method="Close"]
-[connection signal="pressed" from="PopupLayer/UnlockedCellPopup/VBoxContainer/TileSelectorPanel/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="Confirm"]
+[connection signal="pressed" from="PopupLayer/UnlockedCellPopup/HBoxContainer/TileSelectorPanel/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="Confirm"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/ConfirmButton" to="PopupLayer/LockedCellPopup" method="Confirm"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/CloseButton" to="PopupLayer/LockedCellPopup" method="Close"]
 [connection signal="visibility_changed" from="PopupLayer/HousingInfoPopup" to="PopupLayer/HousingInfoPopup" method="OnVisibilityChanged"]

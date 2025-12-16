@@ -3,16 +3,23 @@
 [ext_resource type="Script" uid="uid://cumathtplfne2" path="res://scripts/ui/ResidentInfoUI.cs" id="1_pyfhh"]
 
 [node name="ResidentInfo" type="Panel" unique_id=77035155 node_paths=PackedStringArray("residentLabel")]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(100, 80)
 theme_type_variation = &"PanelEmbedded"
 script = ExtResource("1_pyfhh")
 residentLabel = NodePath("Label")
 
 [node name="Label" type="Label" parent="." unique_id=1987213848]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 26.0
-offset_right = 106.0
-offset_bottom = 53.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 text = "testing 1 2 3"
+vertical_alignment = 1
+autowrap_mode = 2

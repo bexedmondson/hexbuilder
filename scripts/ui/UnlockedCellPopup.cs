@@ -1,12 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using Godot;
 
 public partial class UnlockedCellPopup : Popup
 {
     [Export]
-    private Control infoContainer;
+    private Label title;
+    
+    [Export]
+    private Control leftPanel;
+    
+    [Export]
+    private Control effectDetailsContainer;
+    
+    [Export]
+    private Control effectInfoParent;
+
+    [Export]
+    private Control residentContainer;
+
+    [Export]
+    private Control residentDetailsParent;
 
     [Export]
     private PackedScene unlockedCellAdjacencyUIScene;
@@ -42,32 +58,45 @@ public partial class UnlockedCellPopup : Popup
         
         cell = setCell;
         var cellCustomTileData = baseMapLayer.GetCellTileData(cell).GetCustomData("data").Obj as CustomTileData;
+
+        title.Text = cellCustomTileData.GetFileName();
         
-        SetupInfo(cellCustomTileData);
+        bool hasGeneralInfo = SetupInfo(cellCustomTileData);
+
+        bool hasResidentInfo = SetupResidents(cellCustomTileData);
+        
+        leftPanel.Visible = hasGeneralInfo || hasResidentInfo;
 
         SetupTileSelector(cellCustomTileData);
         
         this.SetVisible(true);
     }
 
-    private void SetupInfo(CustomTileData cellCustomTileData)
+    private bool SetupInfo(CustomTileData cellCustomTileData)
     {
-        for (int i = infoContainer.GetChildCount() - 1; i >= 0; i--)
+        for (int i = effectInfoParent.GetChildCount() - 1; i >= 0; i--)
         {
-            infoContainer.GetChild(i).QueueFree();
+            effectInfoParent.GetChild(i).QueueFree();
         }
+        
         var adjacentCells = mapController.BaseMapLayer.GetSurroundingCells(cell);
-        
-        var label = new Label();
-        StringBuilder sb = new StringBuilder("default:");
 
-        foreach (var kvp in cellCustomTileData.baseTurnCurrencyChange)
-        {
-            sb.Append($" {kvp.Value.ToString()} {kvp.Key.ToString()}");
-        }
+        bool hasEffects = false;
         
-        label.Text = sb.ToString();
-        infoContainer.AddChild(label);
+        if (cellCustomTileData.baseTurnCurrencyChange?.Count > 0)
+        {
+            hasEffects = true;
+            var label = new Label();
+            StringBuilder sb = new StringBuilder("default effects: ");
+
+            foreach (var kvp in cellCustomTileData.baseTurnCurrencyChange)
+            {
+                sb.Append($" {(kvp.Value > 0 ? "+" : string.Empty)}{kvp.Value.ToString()} {kvp.Key.ToString()}");
+            }
+
+            label.Text = sb.ToString();
+            effectInfoParent.AddChild(label);
+        }
 
         foreach (var adjacentCell in adjacentCells)
         {
@@ -78,14 +107,48 @@ public partial class UnlockedCellPopup : Popup
             if (!hasGivenEffect && !hasReceivedEffect)
                 continue;
             
+            hasEffects = true;
+            
             var adjacencyEffectUI = unlockedCellAdjacencyUIScene.Instantiate<UnlockedCellAdjacencyUI>();
             adjacencyEffectUI.Setup(adjacentData, cell, adjacentCell);
             if (hasGivenEffect)
                 adjacencyEffectUI.SetGivenEffects(givenEffect);
             if (hasReceivedEffect)
                 adjacencyEffectUI.SetReceivedEffects(receivedEffect);
-            infoContainer.AddChild(adjacencyEffectUI);
+            effectInfoParent.AddChild(adjacencyEffectUI);
         }
+
+        effectDetailsContainer.Visible = hasEffects;
+        return hasEffects;
+    }
+    
+    private bool SetupResidents(CustomTileData cellCustomTileData)
+    {
+        if (cellCustomTileData.residentCapacity == 0)
+        {
+            residentContainer.Visible = false;
+            return false;
+        }
+
+        residentContainer.Visible = true;
+
+        var housingManager = InjectionManager.Get<HousingManager>();
+        if (!housingManager.TryGetHouseOnCell(cell, out var houseState))
+        {
+            Label noneLabel = new Label();
+            noneLabel.Text = "no residents";
+            residentDetailsParent.AddChild(noneLabel);
+            return true;
+        }
+
+        foreach (var occupantData in houseState.occupants)
+        {
+            var residentLabel = new Label();
+            residentLabel.Text = occupantData.Name;
+            residentDetailsParent.AddChild(residentLabel);
+        }
+
+        return true;
     }
 
     private void SetupTileSelector(CustomTileData cellCustomTileData)
@@ -144,6 +207,21 @@ public partial class UnlockedCellPopup : Popup
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count > 0)
             tileSelectionGroup.Pressed -= OnSelectionChanged;
+
+        foreach (var residentInfo in residentDetailsParent.GetChildren())
+        {
+            residentInfo.QueueFree();
+        }
+        
+        foreach (var effectInfo in effectInfoParent.GetChildren())
+        {
+            effectInfo.QueueFree();
+        }
+
+        foreach (var tileSelectionInfo in tileSelector.GetChildren())
+        {
+            tileSelectionInfo.QueueFree();
+        }
         
         confirmButton.Disabled = true;
     }

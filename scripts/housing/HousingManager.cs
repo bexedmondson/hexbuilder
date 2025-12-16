@@ -115,4 +115,9 @@ public class HousingManager : IInjectable
     {
         return residentHousingMap.TryGetValue(resident, out houseState);
     }
+
+    public bool TryGetHouseOnCell(Vector2I cell, out HouseState houseState)
+    {
+        return houseDatas.TryGetValue(cell, out houseState);
+    }
 }
