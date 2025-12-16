@@ -40,6 +40,7 @@ public partial class MapInputProcessor : Node2D
             }
             else //TODO handle what to do when in unlocking state
             {
+                mapHighlightController.OnSelectCell(cell);
                 InjectionManager.Get<MapCameraController>().FlyToCellWithOffset(cell, new Vector2I(300, 0), 0.3f);
                 unlockedCellPopup.ShowForCell(mapController.BaseMapLayer, cell);
                 lockedCellPopup.Close();
