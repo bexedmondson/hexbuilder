@@ -4,10 +4,11 @@
 [ext_resource type="Resource" uid="uid://dylx1bgqm5eh3" path="res://data/terrain/hill.tres" id="1_aomn4"]
 [ext_resource type="Resource" uid="uid://bp787dbrt1226" path="res://data/terrain/mountain.tres" id="2_c4fns"]
 [ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="3_s3scp"]
+[ext_resource type="Resource" uid="uid://d2ks5o3lef3w2" path="res://data/buildings/pit_mine.tres" id="4_c4fns"]
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = Array[Object]([ExtResource("1_aomn4"), ExtResource("2_c4fns"), ExtResource("3_s3scp")])
+canBePlacedOn = Array[Object]([ExtResource("1_aomn4"), ExtResource("2_c4fns"), ExtResource("3_s3scp"), ExtResource("4_c4fns")])
 price = {
 1: 2
 }

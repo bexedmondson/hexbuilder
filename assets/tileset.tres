@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="5_tvqo2"]
 [ext_resource type="Resource" uid="uid://8m4fhhljy05o" path="res://data/terrain/water.tres" id="7_ctfve"]
 [ext_resource type="Resource" uid="uid://dylx1bgqm5eh3" path="res://data/terrain/hill.tres" id="8_b6r2m"]
+[ext_resource type="Resource" uid="uid://11wjgqy74j1" path="res://data/terrain/water_rocks.tres" id="8_eklle"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="9_rx844"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="10_5kckd"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq4" path="res://data/terrain/island.tres" id="11_040ux"]
@@ -16,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://b2tu1kvag36kv" path="res://data/buildings/archer_camp.tres" id="14_o04i8"]
 [ext_resource type="Resource" uid="uid://cd4473yab66g4" path="res://data/buildings/market.tres" id="15_131hj"]
 [ext_resource type="Resource" uid="uid://cc5jv204rhvnk" path="res://data/buildings/tower.tres" id="16_56aw7"]
+[ext_resource type="Resource" uid="uid://bhnebodpuroy" path="res://data/buildings/rowboat.tres" id="16_f2vc7"]
 [ext_resource type="Resource" uid="uid://de8ocg7h3ig78" path="res://data/buildings/lumber_pile.tres" id="17_f2vc7"]
 [ext_resource type="Resource" uid="uid://b8n5chruakol7" path="res://data/buildings/cabin.tres" id="18_eklle"]
 [ext_resource type="Resource" uid="uid://cj02mf2c7m6bl" path="res://data/buildings/mill.tres" id="19_powct"]
@@ -31,10 +33,13 @@
 [ext_resource type="Resource" uid="uid://c4sgkb7bwedw5" path="res://data/buildings/sheep.tres" id="28_fjnr0"]
 [ext_resource type="Resource" uid="uid://caf21i351x6aa" path="res://data/buildings/watermill.tres" id="29_8nlen"]
 [ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/house.tres" id="30_67nna"]
+[ext_resource type="Resource" uid="uid://bu7kjauo40wv1" path="res://data/buildings/flax.tres" id="30_eklle"]
 [ext_resource type="Resource" uid="uid://cv140bxpsbkar" path="res://data/buildings/smelter.tres" id="31_ekhic"]
 [ext_resource type="Resource" uid="uid://dm2775ci1y87i" path="res://data/buildings/wizard_tower.tres" id="32_8liu1"]
 [ext_resource type="Texture2D" uid="uid://dljtmphrvr20u" path="res://assets/all_2d_rivers_2.png" id="35_56aw7"]
+[ext_resource type="Resource" uid="uid://c1afkcn3qtaj3" path="res://data/buildings/orchard.tres" id="35_powct"]
 [ext_resource type="Texture2D" uid="uid://c82nnycfg8vot" path="res://assets/all_2d_terrain_2.png" id="36_f2vc7"]
+[ext_resource type="Resource" uid="uid://d2ks5o3lef3w2" path="res://data/buildings/pit_mine.tres" id="36_tkdha"]
 [ext_resource type="Texture2D" uid="uid://cg1xv1drijb6b" path="res://assets/all_2d_buildings_2.png" id="37_eklle"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o04i8"]
@@ -103,7 +108,7 @@ texture_region_size = Vector2i(480, 480)
 }
 2:3/0 = 0
 2:3/0/texture_origin = Vector2i(0, 69)
-2:3/0/custom_data_0 = ExtResource("7_ctfve")
+2:3/0/custom_data_0 = ExtResource("8_eklle")
 2:3/0/metadata/_better_terrain = {
 &"type": 3
 }
@@ -208,6 +213,24 @@ texture_region_size = Vector2i(480, 480)
 3:4/0 = 0
 3:4/0/texture_origin = Vector2i(0, 69)
 3:4/0/custom_data_0 = ExtResource("28_5kckd")
+4:4/0 = 0
+4:4/0/texture_origin = Vector2i(0, 69)
+4:4/0/custom_data_0 = ExtResource("35_powct")
+0:5/0 = 0
+0:5/0/texture_origin = Vector2i(0, 69)
+0:5/0/custom_data_0 = ExtResource("16_f2vc7")
+1:5/0 = 0
+1:5/0/texture_origin = Vector2i(0, 69)
+1:5/0/custom_data_0 = ExtResource("16_f2vc7")
+2:5/0 = 0
+2:5/0/texture_origin = Vector2i(0, 69)
+2:5/0/custom_data_0 = ExtResource("16_f2vc7")
+3:5/0 = 0
+3:5/0/texture_origin = Vector2i(0, 69)
+3:5/0/custom_data_0 = ExtResource("30_eklle")
+4:5/0 = 0
+4:5/0/texture_origin = Vector2i(0, 69)
+4:5/0/custom_data_0 = ExtResource("36_tkdha")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ap1my"]
 resource_name = "paths"

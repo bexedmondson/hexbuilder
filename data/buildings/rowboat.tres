@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://bhnebodpuroy"]
+
+[ext_resource type="Resource" uid="uid://8m4fhhljy05o" path="res://data/terrain/water.tres" id="1_bqqnd"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_cnfp7"]
+
+[resource]
+script = ExtResource("3_cnfp7")
+canBePlacedOn = Array[Object]([ExtResource("1_bqqnd")])
+price = {
+1: 2
+}
+baseTurnCurrencyChange = {
+0: 3
+}
+adjacencies = Array[Object]([])
+unlockRequirements = []
+workerCapacity = 1
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

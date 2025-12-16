@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://d2ks5o3lef3w2"]
+
+[ext_resource type="Resource" uid="uid://dylx1bgqm5eh3" path="res://data/terrain/hill.tres" id="1_5ixn8"]
+[ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_rmu2w"]
+[ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="3_w7he1"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="4_lwcxg"]
+
+[resource]
+script = ExtResource("4_lwcxg")
+canBePlacedOn = Array[Object]([ExtResource("1_5ixn8"), ExtResource("3_w7he1"), ExtResource("3_rmu2w")])
+price = {
+1: 2
+}
+baseTurnCurrencyChange = {
+2: 3
+}
+adjacencies = Array[Object]([])
+unlockRequirements = []
+workerCapacity = 2
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
