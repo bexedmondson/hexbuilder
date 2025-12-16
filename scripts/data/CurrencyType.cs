@@ -3,5 +3,6 @@ public enum CurrencyType
 {
     Food,
     Wood,
-    Stone
+    Stone,
+    Fabric
 }

@@ -12,7 +12,7 @@ price = {
 1: 2
 }
 baseTurnCurrencyChange = {
-2: 3
+2: 2
 }
 adjacencies = Array[Object]([])
 unlockRequirements = []

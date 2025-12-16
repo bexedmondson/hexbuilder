@@ -72,18 +72,6 @@ fractal_lacunarity = 4.0
 noise = SubResource("FastNoiseLite_77sti")
 seamless = true
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wf2ql"]
-atlas = ExtResource("15_nkuak")
-region = Rect2(2432, 1152, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rn43n"]
-atlas = ExtResource("15_nkuak")
-region = Rect2(384, 1280, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l3nqq"]
-atlas = ExtResource("15_nkuak")
-region = Rect2(128, 1280, 128, 128)
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mpwrp"]
 load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
 
@@ -122,7 +110,8 @@ inventoryDisplay = NodePath("../CanvasLayer/UIMain/CurrencyDisplay")
 startAmounts = Dictionary[int, int]({
 0: 10,
 1: 10,
-2: 5
+2: 5,
+3: 5
 })
 
 [node name="MapController" type="Node2D" parent="." unique_id=1433828285 node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer", "mapGenerator")]
@@ -272,11 +261,6 @@ offset_right = -10.0
 offset_bottom = 10.0
 grow_horizontal = 0
 script = ExtResource("21_wf2ql")
-currencyIcons = Dictionary[int, Resource]({
-0: SubResource("AtlasTexture_wf2ql"),
-1: SubResource("AtlasTexture_rn43n"),
-2: SubResource("AtlasTexture_l3nqq")
-})
 
 [node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain" unique_id=468898507]
 layout_mode = 1
@@ -385,6 +369,7 @@ script = ExtResource("23_rn43n")
 layer = 2
 
 [node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "leftPanel", "effectDetailsContainer", "effectInfoParent", "residentContainer", "residentDetailsParent", "tileSelector", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -403,7 +388,6 @@ effectDetailsContainer = NodePath("HBoxContainer/VBoxContainer/EffectInfoPanel")
 effectInfoParent = NodePath("HBoxContainer/VBoxContainer/EffectInfoPanel/InfoSubpanel/VBoxContainer")
 residentContainer = NodePath("HBoxContainer/VBoxContainer/HousingInfoPanel")
 residentDetailsParent = NodePath("HBoxContainer/VBoxContainer/HousingInfoPanel/ResidentSubpanel/VBoxContainer")
-residentInfoUIScene = ExtResource("27_xvnm7")
 unlockedCellAdjacencyUIScene = ExtResource("23_cpah3")
 tileSelector = NodePath("HBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer/TileSelectionGrid")
 tileScene = ExtResource("9_hp2ex")
