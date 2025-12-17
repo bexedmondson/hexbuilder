@@ -5,8 +5,8 @@ public partial class DebugCellInfoUI : Control
     [Export]
     private Label label;
 
-    public void Update(CustomTileData tileData)
+    public void Update(CustomTileData tileData, Vector2I cell)
     {
-        label.Text = tileData == null ? "null" : tileData.GetFileName();
+        label.Text = $"{(tileData == null ? "null" : tileData.GetFileName())} {cell.ToString()}";
     }
 }

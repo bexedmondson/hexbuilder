@@ -127,8 +127,8 @@ texture_region_size = Vector2i(480, 480)
 0:0/0/texture_origin = Vector2i(0, 69)
 0:0/0/custom_data_0 = ExtResource("13_5kckd")
 0:0/0/metadata/_better_terrain = {
-4: [0],
-12: [0],
+4: [0, 3],
+12: [0, 3],
 &"symmetry": 1,
 &"type": 4
 }
@@ -136,8 +136,8 @@ texture_region_size = Vector2i(480, 480)
 1:0/0/texture_origin = Vector2i(0, 69)
 1:0/0/custom_data_0 = ExtResource("13_5kckd")
 1:0/0/metadata/_better_terrain = {
-2: [0],
-10: [0],
+2: [0, 3],
+10: [0, 3],
 &"symmetry": 1,
 &"type": 4
 }
@@ -145,8 +145,8 @@ texture_region_size = Vector2i(480, 480)
 2:0/0/texture_origin = Vector2i(0, 69)
 2:0/0/custom_data_0 = ExtResource("13_5kckd")
 2:0/0/metadata/_better_terrain = {
-6: [0],
-14: [0],
+6: [0, 3],
+14: [0, 3],
 &"symmetry": 1,
 &"type": 4
 }
@@ -219,12 +219,21 @@ texture_region_size = Vector2i(480, 480)
 0:5/0 = 0
 0:5/0/texture_origin = Vector2i(0, 69)
 0:5/0/custom_data_0 = ExtResource("16_f2vc7")
+0:5/0/metadata/_better_terrain = {
+&"type": 3
+}
 1:5/0 = 0
 1:5/0/texture_origin = Vector2i(0, 69)
 1:5/0/custom_data_0 = ExtResource("16_f2vc7")
+1:5/0/metadata/_better_terrain = {
+&"type": 3
+}
 2:5/0 = 0
 2:5/0/texture_origin = Vector2i(0, 69)
 2:5/0/custom_data_0 = ExtResource("16_f2vc7")
+2:5/0/metadata/_better_terrain = {
+&"type": 3
+}
 3:5/0 = 0
 3:5/0/texture_origin = Vector2i(0, 69)
 3:5/0/custom_data_0 = ExtResource("30_eklle")

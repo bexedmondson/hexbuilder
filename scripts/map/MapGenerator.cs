@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Godot;
 
 public partial class MapGenerator : Node
@@ -184,6 +185,13 @@ public partial class MapGenerator : Node
             if (mapController.GetCellStatus(affectedCell) == CellStatus.Hidden)
                 allCellsToUpdate.Add(affectedCell);
         }
+
+        StringBuilder sb = new();
+        foreach (var cell in allCellsToUpdate)
+        {
+            sb.Append(cell + " ");
+        }
+        GD.Print(sb.ToString());
         
         bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate));
     }

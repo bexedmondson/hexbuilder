@@ -34,12 +34,12 @@ public partial class DebugCellInfoUIContainer : Control
         {
             if (infoUIs.TryGetValue(usedCell, out var infoUI))
             {
-                infoUI.Update(mapLayer.GetCellCustomData(usedCell));
+                infoUI.Update(mapLayer.GetCellCustomData(usedCell), usedCell);
             }
             else
             {
                 var newInfoUI = debugCellInfoUIScene.Instantiate<DebugCellInfoUI>();
-                newInfoUI.Update(mapLayer.GetCellCustomData(usedCell));
+                newInfoUI.Update(mapLayer.GetCellCustomData(usedCell), usedCell);
                 newInfoUI.GlobalPosition = mapLayer.ToGlobal(mapLayer.MapToLocal(usedCell));
                 newInfoUI.Visible = isOn;
                 infoUIs[usedCell] = newInfoUI;

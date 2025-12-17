@@ -21,8 +21,7 @@ public partial class MapInputProcessor : Node2D
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        if (@event is InputEventMouseButton eventMouseButton
-            && eventMouseButton.ButtonIndex == MouseButton.Left
+        if (@event is InputEventScreenTouch eventMouseButton
             && !eventMouseButton.Pressed)
         {
             var cell = mapController.GetCellUnderMouse();
