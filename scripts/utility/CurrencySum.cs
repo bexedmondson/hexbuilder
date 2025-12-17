@@ -10,7 +10,40 @@ public class CurrencySum : Dictionary<CurrencyType, int>
     {
         this.Add(initialCurrency, initialAmount);
     }
+
+    public static CurrencySum operator +(CurrencySum left, CurrencySum right)
+    {
+        left.Add(right);
+        return left;
+    }
     
+    public static CurrencySum operator -(CurrencySum left, CurrencySum right)
+    {
+        CurrencySum final = new CurrencySum();
+        final.Add(left);
+        
+        foreach (var r in right)
+        {
+            if (final.ContainsKey(r.Key))
+                final[r.Key] -= r.Value;
+            else
+                final[r.Key] = -r.Value;
+        }
+        
+        return final;
+    }
+
+    public static CurrencySum operator *(CurrencySum operand, int multiplier)
+    {
+        CurrencySum final = new CurrencySum();
+        foreach (var o in operand)
+        {
+            final[o.Key] = o.Value * multiplier;
+        }
+        
+        return final;
+    }
+
     public void Add(CurrencySum sumToAdd)
     { 
         foreach (var kvp in sumToAdd)

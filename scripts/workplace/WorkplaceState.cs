@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using Godot;
 
-public class WorkplaceState(Vector2I location, int capacity, string name, Texture2D iconTexture)
+public class WorkplaceState(Vector2I location, CustomTileData tileData, Texture2D iconTexture)
 {
     public Vector2I location { get; private set; } = location;
-    public int capacity { get; private set; } = capacity;
-    public string name { get; private set; } = name;
+    public CustomTileData tileData { get; private set; } = tileData;
+    public int capacity => tileData.workerCapacity;
+    public string name => tileData.GetFileName();
     public Texture2D iconTexture { get; private set; } = iconTexture;
 
     private List<ResidentState> _workers = new();
@@ -16,11 +17,11 @@ public class WorkplaceState(Vector2I location, int capacity, string name, Textur
     {
         if (_workers.Count >= capacity)
             return false;
-        
+
         _workers.Add(resident);
         return true;
     }
-    
+
     public bool TryRemoveWorker(out ResidentState resident)
     {
         if (_workers.Count <= 0)
@@ -34,19 +35,30 @@ public class WorkplaceState(Vector2I location, int capacity, string name, Textur
         return true;
     }
 
-    public void ChangeCapacity(int newCapacity, out List<ResidentState> removedWorkers)
+    public void UpdateWorkplaceType(CustomTileData newTileData, out List<ResidentState> removedWorkers)
     {
         removedWorkers = new();
-        
-        if (capacity <= newCapacity)
+
+        if (capacity <= newTileData.workerCapacity)
         {
-            capacity = newCapacity;
+            tileData = newTileData;
             return;
         }
-        
+
         //get sublist of _workers from {newCapacity}th index to end
-        removedWorkers.AddRange(_workers[newCapacity..]);
-        _workers.RemoveRange(newCapacity, capacity - newCapacity);
-        capacity = newCapacity;
+        removedWorkers.AddRange(_workers[newTileData.workerCapacity..]);
+        _workers.RemoveRange(newTileData.workerCapacity, capacity - newTileData.workerCapacity);
+        tileData = newTileData;
+    }
+
+    public CurrencySum GetWorkerDependentAdjacencyEffects(CustomTileData affectedTileData)
+    {
+        if (_workers.Count == 0)
+            return new();
+
+        bool hasEffect = affectedTileData.TryGetAdjacencyEffectFromTileData(tileData, out var baseEffectPerWorker);
+
+        return !hasEffect ? new() : baseEffectPerWorker * _workers.Count;
+
     }
 }

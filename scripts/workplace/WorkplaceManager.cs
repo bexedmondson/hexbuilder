@@ -47,10 +47,10 @@ public class WorkplaceManager : IInjectable
 
             if (workplaceDatas.TryGetValue(cell, out var existingWorkplaceData))
             {
-                if (existingWorkplaceData.capacity == cellData.workerCapacity)
+                if (existingWorkplaceData.tileData == cellData)
                     continue;
 
-                existingWorkplaceData.ChangeCapacity(cellData.workerCapacity, out List<ResidentState> removedWorkers);
+                existingWorkplaceData.UpdateWorkplaceType(cellData, out List<ResidentState> removedWorkers);
 
                 foreach (var removedWorker in removedWorkers)
                 {
@@ -62,7 +62,7 @@ public class WorkplaceManager : IInjectable
             else
             {
                 //TODO pass in CustomTileData instead?
-                var newWorkplace = new WorkplaceState(cell, cellData.workerCapacity, cellData.GetFileName(), tileDatabase.GetTileTexture(cellData));
+                var newWorkplace = new WorkplaceState(cell, cellData, tileDatabase.GetTileTexture(cellData));
                 workplaceDatas[cell] = newWorkplace;
                 workplaceUpdatedEvent.newOrChangedWorkplaces.Add(newWorkplace);
             }

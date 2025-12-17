@@ -191,7 +191,7 @@ public partial class MapGenerator : Node
         {
             sb.Append(cell + " ");
         }
-        GD.Print(sb.ToString());
+        //GD.Print(sb.ToString());
         
         bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate));
     }
