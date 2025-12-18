@@ -17,6 +17,12 @@ public partial class UnlockedCellPopup : Popup
     
     [Export]
     private Control effectInfoParent;
+    
+    [Export]
+    private Control workplaceDetailsContainer;
+    
+    [Export]
+    private WorkplaceInfoUI workplaceInfoUI;
 
     [Export]
     private Control residentContainer;
@@ -63,9 +69,16 @@ public partial class UnlockedCellPopup : Popup
         
         bool hasGeneralInfo = SetupInfo(cellCustomTileData);
 
-        bool hasResidentInfo = SetupResidents(cellCustomTileData);
+        workplaceDetailsContainer.Visible = cellCustomTileData.IsWorkplace;
+        if (cellCustomTileData.IsWorkplace)
+        {
+            InjectionManager.Get<WorkplaceManager>().TryGetWorkplaceAtLocation(cell, out var workplaceState);
+            workplaceInfoUI.SetWorkplaceInfo(workplaceState, null);
+        }
+            
+        SetupResidents(cellCustomTileData);
         
-        leftPanel.Visible = hasGeneralInfo || hasResidentInfo;
+        leftPanel.Visible = hasGeneralInfo || cellCustomTileData.IsWorkplace || cellCustomTileData.IsResidence;
 
         SetupTileSelector(cellCustomTileData);
         
@@ -122,12 +135,17 @@ public partial class UnlockedCellPopup : Popup
         return hasEffects;
     }
     
-    private bool SetupResidents(CustomTileData cellCustomTileData)
+    private void SetupResidents(CustomTileData cellCustomTileData)
     {
-        if (cellCustomTileData.residentCapacity == 0)
+        if (!cellCustomTileData.IsResidence)
         {
             residentContainer.Visible = false;
-            return false;
+            return;
+        }
+        
+        for (int i = residentDetailsParent.GetChildCount() - 1; i >= 0; i--)
+        {
+            residentDetailsParent.GetChild(i).QueueFree();
         }
 
         residentContainer.Visible = true;
@@ -138,7 +156,7 @@ public partial class UnlockedCellPopup : Popup
             Label noneLabel = new Label();
             noneLabel.Text = "no residents";
             residentDetailsParent.AddChild(noneLabel);
-            return true;
+            return;
         }
 
         foreach (var occupantData in houseState.occupants)
@@ -147,8 +165,6 @@ public partial class UnlockedCellPopup : Popup
             residentLabel.Text = occupantData.Name;
             residentDetailsParent.AddChild(residentLabel);
         }
-
-        return true;
     }
 
     private void SetupTileSelector(CustomTileData cellCustomTileData)

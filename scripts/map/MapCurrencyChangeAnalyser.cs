@@ -57,6 +57,8 @@ public class MapCurrencyChangeAnalyser : IInjectable
     
     private CurrencySum CalculateAdjacencyEffects(Vector2I centreCell, CustomTileData centreTileData)
     {
+        workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
+        
         CurrencySum adjacencyEffects = new();
 
         Dictionary<int, Dictionary<CustomTileData, AdjacencyConfig>> adjacenciesByDistance = new();
@@ -90,8 +92,22 @@ public class MapCurrencyChangeAnalyser : IInjectable
                 var neighbourData = mapController.BaseMapLayer.GetCellCustomData(neighbour);
                 if (neighbourData == null) 
                     continue;
-                
-                if (relevantAdjacenciesByAdjacentData.TryGetValue(neighbourData, out var relevantAdjacency))
+
+                if (!relevantAdjacenciesByAdjacentData.TryGetValue(neighbourData, out var relevantAdjacency))
+                    continue;
+
+                //workplaces' effects are dependent on if there are workers there - otherwise, the effects just happen
+                if (neighbourData.IsWorkplace)
+                {
+                    if (!workplaceManager.TryGetWorkplaceAtLocation(neighbour, out var neighbourWorkplace))
+                    {
+                        GD.PushError("workplace data from tile data but no workplace found here?? something's gone horribly wrong");
+                        continue;
+                    }
+                    
+                    adjacencyEffects.Add(neighbourWorkplace.GetWorkerDependentAdjacencyEffects(centreTileData));
+                }
+                else
                 {
                     adjacencyEffects.Add(relevantAdjacency.currencyEffect);
                 }

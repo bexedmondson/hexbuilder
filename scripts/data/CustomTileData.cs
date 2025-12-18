@@ -20,9 +20,13 @@ public partial class CustomTileData : Resource
 
     [Export]
     public int residentCapacity;
+
+    public bool IsResidence => residentCapacity > 0;
     
     [Export]
     public int workerCapacity;
+    
+    public bool IsWorkplace => workerCapacity > 0;
 
     public bool TryGetAdjacencyEffectFromTileData(CustomTileData otherTile, out CurrencySum effect)
     {

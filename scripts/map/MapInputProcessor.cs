@@ -11,12 +11,14 @@ public partial class MapInputProcessor : Node2D
 
     private MapController mapController;
     private MapHighlightController mapHighlightController;
+    private MapCameraController mapCameraController;
 
     public override void _Ready()
     {
         base._Ready();
         mapController = InjectionManager.Get<MapController>();
         mapHighlightController = InjectionManager.Get<MapHighlightController>();
+        mapCameraController = InjectionManager.Get<MapCameraController>();
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -30,19 +32,24 @@ public partial class MapInputProcessor : Node2D
             if (cellStatus == CellStatus.Hidden)
                 return;
             
-            mapHighlightController.OnSelectCell(cell);
+            //mapHighlightController.OnSelectCell(cell);
 
             if (cellStatus == CellStatus.Locked)
             {
-                lockedCellPopup.ShowForCell(cell);
                 unlockedCellPopup.Close();
+                mapHighlightController.OnSelectCell(cell);
+                lockedCellPopup.ShowForCell(cell);
             }
             else //TODO handle what to do when in unlocking state
             {
-                mapHighlightController.OnSelectCell(cell);
-                InjectionManager.Get<MapCameraController>().FlyToCellWithOffset(cell, new Vector2I(300, 0), 0.3f);
-                unlockedCellPopup.ShowForCell(mapController.BaseMapLayer, cell);
                 lockedCellPopup.Close();
+                mapHighlightController.OnSelectCell(cell);
+                
+                mapCameraController ??= InjectionManager.Get<MapCameraController>();
+                var offset = mapCameraController.Zoom.Length() == 0 ? 0 : Mathf.RoundToInt(500 / mapCameraController.Zoom.Length());
+                mapCameraController.FlyToCellWithOffset(cell, new Vector2I(offset, 0), 0.3f);
+                
+                unlockedCellPopup.ShowForCell(mapController.BaseMapLayer, cell);
             }
         }
     }
