@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://cfvsti1luatbu" path="res://addons/tile_placement_configurator/adjacency/TileAdjacencyMainNode.cs" id="1_4fr6r"]
 
 [node name="TileSelectionNode" type="GraphNode" unique_id=1235936953 node_paths=PackedStringArray("textureRect", "optionButton")]
-custom_minimum_size = Vector2(300, 0)
-offset_right = 300.0
-offset_bottom = 213.0
+custom_minimum_size = Vector2(450, 0)
+offset_right = 600.0
+offset_bottom = 218.0
 title = "example"
 ignore_invalid_connection_type = true
 slot/0/left_enabled = false

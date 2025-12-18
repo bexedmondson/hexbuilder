@@ -184,6 +184,8 @@ public partial class UnlockedCellPopup : Popup
             tileOptionUI.SetButtonGroup(tileSelectionGroup);
             tileSelector.AddChild(tileOptionUI);
         }
+        
+        //TODO add locked options as well
 
         tileSelectionGroup.Pressed += OnSelectionChanged;
     }
@@ -209,7 +211,7 @@ public partial class UnlockedCellPopup : Popup
         var selectedTileInfo = selectedButton.tileInfo;
 
         var mapController = InjectionManager.Get<MapController>();
-        mapController.SetCell(cell, selectedTileInfo);
+        mapController.BuildTileAtCell(cell, selectedTileInfo);
 
         inventoryManager ??= InjectionManager.Get<InventoryManager>();
         inventoryManager.SpendCurrency(new CurrencySum(selectedTileInfo.tileData.price));

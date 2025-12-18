@@ -34,6 +34,8 @@ public partial class MapController : Node2D, IInjectable
     private TimedJobManager timedJobManager;
     private EventDispatcher eventDispatcher;
     private CellStatusManager cellStatusManager;
+    
+    private CellBuildStatsTracker cellBuildStatsTracker;
 
     public override void _EnterTree()
     {
@@ -51,6 +53,7 @@ public partial class MapController : Node2D, IInjectable
         workplaceManager = new WorkplaceManager(this);
         timedJobManager = new TimedJobManager(this);
         residentManager = new ResidentManager(this);
+        cellBuildStatsTracker = new CellBuildStatsTracker();
         
         var tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase ??= new TileDatabase();
@@ -119,9 +122,11 @@ public partial class MapController : Node2D, IInjectable
         eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
-    public void SetCell(Vector2I cell, TileDatabase.TileInfo tileToSet)
+    public void BuildTileAtCell(Vector2I cell, TileDatabase.TileInfo tileToSet)
     {
         baseMapLayer.SetCell(cell, baseMapLayer.TileSet.GetSourceId(tileToSet.sourceId), tileToSet.tileCoords);
+
+        cellBuildStatsTracker.OnCellTileBuilt(tileToSet.tileData);
         
         eventDispatcher.Dispatch(new MapUpdatedEvent());
     }

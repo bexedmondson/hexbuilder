@@ -12,16 +12,17 @@ public class TileDatabase : IInjectable
         public AtlasTexture tileTexture;
         public CustomTileData tileData;
     }
-
-    private TileOptionUnlockManager tileOptionUnlockManager;
     
     private List<TileInfo> tileInfos = new();
     
     public TileDatabase()
     {
         InjectionManager.Register(this);
+    }
 
-        tileOptionUnlockManager = new TileOptionUnlockManager(this);
+    ~TileDatabase()
+    {
+        InjectionManager.Deregister(this);
     }
 
     public void AddTileSetTileData(TileSet tileSet)

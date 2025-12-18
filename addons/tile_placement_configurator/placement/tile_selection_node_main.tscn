@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://3lb8wqmku7cf" path="res://addons/tile_placement_configurator/placement/TileInfoMainNode.cs" id="1_w3j40"]
 
 [node name="TileSelectionNode" type="GraphNode" unique_id=1291926310 node_paths=PackedStringArray("optionButton", "textureRect", "deleteButton")]
-custom_minimum_size = Vector2(300, 0)
-offset_right = 300.0
-offset_bottom = 213.0
+custom_minimum_size = Vector2(600, 0)
+offset_right = 554.0
+offset_bottom = 218.0
 title = "example"
 ignore_invalid_connection_type = true
 slot/0/left_enabled = false
