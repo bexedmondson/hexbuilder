@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://11wjgqy74j1" path="res://data/terrain/water_rocks.tres" id="8_eklle"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="9_rx844"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="10_5kckd"]
+[ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="10_tkdha"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq4" path="res://data/terrain/island.tres" id="11_040ux"]
 [ext_resource type="Resource" uid="uid://dri684d2te7kl" path="res://data/buildings/village.tres" id="13_4fte4"]
 [ext_resource type="Resource" uid="uid://bhdo22lh6munn" path="res://data/buildings/bridge.tres" id="13_5kckd"]
@@ -41,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://c82nnycfg8vot" path="res://assets/all_2d_terrain_2.png" id="36_f2vc7"]
 [ext_resource type="Resource" uid="uid://d2ks5o3lef3w2" path="res://data/buildings/pit_mine.tres" id="36_tkdha"]
 [ext_resource type="Texture2D" uid="uid://cg1xv1drijb6b" path="res://assets/all_2d_buildings_2.png" id="37_eklle"]
+[ext_resource type="Resource" uid="uid://b72uoycdm7u8j" path="res://data/buildings/weaver.tres" id="38_powct"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o04i8"]
 resource_name = "terrain"
@@ -90,7 +92,7 @@ texture_region_size = Vector2i(480, 480)
 2:2/0/custom_data_0 = ExtResource("3_qg7by")
 3:2/0 = 0
 3:2/0/texture_origin = Vector2i(0, 69)
-3:2/0/custom_data_0 = ExtResource("9_rx844")
+3:2/0/custom_data_0 = ExtResource("10_tkdha")
 0:3/0 = 0
 0:3/0/texture_origin = Vector2i(0, 69)
 0:3/0/custom_data_0 = ExtResource("9_rx844")
@@ -240,6 +242,9 @@ texture_region_size = Vector2i(480, 480)
 4:5/0 = 0
 4:5/0/texture_origin = Vector2i(0, 69)
 4:5/0/custom_data_0 = ExtResource("36_tkdha")
+5:0/0 = 0
+5:0/0/texture_origin = Vector2i(0, 69)
+5:0/0/custom_data_0 = ExtResource("38_powct")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ap1my"]
 resource_name = "paths"
