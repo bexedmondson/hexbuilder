@@ -176,6 +176,8 @@ public partial class UnlockedCellPopup : Popup
         
         TileDatabase tileDatabase = InjectionManager.Get<TileDatabase>();
         var compatibleTileInfos = tileDatabase.GetAllCompatibleTileInfos(cellCustomTileData);
+        
+        compatibleTileInfos.Sort((lhs, rhs) => lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName()));
 
         foreach (var compatibleTileInfo in compatibleTileInfos)
         {
