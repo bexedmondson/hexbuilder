@@ -201,7 +201,7 @@ public partial class MapGenerator : Node
         GD.Print(sb2.ToString());
         
         bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate), false);
-        baseMapLayer.EmitSignal("Changed");
+        baseMapLayer.EmitSignal("changed");
     }
 
     private void GenerateCell(Vector2I cell)
@@ -289,6 +289,8 @@ public partial class MapGenerator : Node
     {
         var usedCells = baseMapLayer.GetUsedCells();
 
+        var waterCells = bt.GetTilesInTerrain(oceanTerrain);
+        
         List<Vector2I> riverCells = new();
 
         foreach (var usedCell in usedCells)
@@ -312,8 +314,8 @@ public partial class MapGenerator : Node
                 Vector2I neighbourBefore = i > 0 ? neighbours[i - 1] : neighbours[^1];
                 Vector2I neighbourAfter = i < neighbours.Count - 1 ? neighbours[i + 1] : neighbours[0];
                 
-                if (baseMapLayer.GetCellCustomData(neighbourBefore) == waterCustomTileData
-                    || baseMapLayer.GetCellCustomData(neighbourAfter) == waterCustomTileData)
+                if (waterCells.Contains(baseMapLayer.GetCellTileData(neighbourBefore))
+                    || waterCells.Contains(baseMapLayer.GetCellTileData(neighbourAfter)))
                     isRiver = false;
             }
 
