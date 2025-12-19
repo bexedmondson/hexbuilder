@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://no4wtwivctvf"]
+
+[ext_resource type="Resource" uid="uid://b5pbujxgkogee" path="res://data/buildings/rowboat_large.tres" id="2_hmha6"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="2_x8hgf"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="3_7qi03"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="4_6h2bg"]
+
+[sub_resource type="Resource" id="Resource_0wakl"]
+script = ExtResource("3_7qi03")
+requiredTilesBuildCounts = Dictionary[ExtResource("2_x8hgf"), int]({
+ExtResource("2_hmha6"): 1
+})
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[sub_resource type="Resource" id="Resource_xqxv3"]
+script = ExtResource("4_6h2bg")
+requiredAmountsGained = Dictionary[int, int]({
+0: 50
+})
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[resource]
+script = ExtResource("2_x8hgf")
+canBePlacedOn = Array[Object]([ExtResource("2_hmha6")])
+price = {
+1: 6,
+3: 3
+}
+baseTurnCurrencyChange = {
+0: 5
+}
+adjacencies = Array[Object]([])
+unlockRequirements = [SubResource("Resource_0wakl"), SubResource("Resource_xqxv3")]
+workerCapacity = 2
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

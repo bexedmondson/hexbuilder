@@ -4,6 +4,14 @@
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_x8ft0"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_i4mag"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_305jr"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="5_i4mag"]
+
+[sub_resource type="Resource" id="Resource_305jr"]
+script = ExtResource("5_i4mag")
+requiredAmountsGained = Dictionary[int, int]({
+2: 20
+})
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -15,6 +23,6 @@ baseTurnCurrencyChange = {
 0: -1
 }
 adjacencies = Array[Object]([])
-unlockRequirements = []
+unlockRequirements = [SubResource("Resource_305jr")]
 residentCapacity = 1
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

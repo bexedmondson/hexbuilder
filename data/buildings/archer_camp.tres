@@ -1,14 +1,10 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://b2tu1kvag36kv"]
 
-[ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_3l8dh"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
-[ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_b0ko3"]
-[ext_resource type="Resource" uid="uid://c45irgldcys11" path="res://data/terrain/sand.tres" id="3_6sccn"]
-[ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="4_cfeew"]
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = Array[Object]([ExtResource("1_3l8dh"), ExtResource("2_b0ko3"), ExtResource("3_6sccn"), ExtResource("4_cfeew")])
+canBePlacedOn = Array[Object]([])
 price = {
 1: 2
 }

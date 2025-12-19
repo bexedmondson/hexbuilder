@@ -24,6 +24,7 @@
 [ext_resource type="Resource" uid="uid://cj02mf2c7m6bl" path="res://data/buildings/mill.tres" id="19_powct"]
 [ext_resource type="Resource" uid="uid://c42v6g70vxci2" path="res://data/buildings/castle.tres" id="21_tkdha"]
 [ext_resource type="Resource" uid="uid://b26b1kiyr2vjc" path="res://data/buildings/mine.tres" id="22_5umvd"]
+[ext_resource type="Resource" uid="uid://b5pbujxgkogee" path="res://data/buildings/rowboat_large.tres" id="23_1d33g"]
 [ext_resource type="Resource" uid="uid://b8hvwxf5jgsix" path="res://data/buildings/wall.tres" id="23_640dv"]
 [ext_resource type="Resource" uid="uid://ds1q5vg3ldkkv" path="res://data/buildings/woodcutter.tres" id="23_bcm11"]
 [ext_resource type="Resource" uid="uid://cksbfb33kjift" path="res://data/buildings/dock.tres" id="24_1d33g"]
@@ -32,6 +33,7 @@
 [ext_resource type="Resource" uid="uid://chwut76ukbrlw" path="res://data/buildings/field.tres" id="27_7ply4"]
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="28_5kckd"]
 [ext_resource type="Resource" uid="uid://c4sgkb7bwedw5" path="res://data/buildings/sheep.tres" id="28_fjnr0"]
+[ext_resource type="Resource" uid="uid://no4wtwivctvf" path="res://data/buildings/sailboat.tres" id="28_xfaqi"]
 [ext_resource type="Resource" uid="uid://caf21i351x6aa" path="res://data/buildings/watermill.tres" id="29_8nlen"]
 [ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/house.tres" id="30_67nna"]
 [ext_resource type="Resource" uid="uid://bu7kjauo40wv1" path="res://data/buildings/flax.tres" id="30_eklle"]
@@ -226,14 +228,8 @@ texture_region_size = Vector2i(480, 480)
 }
 1:5/0 = 0
 1:5/0/texture_origin = Vector2i(0, 69)
-1:5/0/custom_data_0 = ExtResource("16_f2vc7")
+1:5/0/custom_data_0 = ExtResource("23_1d33g")
 1:5/0/metadata/_better_terrain = {
-&"type": 3
-}
-2:5/0 = 0
-2:5/0/texture_origin = Vector2i(0, 69)
-2:5/0/custom_data_0 = ExtResource("16_f2vc7")
-2:5/0/metadata/_better_terrain = {
 &"type": 3
 }
 3:5/0 = 0
@@ -245,6 +241,12 @@ texture_region_size = Vector2i(480, 480)
 5:0/0 = 0
 5:0/0/texture_origin = Vector2i(0, 69)
 5:0/0/custom_data_0 = ExtResource("38_powct")
+2:5/0 = 0
+2:5/0/texture_origin = Vector2i(0, 69)
+2:5/0/custom_data_0 = ExtResource("28_xfaqi")
+2:5/0/metadata/_better_terrain = {
+&"type": 3
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ap1my"]
 resource_name = "paths"

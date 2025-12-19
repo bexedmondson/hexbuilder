@@ -3,6 +3,7 @@
 [ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="1_7jax1"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_6lq31"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="4_bia6p"]
 
 [sub_resource type="Resource" id="Resource_g314a"]
 script = ExtResource("2_6lq31")
@@ -12,6 +13,13 @@ currencyEffect = {
 1: 1
 }
 
+[sub_resource type="Resource" id="Resource_6lq31"]
+script = ExtResource("4_bia6p")
+requiredAmountsGained = Dictionary[int, int]({
+1: 10
+})
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
 [resource]
 script = ExtResource("1_24cbf")
 canBePlacedOn = Array[Object]([ExtResource("1_7jax1")])
@@ -20,5 +28,5 @@ price = {
 }
 baseTurnCurrencyChange = {}
 adjacencies = Array[Object]([SubResource("Resource_g314a")])
-unlockRequirements = []
+unlockRequirements = [SubResource("Resource_6lq31")]
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -3,6 +3,15 @@
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://bp787dbrt1226" path="res://data/terrain/mountain.tres" id="1_fu5n7"]
 [ext_resource type="Resource" uid="uid://dylx1bgqm5eh3" path="res://data/terrain/hill.tres" id="2_oxwtk"]
+[ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="4_52ph2"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="4_oxwtk"]
+
+[sub_resource type="Resource" id="Resource_52ph2"]
+script = ExtResource("4_oxwtk")
+requiredTilesBuildCounts = Dictionary[ExtResource("1_24cbf"), int]({
+ExtResource("4_52ph2"): 3
+})
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -14,6 +23,6 @@ baseTurnCurrencyChange = {
 0: -1
 }
 adjacencies = Array[Object]([])
-unlockRequirements = []
+unlockRequirements = [SubResource("Resource_52ph2")]
 residentCapacity = 2
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
