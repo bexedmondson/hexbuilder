@@ -13,6 +13,19 @@ public class HousingManager : IInjectable
 
     private Dictionary<ResidentState, HouseState> residentHousingMap = new();
     
+    public bool AllHousingFull {
+        get
+        {
+            foreach (var houseData in houseDatas)
+            {
+                if (!houseData.Value.IsFull)
+                    return false;
+            }
+
+            return true;
+        }
+    }
+    
     public HousingManager(MapController mapController)
     {
         this.mapController = mapController;

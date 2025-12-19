@@ -37,7 +37,10 @@ public class ResidentManager : IInjectable
         }
 
         //if no food, return
-        if (!InjectionManager.Get<InventoryManager>().CanAfford(new CurrencySum(CurrencyType.Food, 1)))
+        if (!InjectionManager.Get<InventoryManager>().CanAfford(new CurrencySum(CurrencyType.Food, residents.Count)))
+            return;
+
+        if (InjectionManager.Get<HousingManager>().AllHousingFull)
             return;
 
         CreateResident();
