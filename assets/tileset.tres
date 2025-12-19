@@ -753,7 +753,7 @@ metadata/_better_terrain = {
 &"decoration": ["Decoration", Color(0.4117647, 0.4117647, 0.4117647, 1), 3, [], {
 &"path": "res://addons/better-terrain/icons/Decoration.svg"
 }],
-&"terrains": [["river", Color(0.09411764, 0.9882353, 0.9882353, 1), 0, [], {
+&"terrains": [["river", Color(0.09411764, 0.9882353, 0.9882353, 1), 0, [3], {
 &"path": ""
 }], ["grass", Color(0, 1, 0.1796875, 1), 0, [], {
 &"path": ""

@@ -174,7 +174,14 @@ public partial class MapGenerator : Node
                 GenerateCell(affectedCell);
         }
         
-        FindRiverTiles();
+        var riverCells = FindRiverCells();
+        
+        StringBuilder sb1 = new("river cells: ");
+        foreach (var cell in riverCells)
+        {
+            sb1.Append(cell + " ");
+        }
+        GD.Print(sb1.ToString());
 
         mapController ??= InjectionManager.Get<MapController>();
         
@@ -182,18 +189,19 @@ public partial class MapGenerator : Node
         List<Vector2I> allCellsToUpdate = new();
         foreach (var affectedCell in allAffectedCells)
         {
-            if (mapController.GetCellStatus(affectedCell) == CellStatus.Hidden)
+            if (riverCells.Contains(affectedCell) && mapController.GetCellStatus(affectedCell) == CellStatus.Hidden)
                 allCellsToUpdate.Add(affectedCell);
         }
 
-        StringBuilder sb = new();
+        StringBuilder sb2 = new("cells to update: ");
         foreach (var cell in allCellsToUpdate)
         {
-            sb.Append(cell + " ");
+            sb2.Append(cell + " ");
         }
-        //GD.Print(sb.ToString());
+        GD.Print(sb2.ToString());
         
-        bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate));
+        bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate), false);
+        baseMapLayer.EmitSignal("Changed");
     }
 
     private void GenerateCell(Vector2I cell)
@@ -277,7 +285,7 @@ public partial class MapGenerator : Node
             baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? sandRocksCoords : sandCoords);
     }
     
-    private void FindRiverTiles()
+    private List<Vector2I> FindRiverCells()
     {
         var usedCells = baseMapLayer.GetUsedCells();
 
@@ -315,10 +323,18 @@ public partial class MapGenerator : Node
             if (isRiver)
                 riverCells.Add(usedCell); //don't set it here so this cell's water data value can be used to check if other cells are rivers
         }
+        
+        var terrainRiverCells = bt.GetTilesInTerrain(riverTerrain);
 
         foreach (var riverCell in riverCells)
         {
+            //if already a river, continue
+            if (terrainRiverCells.Contains(baseMapLayer.GetCellTileData(riverCell)))
+                continue;
+            
             bt.SetCell(riverCell, riverTerrain);
         }
+
+        return riverCells;
     }
 }

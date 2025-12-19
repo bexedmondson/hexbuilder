@@ -146,10 +146,20 @@ public partial class MapController : Node2D, IInjectable
         return cellStatusManager.GetVisibleCells();
     }
 
-    public int GetCellUnlockCost(Vector2I cell)
+    public int GetCellUnlockWorkerRequirement(Vector2I cell)
     {
-        //TODO change
-        return 1;
+        return Mathf.FloorToInt(GetDistanceFromCentreTo(cell) / 2f);
+    }
+
+    private int GetDistanceFromCentreTo(Vector2I cell)
+    {
+        var x = Mathf.Abs(cell.X);
+        
+        if (cell.X == cell.Y) //accounting for hex coords
+            return x * 2;
+        
+        var y = Mathf.Abs(cell.Y);
+        return x > y ? x : y;
     }
 
     public Dictionary<Vector2I, int> GetSurroundingCellsUpToDistance(Vector2I centreCell, int maxDistance)

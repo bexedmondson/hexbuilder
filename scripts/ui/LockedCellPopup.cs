@@ -23,7 +23,7 @@ public partial class LockedCellPopup : Popup
     public void ShowForCell(Vector2I setCell)
     {
         cell = setCell;
-        int requiredWorkerCount = mapController.GetCellUnlockCost(cell);
+        int requiredWorkerCount = mapController.GetCellUnlockWorkerRequirement(cell);
         int availableResidents = residentManager.GetNotBusyResidentCount();
         
         workerCountLabel.Text = $"x{requiredWorkerCount}";
@@ -37,7 +37,7 @@ public partial class LockedCellPopup : Popup
 
     public override void Confirm()
     {
-        int requiredWorkerCount = mapController.GetCellUnlockCost(cell);
+        int requiredWorkerCount = mapController.GetCellUnlockWorkerRequirement(cell);
         int availableResidents = residentManager.GetNotBusyResidentCount();
         if (requiredWorkerCount > availableResidents)
             return;
