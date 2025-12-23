@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dm7exjhepiwdn"]
+
+[ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="1_3473w"]
+[ext_resource type="Script" uid="uid://1yydqns8wpfo" path="res://scripts/ui/EncyclopediaTileOptionUI.cs" id="2_e4nkf"]
+[ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="3_ymdbp"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_up4l7"]
+
+[node name="TileOption" unique_id=1032778022 node_paths=PackedStringArray("lockIndicator") instance=ExtResource("1_3473w")]
+button_group = SubResource("ButtonGroup_up4l7")
+script = ExtResource("2_e4nkf")
+lockIndicator = NodePath("MarginContainer/Container/TileTexture/LockTextureRect")
+
+[node name="LockTextureRect" type="TextureRect" parent="MarginContainer/Container/TileTexture" parent_id_path=PackedInt32Array(1644242724) index="0" unique_id=1852126011]
+self_modulate = Color(1, 1, 1, 0.65882355)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ymdbp")
+
+[node name="VBoxContainer" parent="MarginContainer/Container" parent_id_path=PackedInt32Array(2134865771) index="1" unique_id=1908694678]
+alignment = 1
+
+[node name="NameDisplay" parent="MarginContainer/Container/VBoxContainer" index="0" unique_id=1752738764]
+horizontal_alignment = 1
+
+[node name="CurrencyDisplay" parent="MarginContainer/Container/VBoxContainer" index="1" unique_id=1826121471]
+visible = false

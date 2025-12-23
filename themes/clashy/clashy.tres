@@ -57,12 +57,36 @@ texture_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fpjl1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kx8pi"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+border_width_left = 2
+border_width_top = 8
+border_width_right = 2
+border_width_bottom = 8
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ml68f"]
 texture = ExtResource("3_i7pvi")
 texture_margin_left = 10.0
 texture_margin_top = 5.0
 texture_margin_right = 10.0
 texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j57xd"]
+bg_color = Color(0.8, 0.8, 0.8, 1)
+border_width_left = 8
+border_width_top = 2
+border_width_right = 8
+border_width_bottom = 2
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 5
 
 [resource]
 default_base_scale = 1.0
@@ -108,6 +132,7 @@ GreenButton/styles/hover = ExtResource("18_5k5bw")
 GreenButton/styles/normal = ExtResource("19_bp2cy")
 GreenButton/styles/pressed = ExtResource("20_7xukr")
 HBoxContainer/constants/separation = 8
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_kx8pi")
 Label/colors/font_outline_color = Color(0.262932, 0.262932, 0.262932, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 12
@@ -145,3 +170,4 @@ SuccessButton/styles/pressed = ExtResource("28_x27uw")
 TabContainer/styles/panel = ExtResource("23_1ivug")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_ml68f")
 VBoxContainer/constants/separation = 8
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_j57xd")

@@ -14,6 +14,27 @@ public class TileDatabase : IInjectable
     }
     
     private List<TileInfo> tileInfos = new();
+
+    public List<TileInfo> AllTileInfos => new(tileInfos);
+
+    private List<TileInfo> allBuildingTileInfos = null;
+    public List<TileInfo> AllBuildingTileInfos
+    {
+        get
+        {
+            if (allBuildingTileInfos != null)
+                return allBuildingTileInfos;
+
+            allBuildingTileInfos = new();
+            foreach (var tileInfo in tileInfos)
+            {
+                if (tileInfo.sourceId == 1) //there has to be a better way to do this. no API to see if this tileset source's ID is "buildings" though :(
+                    allBuildingTileInfos.Add(tileInfo);
+            }
+
+            return allBuildingTileInfos;
+        }
+    }
     
     public TileDatabase()
     {
@@ -35,6 +56,12 @@ public class TileDatabase : IInjectable
             var source = tileSet.GetSource(sourceId) as TileSetAtlasSource; //all sources will be atlases so assumption is acceptable
             for (int j = 0; j < source.GetTilesCount(); j++)
             {
+                var tileCoords = source.GetTileId(j);
+                var tileData = source.GetTileData(tileCoords, 0).GetCustomData("data").Obj as CustomTileData;
+
+                if (tileData == null)
+                    continue;
+                
                 TileInfo tileInfo = new TileInfo();
                 tileInfo.tileSet = tileSet;
                 tileInfo.sourceId = sourceId;
@@ -42,6 +69,7 @@ public class TileDatabase : IInjectable
                 tileInfo.tileCoords = source.GetTileId(j);
                 tileInfo.tileTexture = new AtlasTexture();
                 tileInfo.tileTexture.Atlas = source.Texture;
+                tileInfo.tileTexture.FilterClip = true;
                 tileInfo.tileTexture.Region = source.GetTileTextureRegion(tileInfo.tileCoords);
                 
                 tileInfo.tileData = source.GetTileData(tileInfo.tileCoords, 0).GetCustomData("data").Obj as CustomTileData;
