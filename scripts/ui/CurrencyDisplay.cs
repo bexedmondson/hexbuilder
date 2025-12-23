@@ -10,6 +10,9 @@ public partial class CurrencyDisplay : Control
     protected PackedScene singleCurrencyDisplayScene;
 
     [Export]
+    private bool displayAsDelta = false;
+
+    [Export]
     protected Color iconColor = new Color(255, 255, 255);
 
     protected Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
@@ -31,8 +34,14 @@ public partial class CurrencyDisplay : Control
                 this.AddChild(existingSingleCurrencyDisplay);
             }
             
-            existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount);
-            existingSingleCurrencyDisplay.ShowDelta(false);
+            existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount, displayAsDelta);
+            existingSingleCurrencyDisplay.ShowSeparateDelta(false);
+        }
+
+        foreach (var kvp in currencyDisplays)
+        {
+            if (!currencySum.ContainsKey(kvp.Key))
+                kvp.Value.QueueFree();
         }
     }
 

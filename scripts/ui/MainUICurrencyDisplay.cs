@@ -45,8 +45,8 @@ public partial class MainUICurrencyDisplay : CurrencyDisplay
 
             int delta = 0;
             turnChange.TryGetValue(kvp.Key, out delta);
-            existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount, delta);
-            existingSingleCurrencyDisplay.ShowDelta(true);
+            existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount, false);
+            existingSingleCurrencyDisplay.ShowSeparateDelta(true, delta);
         }
     }
 
@@ -56,7 +56,7 @@ public partial class MainUICurrencyDisplay : CurrencyDisplay
 
         foreach (var kvp in currencyDisplays)
         {
-            kvp.Value.SetDelta(turnDelta.GetValueOrDefault(kvp.Key, 0));
+            kvp.Value.ShowSeparateDelta(true, turnDelta.GetValueOrDefault(kvp.Key, 0));
         }
     }
 

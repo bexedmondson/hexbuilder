@@ -29,6 +29,7 @@ text = "gives:"
 [node name="CurrencyDisplay" parent="GivesHBoxContainer" unique_id=767577572 instance=ExtResource("2_re3pf")]
 layout_mode = 2
 size_flags_horizontal = 2
+displayAsDelta = true
 iconColor = Color(0, 0, 0, 1)
 
 [node name="ReceivesHBoxContainer2" type="HBoxContainer" parent="." unique_id=1356682576]
@@ -42,4 +43,5 @@ text = "receives:"
 [node name="CurrencyDisplay" parent="ReceivesHBoxContainer2" unique_id=929819009 instance=ExtResource("2_re3pf")]
 layout_mode = 2
 size_flags_horizontal = 2
+displayAsDelta = true
 iconColor = Color(0, 0, 0, 1)

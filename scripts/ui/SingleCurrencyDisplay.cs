@@ -15,11 +15,10 @@ public partial class SingleCurrencyDisplay : Control
     private readonly string plusPrefix = "+";
     private readonly string minusPrefix = "-";
 
-    public void SetCurrency(Texture2D iconTexture, int quantity, int delta = 0)
+    public void SetCurrency(Texture2D iconTexture, int quantity, bool displayAsDelta = false)
     {
         icon.Texture = iconTexture;
-        quantityLabel.Text = quantity.ToString();
-        SetDelta(delta);
+        quantityLabel.Text = $"{(displayAsDelta && quantity > 0 ? "+" : string.Empty)}{quantity}";
     }
 
     public void SetIconColor(Color color)
@@ -27,13 +26,11 @@ public partial class SingleCurrencyDisplay : Control
         icon.SelfModulate = color;
     }
 
-    public void ShowDelta(bool showDelta)
+    public void ShowSeparateDelta(bool showDelta, int delta = 0)
     {
         changeLabel.Visible = showDelta;
-    }
-
-    public void SetDelta(int delta)
-    {
-        changeLabel.Text = $"({(delta < 0 ? string.Empty : plusPrefix)}{delta})";
+        
+        if (showDelta)
+            changeLabel.Text = $"({(delta < 0 ? string.Empty : plusPrefix)}{delta})";
     }
 }

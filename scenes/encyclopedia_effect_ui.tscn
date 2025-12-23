@@ -47,4 +47,5 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 1
 singleCurrencyDisplayScene = SubResource("PackedScene_wntgf")
+displayAsDelta = true
 iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
