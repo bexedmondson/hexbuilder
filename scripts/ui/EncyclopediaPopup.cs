@@ -92,7 +92,7 @@ public partial class EncyclopediaPopup : Popup
                     continue;
                 
                 var affectsUI = affectedByScene.Instantiate<EncyclopediaEffectUI>();
-                affectsUI.Setup(otherAdjacency);
+                affectsUI.Setup(otherTileInfo.tileData, new CurrencySum(otherAdjacency.currencyEffect));
                 affectsParent.AddChild(affectsUI);
             }
         }
