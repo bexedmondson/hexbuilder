@@ -38,10 +38,18 @@ public partial class CurrencyDisplay : Control
             existingSingleCurrencyDisplay.ShowSeparateDelta(false);
         }
 
+        List<CurrencyType> toRemove = new();
         foreach (var kvp in currencyDisplays)
         {
             if (!currencySum.ContainsKey(kvp.Key))
+            {
                 kvp.Value.QueueFree();
+                toRemove.Add(kvp.Key);
+            }
+        }
+        foreach (var currencyTypeToRemove in toRemove)
+        {
+            currencyDisplays.Remove(currencyTypeToRemove);
         }
     }
 

@@ -18,7 +18,7 @@ public partial class SingleCurrencyDisplay : Control
     public void SetCurrency(Texture2D iconTexture, int quantity, bool displayAsDelta = false)
     {
         icon.Texture = iconTexture;
-        quantityLabel.Text = $"{(displayAsDelta && quantity > 0 ? "+" : string.Empty)}{quantity}";
+        quantityLabel.Text = $"{(displayAsDelta && quantity > 0 ? plusPrefix : string.Empty)}{quantity}";
     }
 
     public void SetIconColor(Color color)

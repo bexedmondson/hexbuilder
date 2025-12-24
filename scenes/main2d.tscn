@@ -926,6 +926,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileDetails", "tileTextureRect", "defaultEffectDisplay", "affectsParent", "affectedByParent")]
+visible = false
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
