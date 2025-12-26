@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_24cbf")
 canBePlacedOn = Array[Object]([])
-price = {
+buildPrice = {
 1: 2
 }
 baseTurnCurrencyChange = {

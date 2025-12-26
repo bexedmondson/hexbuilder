@@ -92,6 +92,9 @@ public class MapCurrencyChangeAnalyser : IInjectable
                 var neighbourData = mapController.BaseMapLayer.GetCellCustomData(neighbour);
                 if (neighbourData == null) 
                     continue;
+                
+                if (mapController.GetCellStatus(neighbour) != CellStatus.Unlocked)
+                    continue;
 
                 if (!relevantAdjacenciesByAdjacentData.TryGetValue(neighbourData, out var relevantAdjacency))
                     continue;

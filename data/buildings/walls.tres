@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_24cbf")
 canBePlacedOn = [ExtResource("1_xombo")]
-price = {
+buildPrice = {
 1: 2,
 2: 8
 }

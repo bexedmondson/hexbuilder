@@ -26,11 +26,12 @@ currencyEffect = Dictionary[int, int]({
 [resource]
 script = ExtResource("4_kp0b5")
 canBePlacedOn = Array[Object]([ExtResource("1_whhrf"), ExtResource("2_oqk2a"), ExtResource("3_jits7")])
-price = {}
+buildPrice = {}
+unlockRequirements = []
 baseTurnCurrencyChange = {
 1: 3
 }
 adjacencies = Array[Object]([SubResource("Resource_kp0b5"), SubResource("Resource_rh5oq")])
-unlockRequirements = []
 workerCapacity = 1
+storageCapacity = {}
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

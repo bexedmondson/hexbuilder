@@ -31,7 +31,7 @@ public partial class TileOptionUI : Button
 
     protected virtual void SetCostState()
     {
-        var tilePrice = new CurrencySum(tileInfo.tileData.price);
+        var tilePrice = new CurrencySum(tileInfo.tileData.buildPrice);
         currencyDisplay.DisplayCurrencyAmount(tilePrice);
         
         var inventoryManager = InjectionManager.Get<InventoryManager>();

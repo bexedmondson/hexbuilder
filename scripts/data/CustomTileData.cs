@@ -7,16 +7,16 @@ public partial class CustomTileData : Resource
     public Godot.Collections.Array<CustomTileData> canBePlacedOn;
 
     [Export]
-    public Godot.Collections.Dictionary<CurrencyType, int> price;
+    public Godot.Collections.Dictionary<CurrencyType, int> buildPrice;
+
+    [Export] //all requirements must be satisfied - AnyOf unlock requirement to be implemented when needed
+    public Godot.Collections.Array<UnlockRequirement> unlockRequirements;
 
     [Export]
     public Godot.Collections.Dictionary<CurrencyType, int> baseTurnCurrencyChange;
 
     [Export]
     public Godot.Collections.Array<AdjacencyConfig> adjacencies;
-
-    [Export] //all requirements must be satisfied - AnyOf unlock requirement to be implemented when needed
-    public Godot.Collections.Array<UnlockRequirement> unlockRequirements;
 
     [Export]
     public int residentCapacity;
@@ -27,6 +27,9 @@ public partial class CustomTileData : Resource
     public int workerCapacity;
     
     public bool IsWorkplace => workerCapacity > 0;
+
+    [Export]
+    public Godot.Collections.Dictionary<CurrencyType, int> storageCapacity;
 
     public bool TryGetAdjacencyEffectFromTileData(CustomTileData otherTile, out CurrencySum effect)
     {

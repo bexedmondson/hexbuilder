@@ -20,14 +20,15 @@ currencyEffect = {}
 [resource]
 script = ExtResource("8_58okd")
 canBePlacedOn = Array[Object]([])
-price = {
+buildPrice = {
 1: 2,
 2: 12
 }
+unlockRequirements = []
 baseTurnCurrencyChange = {
 0: -4
 }
 adjacencies = Array[Object]([SubResource("Resource_s5lrj"), SubResource("Resource_uw7xw")])
-unlockRequirements = []
 residentCapacity = 6
+storageCapacity = {}
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

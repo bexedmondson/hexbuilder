@@ -18,13 +18,14 @@ metadata/_custom_type_script = "uid://begyr0mqsjkto"
 [resource]
 script = ExtResource("3_flggr")
 canBePlacedOn = Array[Object]([ExtResource("1_mfofh"), ExtResource("2_yr352")])
-price = {
+buildPrice = {
 1: 2
 }
+unlockRequirements = [SubResource("Resource_tx8ee")]
 baseTurnCurrencyChange = {
 3: 2
 }
 adjacencies = Array[Object]([])
-unlockRequirements = [SubResource("Resource_tx8ee")]
 workerCapacity = 1
+storageCapacity = {}
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

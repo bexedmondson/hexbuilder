@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("4_3tutr")
 canBePlacedOn = Array[Object]([ExtResource("1_jhxqr"), ExtResource("2_tfsah"), ExtResource("3_kt3v3")])
-price = {
+buildPrice = {
 1: 1,
 3: 1
 }

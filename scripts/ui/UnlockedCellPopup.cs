@@ -199,7 +199,7 @@ public partial class UnlockedCellPopup : Popup
         //TODO: hate that there is so much controlled from this class!! but works for now at least
         mapController.HighlightNeighbourEffects(cell, selectedOption.tileInfo);
 
-        confirmButton.Disabled = !inventoryManager.CanAfford(new CurrencySum(selectedOption.tileInfo.tileData.price));
+        confirmButton.Disabled = !inventoryManager.CanAfford(new CurrencySum(selectedOption.tileInfo.tileData.buildPrice));
     }
 
     public override void Confirm()
@@ -216,7 +216,7 @@ public partial class UnlockedCellPopup : Popup
         mapController.BuildTileAtCell(cell, selectedTileInfo);
 
         inventoryManager ??= InjectionManager.Get<InventoryManager>();
-        inventoryManager.SpendCurrency(new CurrencySum(selectedTileInfo.tileData.price));
+        inventoryManager.SpendCurrency(new CurrencySum(selectedTileInfo.tileData.buildPrice));
         Close();
     }
 

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_54yph")
 canBePlacedOn = []
-price = {}
+buildPrice = {}
 baseTurnCurrencyChange = {}
 adjacencies = Array[Object]([])
 unlockRequirements = []
