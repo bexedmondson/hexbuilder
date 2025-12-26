@@ -4,7 +4,10 @@ using Godot;
 public partial class InventoryManager : Node2D, IInjectable
 {
     [Export]
-    private CurrencyDisplay inventoryDisplay;
+    private MainInventoryDisplay mainInventoryDisplay;
+    
+    [Export]
+    private Godot.Collections.Dictionary<CurrencyType, Texture2D> currencyIcons;
     
     [Export]
     private Godot.Collections.Dictionary<CurrencyType, int> startAmounts;
@@ -34,7 +37,7 @@ public partial class InventoryManager : Node2D, IInjectable
         inventory.Clear();
         inventory = new CurrencySum(startAmounts);
         
-        inventoryDisplay.DisplayCurrencyAmount(inventory);
+        mainInventoryDisplay.FullUpdate(inventory);
     }
 
     public bool CanAfford(CurrencySum price)
@@ -52,8 +55,12 @@ public partial class InventoryManager : Node2D, IInjectable
     {
         inventory.Subtract(price);
         
-        inventoryDisplay.Cleanup(); //obviously temporary, this is a horrendously inefficient way to handle this
-        inventoryDisplay.DisplayCurrencyAmount(inventory);
+        mainInventoryDisplay.FullUpdate(inventory);
+    }
+
+    public Texture2D GetIcon(CurrencyType currencyType)
+    {
+        return currencyIcons[currencyType];
     }
 
     public void OnNextTurn(CurrencySum[] allCurrencyChanges)
@@ -64,7 +71,6 @@ public partial class InventoryManager : Node2D, IInjectable
             statsTracker.OnCurrencyChange(currencyChange);
         }
 
-        inventoryDisplay.Cleanup(); //obviously temporary
-        inventoryDisplay.DisplayCurrencyAmount(inventory);
+        mainInventoryDisplay.FullUpdate(inventory);
     }
 }

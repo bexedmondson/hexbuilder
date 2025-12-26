@@ -4,18 +4,15 @@ using Godot;
 public partial class CurrencyDisplay : Control
 {
     [Export]
-    protected Godot.Collections.Dictionary<CurrencyType, Resource> currencyIcons;
-
-    [Export]
-    protected PackedScene singleCurrencyDisplayScene;
+    private PackedScene singleCurrencyDisplayScene;
 
     [Export]
     private bool displayAsDelta = false;
 
     [Export]
-    protected Color iconColor = new Color(255, 255, 255);
+    private Color iconColor = new Color(255, 255, 255);
 
-    protected Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
+    private Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
 
     public virtual void DisplayCurrencyAmount(CurrencySum currencySum)
     {
@@ -34,8 +31,8 @@ public partial class CurrencyDisplay : Control
                 this.AddChild(existingSingleCurrencyDisplay);
             }
             
-            existingSingleCurrencyDisplay.SetCurrency(currencyIcons[currencyType] as Texture2D, amount, displayAsDelta);
-            existingSingleCurrencyDisplay.ShowSeparateDelta(false);
+            existingSingleCurrencyDisplay.SetCurrencyIcon(currencyType);
+            existingSingleCurrencyDisplay.SetCurrencyAmount(amount, displayAsDelta);
         }
 
         List<CurrencyType> toRemove = new();

@@ -77,6 +77,8 @@ public partial class MapController : Node2D, IInjectable
         
         baseMapLayer.SetCell(Vector2I.Zero, defaultCentreTileSourceIndex, defaultCentreTileCoords);
         
+        eventDispatcher.Dispatch(new MapUpdatedEvent());
+        
         housingManager.OnNewGame();
         workplaceManager.OnNewGame();
         residentManager.OnNewGame();

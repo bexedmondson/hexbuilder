@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://qmsdrailj53" path="res://scripts/ui/UnlockedCellPopup.cs" id="6_1mh2o"]
 [ext_resource type="TileSet" uid="uid://81kcplaq2lst" path="res://assets/highlight_overlay_tileset.tres" id="6_7log7"]
 [ext_resource type="Script" uid="uid://cf7fm30ln5neo" path="res://scripts/map/MapHighlightController.cs" id="6_a6mti"]
-[ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="6_bn7pe"]
 [ext_resource type="Script" uid="uid://5ns5k1qjdur6" path="res://scripts/ui/LockedCellPopup.cs" id="7_bn7pe"]
 [ext_resource type="Script" uid="uid://jrnewrn4c2j2" path="res://scripts/ui/WorkplaceCellInfoUIContainer.cs" id="8_wa3gb"]
 [ext_resource type="Script" uid="uid://bs00038rrkovu" path="res://scripts/map/MapGenerator.cs" id="9_b0365"]
@@ -27,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="15_nkuak"]
 [ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/HousingInfoPopup.cs" id="20_77sti"]
 [ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/cell_ui/house_info_ui.tscn" id="21_mcgvi"]
-[ext_resource type="Script" uid="uid://b6lx4m4chnfrh" path="res://scripts/ui/MainUICurrencyDisplay.cs" id="21_wf2ql"]
+[ext_resource type="Script" uid="uid://b6lx4m4chnfrh" path="res://scripts/ui/MainInventoryDisplay.cs" id="21_wf2ql"]
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/ResidentInfoPopup.cs" id="22_1w2nm"]
 [ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/WorkplaceInfoPopup.cs" id="22_tacgk"]
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
@@ -121,9 +120,15 @@ script = ExtResource("1_vlfvj")
 mapController = NodePath("MapController")
 inventoryManager = NodePath("InventoryManager")
 
-[node name="InventoryManager" type="Node2D" parent="." unique_id=1197391878 node_paths=PackedStringArray("inventoryDisplay")]
+[node name="InventoryManager" type="Node2D" parent="." unique_id=1197391878 node_paths=PackedStringArray("mainInventoryDisplay")]
 script = ExtResource("2_j1s7q")
-inventoryDisplay = NodePath("../CanvasLayer/UIMain/CurrencyDisplay")
+mainInventoryDisplay = NodePath("../CanvasLayer/UIMain/MainInventoryDisplay")
+currencyIcons = Dictionary[int, Texture2D]({
+0: ExtResource("43_8od8w"),
+1: ExtResource("44_3kpmb"),
+2: ExtResource("45_5n6k3"),
+3: ExtResource("46_t4767")
+})
 startAmounts = Dictionary[int, int]({
 0: 10,
 1: 10,
@@ -267,7 +272,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CurrencyDisplay" parent="CanvasLayer/UIMain" unique_id=1653779922 instance=ExtResource("6_bn7pe")]
+[node name="MainInventoryDisplay" type="VBoxContainer" parent="CanvasLayer/UIMain" unique_id=1653779922 node_paths=PackedStringArray("currencyDisplays", "currencyDeltas")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -275,9 +280,80 @@ anchor_right = 1.0
 offset_left = -160.0
 offset_top = 10.0
 offset_right = -10.0
-offset_bottom = 10.0
+offset_bottom = 234.0
 grow_horizontal = 0
+size_flags_horizontal = 0
+size_flags_vertical = 4
 script = ExtResource("21_wf2ql")
+singleCurrencyDisplayScene = ExtResource("47_hxced")
+currencyDisplays = {
+0: NodePath("SingleCurrencyDisplay"),
+1: NodePath("SingleCurrencyDisplay2"),
+2: NodePath("SingleCurrencyDisplay3"),
+3: NodePath("SingleCurrencyDisplay4")
+}
+currencyDeltas = {
+0: NodePath("SingleCurrencyDisplay/DeltaLabel"),
+1: NodePath("SingleCurrencyDisplay2/DeltaLabel"),
+2: NodePath("SingleCurrencyDisplay3/DeltaLabel"),
+3: NodePath("SingleCurrencyDisplay4/DeltaLabel")
+}
+
+[node name="SingleCurrencyDisplay" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=913887442 instance=ExtResource("47_hxced")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" index="0" unique_id=854191337]
+texture = ExtResource("43_8od8w")
+
+[node name="DeltaLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" unique_id=1286168228]
+self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
+
+[node name="SingleCurrencyDisplay2" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=1857846353 instance=ExtResource("47_hxced")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" index="0" unique_id=854191337]
+texture = ExtResource("44_3kpmb")
+
+[node name="DeltaLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" unique_id=945286557]
+self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
+
+[node name="SingleCurrencyDisplay3" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=304845638 instance=ExtResource("47_hxced")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" index="0" unique_id=854191337]
+texture = ExtResource("45_5n6k3")
+
+[node name="DeltaLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" unique_id=1037661243]
+self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
+
+[node name="SingleCurrencyDisplay4" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=1817663077 instance=ExtResource("47_hxced")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" index="0" unique_id=854191337]
+texture = ExtResource("46_t4767")
+
+[node name="DeltaLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" unique_id=1476107357]
+self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
 
 [node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain" unique_id=468898507]
 layout_mode = 1
@@ -1051,12 +1127,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 alignment = 1
 script = ExtResource("42_gqxrv")
-currencyIcons = Dictionary[int, Resource]({
-0: ExtResource("43_8od8w"),
-1: ExtResource("44_3kpmb"),
-2: ExtResource("45_5n6k3"),
-3: ExtResource("46_t4767")
-})
 singleCurrencyDisplayScene = ExtResource("47_hxced")
 displayAsDelta = true
 iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
@@ -1100,3 +1170,8 @@ columns = 2
 [connection signal="pressed" from="PopupLayer/ResidentInfoPopup/CloseButton" to="PopupLayer/ResidentInfoPopup" method="Close"]
 [connection signal="visibility_changed" from="PopupLayer/EncyclopediaPopup" to="PopupLayer/EncyclopediaPopup" method="OnVisibilityChanged"]
 [connection signal="pressed" from="PopupLayer/EncyclopediaPopup/CloseButton" to="PopupLayer/EncyclopediaPopup" method="Close"]
+
+[editable path="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay"]
+[editable path="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2"]
+[editable path="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3"]
+[editable path="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4"]
