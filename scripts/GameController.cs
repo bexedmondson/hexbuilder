@@ -31,6 +31,11 @@ public partial class GameController : Node2D
         mapController.OnNewGame();
         inventoryManager.OnNewGame();
     }
+    public override void _PhysicsProcess(double delta)
+    {
+        if (Input.IsActionJustReleased("next_turn"))
+            NextTurn();
+    }
 
     public void NextTurn()
     {
