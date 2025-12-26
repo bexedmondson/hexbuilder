@@ -176,12 +176,12 @@ public partial class MapGenerator : Node
         
         var riverCells = FindRiverCells();
         
-        StringBuilder sb1 = new("river cells: ");
+        /*StringBuilder sb1 = new("river cells: ");
         foreach (var cell in riverCells)
         {
             sb1.Append(cell + " ");
         }
-        GD.Print(sb1.ToString());
+        GD.Print(sb1.ToString());*/
 
         mapController ??= InjectionManager.Get<MapController>();
         
@@ -193,12 +193,12 @@ public partial class MapGenerator : Node
                 allCellsToUpdate.Add(affectedCell);
         }
 
-        StringBuilder sb2 = new("cells to update: ");
+        /*StringBuilder sb2 = new("cells to update: ");
         foreach (var cell in allCellsToUpdate)
         {
             sb2.Append(cell + " ");
         }
-        GD.Print(sb2.ToString());
+        GD.Print(sb2.ToString());*/
         
         bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate), false);
         baseMapLayer.EmitSignal("changed");
