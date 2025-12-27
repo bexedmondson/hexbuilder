@@ -25,5 +25,5 @@ baseTurnCurrencyChange = {
 }
 adjacencies = Array[Object]([])
 workerCapacity = 1
-storageCapacity = null
+storageCapacity = {}
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
