@@ -46,6 +46,9 @@ public class CurrencySum : Dictionary<CurrencyType, int>
 
     public void Add(CurrencySum sumToAdd)
     { 
+        if (sumToAdd == null)
+            return;
+
         foreach (var kvp in sumToAdd)
         {
             Add(kvp.Key, kvp.Value);
@@ -54,6 +57,9 @@ public class CurrencySum : Dictionary<CurrencyType, int>
     
     public void Add(Godot.Collections.Dictionary<CurrencyType, int> sumToAdd)
     {
+        if (sumToAdd == null)
+            return;
+        
         foreach (var kvp in sumToAdd)
         {
             Add(kvp.Key, kvp.Value);
@@ -70,6 +76,9 @@ public class CurrencySum : Dictionary<CurrencyType, int>
     
     public void Subtract(CurrencySum sumToSubtract)
     {
+        if (sumToSubtract == null)
+            return;
+
         foreach (var kvp in sumToSubtract)
         {
             Subtract(kvp.Key, kvp.Value);
@@ -78,6 +87,9 @@ public class CurrencySum : Dictionary<CurrencyType, int>
     
     public void Subtract(Godot.Collections.Dictionary<CurrencyType, int> sumToSubtract)
     {
+        if (sumToSubtract == null)
+            return;
+
         foreach (var kvp in sumToSubtract)
         {
             Subtract(kvp.Key, kvp.Value);

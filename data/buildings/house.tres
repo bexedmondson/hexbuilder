@@ -2,7 +2,18 @@
 
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="1_22yc1"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_j1ids"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="3_p1jm6"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_wvt6a"]
+
+[sub_resource type="Resource" id="Resource_ti82r"]
+script = ExtResource("3_wvt6a")
+capacities = Dictionary[int, int]({
+0: 2,
+1: 1,
+3: 1
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_j1ids"]
 script = ExtResource("3_p1jm6")
@@ -25,4 +36,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 residentCapacity = 2
 storageCapacity = {}
+components = Array[ExtResource("2_j1ids")]([SubResource("Resource_ti82r")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

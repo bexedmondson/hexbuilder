@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://cprbbiv623dht"]
+
+[ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="1_wb84i"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_fhh4w"]
+[ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="2_r8hfn"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_r8hfn"]
+[ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="3_x13tf"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="4_x13tf"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="5_x13tf"]
+
+[sub_resource type="Resource" id="Resource_3hw8u"]
+script = ExtResource("5_x13tf")
+capacities = Dictionary[int, int]({
+0: 1,
+2: 2,
+3: 1
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
+
+[sub_resource type="Resource" id="Resource_j1ids"]
+script = ExtResource("4_x13tf")
+requiredTilesBuildCounts = Dictionary[ExtResource("3_r8hfn"), int]({
+ExtResource("1_wb84i"): 2
+})
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[resource]
+script = ExtResource("3_r8hfn")
+canBePlacedOn = Array[Object]([ExtResource("1_wb84i"), ExtResource("2_r8hfn"), ExtResource("3_x13tf")])
+buildPrice = {
+2: 3
+}
+unlockRequirements = [SubResource("Resource_j1ids")]
+baseTurnCurrencyChange = {
+0: -1,
+3: -1
+}
+adjacencies = Array[Object]([])
+residentCapacity = 2
+storageCapacity = {}
+components = Array[ExtResource("2_fhh4w")]([SubResource("Resource_3hw8u")])
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

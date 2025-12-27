@@ -5,6 +5,8 @@
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_jshk8"]
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_ljri3"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_ljri3"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="5_mkh37"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="6_f4a35"]
 [ext_resource type="Script" uid="uid://b8yvq1vldnsav" path="res://scripts/data/CurrentTilePresenceCountUnlockRequirement.cs" id="6_ljri3"]
 
 [sub_resource type="Resource" id="Resource_mkh37"]
@@ -14,6 +16,13 @@ distance = 1
 currencyEffect = {
 2: 1
 }
+
+[sub_resource type="Resource" id="Resource_ojrr8"]
+script = ExtResource("6_f4a35")
+capacities = Dictionary[int, int]({
+2: 3
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_f4a35"]
 script = ExtResource("6_ljri3")
@@ -35,4 +44,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([SubResource("Resource_mkh37")])
 workerCapacity = 1
 storageCapacity = {}
+components = Array[ExtResource("5_mkh37")]([SubResource("Resource_ojrr8")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

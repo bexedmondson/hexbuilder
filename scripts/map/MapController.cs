@@ -28,6 +28,7 @@ public partial class MapController : Node2D, IInjectable
 
     private MapHighlightController highlightController;
     private MapCurrencyChangeAnalyser currencyChangeAnalyser;
+    private MapStorageAnalyser storageAnalyser;
     private ResidentManager residentManager;
     private HousingManager housingManager;
     private WorkplaceManager workplaceManager;
@@ -49,6 +50,7 @@ public partial class MapController : Node2D, IInjectable
         eventDispatcher = InjectionManager.Get<EventDispatcher>();
         cellStatusManager = new CellStatusManager();
         currencyChangeAnalyser = new MapCurrencyChangeAnalyser(this);
+        storageAnalyser = new MapStorageAnalyser(this);
         housingManager = new HousingManager(this);
         workplaceManager = new WorkplaceManager(this);
         timedJobManager = new TimedJobManager(this);

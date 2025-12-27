@@ -4,6 +4,15 @@
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_rmu2w"]
 [ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="3_w7he1"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="4_lwcxg"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="4_uhqq8"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="5_2ouey"]
+
+[sub_resource type="Resource" id="Resource_382n4"]
+script = ExtResource("5_2ouey")
+capacities = Dictionary[int, int]({
+2: 1
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [resource]
 script = ExtResource("4_lwcxg")
@@ -11,10 +20,12 @@ canBePlacedOn = Array[Object]([ExtResource("1_5ixn8"), ExtResource("3_w7he1"), E
 buildPrice = {
 1: 2
 }
+unlockRequirements = []
 baseTurnCurrencyChange = {
 2: 2
 }
 adjacencies = Array[Object]([])
-unlockRequirements = []
 workerCapacity = 2
+storageCapacity = {}
+components = Array[ExtResource("4_uhqq8")]([SubResource("Resource_382n4")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

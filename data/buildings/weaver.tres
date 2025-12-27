@@ -1,11 +1,27 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://b72uoycdm7u8j"]
 
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_mfofh"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_tx8ee"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_yr352"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_flggr"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_m4iac"]
 [ext_resource type="Resource" uid="uid://c4sgkb7bwedw5" path="res://data/buildings/sheep.tres" id="4_b2kmm"]
 [ext_resource type="Resource" uid="uid://bu7kjauo40wv1" path="res://data/buildings/flax.tres" id="5_m4iac"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="6_rn28k"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="6_v22cc"]
+
+[sub_resource type="Resource" id="Resource_2p2k4"]
+script = ExtResource("2_tx8ee")
+requiredTile = ExtResource("5_m4iac")
+distance = 1
+currencyEffect = null
+
+[sub_resource type="Resource" id="Resource_sqpaw"]
+script = ExtResource("6_v22cc")
+capacities = Dictionary[int, int]({
+3: 3
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_tx8ee"]
 script = ExtResource("6_rn28k")
@@ -25,7 +41,8 @@ unlockRequirements = [SubResource("Resource_tx8ee")]
 baseTurnCurrencyChange = {
 3: 2
 }
-adjacencies = Array[Object]([])
+adjacencies = Array[Object]([SubResource("Resource_2p2k4")])
 workerCapacity = 1
 storageCapacity = {}
+components = Array[ExtResource("3_m4iac")]([SubResource("Resource_sqpaw")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

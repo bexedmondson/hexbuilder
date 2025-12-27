@@ -80,18 +80,79 @@ public partial class InventoryManager : Node2D, IInjectable
 
     public void OnNextTurn(CurrencySum[] allCurrencyChanges)
     {
+        //basically trying to be nice to the player here and give the maximum usage and creation stats, so
+        //need to do all the minusing before all the adding now that i have the storage limits, so that out-of-order
+        //storage capacity discards don't interfere
+
+        CurrencySum totalMinus = new();
+        CurrencySum totalPlus = new();
+
         foreach (var currencyChange in allCurrencyChanges)
         {
-            inventory.Add(currencyChange);
-            statsTracker.OnCurrencyChange(currencyChange);
+            foreach (var individualCurrencyChange in currencyChange)
+            {
+                switch (individualCurrencyChange.Value)
+                {
+                    case 0:
+                        continue;
+                    case < 0:
+                        totalMinus.Add(individualCurrencyChange.Key, individualCurrencyChange.Value);
+                        break;
+                    default:
+                        totalPlus.Add(individualCurrencyChange.Key, individualCurrencyChange.Value);
+                        break;
+                }
+            }
         }
+
+        inventory.Add(totalMinus);
+        statsTracker.OnCurrencyChange(totalMinus);
+
+        var actualAdd = new CurrencySum();
+        //capping increases at capacity limits
+        foreach (var individualCurrencyAdd in totalPlus)
+        {
+            var finalValue = inventory.GetValueOrDefault(individualCurrencyAdd.Key, 0) + individualCurrencyAdd.Value;
+            finalValue = Mathf.Min(finalValue, capacities.GetValueOrDefault(individualCurrencyAdd.Key, 0));
+            actualAdd.Add(individualCurrencyAdd.Key, finalValue);
+        }
+        
+        inventory.Add(actualAdd);
+        statsTracker.OnCurrencyChange(actualAdd);
+        
+        //don't track stuff lost due to overflow, so discard overflows here
+        foreach (var kvp in inventory)
+        {
+            var capacity = capacities.GetValueOrDefault(kvp.Key, 0);
+            if (capacity < kvp.Value)
+            {
+                int diff = capacity - kvp.Value;
+                GD.Print($"[InventoryManager] discarding overflow {diff} {kvp.Key}");
+                inventory.Add(kvp.Key, diff); //diff will be negative so adding will set to the correct values
+            }
+        }
+        
+        /*foreach (var currencyChange in allCurrencyChanges)
+        {
+            foreach (var kvp in currencyChange)
+            {
+                if (capacities.GetValueOrDefault(kvp.Key, 0) <= inventory.GetValueOrDefault(kvp.Key))
+                    //do something
+                    GD.Print("hi");
+            }
+            
+            inventory.Add(currencyChange);
+            
+            statsTracker.OnCurrencyChange(currencyChange);
+        }*/
 
         mainInventoryDisplay.FullUpdate(inventory);
     }
 
     private void OnPotentialInventoryChange(IEvent e)
     {
-        
+        var storageAnalyser = InjectionManager.Get<MapStorageAnalyser>();
+        capacities = storageAnalyser.GetTotalStorage();
         
         mainInventoryDisplay.FullUpdate(inventory);
     }

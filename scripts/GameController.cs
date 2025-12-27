@@ -42,6 +42,7 @@ public partial class GameController : Node2D
         mapCurrencyChangeAnalyser ??= InjectionManager.Get<MapCurrencyChangeAnalyser>();
         List<CurrencySum> allCurrencyChanges = mapCurrencyChangeAnalyser.GetFullCurrencyTurnDeltas();
         
+        //NOTE: reconsider this before timed job manager next turn if we add build times for storage!
         inventoryManager.OnNextTurn(allCurrencyChanges.ToArray());
         
         InjectionManager.Get<ResidentManager>().OnNextTurn();

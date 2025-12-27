@@ -3,7 +3,9 @@
 [ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="1_7jax1"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_6lq31"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_wnc6i"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="4_bia6p"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="4_xqx0b"]
 
 [sub_resource type="Resource" id="Resource_g314a"]
 script = ExtResource("2_6lq31")
@@ -12,6 +14,13 @@ distance = 1
 currencyEffect = {
 1: 1
 }
+
+[sub_resource type="Resource" id="Resource_8xsi5"]
+script = ExtResource("4_xqx0b")
+capacities = Dictionary[int, int]({
+1: 10
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_6lq31"]
 script = ExtResource("4_bia6p")
@@ -29,7 +38,6 @@ buildPrice = {
 unlockRequirements = [SubResource("Resource_6lq31")]
 baseTurnCurrencyChange = {}
 adjacencies = Array[Object]([SubResource("Resource_g314a")])
-storageCapacity = {
-1: 10
-}
+storageCapacity = {}
+components = Array[ExtResource("3_wnc6i")]([SubResource("Resource_8xsi5")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

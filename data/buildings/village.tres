@@ -1,7 +1,19 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://dri684d2te7kl"]
 
 [ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/house.tres" id="1_hk2dp"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_53xvg"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="2_n4ucp"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_owtlh"]
+
+[sub_resource type="Resource" id="Resource_3mor3"]
+script = ExtResource("3_owtlh")
+capacities = Dictionary[int, int]({
+0: 3,
+1: 1,
+2: 1,
+3: 1
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [resource]
 script = ExtResource("2_n4ucp")
@@ -10,11 +22,13 @@ buildPrice = {
 1: 3,
 2: 1
 }
+unlockRequirements = []
 baseTurnCurrencyChange = {
 0: -2,
 3: -2
 }
 adjacencies = Array[Object]([])
-unlockRequirements = []
 residentCapacity = 4
+storageCapacity = {}
+components = Array[ExtResource("2_53xvg")]([SubResource("Resource_3mor3")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -1,7 +1,8 @@
 using Godot;
 
+[GlobalClass][Tool]
 public partial class StorageCapacityDataComponent : AbstractTileDataComponent
 {
     [Export]
-    public int storageCapacity;
+    public Godot.Collections.Dictionary<CurrencyType, int> capacities;
 }

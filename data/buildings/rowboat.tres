@@ -1,7 +1,16 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://bhnebodpuroy"]
 
 [ext_resource type="Resource" uid="uid://8m4fhhljy05o" path="res://data/terrain/water.tres" id="1_bqqnd"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_522mn"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_cnfp7"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_mpbb0"]
+
+[sub_resource type="Resource" id="Resource_18eub"]
+script = ExtResource("3_mpbb0")
+capacities = Dictionary[int, int]({
+0: 1
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [resource]
 script = ExtResource("3_cnfp7")
@@ -16,4 +25,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 workerCapacity = 1
 storageCapacity = {}
+components = Array[ExtResource("2_522mn")]([SubResource("Resource_18eub")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
