@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://qa0ad2tdjmdu" path="res://scenes/cell_ui/debug_cell_info_ui.tscn" id="13_cpah3"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="15_nkuak"]
 [ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/HousingInfoPopup.cs" id="20_77sti"]
-[ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/cell_ui/house_info_ui.tscn" id="21_mcgvi"]
+[ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/house_info_ui.tscn" id="21_mcgvi"]
 [ext_resource type="Script" uid="uid://b6lx4m4chnfrh" path="res://scripts/ui/MainInventoryDisplay.cs" id="21_wf2ql"]
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/ResidentInfoPopup.cs" id="22_1w2nm"]
 [ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/WorkplaceInfoPopup.cs" id="22_tacgk"]

@@ -316,6 +316,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("1_b8jlu")
 workerCountLabel = NodePath("HBoxContainer/WorkerCountLabel")
 alert = NodePath("Hourglass")

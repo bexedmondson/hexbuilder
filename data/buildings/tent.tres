@@ -10,7 +10,8 @@
 [sub_resource type="Resource" id="Resource_mlsau"]
 script = ExtResource("5_3tutr")
 capacities = Dictionary[int, int]({
-0: 1
+0: 1,
+1: 1
 })
 metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
