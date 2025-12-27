@@ -19,8 +19,7 @@ metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 script = ExtResource("4_3tutr")
 canBePlacedOn = Array[Object]([ExtResource("1_jhxqr"), ExtResource("2_tfsah"), ExtResource("3_kt3v3")])
 buildPrice = {
-1: 1,
-3: 1
+1: 1
 }
 unlockRequirements = []
 baseTurnCurrencyChange = {

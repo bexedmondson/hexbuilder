@@ -2,6 +2,15 @@
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="1_ku54e"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_xbjma"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="4_ig44f"]
+
+[sub_resource type="Resource" id="Resource_ut87k"]
+script = ExtResource("4_ig44f")
+requiredAmountsGained = Dictionary[int, int]({
+0: 10
+})
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -10,11 +19,12 @@ buildPrice = {
 0: 2,
 1: 2
 }
+unlockRequirements = [SubResource("Resource_ut87k")]
 baseTurnCurrencyChange = {
 0: 3,
 3: 1
 }
 adjacencies = Array[Object]([])
-unlockRequirements = []
 workerCapacity = 1
+storageCapacity = null
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

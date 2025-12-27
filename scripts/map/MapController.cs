@@ -75,9 +75,6 @@ public partial class MapController : Node2D, IInjectable
 
     private void SetupInitialMap()
     {
-        //UnlockCell(Vector2I.Zero);
-        //baseMapLayer.SetCell(Vector2I.Zero, defaultCentreTileSourceIndex, defaultCentreTileCoords);
-        
         var startPattern = baseMapLayer.TileSet.GetPattern(0);
         baseMapLayer.SetPattern(Vector2I.Zero, startPattern);
         
@@ -108,14 +105,18 @@ public partial class MapController : Node2D, IInjectable
         //can't start the unlock if the cell isn't both visible and locked!
         if (cellStatusManager.GetCellStatus(cellToStartUnlock) != CellStatus.Locked)
             return;
+
+        var workerCountRequirement = GetCellUnlockWorkerRequirement(cellToStartUnlock);
         
-        //TODO configure?
-        var cellUnlockTimedJobData = new CellUnlockTimedJobState(cellToStartUnlock, 1, 1);
+        var cellUnlockTimedJobData = new CellUnlockTimedJobState(cellToStartUnlock, 1, workerCountRequirement);
         timedJobManager.AddNewTimedJob(cellUnlockTimedJobData);
-        timedJobManager.TryAssignResidentToTimedJob(cellUnlockTimedJobData);
+        
+        for (int i = 0; i < workerCountRequirement; i++)
+        {
+            timedJobManager.TryAssignResidentToTimedJob(cellUnlockTimedJobData);
+        }
         
         cellStatusManager.OnCellUnlockInitiated(cellToStartUnlock);
-        //TODO show unlocking icon
     }
 
     public void UnlockCell(Vector2I cell)
@@ -160,7 +161,7 @@ public partial class MapController : Node2D, IInjectable
 
     public int GetCellUnlockWorkerRequirement(Vector2I cell)
     {
-        return Mathf.FloorToInt(GetDistanceFromCentreTo(cell) / 2f);
+        return Mathf.Max(1, Mathf.FloorToInt(GetDistanceFromCentreTo(cell) / 2f));
     }
 
     private int GetDistanceFromCentreTo(Vector2I cell)
