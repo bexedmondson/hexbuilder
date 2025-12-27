@@ -332,6 +332,7 @@ offset_left = -32.0
 offset_right = 32.0
 offset_bottom = 27.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
 
@@ -343,6 +344,7 @@ text = "0/0"
 [node name="WorkerIcon" type="TextureRect" parent="HBoxContainer" unique_id=120727205]
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
 layout_mode = 2
+mouse_filter = 2
 texture = SubResource("AtlasTexture_rmpib")
 expand_mode = 3
 
@@ -359,6 +361,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(20, 20)
+mouse_filter = 2
 texture = SubResource("AtlasTexture_5df6q")
 expand_mode = 3
 
@@ -376,6 +379,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(20, 20)
+mouse_filter = 2
 texture = SubResource("AtlasTexture_j1phq")
 expand_mode = 3
 

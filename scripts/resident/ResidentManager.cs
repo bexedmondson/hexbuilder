@@ -50,6 +50,8 @@ public class ResidentManager : IInjectable
     {
         var newResident = new ResidentState(names[GD.RandRange(0, names.Length - 1)]);
         residents.Add(newResident);
+        
+        InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentCountUpdatedEvent(residents.Count));
 
         UpdateResidentHousing();
         

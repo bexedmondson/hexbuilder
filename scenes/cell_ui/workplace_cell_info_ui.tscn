@@ -34,6 +34,7 @@ offset_left = -32.0
 offset_right = 32.0
 offset_bottom = 27.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
 
@@ -45,6 +46,7 @@ text = "0/0"
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=238225894]
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
 layout_mode = 2
+mouse_filter = 2
 texture = SubResource("AtlasTexture_rmpib")
 expand_mode = 3
 
