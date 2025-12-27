@@ -14,6 +14,8 @@ public partial class InventoryManager : Node2D, IInjectable
 
     private CurrencySum inventory = new();
 
+    private CurrencySum capacities = new();
+
     private InventoryStatsTracker statsTracker;
 
     public override void _EnterTree()
@@ -22,6 +24,10 @@ public partial class InventoryManager : Node2D, IInjectable
         InjectionManager.Register(this);
 
         statsTracker = new InventoryStatsTracker();
+        
+        var eventDispatcher = InjectionManager.Get<EventDispatcher>();
+        eventDispatcher.Add<MapUpdatedEvent>(OnPotentialInventoryChange);
+        eventDispatcher.Add<WorkplaceUpdatedEvent>(OnPotentialInventoryChange);
     }
 
     public override void _ExitTree()
@@ -30,6 +36,10 @@ public partial class InventoryManager : Node2D, IInjectable
 
         InjectionManager.Deregister(this);
         statsTracker = null;
+        
+        var eventDispatcher = InjectionManager.Get<EventDispatcher>();
+        eventDispatcher.Remove<MapUpdatedEvent>(OnPotentialInventoryChange);
+        eventDispatcher.Add<WorkplaceUpdatedEvent>(OnPotentialInventoryChange);
     }
 
     public void OnNewGame()
@@ -38,6 +48,16 @@ public partial class InventoryManager : Node2D, IInjectable
         inventory = new CurrencySum(startAmounts);
         
         mainInventoryDisplay.FullUpdate(inventory);
+    }
+
+    public Texture2D GetIcon(CurrencyType currencyType)
+    {
+        return currencyIcons[currencyType];
+    }
+
+    public int GetCurrencyCapacity(CurrencyType currencyType)
+    {
+        return capacities.GetValueOrDefault(currencyType, 0);
     }
 
     public bool CanAfford(CurrencySum price)
@@ -58,11 +78,6 @@ public partial class InventoryManager : Node2D, IInjectable
         mainInventoryDisplay.FullUpdate(inventory);
     }
 
-    public Texture2D GetIcon(CurrencyType currencyType)
-    {
-        return currencyIcons[currencyType];
-    }
-
     public void OnNextTurn(CurrencySum[] allCurrencyChanges)
     {
         foreach (var currencyChange in allCurrencyChanges)
@@ -71,6 +86,13 @@ public partial class InventoryManager : Node2D, IInjectable
             statsTracker.OnCurrencyChange(currencyChange);
         }
 
+        mainInventoryDisplay.FullUpdate(inventory);
+    }
+
+    private void OnPotentialInventoryChange(IEvent e)
+    {
+        
+        
         mainInventoryDisplay.FullUpdate(inventory);
     }
 }

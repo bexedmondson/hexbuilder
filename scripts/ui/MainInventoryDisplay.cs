@@ -11,36 +11,23 @@ public partial class MainInventoryDisplay : Control
 
     [Export]
     private Godot.Collections.Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
+    
+    [Export]
+    private Godot.Collections.Dictionary<CurrencyType, Label> capacityLabels = new();
 
     [Export]
     private Godot.Collections.Dictionary<CurrencyType, Label> currencyDeltas = new();
     
     [Export]
-    private Godot.Collections.Dictionary<CurrencyType, Label> storageFullIndicators = new();
+    private Godot.Collections.Dictionary<CurrencyType, StorageCapacityIndicator> storageIndicators = new();
 
     private readonly string plusPrefix = "+";
+    private InventoryManager inventoryManager;
     private MapCurrencyChangeAnalyser mapCurrencyChangeAnalyser;
-
-    public override void _EnterTree()
-    {
-        base._EnterTree();
-
-        var eventDispatcher = InjectionManager.Get<EventDispatcher>();
-        eventDispatcher.Add<MapUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
-        eventDispatcher.Add<WorkplaceUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
-    }
-
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-
-        var eventDispatcher = InjectionManager.Get<EventDispatcher>();
-        eventDispatcher.Remove<MapUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
-        eventDispatcher.Remove<WorkplaceUpdatedEvent>(OnCurrencyChangePossiblyUpdated);
-    }
 
     public void FullUpdate(CurrencySum inventory)
     {
+        inventoryManager ??= InjectionManager.Get<InventoryManager>();
         mapCurrencyChangeAnalyser ??= InjectionManager.Get<MapCurrencyChangeAnalyser>();
 
         foreach (var kvp in currencyDisplays)
@@ -51,11 +38,30 @@ public partial class MainInventoryDisplay : Control
                 kvp.Value.SetCurrencyAmount(inventory.GetValueOrDefault(kvp.Key, 0));
         }
         
+        foreach (var kvp in capacityLabels)
+        {
+            kvp.Value.Text = $"/ {inventoryManager.GetCurrencyCapacity(kvp.Key)}";
+        }
+        
         CurrencySum turnChange = mapCurrencyChangeAnalyser.GetOverallTurnDelta();
 
         foreach (var kvp in currencyDeltas)
         {
             UpdateCurrencyDeltaDisplay(kvp.Key, turnChange.GetValueOrDefault(kvp.Key, 0));
+        }
+
+        foreach (var kvp in storageIndicators)
+        {
+            var capacity = inventoryManager.GetCurrencyCapacity(kvp.Key);
+            var change = turnChange.GetValueOrDefault(kvp.Key, 0);
+            var current = inventory.GetValueOrDefault(kvp.Key, 0);
+
+            if (current < capacity)
+                kvp.Value.SetNotFull();
+            else if (current + change > capacity)
+                kvp.Value.SetOverflowing();
+            else
+                kvp.Value.SetFull();
         }
     }
     

@@ -32,7 +32,10 @@
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
 [ext_resource type="PackedScene" uid="uid://nrnjv42wsci4" path="res://scenes/unlocked_cell_adjacency_info_ui.tscn" id="23_cpah3"]
 [ext_resource type="Script" uid="uid://fx01r1n7jd8" path="res://scripts/ui/ResidentNoHomeWarningIndicator.cs" id="23_rn43n"]
+[ext_resource type="Script" uid="uid://bil8vuftoleml" path="res://scripts/ui/StorageCapacityIndicator.cs" id="26_gqxrv"]
+[ext_resource type="Texture2D" uid="uid://d1wqqwcyvwbxv" path="res://assets/icons/icon_bag_exclamation.tres" id="27_3kpmb"]
 [ext_resource type="PackedScene" uid="uid://b5cjn1sgivxbt" path="res://scenes/resident_info_ui.tscn" id="27_xvnm7"]
+[ext_resource type="Texture2D" uid="uid://cbig8tsmrjt7k" path="res://assets/icons/icon_bag_stop.tres" id="28_5n6k3"]
 [ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/WorkplaceInfoUI.cs" id="28_l3nqq"]
 [ext_resource type="Script" uid="uid://cgj4kupy76gd4" path="res://scripts/ui/EncyclopediaPopup.cs" id="36_4b3q0"]
 [ext_resource type="ButtonGroup" uid="uid://caiuut1jdayfj" path="res://scenes/encyclopediaButtonGroup.tres" id="37_kj2ff"]
@@ -272,7 +275,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MainInventoryDisplay" type="VBoxContainer" parent="CanvasLayer/UIMain" unique_id=1653779922 node_paths=PackedStringArray("currencyDisplays", "currencyDeltas")]
+[node name="MainInventoryDisplay" type="VBoxContainer" parent="CanvasLayer/UIMain" unique_id=1653779922 node_paths=PackedStringArray("currencyDisplays", "capacityLabels", "currencyDeltas", "storageIndicators")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -292,19 +295,36 @@ currencyDisplays = {
 2: NodePath("SingleCurrencyDisplay3"),
 3: NodePath("SingleCurrencyDisplay4")
 }
+capacityLabels = {
+0: NodePath("SingleCurrencyDisplay/CapacityLabel"),
+1: NodePath("SingleCurrencyDisplay2/CapacityLabel"),
+2: NodePath("SingleCurrencyDisplay3/CapacityLabel"),
+3: NodePath("SingleCurrencyDisplay4/CapacityLabel")
+}
 currencyDeltas = {
 0: NodePath("SingleCurrencyDisplay/DeltaLabel"),
 1: NodePath("SingleCurrencyDisplay2/DeltaLabel"),
 2: NodePath("SingleCurrencyDisplay3/DeltaLabel"),
 3: NodePath("SingleCurrencyDisplay4/DeltaLabel")
 }
+storageIndicators = {
+0: NodePath("SingleCurrencyDisplay/CapacityIndicator"),
+1: NodePath("SingleCurrencyDisplay2/CapacityIndicator"),
+2: NodePath("SingleCurrencyDisplay3/CapacityIndicator"),
+3: NodePath("SingleCurrencyDisplay4/CapacityIndicator")
+}
 
 [node name="SingleCurrencyDisplay" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=913887442 instance=ExtResource("47_hxced")]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 1
 
 [node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" index="0" unique_id=854191337]
 texture = ExtResource("43_8od8w")
+
+[node name="CapacityLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" unique_id=275555590]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
 
 [node name="DeltaLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" unique_id=1286168228]
 self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
@@ -313,12 +333,25 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 vertical_alignment = 1
 
+[node name="CapacityIndicator" type="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" unique_id=24667049]
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("26_gqxrv")
+fullIcon = ExtResource("27_3kpmb")
+overflowingIcon = ExtResource("28_5n6k3")
+
 [node name="SingleCurrencyDisplay2" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=1857846353 instance=ExtResource("47_hxced")]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 1
 
 [node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" index="0" unique_id=854191337]
 texture = ExtResource("44_3kpmb")
+
+[node name="CapacityLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" unique_id=1092083990]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
 
 [node name="DeltaLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" unique_id=945286557]
 self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
@@ -327,12 +360,25 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 vertical_alignment = 1
 
+[node name="CapacityIndicator" type="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" unique_id=324590194]
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("26_gqxrv")
+fullIcon = ExtResource("27_3kpmb")
+overflowingIcon = ExtResource("28_5n6k3")
+
 [node name="SingleCurrencyDisplay3" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=304845638 instance=ExtResource("47_hxced")]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 1
 
 [node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" index="0" unique_id=854191337]
 texture = ExtResource("45_5n6k3")
+
+[node name="CapacityLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" unique_id=716238772]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
 
 [node name="DeltaLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" unique_id=1037661243]
 self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
@@ -341,12 +387,25 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 vertical_alignment = 1
 
+[node name="CapacityIndicator" type="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" unique_id=155996109]
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("26_gqxrv")
+fullIcon = ExtResource("27_3kpmb")
+overflowingIcon = ExtResource("28_5n6k3")
+
 [node name="SingleCurrencyDisplay4" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=1817663077 instance=ExtResource("47_hxced")]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 1
 
 [node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" index="0" unique_id=854191337]
 texture = ExtResource("46_t4767")
+
+[node name="CapacityLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" unique_id=1730336907]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+vertical_alignment = 1
 
 [node name="DeltaLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" unique_id=1476107357]
 self_modulate = Color(0.11105221, 0.89797014, 0.20035034, 1)
@@ -354,6 +413,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 vertical_alignment = 1
+
+[node name="CapacityIndicator" type="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" unique_id=915219990]
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("26_gqxrv")
+fullIcon = ExtResource("27_3kpmb")
+overflowingIcon = ExtResource("28_5n6k3")
 
 [node name="NextTurnButton" type="Button" parent="CanvasLayer/UIMain" unique_id=468898507]
 layout_mode = 1
@@ -397,7 +464,7 @@ text = "Housing"
 icon = SubResource("AtlasTexture_mpwrp")
 expand_icon = true
 
-[node name="WorkplaceInfoButton2" type="Button" parent="CanvasLayer/UIMain" unique_id=2006043558]
+[node name="WorkplaceInfoButton" type="Button" parent="CanvasLayer/UIMain" unique_id=2006043558]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1153,7 +1220,7 @@ columns = 2
 
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
 [connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]
-[connection signal="pressed" from="CanvasLayer/UIMain/WorkplaceInfoButton2" to="PopupLayer/WorkplaceInfoPopup" method="ShowPopup"]
+[connection signal="pressed" from="CanvasLayer/UIMain/WorkplaceInfoButton" to="PopupLayer/WorkplaceInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="CanvasLayer/UIMain/ResidentInfoButton" to="PopupLayer/ResidentInfoPopup" method="ShowPopup"]
 [connection signal="pressed" from="CanvasLayer/UIMain/EncyclopediaButton" to="PopupLayer/EncyclopediaPopup" method="ShowPopup"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/CloseButton" to="PopupLayer/UnlockedCellPopup" method="Close"]
