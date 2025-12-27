@@ -133,10 +133,10 @@ currencyIcons = Dictionary[int, Texture2D]({
 3: ExtResource("46_t4767")
 })
 startAmounts = Dictionary[int, int]({
-0: 10,
-1: 10,
-2: 5,
-3: 5
+0: 1,
+1: 1,
+2: 0,
+3: 0
 })
 
 [node name="MapController" type="Node2D" parent="." unique_id=1433828285 node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer", "mapGenerator")]

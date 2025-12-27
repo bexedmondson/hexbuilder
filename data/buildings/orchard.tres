@@ -22,7 +22,7 @@ buildPrice = {
 }
 unlockRequirements = [SubResource("Resource_iesvl")]
 baseTurnCurrencyChange = {
-0: 3
+0: 2
 }
 adjacencies = Array[Object]([])
 workerCapacity = 1

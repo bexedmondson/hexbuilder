@@ -49,7 +49,7 @@
 [ext_resource type="Resource" uid="uid://6iu3vhfh63aa" path="res://data/buildings/granary.tres" id="43_sn60b"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_xfaqi"]
-tile_data = PackedInt32Array(65536, 131073, 1, 1, 196609, 4, 65537, 196609, 4)
+tile_data = PackedInt32Array(0, 196609, 4, 65536, 65536, 0, 1, 262145, 4)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o04i8"]
 resource_name = "terrain"

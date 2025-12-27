@@ -75,9 +75,17 @@ public partial class MapController : Node2D, IInjectable
 
     private void SetupInitialMap()
     {
-        UnlockCell(Vector2I.Zero);
+        //UnlockCell(Vector2I.Zero);
+        //baseMapLayer.SetCell(Vector2I.Zero, defaultCentreTileSourceIndex, defaultCentreTileCoords);
         
-        baseMapLayer.SetCell(Vector2I.Zero, defaultCentreTileSourceIndex, defaultCentreTileCoords);
+        var startPattern = baseMapLayer.TileSet.GetPattern(0);
+        baseMapLayer.SetPattern(Vector2I.Zero, startPattern);
+        
+        var usedCells = startPattern.GetUsedCells();
+        foreach (var startCell in usedCells)
+        {
+            UnlockCell(startCell);
+        }
         
         eventDispatcher.Dispatch(new MapUpdatedEvent());
         
