@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 [GlobalClass][Tool]
@@ -30,6 +31,40 @@ public partial class CustomTileData : Resource
 
     [Export]
     public Godot.Collections.Dictionary<CurrencyType, int> storageCapacity;
+
+    [Export]
+    public Godot.Collections.Array<AbstractTileDataComponent> components = new();
+    
+    protected System.Collections.Generic.Dictionary<Type, AbstractTileDataComponent> componentDict = null;
+    
+	public bool TryGetComponent<TComponent>(out TComponent component) where TComponent : AbstractTileDataComponent
+	{
+		if (componentDict == null)
+		{
+			componentDict = new System.Collections.Generic.Dictionary<Type, AbstractTileDataComponent>();
+			
+			foreach (var arrayComponent in components)
+				componentDict[arrayComponent.GetType()] = arrayComponent;
+		}
+		
+		if (componentDict.ContainsKey(typeof(TComponent)))
+		{
+			component = componentDict[typeof(TComponent)] as TComponent;
+			return true;
+		}
+		
+		foreach (var kvp in componentDict)
+		{
+			if (kvp.Key.IsInstanceOfType(typeof(TComponent))) //handling component type inheritance
+			{
+				component = kvp.Value as TComponent;
+				return true;
+			}
+		}
+
+		component = null;
+		return false;
+	}
 
     public bool TryGetAdjacencyEffectFromTileData(CustomTileData otherTile, out CurrencySum effect)
     {
