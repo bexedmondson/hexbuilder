@@ -112,9 +112,10 @@ public partial class InventoryManager : Node2D, IInjectable
         //capping increases at capacity limits
         foreach (var individualCurrencyAdd in totalPlus)
         {
-            var finalValue = inventory.GetValueOrDefault(individualCurrencyAdd.Key, 0) + individualCurrencyAdd.Value;
-            finalValue = Mathf.Min(finalValue, capacities.GetValueOrDefault(individualCurrencyAdd.Key, 0));
-            actualAdd.Add(individualCurrencyAdd.Key, finalValue);
+            var potentialFinalValue = inventory.GetValueOrDefault(individualCurrencyAdd.Key, 0) + individualCurrencyAdd.Value;
+            var cappedFinalValue = Mathf.Min(potentialFinalValue, capacities.GetValueOrDefault(individualCurrencyAdd.Key, 0));
+            var finalDelta = cappedFinalValue - inventory.GetValueOrDefault(individualCurrencyAdd.Key, 0);
+            actualAdd.Add(individualCurrencyAdd.Key, finalDelta);
         }
         
         inventory.Add(actualAdd);

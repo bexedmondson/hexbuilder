@@ -47,6 +47,9 @@
 [ext_resource type="Resource" uid="uid://b72uoycdm7u8j" path="res://data/buildings/weaver.tres" id="38_powct"]
 [ext_resource type="Resource" uid="uid://cprbbiv623dht" path="res://data/buildings/house_stone.tres" id="42_xfaqi"]
 [ext_resource type="Resource" uid="uid://6iu3vhfh63aa" path="res://data/buildings/granary.tres" id="43_sn60b"]
+[ext_resource type="Resource" uid="uid://p340fpdf8cg4" path="res://data/buildings/stockpile.tres" id="44_fjnr0"]
+[ext_resource type="Resource" uid="uid://c4he7bm3m8lhi" path="res://data/buildings/cows.tres" id="45_8nlen"]
+[ext_resource type="Resource" uid="uid://cngmx1jbtbgou" path="res://data/terrain/river.tres" id="46_sn60b"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_xfaqi"]
 tile_data = PackedInt32Array(0, 196609, 4, 65536, 65536, 0, 1, 262145, 4)
@@ -258,6 +261,12 @@ texture_region_size = Vector2i(480, 480)
 5:2/0 = 0
 5:2/0/texture_origin = Vector2i(0, 69)
 5:2/0/custom_data_0 = ExtResource("43_sn60b")
+5:3/0 = 0
+5:3/0/texture_origin = Vector2i(0, 69)
+5:3/0/custom_data_0 = ExtResource("44_fjnr0")
+5:4/0 = 0
+5:4/0/texture_origin = Vector2i(0, 69)
+5:4/0/custom_data_0 = ExtResource("45_8nlen")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ap1my"]
 resource_name = "paths"
@@ -302,7 +311,7 @@ texture = ExtResource("35_56aw7")
 texture_region_size = Vector2i(480, 480)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 69)
-0:0/0/custom_data_0 = ExtResource("7_ctfve")
+0:0/0/custom_data_0 = ExtResource("46_sn60b")
 0:0/0/metadata/_better_terrain = {
 4: [0, 3],
 10: [0, 3],
@@ -311,7 +320,7 @@ texture_region_size = Vector2i(480, 480)
 }
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 69)
-1:0/0/custom_data_0 = ExtResource("7_ctfve")
+1:0/0/custom_data_0 = ExtResource("46_sn60b")
 1:0/0/metadata/_better_terrain = {
 2: [0, 3],
 6: [0, 3],
@@ -320,7 +329,7 @@ texture_region_size = Vector2i(480, 480)
 }
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 69)
-2:0/0/custom_data_0 = ExtResource("7_ctfve")
+2:0/0/custom_data_0 = ExtResource("46_sn60b")
 2:0/0/metadata/_better_terrain = {
 10: [0, 3],
 14: [0, 3],
@@ -329,7 +338,7 @@ texture_region_size = Vector2i(480, 480)
 }
 3:0/0 = 0
 3:0/0/texture_origin = Vector2i(0, 69)
-3:0/0/custom_data_0 = ExtResource("7_ctfve")
+3:0/0/custom_data_0 = ExtResource("46_sn60b")
 3:0/0/metadata/_better_terrain = {
 4: [0, 3],
 6: [0, 3],
@@ -338,7 +347,7 @@ texture_region_size = Vector2i(480, 480)
 }
 4:0/0 = 0
 4:0/0/texture_origin = Vector2i(0, 69)
-4:0/0/custom_data_0 = ExtResource("7_ctfve")
+4:0/0/custom_data_0 = ExtResource("46_sn60b")
 4:0/0/metadata/_better_terrain = {
 10: [0, 3],
 12: [0, 3],
@@ -347,7 +356,7 @@ texture_region_size = Vector2i(480, 480)
 }
 5:0/0 = 0
 5:0/0/texture_origin = Vector2i(0, 69)
-5:0/0/custom_data_0 = ExtResource("7_ctfve")
+5:0/0/custom_data_0 = ExtResource("46_sn60b")
 5:0/0/metadata/_better_terrain = {
 6: [0, 3],
 10: [0, 3],
@@ -356,7 +365,7 @@ texture_region_size = Vector2i(480, 480)
 }
 6:0/0 = 0
 6:0/0/texture_origin = Vector2i(0, 69)
-6:0/0/custom_data_0 = ExtResource("7_ctfve")
+6:0/0/custom_data_0 = ExtResource("46_sn60b")
 6:0/0/metadata/_better_terrain = {
 6: [0, 3],
 12: [0, 3],
@@ -365,7 +374,7 @@ texture_region_size = Vector2i(480, 480)
 }
 7:0/0 = 0
 7:0/0/texture_origin = Vector2i(0, 69)
-7:0/0/custom_data_0 = ExtResource("7_ctfve")
+7:0/0/custom_data_0 = ExtResource("46_sn60b")
 7:0/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -378,7 +387,7 @@ texture_region_size = Vector2i(480, 480)
 }
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 69)
-0:1/0/custom_data_0 = ExtResource("7_ctfve")
+0:1/0/custom_data_0 = ExtResource("46_sn60b")
 0:1/0/metadata/_better_terrain = {
 4: [0, 3],
 &"symmetry": 1,
@@ -386,7 +395,7 @@ texture_region_size = Vector2i(480, 480)
 }
 1:1/0 = 0
 1:1/0/texture_origin = Vector2i(0, 69)
-1:1/0/custom_data_0 = ExtResource("7_ctfve")
+1:1/0/custom_data_0 = ExtResource("46_sn60b")
 1:1/0/metadata/_better_terrain = {
 10: [0, 3],
 &"symmetry": 1,
@@ -394,7 +403,7 @@ texture_region_size = Vector2i(480, 480)
 }
 2:1/0 = 0
 2:1/0/texture_origin = Vector2i(0, 69)
-2:1/0/custom_data_0 = ExtResource("7_ctfve")
+2:1/0/custom_data_0 = ExtResource("46_sn60b")
 2:1/0/metadata/_better_terrain = {
 12: [0, 3],
 &"symmetry": 1,
@@ -402,7 +411,7 @@ texture_region_size = Vector2i(480, 480)
 }
 3:1/0 = 0
 3:1/0/texture_origin = Vector2i(0, 69)
-3:1/0/custom_data_0 = ExtResource("7_ctfve")
+3:1/0/custom_data_0 = ExtResource("46_sn60b")
 3:1/0/metadata/_better_terrain = {
 6: [0, 3],
 &"symmetry": 1,
@@ -410,7 +419,7 @@ texture_region_size = Vector2i(480, 480)
 }
 4:1/0 = 0
 4:1/0/texture_origin = Vector2i(0, 69)
-4:1/0/custom_data_0 = ExtResource("7_ctfve")
+4:1/0/custom_data_0 = ExtResource("46_sn60b")
 4:1/0/metadata/_better_terrain = {
 4: [0, 3],
 6: [0, 3],
@@ -420,7 +429,7 @@ texture_region_size = Vector2i(480, 480)
 }
 5:1/0 = 0
 5:1/0/texture_origin = Vector2i(0, 69)
-5:1/0/custom_data_0 = ExtResource("7_ctfve")
+5:1/0/custom_data_0 = ExtResource("46_sn60b")
 5:1/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -430,7 +439,7 @@ texture_region_size = Vector2i(480, 480)
 }
 6:1/0 = 0
 6:1/0/texture_origin = Vector2i(0, 69)
-6:1/0/custom_data_0 = ExtResource("7_ctfve")
+6:1/0/custom_data_0 = ExtResource("46_sn60b")
 6:1/0/metadata/_better_terrain = {
 10: [0, 3],
 12: [0, 3],
@@ -440,7 +449,7 @@ texture_region_size = Vector2i(480, 480)
 }
 7:1/0 = 0
 7:1/0/texture_origin = Vector2i(0, 69)
-7:1/0/custom_data_0 = ExtResource("7_ctfve")
+7:1/0/custom_data_0 = ExtResource("46_sn60b")
 7:1/0/metadata/_better_terrain = {
 6: [0, 3],
 10: [0, 3],
@@ -450,7 +459,7 @@ texture_region_size = Vector2i(480, 480)
 }
 0:2/0 = 0
 0:2/0/texture_origin = Vector2i(0, 69)
-0:2/0/custom_data_0 = ExtResource("7_ctfve")
+0:2/0/custom_data_0 = ExtResource("46_sn60b")
 0:2/0/metadata/_better_terrain = {
 2: [0, 3],
 10: [0, 3],
@@ -460,7 +469,7 @@ texture_region_size = Vector2i(480, 480)
 }
 1:2/0 = 0
 1:2/0/texture_origin = Vector2i(0, 69)
-1:2/0/custom_data_0 = ExtResource("7_ctfve")
+1:2/0/custom_data_0 = ExtResource("46_sn60b")
 1:2/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -470,7 +479,7 @@ texture_region_size = Vector2i(480, 480)
 }
 2:2/0 = 0
 2:2/0/texture_origin = Vector2i(0, 69)
-2:2/0/custom_data_0 = ExtResource("7_ctfve")
+2:2/0/custom_data_0 = ExtResource("46_sn60b")
 2:2/0/metadata/_better_terrain = {
 6: [0, 3],
 12: [0, 3],
@@ -480,7 +489,7 @@ texture_region_size = Vector2i(480, 480)
 }
 3:2/0 = 0
 3:2/0/texture_origin = Vector2i(0, 69)
-3:2/0/custom_data_0 = ExtResource("7_ctfve")
+3:2/0/custom_data_0 = ExtResource("46_sn60b")
 3:2/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -490,7 +499,7 @@ texture_region_size = Vector2i(480, 480)
 }
 4:2/0 = 0
 4:2/0/texture_origin = Vector2i(0, 69)
-4:2/0/custom_data_0 = ExtResource("7_ctfve")
+4:2/0/custom_data_0 = ExtResource("46_sn60b")
 4:2/0/metadata/_better_terrain = {
 4: [0, 3],
 12: [0, 3],
@@ -500,7 +509,7 @@ texture_region_size = Vector2i(480, 480)
 }
 5:2/0 = 0
 5:2/0/texture_origin = Vector2i(0, 69)
-5:2/0/custom_data_0 = ExtResource("7_ctfve")
+5:2/0/custom_data_0 = ExtResource("46_sn60b")
 5:2/0/metadata/_better_terrain = {
 2: [0, 3],
 6: [0, 3],
@@ -510,7 +519,7 @@ texture_region_size = Vector2i(480, 480)
 }
 6:2/0 = 0
 6:2/0/texture_origin = Vector2i(0, 69)
-6:2/0/custom_data_0 = ExtResource("7_ctfve")
+6:2/0/custom_data_0 = ExtResource("46_sn60b")
 6:2/0/metadata/_better_terrain = {
 4: [0, 3],
 10: [0, 3],
@@ -521,7 +530,7 @@ texture_region_size = Vector2i(480, 480)
 }
 7:2/0 = 0
 7:2/0/texture_origin = Vector2i(0, 69)
-7:2/0/custom_data_0 = ExtResource("7_ctfve")
+7:2/0/custom_data_0 = ExtResource("46_sn60b")
 7:2/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -532,7 +541,7 @@ texture_region_size = Vector2i(480, 480)
 }
 0:3/0 = 0
 0:3/0/texture_origin = Vector2i(0, 69)
-0:3/0/custom_data_0 = ExtResource("7_ctfve")
+0:3/0/custom_data_0 = ExtResource("46_sn60b")
 0:3/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -543,7 +552,7 @@ texture_region_size = Vector2i(480, 480)
 }
 1:3/0 = 0
 1:3/0/texture_origin = Vector2i(0, 69)
-1:3/0/custom_data_0 = ExtResource("7_ctfve")
+1:3/0/custom_data_0 = ExtResource("46_sn60b")
 1:3/0/metadata/_better_terrain = {
 2: [0, 3],
 6: [0, 3],
@@ -554,7 +563,7 @@ texture_region_size = Vector2i(480, 480)
 }
 2:3/0 = 0
 2:3/0/texture_origin = Vector2i(0, 69)
-2:3/0/custom_data_0 = ExtResource("7_ctfve")
+2:3/0/custom_data_0 = ExtResource("46_sn60b")
 2:3/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -565,7 +574,7 @@ texture_region_size = Vector2i(480, 480)
 }
 3:3/0 = 0
 3:3/0/texture_origin = Vector2i(0, 69)
-3:3/0/custom_data_0 = ExtResource("7_ctfve")
+3:3/0/custom_data_0 = ExtResource("46_sn60b")
 3:3/0/metadata/_better_terrain = {
 2: [0, 3],
 6: [0, 3],
@@ -576,7 +585,7 @@ texture_region_size = Vector2i(480, 480)
 }
 4:3/0 = 0
 4:3/0/texture_origin = Vector2i(0, 69)
-4:3/0/custom_data_0 = ExtResource("7_ctfve")
+4:3/0/custom_data_0 = ExtResource("46_sn60b")
 4:3/0/metadata/_better_terrain = {
 4: [0, 3],
 10: [0, 3],
@@ -586,7 +595,7 @@ texture_region_size = Vector2i(480, 480)
 }
 5:3/0 = 0
 5:3/0/texture_origin = Vector2i(0, 69)
-5:3/0/custom_data_0 = ExtResource("7_ctfve")
+5:3/0/custom_data_0 = ExtResource("46_sn60b")
 5:3/0/metadata/_better_terrain = {
 2: [0, 3],
 6: [0, 3],
@@ -596,7 +605,7 @@ texture_region_size = Vector2i(480, 480)
 }
 6:3/0 = 0
 6:3/0/texture_origin = Vector2i(0, 69)
-6:3/0/custom_data_0 = ExtResource("7_ctfve")
+6:3/0/custom_data_0 = ExtResource("46_sn60b")
 6:3/0/metadata/_better_terrain = {
 4: [0, 3],
 6: [0, 3],
@@ -608,7 +617,7 @@ texture_region_size = Vector2i(480, 480)
 }
 7:3/0 = 0
 7:3/0/texture_origin = Vector2i(0, 69)
-7:3/0/custom_data_0 = ExtResource("7_ctfve")
+7:3/0/custom_data_0 = ExtResource("46_sn60b")
 7:3/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -620,7 +629,7 @@ texture_region_size = Vector2i(480, 480)
 }
 0:4/0 = 0
 0:4/0/texture_origin = Vector2i(0, 69)
-0:4/0/custom_data_0 = ExtResource("7_ctfve")
+0:4/0/custom_data_0 = ExtResource("46_sn60b")
 0:4/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -632,7 +641,7 @@ texture_region_size = Vector2i(480, 480)
 }
 1:4/0 = 0
 1:4/0/texture_origin = Vector2i(0, 69)
-1:4/0/custom_data_0 = ExtResource("7_ctfve")
+1:4/0/custom_data_0 = ExtResource("46_sn60b")
 1:4/0/metadata/_better_terrain = {
 2: [0, 3],
 6: [0, 3],
@@ -644,7 +653,7 @@ texture_region_size = Vector2i(480, 480)
 }
 2:4/0 = 0
 2:4/0/texture_origin = Vector2i(0, 69)
-2:4/0/custom_data_0 = ExtResource("7_ctfve")
+2:4/0/custom_data_0 = ExtResource("46_sn60b")
 2:4/0/metadata/_better_terrain = {
 4: [0, 3],
 6: [0, 3],
@@ -655,7 +664,7 @@ texture_region_size = Vector2i(480, 480)
 }
 3:4/0 = 0
 3:4/0/texture_origin = Vector2i(0, 69)
-3:4/0/custom_data_0 = ExtResource("7_ctfve")
+3:4/0/custom_data_0 = ExtResource("46_sn60b")
 3:4/0/metadata/_better_terrain = {
 2: [0, 3],
 4: [0, 3],
@@ -666,7 +675,7 @@ texture_region_size = Vector2i(480, 480)
 }
 4:4/0 = 0
 4:4/0/texture_origin = Vector2i(0, 69)
-4:4/0/custom_data_0 = ExtResource("7_ctfve")
+4:4/0/custom_data_0 = ExtResource("46_sn60b")
 4:4/0/metadata/_better_terrain = {
 6: [0, 3],
 10: [0, 3],
@@ -677,7 +686,7 @@ texture_region_size = Vector2i(480, 480)
 }
 5:4/0 = 0
 5:4/0/texture_origin = Vector2i(0, 69)
-5:4/0/custom_data_0 = ExtResource("7_ctfve")
+5:4/0/custom_data_0 = ExtResource("46_sn60b")
 5:4/0/metadata/_better_terrain = {
 10: [0, 3],
 &"symmetry": 1,
@@ -685,7 +694,7 @@ texture_region_size = Vector2i(480, 480)
 }
 6:4/0 = 0
 6:4/0/texture_origin = Vector2i(0, 69)
-6:4/0/custom_data_0 = ExtResource("7_ctfve")
+6:4/0/custom_data_0 = ExtResource("46_sn60b")
 6:4/0/metadata/_better_terrain = {
 12: [0, 3],
 &"symmetry": 1,
@@ -693,7 +702,7 @@ texture_region_size = Vector2i(480, 480)
 }
 7:4/0 = 0
 7:4/0/texture_origin = Vector2i(0, 69)
-7:4/0/custom_data_0 = ExtResource("7_ctfve")
+7:4/0/custom_data_0 = ExtResource("46_sn60b")
 7:4/0/metadata/_better_terrain = {
 4: [0, 3],
 &"symmetry": 1,
@@ -701,7 +710,7 @@ texture_region_size = Vector2i(480, 480)
 }
 0:5/0 = 0
 0:5/0/texture_origin = Vector2i(0, 69)
-0:5/0/custom_data_0 = ExtResource("7_ctfve")
+0:5/0/custom_data_0 = ExtResource("46_sn60b")
 0:5/0/metadata/_better_terrain = {
 6: [0, 3],
 &"symmetry": 1,
@@ -709,7 +718,7 @@ texture_region_size = Vector2i(480, 480)
 }
 1:5/0 = 0
 1:5/0/texture_origin = Vector2i(0, 69)
-1:5/0/custom_data_0 = ExtResource("7_ctfve")
+1:5/0/custom_data_0 = ExtResource("46_sn60b")
 1:5/0/metadata/_better_terrain = {
 4: [0, 3],
 12: [0, 3],
@@ -718,7 +727,7 @@ texture_region_size = Vector2i(480, 480)
 }
 2:5/0 = 0
 2:5/0/texture_origin = Vector2i(0, 69)
-2:5/0/custom_data_0 = ExtResource("7_ctfve")
+2:5/0/custom_data_0 = ExtResource("46_sn60b")
 2:5/0/metadata/_better_terrain = {
 6: [0, 3],
 14: [0, 3],

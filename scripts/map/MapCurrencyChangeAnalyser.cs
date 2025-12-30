@@ -33,10 +33,12 @@ public class MapCurrencyChangeAnalyser : IInjectable
             //don't get regular effects nor adjacency benefits for unstaffed workplaces
             //non-workplace tiles that have effects are fine though
             
-            if (cellTileData?.baseTurnCurrencyChange != null)
+            if (cellTileData?.baseTurnCurrencyChange != null && cellTileData.baseTurnCurrencyChange.Count > 0)
                 allCurrencyChanges.Add(new CurrencySum(cellTileData.baseTurnCurrencyChange));
-            
-            allCurrencyChanges.Add(CalculateAdjacencyEffects(cell, cellTileData));
+
+            var adjacencyEffects = CalculateAdjacencyEffects(cell, cellTileData);
+            if (adjacencyEffects.Count > 0)
+               allCurrencyChanges.Add(adjacencyEffects);
         }
         
         return allCurrencyChanges;
