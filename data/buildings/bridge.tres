@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="1_op6oi"]
+[ext_resource type="Script" uid="uid://kl2tmf4tnglp" path="res://scripts/data/tilecomponents/HideInEncyclopediaComponent.cs" id="2_5udbl"]
+
+[sub_resource type="Resource" id="Resource_8s0a5"]
+script = ExtResource("2_5udbl")
+metadata/_custom_type_script = "uid://kl2tmf4tnglp"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -9,10 +14,9 @@ canBePlacedOn = []
 buildPrice = {
 1: 2
 }
-unlockRequirements = []
 baseTurnCurrencyChange = {
 0: -1
 }
 adjacencies = Array[Object]([])
-storageCapacity = null
+components = Array[ExtResource("1_op6oi")]([SubResource("Resource_8s0a5")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

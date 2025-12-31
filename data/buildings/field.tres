@@ -17,12 +17,9 @@ canBePlacedOn = Array[Object]([ExtResource("1_yw51q"), ExtResource("2_7s1am")])
 buildPrice = {
 1: 2
 }
-unlockRequirements = []
 baseTurnCurrencyChange = {
 0: 3
 }
 adjacencies = Array[Object]([])
-workerCapacity = 1
-storageCapacity = null
 components = Array[ExtResource("3_k7c6n")]([SubResource("Resource_8pu6x")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

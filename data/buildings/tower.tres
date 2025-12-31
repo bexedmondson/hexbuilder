@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="5_1y7xi"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="5_i4mag"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="7_u3b4o"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="8_u3b4o"]
 
 [sub_resource type="Resource" id="Resource_uqrft"]
 script = ExtResource("5_1y7xi")
@@ -26,18 +27,25 @@ script = ExtResource("7_u3b4o")
 requirements = Array[Object]([SubResource("Resource_305jr")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
+[sub_resource type="Resource" id="Resource_wx0d3"]
+script = ExtResource("8_u3b4o")
+capacities = Dictionary[int, int]({
+0: 2,
+1: 2,
+2: 1,
+3: 1
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
+
 [resource]
 script = ExtResource("1_24cbf")
 canBePlacedOn = Array[Object]([ExtResource("1_x8ft0"), ExtResource("2_i4mag"), ExtResource("3_305jr")])
 buildPrice = {
-1: 2
+2: 5
 }
-unlockRequirements = [SubResource("Resource_305jr")]
 baseTurnCurrencyChange = {
 0: -1
 }
 adjacencies = Array[Object]([])
-residentCapacity = 1
-storageCapacity = {}
-components = Array[ExtResource("4_305jr")]([SubResource("Resource_uqrft"), SubResource("Resource_5sslw")])
+components = Array[ExtResource("4_305jr")]([SubResource("Resource_uqrft"), SubResource("Resource_5sslw"), SubResource("Resource_wx0d3")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

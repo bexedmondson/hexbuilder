@@ -30,14 +30,11 @@ script = ExtResource("3_iesvl")
 canBePlacedOn = Array[Object]([ExtResource("1_lw30e"), ExtResource("2_b7qgu")])
 buildPrice = {
 0: 1,
-1: 1
+1: 3
 }
-unlockRequirements = [SubResource("Resource_iesvl")]
 baseTurnCurrencyChange = {
 0: 2
 }
 adjacencies = Array[Object]([])
-workerCapacity = 1
-storageCapacity = {}
 components = Array[ExtResource("3_oig7r")]([SubResource("Resource_s1qno"), SubResource("Resource_jauop")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

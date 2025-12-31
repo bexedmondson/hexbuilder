@@ -53,14 +53,11 @@ metadata/_custom_type_script = "uid://7pquj0428dp5"
 script = ExtResource("6_hv1c6")
 canBePlacedOn = Array[Object]([ExtResource("1_8uj3x"), ExtResource("2_nky1h"), ExtResource("3_qw1qp")])
 buildPrice = {
-1: 2
+1: 10
 }
-unlockRequirements = [SubResource("Resource_hv1c6"), SubResource("Resource_frkme")]
 baseTurnCurrencyChange = {
 0: 2
 }
 adjacencies = Array[Object]([SubResource("Resource_j5x2k")])
-workerCapacity = 1
-storageCapacity = {}
 components = Array[ExtResource("6_3iw88")]([SubResource("Resource_lwfrp"), SubResource("Resource_ufexx"), SubResource("Resource_wsah8")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

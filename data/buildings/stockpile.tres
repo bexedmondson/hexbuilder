@@ -13,10 +13,10 @@
 [sub_resource type="Resource" id="Resource_8xsi5"]
 script = ExtResource("4_so5qk")
 capacities = Dictionary[int, int]({
-0: 5,
-1: 5,
-2: 4,
-3: 3
+0: 4,
+1: 4,
+2: 3,
+3: 2
 })
 metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
@@ -40,9 +40,7 @@ canBePlacedOn = Array[Object]([ExtResource("2_ngqpg"), ExtResource("3_8c7bd"), E
 buildPrice = {
 1: 3
 }
-unlockRequirements = [SubResource("Resource_6lq31")]
 baseTurnCurrencyChange = {}
 adjacencies = Array[Object]([])
-storageCapacity = {}
 components = Array[ExtResource("3_boct3")]([SubResource("Resource_8xsi5"), SubResource("Resource_b476h")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
