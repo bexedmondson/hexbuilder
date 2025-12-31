@@ -6,6 +6,8 @@
   <ItemGroup>
     <Folder Include="addons\tile_placement_configurator\placement\" />
     <Folder Include="assets\" />
+    <Folder Include="scripts\ui\cellinfos\" />
+    <Folder Include="scripts\ui\popups\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\housing\HouseState.cs.uid" />

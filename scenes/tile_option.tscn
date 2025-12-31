@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://uffj30rhdgvw"]
 
 [ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="1_whmtt"]
-[ext_resource type="Script" uid="uid://cois7vh5ul7c7" path="res://scripts/ui/TileOptionUI.cs" id="2_tjxx3"]
+[ext_resource type="Script" uid="uid://cois7vh5ul7c7" path="res://scripts/ui/popups/TileOptionUI.cs" id="2_tjxx3"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="3_6d75x"]
 [ext_resource type="Texture2D" uid="uid://byfu2r5i3mr06" path="res://assets/2d/building-castle.png" id="3_wgdtb"]
 [ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="4_goryc"]

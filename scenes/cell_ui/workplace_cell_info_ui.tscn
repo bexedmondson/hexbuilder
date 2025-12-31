@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://buovaj2q4fmqw"]
 
-[ext_resource type="Script" uid="uid://du33fkfjm2ema" path="res://scripts/ui/WorkplaceCellInfoUI.cs" id="1_rmpib"]
+[ext_resource type="Script" uid="uid://du33fkfjm2ema" path="res://scripts/ui/cellinfos/WorkplaceCellInfoUI.cs" id="1_rmpib"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nma3w"]
 load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dm7exjhepiwdn"]
 
 [ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="1_3473w"]
-[ext_resource type="Script" uid="uid://1yydqns8wpfo" path="res://scripts/ui/EncyclopediaTileOptionUI.cs" id="2_e4nkf"]
+[ext_resource type="Script" uid="uid://1yydqns8wpfo" path="res://scripts/ui/popups/EncyclopediaTileOptionUI.cs" id="2_e4nkf"]
 [ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="3_ymdbp"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_up4l7"]

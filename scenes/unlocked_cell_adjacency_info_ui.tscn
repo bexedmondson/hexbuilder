@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://nrnjv42wsci4"]
 
-[ext_resource type="Script" uid="uid://djnscpwua3iqw" path="res://scripts/ui/UnlockedCellAdjacencyUI.cs" id="1_rjnxt"]
+[ext_resource type="Script" uid="uid://djnscpwua3iqw" path="res://scripts/ui/popups/UnlockedCellAdjacencyUI.cs" id="1_rjnxt"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="2_re3pf"]
 
 [node name="AdjacencyInfoHBoxContainer" type="HBoxContainer" unique_id=1052811575 node_paths=PackedStringArray("effectGivenUI", "effectReceivedUI", "name", "direction", "giveEffectDisplay", "receiveEffectDisplay")]

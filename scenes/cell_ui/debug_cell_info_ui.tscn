@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qa0ad2tdjmdu"]
 
-[ext_resource type="Script" uid="uid://dw6snh6awpsou" path="res://scripts/ui/DebugCellInfoUI.cs" id="1_n0ibl"]
+[ext_resource type="Script" uid="uid://dw6snh6awpsou" path="res://scripts/ui/cellinfos/DebugCellInfoUI.cs" id="1_n0ibl"]
 
 [node name="DebugCellInfoUi" type="Control" unique_id=359131576 node_paths=PackedStringArray("label")]
 modulate = Color(1, 0.3764706, 0.047058824, 1)

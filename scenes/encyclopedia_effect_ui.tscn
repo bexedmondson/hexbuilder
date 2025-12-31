@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjj73jr4pvi30"]
 
-[ext_resource type="Script" uid="uid://rgp00wlcpx5" path="res://scripts/ui/EncyclopediaEffectUI.cs" id="1_lc4m7"]
+[ext_resource type="Script" uid="uid://rgp00wlcpx5" path="res://scripts/ui/popups/EncyclopediaEffectUI.cs" id="1_lc4m7"]
 [ext_resource type="Texture2D" uid="uid://byfu2r5i3mr06" path="res://assets/2d/building-castle.png" id="2_gklb1"]
 [ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="3_11cxy"]
 [ext_resource type="Material" uid="uid://jrcfkjx2d6od" path="res://materials_shaders/greyscale_material.tres" id="4_3h4ng"]

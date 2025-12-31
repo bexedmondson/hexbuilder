@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://rhtqjafh80s4"]
 
-[ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/WorkplaceInfoUI.cs" id="1_bn0rj"]
+[ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/popups/WorkplaceInfoUI.cs" id="1_bn0rj"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_s6cp8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mcgvi"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2crqakku64ae"]
 
-[ext_resource type="Script" uid="uid://njf8gojp3x73" path="res://scripts/ui/TimedJobCellInfoUI.cs" id="1_b8jlu"]
+[ext_resource type="Script" uid="uid://njf8gojp3x73" path="res://scripts/ui/cellinfos/TimedJobCellInfoUI.cs" id="1_b8jlu"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_22lh2"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nma3w"]
