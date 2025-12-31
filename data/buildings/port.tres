@@ -1,6 +1,13 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://dem8cmagy7vqr"]
 
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="1_6ou8b"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="2_c1cne"]
+
+[sub_resource type="Resource" id="Resource_kulp5"]
+script = ExtResource("2_c1cne")
+capacity = 1
+metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -8,12 +15,14 @@ canBePlacedOn = Array[Object]([])
 buildPrice = {
 1: 2
 }
+unlockRequirements = []
 baseTurnCurrencyChange = {
 1: 1,
 2: 1,
 3: 1
 }
 adjacencies = Array[Object]([])
-unlockRequirements = []
 workerCapacity = 1
+storageCapacity = null
+components = Array[ExtResource("1_6ou8b")]([SubResource("Resource_kulp5")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -60,17 +60,18 @@ public class HousingManager : IInjectable
                 continue;
             }
                 
-            if (cellData.residentCapacity == 0)
+            if (!cellData.TryGetComponent<ResidentCapacityComponent>(out var cellDataResidentCapacity) 
+                || cellDataResidentCapacity.capacity == 0)
                 continue;
             
             existingMapHouseCoords.Add(cell);
 
             if (houseDatas.TryGetValue(cell, out var existingHouseData))
             {
-                if (existingHouseData.capacity == cellData.residentCapacity)
+                if (existingHouseData.capacity == cellDataResidentCapacity.capacity)
                     continue;
 
-                existingHouseData.ChangeCapacity(cellData.residentCapacity, out List<ResidentState> kickedOutResidents);
+                existingHouseData.ChangeCapacity(cellDataResidentCapacity.capacity, out List<ResidentState> kickedOutResidents);
 
                 foreach (var kickedOutResident in kickedOutResidents)
                 {
@@ -84,7 +85,7 @@ public class HousingManager : IInjectable
             else
             {
                 //TODO pass in CustomTileData instead?
-                houseDatas[cell] = new HouseState(cell, cellData.residentCapacity);
+                houseDatas[cell] = new HouseState(cell, cellDataResidentCapacity.capacity);
                 housesChanged = true;
             }
         }

@@ -10,9 +10,6 @@ public partial class CustomTileData : Resource
     [Export]
     public Godot.Collections.Dictionary<CurrencyType, int> buildPrice;
 
-    [Export] //all requirements must be satisfied - AnyOf unlock requirement to be implemented when needed
-    public Godot.Collections.Array<UnlockRequirement> unlockRequirements;
-
     [Export]
     public Godot.Collections.Dictionary<CurrencyType, int> baseTurnCurrencyChange;
 
@@ -20,20 +17,10 @@ public partial class CustomTileData : Resource
     public Godot.Collections.Array<AdjacencyConfig> adjacencies;
 
     [Export]
-    public int residentCapacity;
-
-    public bool IsResidence => residentCapacity > 0;
-    
-    [Export]
-    public int workerCapacity;
-    
-    public bool IsWorkplace => workerCapacity > 0;
-
-    [Export]
-    public Godot.Collections.Dictionary<CurrencyType, int> storageCapacity;
-
-    [Export]
     public Godot.Collections.Array<AbstractTileDataComponent> components = new();
+    
+    public bool IsResidence => TryGetComponent(out ResidentCapacityComponent c) && c.capacity > 0;
+    public bool IsWorkplace => TryGetComponent(out WorkerCapacityComponent c) && c.capacity > 0;
     
     protected System.Collections.Generic.Dictionary<Type, AbstractTileDataComponent> componentDict = null;
     
@@ -83,10 +70,11 @@ public partial class CustomTileData : Resource
 
     public bool IsUnlocked()
     {
-        if (unlockRequirements == null)
+        if (!TryGetComponent(out UnlockRequirementsComponent unlockRequirementsComponent)
+            || unlockRequirementsComponent.requirements == null)
             return true;
         
-        foreach (var unlockRequirement in unlockRequirements)
+        foreach (var unlockRequirement in unlockRequirementsComponent.requirements)
         {
             if (!unlockRequirement.IsSatisfied())
                 return false;

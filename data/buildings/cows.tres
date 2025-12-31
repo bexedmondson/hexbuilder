@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_fefak"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_sx0ax"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="4_faajv"]
+[ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="4_sx0ax"]
+[ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_faajv"]
 
 [sub_resource type="Resource" id="Resource_ut87k"]
 script = ExtResource("4_faajv")
@@ -11,6 +13,16 @@ requiredAmountsGained = Dictionary[int, int]({
 0: 10
 })
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_1bw08"]
+script = ExtResource("4_sx0ax")
+requirements = Array[Object]([SubResource("Resource_ut87k")])
+metadata/_custom_type_script = "uid://7pquj0428dp5"
+
+[sub_resource type="Resource" id="Resource_xbks7"]
+script = ExtResource("5_faajv")
+capacity = 2
+metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
 [resource]
 script = ExtResource("3_sx0ax")
@@ -27,4 +39,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 workerCapacity = 1
 storageCapacity = {}
+components = Array[ExtResource("2_fefak")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

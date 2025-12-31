@@ -7,6 +7,8 @@
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="4_52ph2"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="4_71r3f"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="4_oxwtk"]
+[ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="5_m3t3u"]
+[ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="9_0gy0h"]
 
 [sub_resource type="Resource" id="Resource_1nllx"]
 script = ExtResource("4_71r3f")
@@ -16,12 +18,22 @@ capacities = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
+[sub_resource type="Resource" id="Resource_16rmr"]
+script = ExtResource("5_m3t3u")
+capacity = 2
+metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
+
 [sub_resource type="Resource" id="Resource_52ph2"]
 script = ExtResource("4_oxwtk")
 requiredTilesBuildCounts = Dictionary[ExtResource("1_24cbf"), int]({
 ExtResource("4_52ph2"): 3
 })
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[sub_resource type="Resource" id="Resource_8awr6"]
+script = ExtResource("9_0gy0h")
+requirements = [SubResource("Resource_52ph2")]
+metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -36,5 +48,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 residentCapacity = 2
 storageCapacity = {}
-components = Array[ExtResource("3_joiki")]([SubResource("Resource_1nllx")])
+components = Array[ExtResource("3_joiki")]([SubResource("Resource_1nllx"), SubResource("Resource_16rmr"), SubResource("Resource_8awr6")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

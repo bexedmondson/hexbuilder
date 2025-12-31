@@ -5,7 +5,7 @@ public class WorkplaceState(Vector2I location, CustomTileData tileData, Texture2
 {
     public Vector2I location { get; private set; } = location;
     public CustomTileData tileData { get; private set; } = tileData;
-    public int capacity => tileData.workerCapacity;
+    public int capacity => tileData.TryGetComponent<WorkerCapacityComponent>(out var workerCapacity) ? workerCapacity.capacity : 0;
     public string name => tileData.GetFileName();
     public Texture2D iconTexture { get; private set; } = iconTexture;
 
@@ -39,15 +39,16 @@ public class WorkplaceState(Vector2I location, CustomTileData tileData, Texture2
     {
         removedWorkers = new();
 
-        if (capacity <= newTileData.workerCapacity)
+        if (!newTileData.TryGetComponent<WorkerCapacityComponent>(out var newWorkerCapacity) 
+            || capacity <= newWorkerCapacity.capacity)
         {
             tileData = newTileData;
             return;
         }
 
         //get sublist of _workers from {newCapacity}th index to end
-        removedWorkers.AddRange(_workers[newTileData.workerCapacity..]);
-        _workers.RemoveRange(newTileData.workerCapacity, capacity - newTileData.workerCapacity);
+        removedWorkers.AddRange(_workers[newWorkerCapacity.capacity..]);
+        _workers.RemoveRange(newWorkerCapacity.capacity, capacity - newWorkerCapacity.capacity);
         tileData = newTileData;
     }
 

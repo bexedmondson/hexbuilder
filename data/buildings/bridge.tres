@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://bhdo22lh6munn"]
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="1_op6oi"]
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -8,9 +9,10 @@ canBePlacedOn = []
 buildPrice = {
 1: 2
 }
+unlockRequirements = []
 baseTurnCurrencyChange = {
 0: -1
 }
 adjacencies = Array[Object]([])
-unlockRequirements = []
+storageCapacity = null
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

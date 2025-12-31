@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://b8hvwxf5jgsix" path="res://data/buildings/wall.tres" id="1_xombo"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_j726c"]
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -10,9 +11,10 @@ buildPrice = {
 1: 2,
 2: 8
 }
+unlockRequirements = []
 baseTurnCurrencyChange = {
 0: -1
 }
 adjacencies = Array[Object]([])
-unlockRequirements = []
+storageCapacity = null
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

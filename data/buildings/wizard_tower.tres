@@ -5,7 +5,13 @@
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_mpcog"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_ato36"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="4_ato36"]
+[ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_5dl3r"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="5_mpcog"]
+
+[sub_resource type="Resource" id="Resource_flcca"]
+script = ExtResource("5_5dl3r")
+capacity = 1
+metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
 [sub_resource type="Resource" id="Resource_ato36"]
 script = ExtResource("5_mpcog")
@@ -29,4 +35,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 workerCapacity = 1
 storageCapacity = {}
+components = Array[ExtResource("4_ato36")]([SubResource("Resource_flcca")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="4_3tutr"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="4_kt3v3"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="5_3tutr"]
+[ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="6_3tutr"]
 
 [sub_resource type="Resource" id="Resource_mlsau"]
 script = ExtResource("5_3tutr")
@@ -14,6 +15,11 @@ capacities = Dictionary[int, int]({
 1: 1
 })
 metadata/_custom_type_script = "uid://be4uqqgw38s0q"
+
+[sub_resource type="Resource" id="Resource_uls6c"]
+script = ExtResource("6_3tutr")
+capacity = 1
+metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
 
 [resource]
 script = ExtResource("4_3tutr")
@@ -28,5 +34,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 residentCapacity = 1
 storageCapacity = {}
-components = Array[ExtResource("4_kt3v3")]([SubResource("Resource_mlsau")])
+components = Array[ExtResource("4_kt3v3")]([SubResource("Resource_mlsau"), SubResource("Resource_uls6c")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

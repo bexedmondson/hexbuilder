@@ -40,7 +40,8 @@ public class WorkplaceManager : IInjectable
             
             var cellData = mapController.BaseMapLayer.GetCellCustomData(cell);
             
-            if (cellData.workerCapacity == 0)
+            if (!cellData.TryGetComponent<WorkerCapacityComponent>(out var workerCapacity)
+                || workerCapacity.capacity == 0)
                 continue;
             
             existingMapWorkplaceCoords.Add(cell);

@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://d2ks5o3lef3w2" path="res://data/buildings/pit_mine.tres" id="4_c4fns"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="5_psxop"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="6_3qjxr"]
+[ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="7_3qjxr"]
 
 [sub_resource type="Resource" id="Resource_16g3e"]
 script = ExtResource("6_3qjxr")
@@ -14,6 +15,11 @@ capacities = Dictionary[int, int]({
 2: 2
 })
 metadata/_custom_type_script = "uid://be4uqqgw38s0q"
+
+[sub_resource type="Resource" id="Resource_k7iep"]
+script = ExtResource("7_3qjxr")
+capacity = 2
+metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -28,5 +34,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 workerCapacity = 2
 storageCapacity = {}
-components = Array[ExtResource("5_psxop")]([SubResource("Resource_16g3e")])
+components = Array[ExtResource("5_psxop")]([SubResource("Resource_16g3e"), SubResource("Resource_k7iep")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_j1ids"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="3_p1jm6"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_wvt6a"]
+[ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="6_4nmjt"]
+[ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="7_poee0"]
 
 [sub_resource type="Resource" id="Resource_ti82r"]
 script = ExtResource("3_wvt6a")
@@ -22,6 +24,16 @@ ExtResource("1_22yc1"): 3
 })
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
+[sub_resource type="Resource" id="Resource_iyw0n"]
+script = ExtResource("6_4nmjt")
+requirements = Array[Object]([SubResource("Resource_j1ids")])
+metadata/_custom_type_script = "uid://7pquj0428dp5"
+
+[sub_resource type="Resource" id="Resource_ifxl0"]
+script = ExtResource("7_poee0")
+capacity = 2
+metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
+
 [resource]
 script = ExtResource("1_24cbf")
 canBePlacedOn = Array[Object]([ExtResource("1_22yc1")])
@@ -36,5 +48,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 residentCapacity = 2
 storageCapacity = {}
-components = Array[ExtResource("2_j1ids")]([SubResource("Resource_ti82r")])
+components = Array[ExtResource("2_j1ids")]([SubResource("Resource_ti82r"), SubResource("Resource_iyw0n"), SubResource("Resource_ifxl0")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

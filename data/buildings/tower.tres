@@ -5,7 +5,14 @@
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_i4mag"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_305jr"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="4_305jr"]
+[ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="5_1y7xi"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedUnlockRequirement.cs" id="5_i4mag"]
+[ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="7_u3b4o"]
+
+[sub_resource type="Resource" id="Resource_uqrft"]
+script = ExtResource("5_1y7xi")
+capacity = 1
+metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
 
 [sub_resource type="Resource" id="Resource_305jr"]
 script = ExtResource("5_i4mag")
@@ -13,6 +20,11 @@ requiredAmountsGained = Dictionary[int, int]({
 2: 20
 })
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_5sslw"]
+script = ExtResource("7_u3b4o")
+requirements = Array[Object]([SubResource("Resource_305jr")])
+metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -27,4 +39,5 @@ baseTurnCurrencyChange = {
 adjacencies = Array[Object]([])
 residentCapacity = 1
 storageCapacity = {}
+components = Array[ExtResource("4_305jr")]([SubResource("Resource_uqrft"), SubResource("Resource_5sslw")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
