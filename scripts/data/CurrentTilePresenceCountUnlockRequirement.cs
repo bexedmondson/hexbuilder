@@ -23,9 +23,9 @@ public partial class CurrentTilePresenceCountUnlockRequirement : UnlockRequireme
                 currentTileCount[tileData]++;
         }
 
-        foreach (var kvp in currentTileCount)
+        foreach (var kvp in requiredTilesBuildCounts)
         {
-            if (requiredTilesBuildCounts[kvp.Key] > kvp.Value)
+            if (!currentTileCount.TryGetValue(kvp.Key, out var currentValue) || kvp.Value > currentValue)
                 return false;
         }
 
