@@ -109,7 +109,9 @@ public class WorkplaceManager : IInjectable
             return false;
 
         residentWorkplaceMap.Remove(resident);
-        InjectionManager.Get<EventDispatcher>().Dispatch(new WorkplaceUpdatedEvent());
+        var workplaceUpdatedEvent = new WorkplaceUpdatedEvent();
+        workplaceUpdatedEvent.newOrChangedWorkplaces.Add(workplaceState);
+        InjectionManager.Get<EventDispatcher>().Dispatch(workplaceUpdatedEvent);
         return true;
     }
 

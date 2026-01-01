@@ -19,8 +19,7 @@ public partial class WorkplaceCellInfoUIContainer : Control
 
     private void OnWorkplaceUpdated(WorkplaceUpdatedEvent workplaceUpdatedEvent)
     {
-        
-            foreach (var removedWorkplace in workplaceUpdatedEvent.removedWorkplaces)
+        foreach (var removedWorkplace in workplaceUpdatedEvent.removedWorkplaces)
         {
             var removedWorkplaceLocation = removedWorkplace.location;
             if (workplaceCellInfoUis.TryGetValue(removedWorkplaceLocation, out var removedWorkplaceInfoUI))
