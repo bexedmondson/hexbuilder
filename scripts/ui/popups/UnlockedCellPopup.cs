@@ -8,9 +8,25 @@ public partial class UnlockedCellPopup : Popup
 {
     [Export]
     private Label title;
-    
+
     [Export]
-    private Control leftPanel;
+    private TabContainer tabContainer;
+
+    [Export]
+    private Control effectsTab;
+
+    [Export]
+    private Control residentTab;
+
+    [Export]
+    private Control workerTab;
+
+    [Export]
+    private Control storageTab;
+
+    [Export]
+    private Control buildTab;
+    
     
     [Export]
     private Control effectDetailsContainer;
@@ -67,9 +83,10 @@ public partial class UnlockedCellPopup : Popup
 
         title.Text = cellCustomTileData.GetFileName();
         
-        bool hasGeneralInfo = SetupInfo(cellCustomTileData);
+        SetupInfo(cellCustomTileData);
 
-        workplaceDetailsContainer.Visible = cellCustomTileData.IsWorkplace;
+        //workplaceDetailsContainer.Visible = cellCustomTileData.IsWorkplace;
+        tabContainer.SetTabHidden(workerTab.GetIndex(), !cellCustomTileData.IsWorkplace);
         if (cellCustomTileData.IsWorkplace)
         {
             InjectionManager.Get<WorkplaceManager>().TryGetWorkplaceAtLocation(cell, out var workplaceState);
@@ -77,15 +94,13 @@ public partial class UnlockedCellPopup : Popup
         }
             
         SetupResidents(cellCustomTileData);
-        
-        leftPanel.Visible = hasGeneralInfo || cellCustomTileData.IsWorkplace || cellCustomTileData.IsResidence;
 
         SetupTileSelector(cellCustomTileData);
         
         this.SetVisible(true);
     }
 
-    private bool SetupInfo(CustomTileData cellCustomTileData)
+    private void SetupInfo(CustomTileData cellCustomTileData)
     {
         for (int i = effectInfoParent.GetChildCount() - 1; i >= 0; i--)
         {
@@ -131,15 +146,17 @@ public partial class UnlockedCellPopup : Popup
             effectInfoParent.AddChild(adjacencyEffectUI);
         }
 
-        effectDetailsContainer.Visible = hasEffects;
-        return hasEffects;
+        //effectDetailsContainer.Visible = hasEffects;
+        tabContainer.SetTabHidden(effectsTab.GetIndex(), !hasEffects);
+        //return hasEffects;
     }
     
     private void SetupResidents(CustomTileData cellCustomTileData)
     {
         if (!cellCustomTileData.IsResidence)
         {
-            residentContainer.Visible = false;
+            tabContainer.SetTabHidden(residentTab.GetIndex(), true);
+            //residentContainer.Visible = false;
             return;
         }
         
@@ -148,7 +165,8 @@ public partial class UnlockedCellPopup : Popup
             residentDetailsParent.GetChild(i).QueueFree();
         }
 
-        residentContainer.Visible = true;
+        //residentContainer.Visible = true;
+        tabContainer.SetTabHidden(residentTab.GetIndex(), false);
 
         var housingManager = InjectionManager.Get<HousingManager>();
         if (!housingManager.TryGetHouseOnCell(cell, out var houseState))
@@ -173,6 +191,8 @@ public partial class UnlockedCellPopup : Popup
         {
             tileSelector.GetChild(i).QueueFree();
         }
+        
+        tabContainer.SetTabHidden(buildTab.GetIndex(), false); //TODO change?
         
         TileDatabase tileDatabase = InjectionManager.Get<TileDatabase>();
         var compatibleTileInfos = tileDatabase.GetAllCompatibleTileInfos(cellCustomTileData);

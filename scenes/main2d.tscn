@@ -182,16 +182,16 @@ z_index = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("8_wa3gb")
-cellInfoUIScene = ExtResource("9_xvnm7")
 baseTileMapLayer = NodePath("../BaseTileMapLayer")
+cellInfoUIScene = ExtResource("9_xvnm7")
 
 [node name="TimedJobCellInfoContainer" type="Control" parent="MapController" unique_id=105704156 node_paths=PackedStringArray("baseTileMapLayer")]
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("10_mpwrp")
-cellInfoUIScene = ExtResource("11_v8tdf")
 baseTileMapLayer = NodePath("../BaseTileMapLayer")
+cellInfoUIScene = ExtResource("11_v8tdf")
 
 [node name="DebugCellInfoContainer" type="Control" parent="MapController" unique_id=2027750588]
 z_index = 1
@@ -568,7 +568,7 @@ script = ExtResource("32_t4767")
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
 
-[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "leftPanel", "effectDetailsContainer", "effectInfoParent", "workplaceDetailsContainer", "workplaceInfoUI", "residentContainer", "residentDetailsParent", "tileSelector", "confirmButton")]
+[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "buildTab", "effectDetailsContainer", "effectInfoParent", "workplaceDetailsContainer", "workplaceInfoUI", "residentContainer", "residentDetailsParent", "tileSelector", "confirmButton")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -582,18 +582,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_1mh2o")
 title = NodePath("Label")
-leftPanel = NodePath("HBoxContainer/VBoxContainer")
+tabContainer = NodePath("TabContainer")
+effectsTab = NodePath("TabContainer/Effects")
+residentTab = NodePath("TabContainer/Residents")
+workerTab = NodePath("TabContainer/Workers")
+storageTab = NodePath("TabContainer/Storage")
+buildTab = NodePath("TabContainer/Build")
 effectDetailsContainer = NodePath("HBoxContainer/VBoxContainer/EffectInfoPanel")
-effectInfoParent = NodePath("HBoxContainer/VBoxContainer/EffectInfoPanel/InfoSubpanel/VBoxContainer")
+effectInfoParent = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer")
 workplaceDetailsContainer = NodePath("HBoxContainer/VBoxContainer/WorkplaceInfoPanel")
-workplaceInfoUI = NodePath("HBoxContainer/VBoxContainer/WorkplaceInfoPanel/InfoSubpanel/WorkplaceInfoUI")
+workplaceInfoUI = NodePath("TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI")
 residentContainer = NodePath("HBoxContainer/VBoxContainer/HousingInfoPanel")
-residentDetailsParent = NodePath("HBoxContainer/VBoxContainer/HousingInfoPanel/ResidentSubpanel/VBoxContainer")
+residentDetailsParent = NodePath("TabContainer/Residents/ResidentSubpanel/VBoxContainer")
 unlockedCellAdjacencyUIScene = ExtResource("23_cpah3")
-tileSelector = NodePath("HBoxContainer/TileSelectorPanel/ScrollPanel/ScrollContainer/TileSelectionGrid")
+tileSelector = NodePath("TabContainer/Build/Panel/ScrollPanel/ScrollContainer/TileSelectionGrid")
 tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
-confirmButton = NodePath("HBoxContainer/TileSelectorPanel/ConfirmButton")
+confirmButton = NodePath("TabContainer/Build/Panel/ConfirmButton")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/UnlockedCellPopup" unique_id=1763966649]
 custom_minimum_size = Vector2(50, 50)
@@ -624,6 +629,7 @@ text = "tile name here"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup" unique_id=1281793294]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -875,6 +881,195 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "OK"
 
+[node name="TabContainer" type="TabContainer" parent="PopupLayer/UnlockedCellPopup" unique_id=4165522]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 1
+
+[node name="Effects" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=536292955]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects" unique_id=2065032771]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel" unique_id=1858583449]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Residents" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=140943431]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="ResidentSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Residents" unique_id=86946302]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Residents/ResidentSubpanel" unique_id=1871819088]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Workers" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=2077364899]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Workers" unique_id=1153315979]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorkplaceInfoUI" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel" unique_id=898314851 node_paths=PackedStringArray("workplaceInfoLabel", "workplaceIcon", "workerNamesLabel", "workerCountLabel", "minusButton", "plusButton")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.05
+anchor_right = 0.97
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("28_l3nqq")
+workplaceInfoLabel = NodePath("InfoLabel")
+workplaceIcon = NodePath("IconTextureRect")
+workerNamesLabel = NodePath("NamesLabel")
+workerCountLabel = NodePath("CountLabel")
+minusButton = NodePath("MinusButton")
+plusButton = NodePath("PlusButton")
+
+[node name="IconTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=1908798264]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+expand_mode = 5
+
+[node name="InfoLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=1520284191]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+text = "testing 1 2 3"
+
+[node name="NamesLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=1067939557]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "testing 1 2 3"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MinusButton" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=127484227]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "-"
+
+[node name="CountLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=1940472802]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0/0"
+
+[node name="PlusButton" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=800711205]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "+"
+
+[node name="Storage" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=816071196]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Build" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=459481767]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="Panel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build" unique_id=1320820301]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel" unique_id=216826276]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelEmbedded"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/ScrollPanel" unique_id=1052887503]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+
+[node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/ScrollPanel/ScrollContainer" unique_id=1964161459]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="ConfirmButton" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel" unique_id=731801860]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -72.0
+offset_right = 50.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "OK"
+
 [node name="LockedCellPopup" type="Panel" parent="PopupLayer" unique_id=332027100 node_paths=PackedStringArray("workerCountLabel", "confirmButton")]
 visible = false
 anchors_preset = 8
@@ -978,8 +1173,8 @@ anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("20_77sti")
-houseInfoScene = ExtResource("21_mcgvi")
 houseInfoContainer = NodePath("ScrollContainer/VBoxContainer")
+houseInfoScene = ExtResource("21_mcgvi")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/HousingInfoPopup" unique_id=1178184510]
 custom_minimum_size = Vector2(50, 50)
@@ -1056,8 +1251,8 @@ anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("22_1w2nm")
-residentInfoUIScene = ExtResource("27_xvnm7")
 residentInfoContainer = NodePath("ScrollContainer/VBoxContainer")
+residentInfoUIScene = ExtResource("27_xvnm7")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/ResidentInfoPopup" unique_id=1154121240]
 custom_minimum_size = Vector2(50, 50)
@@ -1095,15 +1290,15 @@ anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("36_4b3q0")
-tileScene = ExtResource("37_y60pf")
-encyclopediaTileGroup = ExtResource("37_kj2ff")
-affectedByScene = ExtResource("39_e4lbj")
 tileSelector = NodePath("ScrollContainer/VBoxContainer")
+tileScene = ExtResource("37_y60pf")
 tileDetails = NodePath("TileDetailPanel/TileDetails")
+encyclopediaTileGroup = ExtResource("37_kj2ff")
 tileTextureRect = NodePath("TileDetailPanel/TileTextureRect")
 defaultEffectDisplay = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/HBoxContainer/CurrencyDisplay")
 affectsParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsHBoxContainer")
 affectedByParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByHBoxContainer2")
+affectedByScene = ExtResource("39_e4lbj")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/EncyclopediaPopup" unique_id=1100325916]
 custom_minimum_size = Vector2(50, 50)
@@ -1244,6 +1439,8 @@ columns = 2
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/WorkplaceInfoPanel/InfoSubpanel/WorkplaceInfoUI/MinusButton" to="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/WorkplaceInfoPanel/InfoSubpanel/WorkplaceInfoUI" method="OnMinusButton"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/WorkplaceInfoPanel/InfoSubpanel/WorkplaceInfoUI/PlusButton" to="PopupLayer/UnlockedCellPopup/HBoxContainer/VBoxContainer/WorkplaceInfoPanel/InfoSubpanel/WorkplaceInfoUI" method="OnPlusButton"]
 [connection signal="pressed" from="PopupLayer/UnlockedCellPopup/HBoxContainer/TileSelectorPanel/ConfirmButton" to="PopupLayer/UnlockedCellPopup" method="Confirm"]
+[connection signal="pressed" from="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI/MinusButton" to="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" method="OnMinusButton"]
+[connection signal="pressed" from="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI/PlusButton" to="PopupLayer/UnlockedCellPopup/TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" method="OnPlusButton"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/ConfirmButton" to="PopupLayer/LockedCellPopup" method="Confirm"]
 [connection signal="pressed" from="PopupLayer/LockedCellPopup/CloseButton" to="PopupLayer/LockedCellPopup" method="Close"]
 [connection signal="visibility_changed" from="PopupLayer/HousingInfoPopup" to="PopupLayer/HousingInfoPopup" method="OnVisibilityChanged"]
