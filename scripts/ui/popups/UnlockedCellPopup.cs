@@ -29,19 +29,10 @@ public partial class UnlockedCellPopup : Popup
     
     
     [Export]
-    private Control effectDetailsContainer;
-    
-    [Export]
     private Control effectInfoParent;
     
     [Export]
-    private Control workplaceDetailsContainer;
-    
-    [Export]
     private WorkplaceInfoUI workplaceInfoUI;
-
-    [Export]
-    private Control residentContainer;
 
     [Export]
     private Control residentDetailsParent;
