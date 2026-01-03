@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using Godot;
 
@@ -30,15 +27,18 @@ public partial class UnlockedCellPopup : Popup
     
     [Export]
     private Control effectInfoParent;
-    
-    [Export]
-    private WorkplaceInfoUI workplaceInfoUI;
-
-    [Export]
-    private Control residentDetailsParent;
 
     [Export]
     private PackedScene unlockedCellAdjacencyUIScene;
+
+    [Export]
+    private StorageInfoUI storageInfoUI;
+
+    [Export]
+    private Control residentDetailsParent;
+    
+    [Export]
+    private WorkplaceInfoUI workplaceInfoUI;
     
     [Export]
     private Control tileSelector;
@@ -76,12 +76,21 @@ public partial class UnlockedCellPopup : Popup
         
         SetupInfo(cellCustomTileData);
 
-        //workplaceDetailsContainer.Visible = cellCustomTileData.IsWorkplace;
         tabContainer.SetTabHidden(workerTab.GetIndex(), !cellCustomTileData.IsWorkplace);
         if (cellCustomTileData.IsWorkplace)
         {
             InjectionManager.Get<WorkplaceManager>().TryGetWorkplaceAtLocation(cell, out var workplaceState);
             workplaceInfoUI.SetWorkplaceInfo(workplaceState, null);
+        }
+
+        if (cellCustomTileData.TryGetComponent<StorageCapacityDataComponent>(out var storageComponent))
+        {
+            storageInfoUI.SetStorageInfo(storageComponent);
+            tabContainer.SetTabHidden(storageTab.GetIndex(), false);
+        }
+        else
+        {
+            tabContainer.SetTabHidden(storageTab.GetIndex(), true);
         }
             
         SetupResidents(cellCustomTileData);
@@ -137,9 +146,7 @@ public partial class UnlockedCellPopup : Popup
             effectInfoParent.AddChild(adjacencyEffectUI);
         }
 
-        //effectDetailsContainer.Visible = hasEffects;
         tabContainer.SetTabHidden(effectsTab.GetIndex(), !hasEffects);
-        //return hasEffects;
     }
     
     private void SetupResidents(CustomTileData cellCustomTileData)
@@ -147,7 +154,6 @@ public partial class UnlockedCellPopup : Popup
         if (!cellCustomTileData.IsResidence)
         {
             tabContainer.SetTabHidden(residentTab.GetIndex(), true);
-            //residentContainer.Visible = false;
             return;
         }
         
@@ -156,7 +162,6 @@ public partial class UnlockedCellPopup : Popup
             residentDetailsParent.GetChild(i).QueueFree();
         }
 
-        //residentContainer.Visible = true;
         tabContainer.SetTabHidden(residentTab.GetIndex(), false);
 
         var housingManager = InjectionManager.Get<HousingManager>();

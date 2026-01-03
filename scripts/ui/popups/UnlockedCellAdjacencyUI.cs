@@ -21,6 +21,12 @@ public partial class UnlockedCellAdjacencyUI : Control
     [Export]
     private CurrencyDisplay receiveEffectDisplay;
 
+    [Export]
+    private Color disabledColour;
+
+    [Export]
+    private Control noWorkerIndicator;
+
     private readonly Dictionary<Vector2I, string> coordsToDirectionMap = new(){
         { Vector2I.Down, "NW" },
         { Vector2I.Left, "NE"},
@@ -37,6 +43,15 @@ public partial class UnlockedCellAdjacencyUI : Control
 
         effectGivenUI.Visible = false;
         effectReceivedUI.Visible = false;
+
+        var workplaceManager = InjectionManager.Get<WorkplaceManager>();
+
+        if (workplaceManager.TryGetWorkplaceAtLocation(adjacentCell, out var adjacentWorkplace))
+        {
+            noWorkerIndicator.Visible = adjacentWorkplace.workerCount == 0;
+            if (adjacentWorkplace.workerCount == 0)
+                this.Modulate = disabledColour;
+        }
     }
 
     public void SetGivenEffects(CurrencySum givenEffects)

@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://djnscpwua3iqw" path="res://scripts/ui/popups/UnlockedCellAdjacencyUI.cs" id="1_rjnxt"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="2_re3pf"]
+[ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="3_re3pf"]
 
-[node name="AdjacencyInfoHBoxContainer" type="HBoxContainer" unique_id=1052811575 node_paths=PackedStringArray("effectGivenUI", "effectReceivedUI", "name", "direction", "giveEffectDisplay", "receiveEffectDisplay")]
+[node name="AdjacencyInfoHBoxContainer" type="HBoxContainer" unique_id=1052811575 node_paths=PackedStringArray("effectGivenUI", "effectReceivedUI", "name", "direction", "giveEffectDisplay", "receiveEffectDisplay", "noWorkerIndicator")]
 script = ExtResource("1_rjnxt")
 effectGivenUI = NodePath("GivesHBoxContainer")
 effectReceivedUI = NodePath("ReceivesHBoxContainer2")
@@ -11,6 +12,8 @@ name = NodePath("NameLabel")
 direction = NodePath("DirectionLabel")
 giveEffectDisplay = NodePath("GivesHBoxContainer/CurrencyDisplay")
 receiveEffectDisplay = NodePath("ReceivesHBoxContainer2/CurrencyDisplay")
+disabledColour = Color(0.27450982, 0.27450982, 0.27450982, 1)
+noWorkerIndicator = NodePath("GivesHBoxContainer/NoWorkerIndicator")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1314120367]
 layout_mode = 2
@@ -19,7 +22,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="GivesHBoxContainer" type="HBoxContainer" parent="." unique_id=1760846320]
-visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="GivesHBoxContainer" unique_id=888050520]
@@ -31,6 +33,21 @@ layout_mode = 2
 size_flags_horizontal = 2
 displayAsDelta = true
 iconColor = Color(0, 0, 0, 1)
+
+[node name="NoWorkerIndicator" type="HBoxContainer" parent="GivesHBoxContainer" unique_id=680998968]
+modulate = Color(0.85490197, 0, 0, 1)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="GivesHBoxContainer/NoWorkerIndicator" unique_id=401943985]
+layout_mode = 2
+text = "! 0"
+
+[node name="TextureRect" type="TextureRect" parent="GivesHBoxContainer/NoWorkerIndicator" unique_id=1008687498]
+layout_mode = 2
+texture = ExtResource("3_re3pf")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="ReceivesHBoxContainer2" type="HBoxContainer" parent="." unique_id=1356682576]
 visible = false
