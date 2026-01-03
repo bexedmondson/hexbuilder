@@ -21,6 +21,9 @@ public partial class WorkplaceInfoUI : Control
     
     [Export]
     private Button plusButton;
+    
+    [Export]
+    private Control noWorkerIndicator;
 
     private WorkplaceManager workplaceManager;
 
@@ -31,7 +34,8 @@ public partial class WorkplaceInfoUI : Control
     {
         this.workplaceState = workplaceState;
         this.onGoToButtonAction = onGoToButtonAction;
-        workplaceInfoLabel.Text = $"{workplaceState.location} {workplaceState.name}";
+        if (workplaceInfoLabel != null)
+            workplaceInfoLabel.Text = $"{workplaceState.location} {workplaceState.name}";
 
         workplaceIcon.Texture = workplaceState.iconTexture;
         
@@ -49,6 +53,9 @@ public partial class WorkplaceInfoUI : Control
         
         int current = workplaceState.workerCount;
         int max = workplaceState.capacity;
+
+        if (noWorkerIndicator != null)
+            noWorkerIndicator.Visible = current == 0;
 
         minusButton.Disabled = current <= 0;
         plusButton.Disabled = current >= max;
