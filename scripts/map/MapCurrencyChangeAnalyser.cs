@@ -5,6 +5,7 @@ public class MapCurrencyChangeAnalyser : IInjectable
 {
     private MapController mapController;
     private WorkplaceManager workplaceManager;
+    private HousingManager housingManager;
     
     public MapCurrencyChangeAnalyser(MapController mapController)
     {
@@ -15,6 +16,7 @@ public class MapCurrencyChangeAnalyser : IInjectable
     public List<CurrencySum> GetFullCurrencyTurnDeltas()
     {
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
+        housingManager ??= InjectionManager.Get<HousingManager>();
         
         List<CurrencySum> allCurrencyChanges = new();
         
@@ -32,6 +34,12 @@ public class MapCurrencyChangeAnalyser : IInjectable
             }
             //don't get regular effects nor adjacency benefits for unstaffed workplaces
             //non-workplace tiles that have effects are fine though
+            
+            //don't get effects for residences without residents
+            if (housingManager.TryGetHouseOnCell(cell, out var house) && house.occupants.Length <= 0)
+            {
+                continue;
+            }
             
             if (cellTileData?.baseTurnCurrencyChange != null && cellTileData.baseTurnCurrencyChange.Count > 0)
                 allCurrencyChanges.Add(new CurrencySum(cellTileData.baseTurnCurrencyChange));
