@@ -637,9 +637,10 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 1
 
 [node name="Effects" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=536292955]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -662,7 +663,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Storage" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=816071196]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -681,7 +681,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_left = 10.0
-offset_top = 10.0
+offset_top = 50.0
 offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
@@ -691,6 +691,19 @@ alignment = 1
 script = ExtResource("42_gqxrv")
 singleCurrencyDisplayScene = ExtResource("47_hxced")
 iconColor = Color(0.12156863, 0.16078432, 0.18431373, 1)
+
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Storage/StoragePanel" unique_id=1212123188]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 37.0
+grow_horizontal = 2
+text = "storage capacity:"
+horizontal_alignment = 1
 
 [node name="Residents" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=140943431]
 visible = false
