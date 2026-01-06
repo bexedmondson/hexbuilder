@@ -4,6 +4,8 @@ public class ResidentState(string name)
     private HousingManager housingManager;
     
     public string Name { get; private set; } = name;
+    
+    public int happiness { get; private set; } = 1;
 
     public int TurnsWithoutHouse { get; private set; } = 0;
 

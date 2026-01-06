@@ -1,25 +1,59 @@
 [gd_scene format=3 uid="uid://b5cjn1sgivxbt"]
 
 [ext_resource type="Script" uid="uid://cumathtplfne2" path="res://scripts/ui/popups/ResidentInfoUI.cs" id="1_pyfhh"]
+[ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="2_2s74l"]
 
-[node name="ResidentInfo" type="Panel" unique_id=77035155 node_paths=PackedStringArray("residentLabel")]
+[node name="ResidentInfo" type="PanelContainer" unique_id=330889481 node_paths=PackedStringArray("residentLabel", "happinessIcon", "noHouseLabel", "employmentLabel")]
 custom_minimum_size = Vector2(100, 80)
+offset_right = 345.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_type_variation = &"PanelEmbedded"
 script = ExtResource("1_pyfhh")
-residentLabel = NodePath("Label")
+residentLabel = NodePath("HBoxContainer/Label")
+happinessIcon = NodePath("HBoxContainer/TextureRect")
+noHouseLabel = NodePath("HBoxContainer/Label2")
+employmentLabel = NodePath("HBoxContainer/Label3")
 
-[node name="Label" type="Label" parent="." unique_id=1987213848]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=306795154]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=1987213848]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "name"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1043772189]
+layout_mode = 2
+texture = ExtResource("2_2s74l")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="HBoxContainer/TextureRect" unique_id=299680700]
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
+offset_top = 2.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 0
-text = "testing 1 2 3"
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=1073977895]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "no house!"
 vertical_alignment = 1
-autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="HBoxContainer" unique_id=1290955726]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "workplace"
+vertical_alignment = 1

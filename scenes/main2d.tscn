@@ -32,6 +32,8 @@
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
 [ext_resource type="PackedScene" uid="uid://nrnjv42wsci4" path="res://scenes/unlocked_cell_adjacency_info_ui.tscn" id="23_cpah3"]
 [ext_resource type="Script" uid="uid://fx01r1n7jd8" path="res://scripts/ui/ResidentNoHomeWarningIndicator.cs" id="23_rn43n"]
+[ext_resource type="Script" uid="uid://7xixs01jf3f8" path="res://scripts/ui/IconMapper.cs" id="24_6r123"]
+[ext_resource type="Texture2D" uid="uid://oxwmhj6v1jk2" path="res://assets/emotes.png" id="25_hxfgi"]
 [ext_resource type="Script" uid="uid://bil8vuftoleml" path="res://scripts/ui/StorageCapacityIndicator.cs" id="26_gqxrv"]
 [ext_resource type="Texture2D" uid="uid://d1wqqwcyvwbxv" path="res://assets/icons/icon_bag_exclamation.tres" id="27_3kpmb"]
 [ext_resource type="PackedScene" uid="uid://b5cjn1sgivxbt" path="res://scenes/resident_info_ui.tscn" id="27_xvnm7"]
@@ -89,6 +91,34 @@ fractal_lacunarity = 4.0
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mcgvi"]
 noise = SubResource("FastNoiseLite_77sti")
 seamless = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bi4yo"]
+atlas = ExtResource("25_hxfgi")
+region = Rect2(96, 0, 32, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufsem"]
+atlas = ExtResource("25_hxfgi")
+region = Rect2(128, 0, 32, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi10l"]
+atlas = ExtResource("25_hxfgi")
+region = Rect2(160, 38, 32, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnbf5"]
+atlas = ExtResource("25_hxfgi")
+region = Rect2(128, 38, 32, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54yl2"]
+atlas = ExtResource("25_hxfgi")
+region = Rect2(96, 38, 32, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs41i"]
+atlas = ExtResource("25_hxfgi")
+region = Rect2(288, 38, 32, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a4bv"]
+atlas = ExtResource("25_hxfgi")
+region = Rect2(160, 0, 32, 38)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mpwrp"]
 load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
@@ -273,6 +303,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="IconMapper" type="Control" parent="CanvasLayer/UIMain" unique_id=1225025790]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("24_6r123")
+happinessIconMap = Dictionary[int, AtlasTexture]({
+-3: SubResource("AtlasTexture_ufsem"),
+-2: SubResource("AtlasTexture_yi10l"),
+-1: SubResource("AtlasTexture_bnbf5"),
+0: SubResource("AtlasTexture_bi4yo"),
+1: SubResource("AtlasTexture_54yl2"),
+2: SubResource("AtlasTexture_hs41i"),
+3: SubResource("AtlasTexture_2a4bv")
+})
 
 [node name="MainInventoryDisplay" type="VBoxContainer" parent="CanvasLayer/UIMain" unique_id=1653779922 node_paths=PackedStringArray("currencyDisplays", "capacityLabels", "currencyDeltas", "storageIndicators")]
 layout_mode = 1
@@ -637,10 +682,9 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 0
 
 [node name="Effects" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=536292955]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -663,6 +707,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Storage" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=816071196]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
