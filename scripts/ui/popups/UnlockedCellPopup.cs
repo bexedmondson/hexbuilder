@@ -66,6 +66,9 @@ public partial class UnlockedCellPopup : Popup
     
     public void ShowForCell(TileMapLayer baseMapLayer, Vector2I setCell)
     {
+        if (setCell == cell)
+            return;
+        
         inventoryManager ??= InjectionManager.Get<InventoryManager>();
         confirmButton.Disabled = true;
         
@@ -96,7 +99,10 @@ public partial class UnlockedCellPopup : Popup
         SetupResidents(cellCustomTileData);
 
         SetupTileSelector(cellCustomTileData);
-        
+
+        tabContainer.SetCurrentTab(0);
+        if (tabContainer.IsTabHidden(0))
+            tabContainer.SelectNextAvailable();
         this.SetVisible(true);
     }
 
@@ -205,7 +211,8 @@ public partial class UnlockedCellPopup : Popup
         
         //TODO add locked options as well
 
-        tileSelectionGroup.Pressed += OnSelectionChanged;
+        if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count == 0)
+            tileSelectionGroup.Pressed += OnSelectionChanged;
     }
 
     private void OnSelectionChanged(BaseButton selectedButton)
