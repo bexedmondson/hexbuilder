@@ -7,9 +7,9 @@
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_qw1qp"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="6_3iw88"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="6_hv1c6"]
-[ext_resource type="Script" uid="uid://b8yvq1vldnsav" path="res://scripts/data/CurrentTilePresenceCountUnlockRequirement.cs" id="7_j5x2k"]
+[ext_resource type="Script" uid="uid://b8yvq1vldnsav" path="res://scripts/data/CurrentTilePresenceCountRequirement.cs" id="7_j5x2k"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="7_oq0j1"]
-[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="8_hv1c6"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildRequirement.cs" id="8_hv1c6"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="8_ury0i"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="12_sn052"]
 

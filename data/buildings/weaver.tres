@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_m4iac"]
 [ext_resource type="Resource" uid="uid://c4sgkb7bwedw5" path="res://data/buildings/sheep.tres" id="4_b2kmm"]
 [ext_resource type="Resource" uid="uid://bu7kjauo40wv1" path="res://data/buildings/flax.tres" id="5_m4iac"]
-[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildUnlockRequirement.cs" id="6_rn28k"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildRequirement.cs" id="6_rn28k"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="6_v22cc"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="7_2p2k4"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="11_sqpaw"]

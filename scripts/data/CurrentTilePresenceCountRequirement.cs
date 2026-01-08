@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Godot;
 
 [GlobalClass][Tool]
-public partial class CurrentTilePresenceCountUnlockRequirement : UnlockRequirement
+public partial class CurrentTilePresenceCountRequirement : Requirement
 {
     [Export]
     public Godot.Collections.Dictionary<CustomTileData, int> requiredTilesBuildCounts = new();

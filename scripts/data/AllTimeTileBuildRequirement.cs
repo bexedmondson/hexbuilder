@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass][Tool]
-public partial class AllTimeTileBuildUnlockRequirement : UnlockRequirement
+public partial class AllTimeTileBuildRequirement : Requirement
 {
     [Export]
     public Godot.Collections.Dictionary<CustomTileData, int> requiredTilesBuildCounts = new();

@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass][Tool]
-public partial class LifetimeGainedUnlockRequirement : UnlockRequirement
+public partial class LifetimeGainedRequirement : Requirement
 {
     [Export]
     public Godot.Collections.Dictionary<CurrencyType, int> requiredAmountsGained;

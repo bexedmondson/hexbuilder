@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_ljri3"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="5_mkh37"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="6_f4a35"]
-[ext_resource type="Script" uid="uid://b8yvq1vldnsav" path="res://scripts/data/CurrentTilePresenceCountUnlockRequirement.cs" id="6_ljri3"]
+[ext_resource type="Script" uid="uid://b8yvq1vldnsav" path="res://scripts/data/CurrentTilePresenceCountRequirement.cs" id="6_ljri3"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="7_fssqy"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="10_8i360"]
 
