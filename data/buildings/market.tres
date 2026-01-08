@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_xd4gl"]
 [ext_resource type="Resource" uid="uid://c45irgldcys11" path="res://data/terrain/sand.tres" id="3_xd4gl"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="4_y25w2"]
-[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/LifetimeGainedRequirement.cs" id="5_uyp33"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="5_uyp33"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="5_y7xcg"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="7_e35tn"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="8_dggx0"]

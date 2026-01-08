@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_joiki"]
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="4_52ph2"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="4_71r3f"]
-[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildRequirement.cs" id="4_oxwtk"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="4_oxwtk"]
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="5_m3t3u"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="9_0gy0h"]
 

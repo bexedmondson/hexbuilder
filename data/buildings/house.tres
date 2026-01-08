@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="1_22yc1"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_j1ids"]
-[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/AllTimeTileBuildRequirement.cs" id="3_p1jm6"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="3_p1jm6"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_wvt6a"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="6_4nmjt"]
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="7_poee0"]
