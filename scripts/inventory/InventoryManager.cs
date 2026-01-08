@@ -39,7 +39,7 @@ public partial class InventoryManager : Node2D, IInjectable
         
         var eventDispatcher = InjectionManager.Get<EventDispatcher>();
         eventDispatcher.Remove<MapUpdatedEvent>(OnPotentialInventoryChange);
-        eventDispatcher.Add<WorkplaceUpdatedEvent>(OnPotentialInventoryChange);
+        eventDispatcher.Remove<WorkplaceUpdatedEvent>(OnPotentialInventoryChange);
     }
 
     public void OnNewGame()

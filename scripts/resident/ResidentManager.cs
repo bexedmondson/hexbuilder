@@ -6,6 +6,9 @@ public class ResidentManager : IInjectable
     private MapController mapController;
     private HousingManager housingManager;
     private WorkplaceManager workplaceManager;
+    private TurnCounter turnCounter;
+
+    private ResidentNeedManager needManager;
 
     private List<ResidentState> residents = new();
     public ResidentState[] AllResidents => residents.ToArray();
@@ -16,6 +19,8 @@ public class ResidentManager : IInjectable
     {
         this.mapController = mapController;
         InjectionManager.Register(this);
+
+        needManager = new(this);
 
         string json = System.IO.File.ReadAllText("data/residents/firstNames.json");
         names = System.Text.Json.JsonSerializer.Deserialize<string[]>(json);
@@ -30,11 +35,16 @@ public class ResidentManager : IInjectable
 
     public void OnNextTurn()
     {
+        bool residentWithoutHouse = false;
         foreach (var resident in residents)
         {
+            needManager.UpdateNeeds(resident);
             if (!resident.HasHouse)
-                return;
+                residentWithoutHouse = true;
         }
+
+        if (residentWithoutHouse)
+            return;
 
         //if no food, return
         if (!InjectionManager.Get<InventoryManager>().CanAfford(new CurrencySum(CurrencyType.Food, residents.Count)))
@@ -48,7 +58,8 @@ public class ResidentManager : IInjectable
 
     public ResidentState CreateResident()
     {
-        var newResident = new ResidentState(names[GD.RandRange(0, names.Length - 1)]);
+        turnCounter ??= InjectionManager.Get<TurnCounter>();
+        var newResident = new ResidentState(names[GD.RandRange(0, names.Length - 1)], turnCounter.turnCount);
         residents.Add(newResident);
         
         InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentCountUpdatedEvent(residents.Count));

@@ -1,9 +1,13 @@
 
-public class ResidentState(string name)
+using Godot;
+
+public class ResidentState(string name, int moveInDay)
 {
     private HousingManager housingManager;
     
     public string Name { get; private set; } = name;
+
+    public int moveInDay { get; private set; } = moveInDay;
     
     public int happiness { get; private set; } = 1;
 
@@ -68,5 +72,11 @@ public class ResidentState(string name)
         {
             return string.Empty;
         }
+    }
+
+    public void ChangeHappiness(int delta)
+    {
+        happiness = Mathf.Max(happiness + delta, -3);
+        happiness = Mathf.Min(happiness + delta, 3);
     }
 }

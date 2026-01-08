@@ -13,6 +13,7 @@ public partial class GameController : Node2D
     private EventDispatcher eventDispatcher;
     private MapCurrencyChangeAnalyser mapCurrencyChangeAnalyser;
     private TimedJobManager timedJobManager;
+    private TurnCounter turnCounter;
 
     public override void _EnterTree()
     {
@@ -30,6 +31,7 @@ public partial class GameController : Node2D
         
         mapController.OnNewGame();
         inventoryManager.OnNewGame();
+        turnCounter = new TurnCounter();
     }
     public override void _PhysicsProcess(double delta)
     {
@@ -41,6 +43,8 @@ public partial class GameController : Node2D
     {
         mapCurrencyChangeAnalyser ??= InjectionManager.Get<MapCurrencyChangeAnalyser>();
         List<CurrencySum> allCurrencyChanges = mapCurrencyChangeAnalyser.GetFullCurrencyTurnDeltas();
+        
+        turnCounter.OnNextTurn();
         
         //NOTE: reconsider this before timed job manager next turn if we add build times for storage!
         inventoryManager.OnNextTurn(allCurrencyChanges.ToArray());
