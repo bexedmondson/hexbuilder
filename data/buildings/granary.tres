@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="4_8x755"]
 [ext_resource type="Resource" uid="uid://dylx1bgqm5eh3" path="res://data/terrain/hill.tres" id="5_7vfwx"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="5_svi34"]
-[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="6_lbsoj"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="8_svi34"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="9_svi34"]
 
 [sub_resource type="Resource" id="Resource_g314a"]
@@ -27,7 +27,7 @@ capacities = Dictionary[int, int]({
 metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_6lq31"]
-script = ExtResource("6_lbsoj")
+script = ExtResource("8_svi34")
 requiredAmountsGained = Dictionary[int, int]({
 0: 5
 })

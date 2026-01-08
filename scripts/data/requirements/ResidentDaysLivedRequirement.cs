@@ -1,9 +1,13 @@
+using Godot;
 
-public partial class ResidentDaysLivedRequirement : Requirement<ResidentState>
+[GlobalClass][Tool]
+public partial class ResidentDaysLivedRequirement : DataRequirement
 {
+    [Export]
+    public int minimumDaysLived;
 
-    public override bool IsSatisfied(ResidentState data)
+    public override DataRequirementProcessor GetDataRequirementProcessor()
     {
-        throw new System.NotImplementedException();
+        return new ResidentDaysLivedRequirementProcessor(this);
     }
 }

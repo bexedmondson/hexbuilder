@@ -22,8 +22,9 @@ public partial class NeedConfig : Resource
         {
             switch (assignmentRequirement)
             {
-                case Requirement<ResidentState> residentRequirement:
-                    if (residentRequirement.IsSatisfied(resident))
+                case DataRequirement residentRequirement:
+                    var processor = residentRequirement.GetDataRequirementProcessor();
+                    if (GetDataRequirementSatisfaction(processor, resident))
                         continue;
                     break;
                 case Requirement requirement:
@@ -40,7 +41,8 @@ public partial class NeedConfig : Resource
 
     public bool IsSatisfied(ResidentState resident)
     {
-        foreach (var satisfactionRequirement in satisfactionRequirements)
+    //TODO resolve as above
+       /* foreach (var satisfactionRequirement in satisfactionRequirements)
         {
             switch (satisfactionRequirement)
             {
@@ -55,8 +57,17 @@ public partial class NeedConfig : Resource
             }
             
             return false;
-        }
+        }*/
 
         return true;
+    }
+
+    private bool GetDataRequirementSatisfaction(DataRequirementProcessor dataRequirementProcessor, ResidentState resident)
+    {
+        if (dataRequirementProcessor is DataRequirementProcessor<ResidentState> residentRequirementProcessor)
+            return residentRequirementProcessor.IsSatisfied(resident);
+        
+        GD.PushError("NeedConfig IsSatisfied: found data requirement that isn't handled!");
+        return false;
     }
 }

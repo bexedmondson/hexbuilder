@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_iesvl"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_oig7r"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="4_3evil"]
-[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="4_b7qgu"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="5_3evil"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="6_c7mhn"]
 
 [sub_resource type="Resource" id="Resource_s1qno"]
@@ -14,7 +14,7 @@ capacity = 1
 metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
 [sub_resource type="Resource" id="Resource_iesvl"]
-script = ExtResource("4_b7qgu")
+script = ExtResource("5_3evil")
 requiredAmountsGained = Dictionary[int, int]({
 0: 5
 })

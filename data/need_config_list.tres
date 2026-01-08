@@ -1,8 +1,15 @@
 [gd_resource type="Resource" script_class="NeedConfigList" format=3 uid="uid://817ggbqehlrq"]
 
+[ext_resource type="Script" uid="uid://b4lwxjw7fbxt0" path="res://scripts/data/NeedConfig.cs" id="1_eima2"]
 [ext_resource type="Script" uid="uid://da02je0wt2q1i" path="res://scripts/data/NeedConfigList.cs" id="1_n2xuo"]
+
+[sub_resource type="Resource" id="Resource_77i5u"]
+script = ExtResource("1_eima2")
+assignmentRequirements = Array[Resource]([null])
+satisfactionRequirements = []
+metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
 [resource]
 script = ExtResource("1_n2xuo")
-needConfigs = Array[Object]([])
+needConfigs = Array[Object]([SubResource("Resource_77i5u")])
 metadata/_custom_type_script = "uid://da02je0wt2q1i"
