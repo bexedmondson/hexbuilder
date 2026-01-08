@@ -5,10 +5,10 @@ using Godot.Collections;
 public partial class NeedConfig : Resource
 {
     [Export]
-    public Array<Requirement> assignmentRequirements;
+    public Array<AbstractRequirement> assignmentRequirements;
 
     [Export]
-    public Array<Requirement> satisfactionRequirements;
+    public Array<AbstractRequirement> satisfactionRequirements;
 
     [Export]
     public int unsatisfiedHappinessPenalty;
@@ -20,11 +20,17 @@ public partial class NeedConfig : Resource
     {
         foreach (var assignmentRequirement in assignmentRequirements)
         {
-            if (assignmentRequirement is ResidentRequirement residentRequirement 
-                && residentRequirement.IsSatisfied(resident))
-                continue;
-            else if (assignmentRequirement.IsSatisfied())
-                continue;
+            switch (assignmentRequirement)
+            {
+                case Requirement<ResidentState> residentRequirement:
+                    if (residentRequirement.IsSatisfied(resident))
+                        continue;
+                    break;
+                case Requirement requirement:
+                    if (requirement.IsSatisfied())
+                        continue;
+                    break;
+            }
             
             return false;
         }
@@ -36,11 +42,17 @@ public partial class NeedConfig : Resource
     {
         foreach (var satisfactionRequirement in satisfactionRequirements)
         {
-            if (satisfactionRequirement is ResidentRequirement residentRequirement 
-                && residentRequirement.IsSatisfied(resident))
-                continue;
-            else if (satisfactionRequirement.IsSatisfied())
-                continue;
+            switch (satisfactionRequirement)
+            {
+                case Requirement<ResidentState> residentRequirement:
+                    if (residentRequirement.IsSatisfied(resident))
+                        continue;
+                    break;
+                case Requirement requirement:
+                    if (requirement.IsSatisfied())
+                        continue;
+                    break;
+            }
             
             return false;
         }
