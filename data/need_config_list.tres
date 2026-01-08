@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="NeedConfigList" format=3 uid="uid://817ggbqehlrq"]
+
+[ext_resource type="Script" uid="uid://da02je0wt2q1i" path="res://scripts/data/NeedConfigList.cs" id="1_n2xuo"]
+
+[resource]
+script = ExtResource("1_n2xuo")
+needConfigs = Array[Object]([])
+metadata/_custom_type_script = "uid://da02je0wt2q1i"
