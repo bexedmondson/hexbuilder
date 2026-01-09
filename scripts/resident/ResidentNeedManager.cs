@@ -1,3 +1,5 @@
+using Godot;
+
 public class ResidentNeedManager : IInjectable
 {
     private ResidentManager residentManager;
@@ -14,7 +16,7 @@ public class ResidentNeedManager : IInjectable
         InjectionManager.Deregister(this);
     }
 
-    public void UpdateNeeds(ResidentState residentState)
+    public void UpdateNeedsAssignment(ResidentState residentState)
     {
         needConfigList ??= InjectionManager.Get<DataResourceContainer>().needConfigList;
 
@@ -22,13 +24,14 @@ public class ResidentNeedManager : IInjectable
         {
             foreach (var needConfig in needConfigList.needConfigs)
             {
-                
+                if (needConfig.CanAssignToResident(resident))
+                {
+                    GD.Print($"Assigning new active need to {resident.Name}");
+                    resident.activeNeeds.Add(needConfig);
+                }
             }
         }
-        
-        //for each resident
-        //for each need in need resource list
-        //if need condition met, assign need
-        //e.g. if resident has lived in town for X days, and if random chance is > 50%, assign need to live in house not tent 
+
+        residentState.UpdateHappiness();
     }
 }

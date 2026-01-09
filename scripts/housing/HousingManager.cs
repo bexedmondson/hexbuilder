@@ -68,10 +68,7 @@ public class HousingManager : IInjectable
 
             if (houseDatas.TryGetValue(cell, out var existingHouseData))
             {
-                if (existingHouseData.capacity == cellDataResidentCapacity.capacity)
-                    continue;
-
-                existingHouseData.ChangeCapacity(cellDataResidentCapacity.capacity, out List<ResidentState> kickedOutResidents);
+                existingHouseData.UpdateResidenceType(cellData, out List<ResidentState> kickedOutResidents);
 
                 foreach (var kickedOutResident in kickedOutResidents)
                 {
@@ -84,8 +81,7 @@ public class HousingManager : IInjectable
             }
             else
             {
-                //TODO pass in CustomTileData instead?
-                houseDatas[cell] = new HouseState(cell, cellDataResidentCapacity.capacity);
+                houseDatas[cell] = new HouseState(cell, cellData);
                 housesChanged = true;
             }
         }

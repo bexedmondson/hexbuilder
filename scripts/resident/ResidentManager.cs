@@ -38,7 +38,7 @@ public class ResidentManager : IInjectable
         bool residentWithoutHouse = false;
         foreach (var resident in residents)
         {
-            needManager.UpdateNeeds(resident);
+            needManager.UpdateNeedsAssignment(resident);
             if (!resident.HasHouse)
                 residentWithoutHouse = true;
         }

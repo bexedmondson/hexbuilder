@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using Godot;
 
 public class ResidentState(string name, int moveInDay)
@@ -7,9 +8,24 @@ public class ResidentState(string name, int moveInDay)
     
     public string Name { get; private set; } = name;
 
+    public List<NeedConfig> activeNeeds = new();
+
     public int moveInDay { get; private set; } = moveInDay;
     
-    public int happiness { get; private set; } = 1;
+    public int happiness { get; private set; } = 0;
+    public void UpdateHappiness()
+    {
+        int happinessSum = 0;
+        foreach (var activeNeed in activeNeeds)
+        {
+            if (activeNeed.IsSatisfied(this))
+                happinessSum += activeNeed.satisfiedHappinessBonus;
+            else
+                happinessSum += activeNeed.unsatisfiedHappinessPenalty;
+        }
+
+        happiness = happinessSum;
+    }
 
     public int TurnsWithoutHouse { get; private set; } = 0;
 

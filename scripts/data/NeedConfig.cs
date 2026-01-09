@@ -18,12 +18,15 @@ public partial class NeedConfig : Resource
 
     public bool CanAssignToResident(ResidentState resident)
     {
+        if (resident.activeNeeds.Contains(this))
+            return false;
+        
         foreach (var assignmentRequirement in assignmentRequirements)
         {
             switch (assignmentRequirement)
             {
-                case DataRequirement residentRequirement:
-                    var processor = residentRequirement.GetDataRequirementProcessor();
+                case DataRequirement dataRequirement:
+                    var processor = dataRequirement.GetDataRequirementProcessor();
                     if (GetDataRequirementSatisfaction(processor, resident))
                         continue;
                     break;
@@ -41,13 +44,13 @@ public partial class NeedConfig : Resource
 
     public bool IsSatisfied(ResidentState resident)
     {
-    //TODO resolve as above
-       /* foreach (var satisfactionRequirement in satisfactionRequirements)
+        foreach (var satisfactionRequirement in satisfactionRequirements)
         {
             switch (satisfactionRequirement)
             {
-                case Requirement<ResidentState> residentRequirement:
-                    if (residentRequirement.IsSatisfied(resident))
+                case DataRequirement dataRequirement:
+                    var processor = dataRequirement.GetDataRequirementProcessor();
+                    if (GetDataRequirementSatisfaction(processor, resident))
                         continue;
                     break;
                 case Requirement requirement:
@@ -57,8 +60,8 @@ public partial class NeedConfig : Resource
             }
             
             return false;
-        }*/
-
+        }
+        
         return true;
     }
 
