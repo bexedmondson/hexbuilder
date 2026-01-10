@@ -1,0 +1,10 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://dbuw26otdk8gp"]
+
+[ext_resource type="Texture2D" uid="uid://cam646af0j60j" path="res://themes/clashy/graphics/button-pressed-foldout.png" id="1_pqo24"]
+
+[resource]
+texture = ExtResource("1_pqo24")
+texture_margin_left = 16.0
+texture_margin_top = 10.0
+texture_margin_right = 16.0
+texture_margin_bottom = 21.0
