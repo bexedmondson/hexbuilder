@@ -8,7 +8,7 @@ public class ResidentManager : IInjectable
     private WorkplaceManager workplaceManager;
     private TurnCounter turnCounter;
 
-    private ResidentNeedManager needManager;
+    private ResidentNeedAssignmentManager needAssignmentManager;
 
     private List<ResidentState> residents = new();
     public ResidentState[] AllResidents => residents.ToArray();
@@ -20,7 +20,7 @@ public class ResidentManager : IInjectable
         this.mapController = mapController;
         InjectionManager.Register(this);
 
-        needManager = new(this);
+        needAssignmentManager = new(this);
 
         string json = System.IO.File.ReadAllText("data/residents/firstNames.json");
         names = System.Text.Json.JsonSerializer.Deserialize<string[]>(json);
@@ -38,7 +38,7 @@ public class ResidentManager : IInjectable
         bool residentWithoutHouse = false;
         foreach (var resident in residents)
         {
-            needManager.UpdateNeedsAssignment(resident);
+            needAssignmentManager.UpdateNeedsAssignment(resident);
             if (!resident.HasHouse)
                 residentWithoutHouse = true;
         }

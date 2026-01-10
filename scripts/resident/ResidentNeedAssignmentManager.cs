@@ -1,17 +1,17 @@
 using Godot;
 
-public class ResidentNeedManager : IInjectable
+public class ResidentNeedAssignmentManager : IInjectable
 {
     private ResidentManager residentManager;
     private NeedConfigList needConfigList;
     
-    public ResidentNeedManager(ResidentManager residentManager)
+    public ResidentNeedAssignmentManager(ResidentManager residentManager)
     {
         this.residentManager = residentManager;
         InjectionManager.Register(this);
     }
 
-    ~ResidentNeedManager()
+    ~ResidentNeedAssignmentManager()
     {
         InjectionManager.Deregister(this);
     }
