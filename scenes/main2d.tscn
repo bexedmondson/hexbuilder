@@ -1261,12 +1261,15 @@ text = "affected by:"
 
 [node name="AffectsFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1401136013]
 layout_mode = 2
+folded = true
 title = "effects on other tiles"
 
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer" unique_id=484974843]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer" unique_id=1048054392]
+visible = false
 layout_mode = 2
 theme = ExtResource("57_yi10l")
 
@@ -1284,12 +1287,15 @@ noneIndicator = NodePath("../NoneLabel")
 
 [node name="AffectedByFoldableContainer2" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1457792366]
 layout_mode = 2
+folded = true
 title = "effects from other tiles"
 
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2" unique_id=551477341]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2" unique_id=828565747]
+visible = false
 layout_mode = 2
 theme = ExtResource("57_yi10l")
 
@@ -1307,14 +1313,17 @@ noneIndicator = NodePath("../NoneLabel")
 
 [node name="StorageFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1492439428 node_paths=PackedStringArray("storageCurrencyDisplay")]
 layout_mode = 2
+folded = true
 title = "storage"
 script = ExtResource("38_hxced")
 storageCurrencyDisplay = NodePath("MarginContainer/CurrencyDisplay")
 
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer" unique_id=1397689692]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer" unique_id=1997269909]
+visible = false
 layout_mode = 2
 theme = ExtResource("57_yi10l")
 

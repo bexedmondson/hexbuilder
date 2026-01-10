@@ -19,8 +19,10 @@
 [ext_resource type="StyleBox" uid="uid://cs4adpd6rj16" path="res://themes/clashy/panels/dangerClashButton.tres" id="16_lyg6y"]
 [ext_resource type="StyleBox" uid="uid://8aoy2hfwk68y" path="res://themes/clashy/panels/dangerClashButtonPress.tres" id="17_2jklr"]
 [ext_resource type="StyleBox" uid="uid://dewga67neikey" path="res://themes/clashy/panels/clashGreenButtonHovered.tres" id="18_5k5bw"]
+[ext_resource type="Texture2D" uid="uid://bsvqe1orkbmxb" path="res://assets/icons/foldout_arrow_expanded.tres" id="19_546nt"]
 [ext_resource type="StyleBox" uid="uid://dsq41wy5jywes" path="res://themes/clashy/panels/clashGreenButton.tres" id="19_bp2cy"]
 [ext_resource type="StyleBox" uid="uid://cr8yu214v4imm" path="res://themes/clashy/panels/clashGreenButtonPressed.tres" id="20_7xukr"]
+[ext_resource type="Texture2D" uid="uid://dw7lvv2wn57kk" path="res://assets/icons/foldout_arrow_collapsed.tres" id="20_wwnvm"]
 [ext_resource type="StyleBox" uid="uid://t88jwvb7s6t5" path="res://themes/clashy/panels/panel_dark_embedded.tres" id="23_1ivug"]
 [ext_resource type="StyleBox" uid="uid://dckahvecau5rs" path="res://themes/clashy/panels/panel_light_embedded.tres" id="24_qau7n"]
 [ext_resource type="StyleBox" uid="uid://bvxyf0wxqh33m" path="res://themes/clashy/panels/panel_light.tres" id="25_ihi0n"]
@@ -127,6 +129,8 @@ DangerButton/base_type = &"Button"
 DangerButton/styles/hover = ExtResource("15_iitqk")
 DangerButton/styles/normal = ExtResource("16_lyg6y")
 DangerButton/styles/pressed = ExtResource("17_2jklr")
+FoldableContainer/icons/expanded_arrow = ExtResource("19_546nt")
+FoldableContainer/icons/folded_arrow = ExtResource("20_wwnvm")
 GreenButton/base_type = &"Button"
 GreenButton/styles/hover = ExtResource("18_5k5bw")
 GreenButton/styles/normal = ExtResource("19_bp2cy")
