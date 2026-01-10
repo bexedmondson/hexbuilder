@@ -28,6 +28,9 @@ public partial class EncyclopediaPopup : Popup
     
     [Export]
     private PackedScene affectedByScene;
+
+    [Export]
+    private StorageInfoUI storageInfoUI;
     
     public override void _Ready()
     {
@@ -69,12 +72,15 @@ public partial class EncyclopediaPopup : Popup
         
         var selectedOption = selectedButton as TileOptionUI;
         tileTextureRect.SetTile(selectedOption.tileInfo);
+        var selectedTileData = selectedOption.tileInfo.tileData;
         
-        defaultEffectDisplay.DisplayCurrencyAmount(new CurrencySum(selectedOption.tileInfo.tileData.baseTurnCurrencyChange));
+        defaultEffectDisplay.DisplayCurrencyAmount(new CurrencySum(selectedTileData.baseTurnCurrencyChange));
 
-        SetupAffects(selectedOption.tileInfo.tileData);
+        SetupAffects(selectedTileData);
 
-        SetupAffectedBy(selectedOption.tileInfo.tileData);
+        SetupAffectedBy(selectedTileData);
+
+        SetupStorageInfo(selectedTileData);
     }
 
     private void SetupAffects(CustomTileData tileData)
@@ -113,6 +119,19 @@ public partial class EncyclopediaPopup : Popup
             var affectedByUI = affectedByScene.Instantiate<EncyclopediaEffectUI>();
             affectedByUI.Setup(adjacency);
             affectedByParent.AddChild(affectedByUI);
+        }
+    }
+
+    private void SetupStorageInfo(CustomTileData tileData)
+    {
+        if (tileData.TryGetComponent<StorageCapacityDataComponent>(out var storageComponent))
+        {
+            storageInfoUI.Visible = true;
+            storageInfoUI.SetStorageInfo(storageComponent);
+        }
+        else
+        {
+            storageInfoUI.Visible = false;
         }
     }
 

@@ -56,6 +56,8 @@
 [ext_resource type="Texture2D" uid="uid://brlsqbuytsi4t" path="res://assets/icons/icon_stone.tres" id="45_5n6k3"]
 [ext_resource type="Texture2D" uid="uid://1g1gvjwkcrki" path="res://assets/icons/icon_fabric.tres" id="46_t4767"]
 [ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="47_hxced"]
+[ext_resource type="Theme" uid="uid://c42r8558dvmyi" path="res://themes/clashy/clashy.tres" id="57_yi10l"]
+[ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="58_bnbf5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
 noise_type = 0
@@ -622,6 +624,7 @@ script = ExtResource("32_t4767")
 layer = 2
 
 [node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "buildTab", "effectInfoParent", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "tileSelector", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1116,8 +1119,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileDetails", "tileTextureRect", "defaultEffectDisplay", "affectsParent", "affectedByParent")]
-visible = false
+[node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileDetails", "tileTextureRect", "defaultEffectDisplay", "affectsParent", "affectedByParent", "storageInfoUI")]
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
@@ -1132,9 +1134,10 @@ tileDetails = NodePath("TileDetailPanel/TileDetails")
 encyclopediaTileGroup = ExtResource("37_kj2ff")
 tileTextureRect = NodePath("TileDetailPanel/TileTextureRect")
 defaultEffectDisplay = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/HBoxContainer/CurrencyDisplay")
-affectsParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsHBoxContainer")
-affectedByParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByHBoxContainer2")
+affectsParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer/AffectsHBoxContainer")
+affectedByParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer/AffectedByHBoxContainer2")
 affectedByScene = ExtResource("39_e4lbj")
+storageInfoUI = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/EncyclopediaPopup" unique_id=1100325916]
 custom_minimum_size = Vector2(50, 50)
@@ -1247,24 +1250,80 @@ displayAsDelta = true
 iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
 [node name="AffectsLabel" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1562743749]
+visible = false
 layout_mode = 2
 text = "affects:"
 
-[node name="AffectsHBoxContainer" type="GridContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=483536645]
-layout_mode = 2
-theme_override_constants/h_separation = 8
-theme_override_constants/v_separation = 8
-columns = 2
-
 [node name="AffectedByLabel2" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1944021695]
+visible = false
 layout_mode = 2
 text = "affected by:"
 
-[node name="AffectedByHBoxContainer2" type="GridContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1566756208]
+[node name="AffectsFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1401136013]
+layout_mode = 2
+title = "effects on other tiles"
+
+[node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer" unique_id=484974843]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer" unique_id=1048054392]
+layout_mode = 2
+theme = ExtResource("57_yi10l")
+
+[node name="NoneLabel" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer" unique_id=1297362907]
+layout_mode = 2
+text = " no other tiles affected"
+
+[node name="AffectsHBoxContainer" type="GridContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer" unique_id=483536645 node_paths=PackedStringArray("noneIndicator")]
 layout_mode = 2
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 2
+script = ExtResource("58_bnbf5")
+noneIndicator = NodePath("../NoneLabel")
+
+[node name="AffectedByFoldableContainer2" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1457792366]
+layout_mode = 2
+title = "effects from other tiles"
+
+[node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2" unique_id=551477341]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2" unique_id=828565747]
+layout_mode = 2
+theme = ExtResource("57_yi10l")
+
+[node name="NoneLabel" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer" unique_id=1789372501]
+layout_mode = 2
+text = " not affected by any other tiles"
+
+[node name="AffectedByHBoxContainer2" type="GridContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer" unique_id=1566756208 node_paths=PackedStringArray("noneIndicator")]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+script = ExtResource("58_bnbf5")
+noneIndicator = NodePath("../NoneLabel")
+
+[node name="StorageFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1492439428 node_paths=PackedStringArray("storageCurrencyDisplay")]
+layout_mode = 2
+title = "storage"
+script = ExtResource("38_hxced")
+storageCurrencyDisplay = NodePath("MarginContainer/CurrencyDisplay")
+
+[node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer" unique_id=1397689692]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer" unique_id=1997269909]
+layout_mode = 2
+theme = ExtResource("57_yi10l")
+
+[node name="CurrencyDisplay" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer/MarginContainer" unique_id=2048279177]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("42_gqxrv")
+singleCurrencyDisplayScene = ExtResource("47_hxced")
+iconColor = Color(0.3529412, 0.37254903, 0.38431373, 1)
 
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
 [connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]
