@@ -4,9 +4,9 @@ using System;
 public enum Comparison
 {
     None = 0,
-    Equal,
-    LessThan,
-    MoreThan
+    Equal = 1,
+    LessThan = 2,
+    MoreThan = 4
 }
 
 public static class ComparisonExtensions

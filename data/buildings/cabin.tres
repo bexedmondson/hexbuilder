@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="4_52ph2"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="4_71r3f"]
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="5_m3t3u"]
+[ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="6_0gy0h"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="8_m3t3u"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="9_0gy0h"]
 
@@ -23,11 +24,16 @@ script = ExtResource("5_m3t3u")
 capacity = 2
 metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
 
+[sub_resource type="Resource" id="Resource_0gy0h"]
+script = ExtResource("6_0gy0h")
+tile = ExtResource("4_52ph2")
+amount = 3
+comparison = 5
+metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
+
 [sub_resource type="Resource" id="Resource_52ph2"]
 script = ExtResource("8_m3t3u")
-requiredTilesBuildCounts = Dictionary[ExtResource("1_24cbf"), int]({
-ExtResource("4_52ph2"): 3
-})
+requiredTileBuildCounts = Array[ExtResource("6_0gy0h")]([SubResource("Resource_0gy0h")])
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_8awr6"]

@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_r8hfn"]
 [ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="3_x13tf"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="5_x13tf"]
+[ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="6_fl3f3"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="7_a4v8o"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="8_a4v8o"]
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="9_fl3f3"]
@@ -19,11 +20,16 @@ capacities = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
+[sub_resource type="Resource" id="Resource_poee0"]
+script = ExtResource("6_fl3f3")
+tile = ExtResource("1_wb84i")
+amount = 2
+comparison = 5
+metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
+
 [sub_resource type="Resource" id="Resource_j1ids"]
 script = ExtResource("7_a4v8o")
-requiredTilesBuildCounts = Dictionary[ExtResource("3_r8hfn"), int]({
-ExtResource("1_wb84i"): 2
-})
+requiredTileBuildCounts = Array[ExtResource("6_fl3f3")]([SubResource("Resource_poee0")])
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_bdlm4"]
