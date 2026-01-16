@@ -90,10 +90,7 @@ public partial class MapController : Node2D, IInjectable
         workplaceManager.OnNewGame();
         residentManager.OnNewGame();
 
-        for (int i = 0; i < 5; i++) //debug only
-        {
-            residentManager.CreateResident();
-        }
+        residentManager.CreateResident();
     }
 
     public void OnCellUnlockInitiated(Vector2I cellToStartUnlock)
