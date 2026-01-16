@@ -1,0 +1,422 @@
+[gd_scene format=3 uid="uid://cqeakhl446d4r"]
+
+[ext_resource type="Script" uid="uid://bexg7lvpt0u4m" path="res://scripts/ui/cellinfos/AdjacencyEffectCellInfoUI.cs" id="1_06ica"]
+[ext_resource type="Texture2D" uid="uid://dlmbkw17dh1ip" path="res://assets/2d/selection_segment_overlay_atlas.png" id="1_h03gx"]
+[ext_resource type="Texture2D" uid="uid://ceqvtlo77pcfy" path="res://assets/icons/icon_wood.tres" id="2_h03gx"]
+[ext_resource type="Script" uid="uid://begvonsf33ldu" path="res://scripts/ui/cellinfos/AdjacencyEffectAnimationTree.cs" id="2_msroh"]
+[ext_resource type="AnimationLibrary" uid="uid://dlma8nh3kpl37" path="res://assets/anims/adjacency_TL_animation_library.tres" id="5_msroh"]
+[ext_resource type="AnimationLibrary" uid="uid://b123fpcs40fvp" path="res://assets/anims/adjacency_TR_animation_library.tres" id="6_06ica"]
+[ext_resource type="AnimationLibrary" uid="uid://dp3uebnrk3du8" path="res://assets/anims/adjacency_BR_animation_library.tres" id="7_06ica"]
+[ext_resource type="AnimationLibrary" uid="uid://cgbemp2myhpfo" path="res://assets/anims/adjacency_BL_animation_library.tres" id="8_n4wuj"]
+[ext_resource type="AnimationLibrary" uid="uid://dpnwtvfbhm6w6" path="res://assets/anims/adjacency_Top_animation_library.tres" id="9_24mrt"]
+[ext_resource type="AnimationLibrary" uid="uid://blnd83lugv4a3" path="res://assets/anims/adjacency_Bottom_animation_library.tres" id="10_rjy2m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xih50"]
+atlas = ExtResource("1_h03gx")
+region = Rect2(0, 0, 480, 480)
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_2qrqa"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_msroh"]
+animation = &"drawback"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_24mrt"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_06ica"]
+animation = &"benefit"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_rjy2m"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n4wuj"]
+animation = &"fabric"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2qrqa"]
+animation = &"food"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2qrqc"]
+animation = &"stone"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2qrqb"]
+animation = &"wood"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2qrqa"]
+advance_mode = 2
+advance_condition = &"isFabric"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_msroh"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_06ica"]
+advance_mode = 2
+advance_condition = &"isFood"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n4wuj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_24mrt"]
+advance_mode = 2
+advance_condition = &"isWood"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rjy2m"]
+advance_mode = 2
+advance_condition = &"isStone"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sbkfq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s0t4b"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_24mrt"]
+states/End/position = Vector2(563.8828, 141.94965)
+states/Start/position = Vector2(200, 140.60547)
+states/fabric/node = SubResource("AnimationNodeAnimation_n4wuj")
+states/fabric/position = Vector2(385.9857, 72.52734)
+states/food/node = SubResource("AnimationNodeAnimation_2qrqa")
+states/food/position = Vector2(386.74393, 130.16406)
+states/stone/node = SubResource("AnimationNodeAnimation_2qrqc")
+states/stone/position = Vector2(386.74393, 230.16406)
+states/wood/node = SubResource("AnimationNodeAnimation_2qrqb")
+states/wood/position = Vector2(386.74393, 180.16406)
+transitions = ["Start", "fabric", SubResource("AnimationNodeStateMachineTransition_2qrqa"), "fabric", "End", SubResource("AnimationNodeStateMachineTransition_msroh"), "Start", "food", SubResource("AnimationNodeStateMachineTransition_06ica"), "food", "End", SubResource("AnimationNodeStateMachineTransition_n4wuj"), "Start", "wood", SubResource("AnimationNodeStateMachineTransition_24mrt"), "Start", "stone", SubResource("AnimationNodeStateMachineTransition_rjy2m"), "wood", "End", SubResource("AnimationNodeStateMachineTransition_sbkfq"), "stone", "End", SubResource("AnimationNodeStateMachineTransition_s0t4b")]
+graph_offset = Vector2(32.226563, -38.785156)
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_rjy2m"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_06ica"]
+nodes/output/position = Vector2(560, 40)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_24mrt")
+nodes/StateMachine/position = Vector2(66.666664, 280)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_2qrqa")
+nodes/Add2/position = Vector2(360, 0)
+nodes/isDrawback/node = SubResource("AnimationNodeBlend2_rjy2m")
+nodes/isDrawback/position = Vector2(-106.666664, 133.33333)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_06ica")
+nodes/Animation/position = Vector2(-386.66666, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_msroh")
+"nodes/Animation 2/position" = Vector2(-386.66666, 320)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_24mrt")
+"nodes/Animation 3/position" = Vector2(-106.666664, -93.333336)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_rjy2m")
+nodes/OneShot/position = Vector2(120, -13.333333)
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"OneShot", &"Add2", 1, &"StateMachine", &"isDrawback", 0, &"Animation", &"isDrawback", 1, &"Animation 2", &"OneShot", 0, &"Animation 3", &"OneShot", 1, &"isDrawback"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4wym"]
+atlas = ExtResource("1_h03gx")
+region = Rect2(480, 0, 480, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qrqa"]
+atlas = ExtResource("1_h03gx")
+region = Rect2(960, 0, 480, 480)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sbkfq"]
+nodes/output/position = Vector2(560, 40)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_24mrt")
+nodes/StateMachine/position = Vector2(66.666664, 280)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_2qrqa")
+nodes/Add2/position = Vector2(360, 0)
+nodes/isDrawback/node = SubResource("AnimationNodeBlend2_rjy2m")
+nodes/isDrawback/position = Vector2(-106.666664, 133.33333)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_06ica")
+nodes/Animation/position = Vector2(-386.66666, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_msroh")
+"nodes/Animation 2/position" = Vector2(-386.66666, 320)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_24mrt")
+"nodes/Animation 3/position" = Vector2(-106.666664, -93.333336)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_rjy2m")
+nodes/OneShot/position = Vector2(120, -13.333333)
+node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"OneShot", &"Add2", 1, &"StateMachine", &"isDrawback", 0, &"Animation", &"isDrawback", 1, &"Animation 2", &"OneShot", 0, &"Animation 3", &"OneShot", 1, &"isDrawback"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06ica"]
+atlas = ExtResource("1_h03gx")
+region = Rect2(0, 480, 480, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msroh"]
+atlas = ExtResource("1_h03gx")
+region = Rect2(480, 480, 480, 480)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4wuj"]
+atlas = ExtResource("1_h03gx")
+region = Rect2(960, 480, 480, 480)
+
+[node name="TurnChangeAdjacencyIndicator" type="Node2D" unique_id=1105749018 node_paths=PackedStringArray("topLeft", "top", "topRight", "bottomLeft", "bottom", "bottomRight")]
+y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_06ica")
+topLeft = NodePath("TL/TLAnimationTree")
+top = NodePath("Top/TopAnimationTree")
+topRight = NodePath("TR/TRAnimationTree")
+bottomLeft = NodePath("BL/BLAnimationTree")
+bottom = NodePath("Bottom/BottomAnimationTree")
+bottomRight = NodePath("BR/BRAnimationTree")
+
+[node name="TL" type="Node2D" parent="." unique_id=1113171288]
+
+[node name="Glow" type="Sprite2D" parent="TL" unique_id=1038230223]
+self_modulate = Color(0.16862744, 1, 0.5294118, 0)
+position = Vector2(0, -69)
+texture = SubResource("AtlasTexture_xih50")
+
+[node name="Icon" type="Sprite2D" parent="TL" unique_id=870260819]
+modulate = Color(0, 0, 0, 0)
+self_modulate = Color(0, 0, 0, 0)
+position = Vector2(-184, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_h03gx")
+
+[node name="Label" type="Label" parent="TL/Icon" unique_id=890319670]
+offset_left = -137.5
+offset_top = -45.0
+offset_right = -59.5
+offset_bottom = 70.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "++"
+
+[node name="TLAnimationTree" type="AnimationTree" parent="TL" unique_id=964318199]
+root_node = NodePath("../..")
+root_motion_local = true
+tree_root = SubResource("AnimationNodeBlendTree_06ica")
+anim_player = NodePath("TLAnimationPlayer")
+parameters/StateMachine/conditions/isFabric = false
+parameters/StateMachine/conditions/isFood = false
+parameters/StateMachine/conditions/isStone = false
+parameters/StateMachine/conditions/isWood = true
+parameters/Add2/add_amount = 1.0
+parameters/isDrawback/blend_amount = 0.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+script = ExtResource("2_msroh")
+
+[node name="TLAnimationPlayer" type="AnimationPlayer" parent="TL/TLAnimationTree" unique_id=2105073456]
+root_node = NodePath("../../..")
+libraries/ = ExtResource("5_msroh")
+
+[node name="Top" type="Node2D" parent="." unique_id=1227590511]
+
+[node name="Glow" type="Sprite2D" parent="Top" unique_id=1554092479]
+self_modulate = Color(0.16862744, 1, 0.5294118, 0)
+position = Vector2(0, -69)
+texture = SubResource("AtlasTexture_j4wym")
+
+[node name="Icon" type="Sprite2D" parent="Top" unique_id=1809431570]
+modulate = Color(0, 0, 0, 0)
+self_modulate = Color(0, 0, 0, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_h03gx")
+
+[node name="Label" type="Label" parent="Top/Icon" unique_id=365306544]
+offset_left = -137.5
+offset_top = -45.0
+offset_right = -59.5
+offset_bottom = 70.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "++"
+
+[node name="TopAnimationTree" type="AnimationTree" parent="Top" unique_id=2052178227]
+root_node = NodePath("../..")
+root_motion_local = true
+tree_root = SubResource("AnimationNodeBlendTree_06ica")
+anim_player = NodePath("TopAnimationPlayer")
+parameters/StateMachine/conditions/isFabric = false
+parameters/StateMachine/conditions/isFood = false
+parameters/StateMachine/conditions/isStone = false
+parameters/StateMachine/conditions/isWood = true
+parameters/Add2/add_amount = 1.0
+parameters/isDrawback/blend_amount = 0.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+script = ExtResource("2_msroh")
+
+[node name="TopAnimationPlayer" type="AnimationPlayer" parent="Top/TopAnimationTree" unique_id=1099731880]
+root_node = NodePath("../../..")
+libraries/ = ExtResource("9_24mrt")
+
+[node name="TR" type="Node2D" parent="." unique_id=1416823057]
+scale = Vector2(-1, 1)
+
+[node name="Glow" type="Sprite2D" parent="TR" unique_id=438759162]
+self_modulate = Color(0.16862744, 1, 0.5294118, 0)
+position = Vector2(0, -69)
+scale = Vector2(-1, 1)
+texture = SubResource("AtlasTexture_2qrqa")
+
+[node name="Icon" type="Sprite2D" parent="TR" unique_id=431829669]
+modulate = Color(0, 0, 0, 0)
+self_modulate = Color(0, 0, 0, 0)
+position = Vector2(-184, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_h03gx")
+
+[node name="Label" type="Label" parent="TR/Icon" unique_id=1655295000]
+offset_left = -137.5
+offset_top = -45.0
+offset_right = -59.5
+offset_bottom = 70.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "++"
+
+[node name="TRAnimationTree" type="AnimationTree" parent="TR" unique_id=211670666]
+root_node = NodePath("../..")
+root_motion_local = true
+tree_root = SubResource("AnimationNodeBlendTree_sbkfq")
+anim_player = NodePath("TRAnimationPlayer")
+parameters/StateMachine/conditions/isFabric = false
+parameters/StateMachine/conditions/isFood = false
+parameters/StateMachine/conditions/isStone = false
+parameters/StateMachine/conditions/isWood = true
+parameters/Add2/add_amount = 1.0
+parameters/isDrawback/blend_amount = 0.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+script = ExtResource("2_msroh")
+
+[node name="TRAnimationPlayer" type="AnimationPlayer" parent="TR/TRAnimationTree" unique_id=710241658]
+root_node = NodePath("../../..")
+libraries/ = ExtResource("6_06ica")
+
+[node name="BL" type="Node2D" parent="." unique_id=2028376050]
+
+[node name="Glow" type="Sprite2D" parent="BL" unique_id=1361894262]
+self_modulate = Color(0.16862744, 1, 0.5294118, 0)
+position = Vector2(0, -69)
+texture = SubResource("AtlasTexture_06ica")
+
+[node name="Transform" type="Node2D" parent="BL" unique_id=2096787438]
+position = Vector2(10, -12)
+rotation = -0.44156832
+
+[node name="Icon" type="Sprite2D" parent="BL/Transform" unique_id=1308147591]
+modulate = Color(0, 0, 0, 0)
+self_modulate = Color(0, 0, 0, 0)
+position = Vector2(-184, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_h03gx")
+
+[node name="Label" type="Label" parent="BL/Transform/Icon" unique_id=2032289201]
+offset_left = -137.5
+offset_top = -45.0
+offset_right = -59.5
+offset_bottom = 70.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "++"
+
+[node name="BLAnimationTree" type="AnimationTree" parent="BL" unique_id=288381143]
+root_node = NodePath("../..")
+root_motion_local = true
+tree_root = SubResource("AnimationNodeBlendTree_sbkfq")
+anim_player = NodePath("BLAnimationPlayer")
+parameters/StateMachine/conditions/isFabric = false
+parameters/StateMachine/conditions/isFood = false
+parameters/StateMachine/conditions/isStone = false
+parameters/StateMachine/conditions/isWood = true
+parameters/Add2/add_amount = 1.0
+parameters/isDrawback/blend_amount = 0.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+script = ExtResource("2_msroh")
+
+[node name="BLAnimationPlayer" type="AnimationPlayer" parent="BL/BLAnimationTree" unique_id=1376186340]
+root_node = NodePath("../../..")
+libraries/ = ExtResource("8_n4wuj")
+
+[node name="Bottom" type="Node2D" parent="." unique_id=211013406]
+
+[node name="Glow" type="Sprite2D" parent="Bottom" unique_id=794537401]
+self_modulate = Color(0.16862744, 1, 0.5294118, 0)
+position = Vector2(0, -69)
+texture = SubResource("AtlasTexture_msroh")
+
+[node name="Icon" type="Sprite2D" parent="Bottom" unique_id=1065681633]
+modulate = Color(0.16862744, 1, 0.5294118, 0)
+self_modulate = Color(0.16862744, 1, 0.5294118, 0)
+position = Vector2(0, 98.4406)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_h03gx")
+
+[node name="Label" type="Label" parent="Bottom/Icon" unique_id=768274765]
+offset_left = -137.5
+offset_top = -45.0
+offset_right = -59.5
+offset_bottom = 70.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "++"
+
+[node name="BottomAnimationTree" type="AnimationTree" parent="Bottom" unique_id=1940741511]
+root_node = NodePath("../..")
+root_motion_local = true
+tree_root = SubResource("AnimationNodeBlendTree_06ica")
+anim_player = NodePath("BottomAnimationPlayer")
+parameters/StateMachine/conditions/isFabric = false
+parameters/StateMachine/conditions/isFood = false
+parameters/StateMachine/conditions/isStone = false
+parameters/StateMachine/conditions/isWood = true
+parameters/Add2/add_amount = 1.0
+parameters/isDrawback/blend_amount = 0.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+script = ExtResource("2_msroh")
+
+[node name="BottomAnimationPlayer" type="AnimationPlayer" parent="Bottom/BottomAnimationTree" unique_id=1313824848]
+root_node = NodePath("../../..")
+libraries/ = ExtResource("10_rjy2m")
+
+[node name="BR" type="Node2D" parent="." unique_id=247116531]
+scale = Vector2(-1, 1)
+
+[node name="Glow" type="Sprite2D" parent="BR" unique_id=267890304]
+self_modulate = Color(0.16862744, 1, 0.5294118, 0)
+position = Vector2(0, -69)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+texture = SubResource("AtlasTexture_n4wuj")
+
+[node name="Transform" type="Node2D" parent="BR" unique_id=1131218864]
+position = Vector2(10, -12)
+rotation = -0.44156832
+
+[node name="Icon" type="Sprite2D" parent="BR/Transform" unique_id=103777264]
+modulate = Color(0, 0, 0, 0)
+self_modulate = Color(0, 0, 0, 0)
+position = Vector2(-184, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_h03gx")
+
+[node name="Label" type="Label" parent="BR/Transform/Icon" unique_id=1883737036]
+offset_left = -137.5
+offset_top = -45.0
+offset_right = -59.5
+offset_bottom = 70.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 90
+text = "++"
+
+[node name="BRAnimationTree" type="AnimationTree" parent="BR" unique_id=217622083]
+root_node = NodePath("../..")
+root_motion_local = true
+tree_root = SubResource("AnimationNodeBlendTree_sbkfq")
+anim_player = NodePath("BRAnimationPlayer")
+parameters/StateMachine/conditions/isFabric = false
+parameters/StateMachine/conditions/isFood = false
+parameters/StateMachine/conditions/isStone = false
+parameters/StateMachine/conditions/isWood = true
+parameters/Add2/add_amount = 1.0
+parameters/isDrawback/blend_amount = 0.0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+script = ExtResource("2_msroh")
+
+[node name="BRAnimationPlayer" type="AnimationPlayer" parent="BR/BRAnimationTree" unique_id=172289910]
+root_node = NodePath("../../..")
+libraries/ = ExtResource("7_06ica")

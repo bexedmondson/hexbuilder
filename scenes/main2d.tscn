@@ -27,6 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://qa0ad2tdjmdu" path="res://scenes/cell_ui/debug_cell_info_ui.tscn" id="13_cpah3"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="15_nkuak"]
 [ext_resource type="Script" uid="uid://6vak8sxfwnbd" path="res://scripts/ui/popups/HousingInfoPopup.cs" id="20_77sti"]
+[ext_resource type="Script" uid="uid://csjgwerd6mety" path="res://scripts/ui/cellinfos/AdjacencyEffectCellInfoUIContainer.cs" id="20_hs41i"]
+[ext_resource type="PackedScene" uid="uid://cqeakhl446d4r" path="res://scenes/turn_change_adjacency_indicator.tscn" id="21_2a4bv"]
 [ext_resource type="PackedScene" uid="uid://b4jge416gxgmd" path="res://scenes/house_info_ui.tscn" id="21_mcgvi"]
 [ext_resource type="Script" uid="uid://b6lx4m4chnfrh" path="res://scripts/ui/MainInventoryDisplay.cs" id="21_wf2ql"]
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/popups/ResidentInfoPopup.cs" id="22_1w2nm"]
@@ -238,6 +240,11 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("12_745hd")
 debugCellInfoUIScene = ExtResource("13_cpah3")
+
+[node name="AdjacencyEffectCellInfoContainer" type="Node2D" parent="MapController" unique_id=648345459]
+z_index = 1
+script = ExtResource("20_hs41i")
+adjacencyEffectCellInfoUIScene = ExtResource("21_2a4bv")
 
 [node name="HighlightOverlayTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=2083917746]
 z_index = 1

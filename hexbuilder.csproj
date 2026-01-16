@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.6.0-beta.2">
+<Project Sdk="Godot.NET.Sdk/4.6.0-beta.3">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -6,7 +6,6 @@
   <ItemGroup>
     <Folder Include="addons\tile_placement_configurator\placement\" />
     <Folder Include="assets\" />
-    <Folder Include="scripts\ui\cellinfos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\housing\HouseState.cs.uid" />

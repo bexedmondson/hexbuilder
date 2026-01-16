@@ -8,7 +8,6 @@
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="4_2ok8c"]
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="6_oee08"]
 [ext_resource type="Script" uid="uid://bf0ivtyh7meiq" path="res://scripts/data/requirements/PopulationRequirement.cs" id="6_pjxgo"]
-[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="6_pk0ri"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="7_oee08"]
 
 [sub_resource type="Resource" id="Resource_5u8ks"]

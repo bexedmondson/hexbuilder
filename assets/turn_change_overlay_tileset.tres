@@ -1,0 +1,23 @@
+[gd_resource type="TileSet" format=3 uid="uid://c5xmorkaex7cr"]
+
+[ext_resource type="Texture2D" uid="uid://bj70g64x02teo" path="res://assets/2d/selection_overlay.png" id="1_vtjyu"]
+[ext_resource type="PackedScene" uid="uid://dusngu1tduntl" path="res://scenes/adjacency_benefit_indicator.tscn" id="2_2onq8"]
+[ext_resource type="PackedScene" uid="uid://dy2wuyld13juk" path="res://scenes/adjacency_drawback_indicator.tscn" id="3_ihnuj"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxljk"]
+texture = ExtResource("1_vtjyu")
+texture_region_size = Vector2i(480, 480)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 69)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_gut6m"]
+scenes/1/scene = ExtResource("2_2onq8")
+scenes/2/scene = ExtResource("3_ihnuj")
+
+[resource]
+tile_shape = 3
+tile_layout = 4
+tile_offset_axis = 1
+tile_size = Vector2i(480, 204)
+sources/2 = SubResource("TileSetAtlasSource_bxljk")
+sources/3 = SubResource("TileSetScenesCollectionSource_gut6m")

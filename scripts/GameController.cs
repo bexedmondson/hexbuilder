@@ -53,5 +53,7 @@ public partial class GameController : Node2D
 
         timedJobManager ??= InjectionManager.Get<TimedJobManager>();
         timedJobManager.OnNextTurn();
+        
+        eventDispatcher.Dispatch(new NextTurnEvent());
     }
 }
