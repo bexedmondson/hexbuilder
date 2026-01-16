@@ -9,6 +9,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://dp3uebnrk3du8" path="res://assets/anims/adjacency_BR_animation_library.tres" id="7_06ica"]
 [ext_resource type="AnimationLibrary" uid="uid://cgbemp2myhpfo" path="res://assets/anims/adjacency_BL_animation_library.tres" id="8_n4wuj"]
 [ext_resource type="AnimationLibrary" uid="uid://dpnwtvfbhm6w6" path="res://assets/anims/adjacency_Top_animation_library.tres" id="9_24mrt"]
+[ext_resource type="Texture2D" uid="uid://brlsqbuytsi4t" path="res://assets/icons/icon_stone.tres" id="9_sbkfq"]
 [ext_resource type="AnimationLibrary" uid="uid://blnd83lugv4a3" path="res://assets/anims/adjacency_Bottom_animation_library.tres" id="10_rjy2m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xih50"]
@@ -27,6 +28,7 @@ animation = &"RESET"
 animation = &"benefit"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_rjy2m"]
+filters = ["Bottom/Glow:self_modulate:a", "Bottom/Glow:self_modulate:b", "Bottom/Glow:self_modulate:g", "Bottom/Glow:self_modulate:r", "Bottom/Icon/Label:text", "Bottom/Icon:modulate:a", "Bottom/Icon:modulate:b", "Bottom/Icon:modulate:g", "Bottom/Icon:modulate:r", "Bottom/Icon:position:y", "Bottom/Icon:self_modulate:a", "Bottom/Icon:self_modulate:b", "Bottom/Icon:self_modulate:g", "Bottom/Icon:self_modulate:r"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n4wuj"]
 animation = &"fabric"
@@ -85,6 +87,7 @@ graph_offset = Vector2(32.226563, -38.785156)
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_rjy2m"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_06ica"]
+graph_offset = Vector2(-412.6444, -56.676624)
 nodes/output/position = Vector2(560, 40)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_24mrt")
 nodes/StateMachine/position = Vector2(66.666664, 280)
@@ -111,6 +114,7 @@ atlas = ExtResource("1_h03gx")
 region = Rect2(960, 0, 480, 480)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_sbkfq"]
+graph_offset = Vector2(-175.36328, -106.28516)
 nodes/output/position = Vector2(560, 40)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_24mrt")
 nodes/StateMachine/position = Vector2(66.666664, 280)
@@ -158,14 +162,17 @@ self_modulate = Color(0.16862744, 1, 0.5294118, 0)
 position = Vector2(0, -69)
 texture = SubResource("AtlasTexture_xih50")
 
-[node name="Icon" type="Sprite2D" parent="TL" unique_id=870260819]
+[node name="Currency" type="Sprite2D" parent="TL" unique_id=870260819]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 0)
 position = Vector2(-184, 0)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_h03gx")
 
-[node name="Label" type="Label" parent="TL/Icon" unique_id=890319670]
+[node name="Icon" type="Sprite2D" parent="TL/Currency" unique_id=1294843258]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Label" type="Label" parent="TL/Currency" unique_id=890319670]
 offset_left = -137.5
 offset_top = -45.0
 offset_right = -59.5
@@ -174,7 +181,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 90
 text = "++"
 
-[node name="TLAnimationTree" type="AnimationTree" parent="TL" unique_id=964318199]
+[node name="TLAnimationTree" type="AnimationTree" parent="TL" unique_id=964318199 node_paths=PackedStringArray("icon")]
 root_node = NodePath("../..")
 root_motion_local = true
 tree_root = SubResource("AnimationNodeBlendTree_06ica")
@@ -189,6 +196,7 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 script = ExtResource("2_msroh")
+icon = NodePath("../Currency/Icon")
 
 [node name="TLAnimationPlayer" type="AnimationPlayer" parent="TL/TLAnimationTree" unique_id=2105073456]
 root_node = NodePath("../../..")
@@ -201,13 +209,16 @@ self_modulate = Color(0.16862744, 1, 0.5294118, 0)
 position = Vector2(0, -69)
 texture = SubResource("AtlasTexture_j4wym")
 
-[node name="Icon" type="Sprite2D" parent="Top" unique_id=1809431570]
+[node name="Currency" type="Sprite2D" parent="Top" unique_id=1809431570]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 0)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_h03gx")
 
-[node name="Label" type="Label" parent="Top/Icon" unique_id=365306544]
+[node name="Icon" type="Sprite2D" parent="Top/Currency" unique_id=982522713]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Label" type="Label" parent="Top/Currency" unique_id=365306544]
 offset_left = -137.5
 offset_top = -45.0
 offset_right = -59.5
@@ -216,7 +227,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 90
 text = "++"
 
-[node name="TopAnimationTree" type="AnimationTree" parent="Top" unique_id=2052178227]
+[node name="TopAnimationTree" type="AnimationTree" parent="Top" unique_id=2052178227 node_paths=PackedStringArray("icon")]
 root_node = NodePath("../..")
 root_motion_local = true
 tree_root = SubResource("AnimationNodeBlendTree_06ica")
@@ -231,6 +242,7 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 script = ExtResource("2_msroh")
+icon = NodePath("../Currency/Icon")
 
 [node name="TopAnimationPlayer" type="AnimationPlayer" parent="Top/TopAnimationTree" unique_id=1099731880]
 root_node = NodePath("../../..")
@@ -245,14 +257,17 @@ position = Vector2(0, -69)
 scale = Vector2(-1, 1)
 texture = SubResource("AtlasTexture_2qrqa")
 
-[node name="Icon" type="Sprite2D" parent="TR" unique_id=431829669]
+[node name="Currency" type="Sprite2D" parent="TR" unique_id=431829669]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 0)
 position = Vector2(-184, 0)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_h03gx")
 
-[node name="Label" type="Label" parent="TR/Icon" unique_id=1655295000]
+[node name="Icon" type="Sprite2D" parent="TR/Currency" unique_id=1853176530]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Label" type="Label" parent="TR/Currency" unique_id=1655295000]
 offset_left = -137.5
 offset_top = -45.0
 offset_right = -59.5
@@ -261,7 +276,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 90
 text = "++"
 
-[node name="TRAnimationTree" type="AnimationTree" parent="TR" unique_id=211670666]
+[node name="TRAnimationTree" type="AnimationTree" parent="TR" unique_id=211670666 node_paths=PackedStringArray("icon")]
 root_node = NodePath("../..")
 root_motion_local = true
 tree_root = SubResource("AnimationNodeBlendTree_sbkfq")
@@ -276,6 +291,7 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 script = ExtResource("2_msroh")
+icon = NodePath("../Currency/Icon")
 
 [node name="TRAnimationPlayer" type="AnimationPlayer" parent="TR/TRAnimationTree" unique_id=710241658]
 root_node = NodePath("../../..")
@@ -292,14 +308,16 @@ texture = SubResource("AtlasTexture_06ica")
 position = Vector2(10, -12)
 rotation = -0.44156832
 
-[node name="Icon" type="Sprite2D" parent="BL/Transform" unique_id=1308147591]
+[node name="Currency" type="Sprite2D" parent="BL/Transform" unique_id=1308147591]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 0)
 position = Vector2(-184, 0)
+rotation = 0.44156832
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_h03gx")
 
-[node name="Label" type="Label" parent="BL/Transform/Icon" unique_id=2032289201]
+[node name="Icon" type="Sprite2D" parent="BL/Transform/Currency" unique_id=102110989]
+
+[node name="Label" type="Label" parent="BL/Transform/Currency" unique_id=2032289201]
 offset_left = -137.5
 offset_top = -45.0
 offset_right = -59.5
@@ -308,7 +326,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 90
 text = "++"
 
-[node name="BLAnimationTree" type="AnimationTree" parent="BL" unique_id=288381143]
+[node name="BLAnimationTree" type="AnimationTree" parent="BL" unique_id=288381143 node_paths=PackedStringArray("icon")]
 root_node = NodePath("../..")
 root_motion_local = true
 tree_root = SubResource("AnimationNodeBlendTree_sbkfq")
@@ -323,6 +341,7 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 script = ExtResource("2_msroh")
+icon = NodePath("../Transform/Currency/Icon")
 
 [node name="BLAnimationPlayer" type="AnimationPlayer" parent="BL/BLAnimationTree" unique_id=1376186340]
 root_node = NodePath("../../..")
@@ -335,14 +354,16 @@ self_modulate = Color(0.16862744, 1, 0.5294118, 0)
 position = Vector2(0, -69)
 texture = SubResource("AtlasTexture_msroh")
 
-[node name="Icon" type="Sprite2D" parent="Bottom" unique_id=1065681633]
-modulate = Color(0.16862744, 1, 0.5294118, 0)
-self_modulate = Color(0.16862744, 1, 0.5294118, 0)
-position = Vector2(0, 98.4406)
+[node name="Currency" type="Sprite2D" parent="Bottom" unique_id=1065681633]
+modulate = Color(0, 0, 0, 0)
+self_modulate = Color(0, 0, 0, 0)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_h03gx")
 
-[node name="Label" type="Label" parent="Bottom/Icon" unique_id=768274765]
+[node name="Icon" type="Sprite2D" parent="Bottom/Currency" unique_id=1353685135]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("9_sbkfq")
+
+[node name="Label" type="Label" parent="Bottom/Currency" unique_id=768274765]
 offset_left = -137.5
 offset_top = -45.0
 offset_right = -59.5
@@ -351,7 +372,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 90
 text = "++"
 
-[node name="BottomAnimationTree" type="AnimationTree" parent="Bottom" unique_id=1940741511]
+[node name="BottomAnimationTree" type="AnimationTree" parent="Bottom" unique_id=1940741511 node_paths=PackedStringArray("icon")]
 root_node = NodePath("../..")
 root_motion_local = true
 tree_root = SubResource("AnimationNodeBlendTree_06ica")
@@ -366,12 +387,14 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 script = ExtResource("2_msroh")
+icon = NodePath("../Currency/Icon")
 
 [node name="BottomAnimationPlayer" type="AnimationPlayer" parent="Bottom/BottomAnimationTree" unique_id=1313824848]
 root_node = NodePath("../../..")
 libraries/ = ExtResource("10_rjy2m")
 
 [node name="BR" type="Node2D" parent="." unique_id=247116531]
+position = Vector2(2, 0)
 scale = Vector2(-1, 1)
 
 [node name="Glow" type="Sprite2D" parent="BR" unique_id=267890304]
@@ -385,14 +408,16 @@ texture = SubResource("AtlasTexture_n4wuj")
 position = Vector2(10, -12)
 rotation = -0.44156832
 
-[node name="Icon" type="Sprite2D" parent="BR/Transform" unique_id=103777264]
+[node name="Currency" type="Sprite2D" parent="BR/Transform" unique_id=103777264]
 modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 0)
 position = Vector2(-184, 0)
+rotation = 0.44156832
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_h03gx")
 
-[node name="Label" type="Label" parent="BR/Transform/Icon" unique_id=1883737036]
+[node name="Icon" type="Sprite2D" parent="BR/Transform/Currency" unique_id=2028236630]
+
+[node name="Label" type="Label" parent="BR/Transform/Currency" unique_id=1883737036]
 offset_left = -137.5
 offset_top = -45.0
 offset_right = -59.5
@@ -401,7 +426,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 90
 text = "++"
 
-[node name="BRAnimationTree" type="AnimationTree" parent="BR" unique_id=217622083]
+[node name="BRAnimationTree" type="AnimationTree" parent="BR" unique_id=217622083 node_paths=PackedStringArray("icon")]
 root_node = NodePath("../..")
 root_motion_local = true
 tree_root = SubResource("AnimationNodeBlendTree_sbkfq")
@@ -416,6 +441,7 @@ parameters/OneShot/active = false
 parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 script = ExtResource("2_msroh")
+icon = NodePath("../Transform/Currency/Icon")
 
 [node name="BRAnimationPlayer" type="AnimationPlayer" parent="BR/BRAnimationTree" unique_id=172289910]
 root_node = NodePath("../../..")
