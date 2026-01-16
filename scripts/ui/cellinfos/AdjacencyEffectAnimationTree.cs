@@ -13,12 +13,6 @@ public partial class AdjacencyEffectAnimationTree : AnimationTree
     public void SetCurrencyType(CurrencyType type)
     {
         if (icon != null)
-        {
             icon.Texture = InjectionManager.Get<InventoryManager>().GetIcon(type);
-        }
-        /*this.Set("parameters/StateMachine/conditions/isFabric", type == CurrencyType.Fabric);
-        this.Set("parameters/StateMachine/conditions/isFood", type == CurrencyType.Food);
-        this.Set("parameters/StateMachine/conditions/isWood", type == CurrencyType.Wood);
-        this.Set("parameters/StateMachine/conditions/isStone", type == CurrencyType.Stone);*/
     }
 }

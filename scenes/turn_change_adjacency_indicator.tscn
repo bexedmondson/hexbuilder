@@ -210,8 +210,9 @@ position = Vector2(0, -69)
 texture = SubResource("AtlasTexture_j4wym")
 
 [node name="Currency" type="Sprite2D" parent="Top" unique_id=1809431570]
-modulate = Color(0, 0, 0, 0)
-self_modulate = Color(0, 0, 0, 0)
+modulate = Color(0.16862744, 1, 0.5294118, 0)
+self_modulate = Color(0.16862744, 1, 0.5294118, 0)
+position = Vector2(0, -123.8418)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_h03gx")
 
