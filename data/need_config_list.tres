@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bx4lsbuoarqa4" path="res://scripts/data/requirements/RandomnessRequirement.cs" id="2_t7cna"]
 [ext_resource type="Script" uid="uid://dcio2ff1rmkiq" path="res://scripts/data/requirements/ResidentBetterHousingRequirement.cs" id="3_5u8ks"]
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="4_2ok8c"]
+[ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="6_oee08"]
 [ext_resource type="Script" uid="uid://bf0ivtyh7meiq" path="res://scripts/data/requirements/PopulationRequirement.cs" id="6_pjxgo"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="7_oee08"]
 
@@ -37,8 +38,16 @@ threshold = 2
 comparison = 3
 metadata/_custom_type_script = "uid://bf0ivtyh7meiq"
 
+[sub_resource type="Resource" id="Resource_exvii"]
+script = ExtResource("6_oee08")
+tile = ExtResource("4_2ok8c")
+amount = 1
+comparison = 5
+metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
+
 [sub_resource type="Resource" id="Resource_pjxgo"]
 script = ExtResource("7_oee08")
+requiredTileBuildCount = SubResource("Resource_exvii")
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_oee08"]

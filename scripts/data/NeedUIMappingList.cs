@@ -65,7 +65,7 @@ public partial class NeedUIMappingList : Resource
             case PopulationRequirement _:
                 return populationText;
             case AllTimeTileBuildRequirement allTimeTileBuildRequirement:
-                return allTimeBuildText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.amount.ToString());
+                return allTimeBuildText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.tile.GetFileName());
         }
 
         return string.Empty;

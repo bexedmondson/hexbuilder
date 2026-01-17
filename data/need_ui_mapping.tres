@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cflcy4b0jtftv" path="res://scripts/data/NeedUIMappingList.cs" id="1_drirf"]
 [ext_resource type="Texture2D" uid="uid://vesvjue8l2kq" path="res://assets/2d/building-house.png" id="1_igm1h"]
+[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="1_iki4q"]
 [ext_resource type="Texture2D" uid="uid://m6p844tktvxg" path="res://assets/icons/icon_people.tres" id="2_1am73"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3a8gp"]
+atlas = ExtResource("1_iki4q")
+region = Rect2(1280, 1536, 128, 128)
 
 [resource]
 script = ExtResource("1_drirf")
@@ -10,3 +15,5 @@ betterHousingIcon = ExtResource("1_igm1h")
 betterHousingText = "I don't like the type of house I live in."
 populationIcon = ExtResource("2_1am73")
 populationText = "I wish we had more people living here."
+allTimeBuildIcon = SubResource("AtlasTexture_3a8gp")
+allTimeBuildText = "We need to build more {building}s!"

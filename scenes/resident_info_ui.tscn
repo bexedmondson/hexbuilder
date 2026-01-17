@@ -12,7 +12,7 @@ region = Rect2(1024, 1536, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t3lr"]
 atlas = ExtResource("4_1t3lr")
-region = Rect2(968, 1611, 48, 46)
+region = Rect2(1152, 1536, 128, 128)
 
 [node name="ResidentInfo" type="PanelContainer" unique_id=330889481 node_paths=PackedStringArray("residentLabel", "happinessIcon", "noHouseLabel", "employmentLabel", "needInfoParent")]
 custom_minimum_size = Vector2(100, 80)
@@ -31,16 +31,14 @@ needInfoScene = ExtResource("2_f7blf")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=314040104]
 layout_mode = 2
-theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=306795154]
 layout_mode = 2
-size_flags_horizontal = 0
 theme_override_constants/separation = 12
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1987213848]
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 0
 text = "name"
 vertical_alignment = 1
 
@@ -92,17 +90,38 @@ size_flags_horizontal = 2
 text = "workplace"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=2121646219]
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=159990553]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpeechBubbleIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=501012164]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+tooltip_text = "no house!"
+texture = SubResource("AtlasTexture_1t3lr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/SpeechBubbleIcon" unique_id=2121646219]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 toggle_mode = true
 button_pressed = true
-icon = SubResource("AtlasTexture_1t3lr")
 icon_alignment = 1
 
 [node name="NeedInfoVBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=146214387]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/Button" to="." method="OnToggleNeedBubbles"]
+[connection signal="toggled" from="VBoxContainer/HBoxContainer/SpeechBubbleIcon/Button" to="." method="OnToggleNeedBubbles"]
