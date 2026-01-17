@@ -35,7 +35,7 @@
 [ext_resource type="Script" uid="uid://8lsuvilm7x8x" path="res://scripts/ui/popups/ResidentInfoPopup.cs" id="22_1w2nm"]
 [ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/popups/WorkplaceInfoPopup.cs" id="22_tacgk"]
 [ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="23_2dmcc"]
-[ext_resource type="PackedScene" uid="uid://nrnjv42wsci4" path="res://scenes/unlocked_cell_adjacency_info_ui.tscn" id="23_cpah3"]
+[ext_resource type="PackedScene" uid="uid://nrnjv42wsci4" path="res://scenes/cell_ui/unlocked_cell_adjacency_info_ui.tscn" id="23_cpah3"]
 [ext_resource type="Script" uid="uid://fx01r1n7jd8" path="res://scripts/ui/ResidentNoHomeWarningIndicator.cs" id="23_rn43n"]
 [ext_resource type="Script" uid="uid://7xixs01jf3f8" path="res://scripts/ui/IconMapper.cs" id="24_6r123"]
 [ext_resource type="Texture2D" uid="uid://oxwmhj6v1jk2" path="res://assets/emotes.png" id="25_hxfgi"]
