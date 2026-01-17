@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://b8hvwxf5jgsix" path="res://data/buildings/wall.tres" id="1_xombo"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_j726c"]
+[ext_resource type="Script" uid="uid://kl2tmf4tnglp" path="res://scripts/data/tilecomponents/HideInEncyclopediaComponent.cs" id="3_in1tw"]
+
+[sub_resource type="Resource" id="Resource_iwqtf"]
+script = ExtResource("3_in1tw")
+metadata/_custom_type_script = "uid://kl2tmf4tnglp"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -11,10 +16,9 @@ buildPrice = {
 1: 2,
 2: 8
 }
-unlockRequirements = []
 baseTurnCurrencyChange = {
 0: -1
 }
 adjacencies = Array[Object]([])
-storageCapacity = null
+components = Array[ExtResource("2_j726c")]([SubResource("Resource_iwqtf")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

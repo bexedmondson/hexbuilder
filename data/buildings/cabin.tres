@@ -34,6 +34,7 @@ metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
 [sub_resource type="Resource" id="Resource_52ph2"]
 script = ExtResource("8_m3t3u")
 requiredTileBuildCounts = Array[ExtResource("6_0gy0h")]([SubResource("Resource_0gy0h")])
+requiredTileBuildCount = SubResource("Resource_0gy0h")
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_8awr6"]

@@ -33,13 +33,6 @@ script = ExtResource("7_2p2k4")
 capacity = 1
 metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
-[sub_resource type="Resource" id="Resource_07x5j"]
-script = ExtResource("8_sqpaw")
-tile = ExtResource("4_b2kmm")
-amount = 1
-comparison = 5
-metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
-
 [sub_resource type="Resource" id="Resource_t636a"]
 script = ExtResource("8_sqpaw")
 tile = ExtResource("5_m4iac")
@@ -47,14 +40,28 @@ amount = 1
 comparison = 5
 metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
 
+[sub_resource type="Resource" id="Resource_07x5j"]
+script = ExtResource("8_sqpaw")
+tile = ExtResource("4_b2kmm")
+amount = 1
+comparison = 5
+metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
+
 [sub_resource type="Resource" id="Resource_tx8ee"]
 script = ExtResource("10_2p2k4")
 requiredTileBuildCounts = Array[ExtResource("8_sqpaw")]([SubResource("Resource_07x5j"), SubResource("Resource_t636a")])
+requiredTileBuildCount = SubResource("Resource_t636a")
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[sub_resource type="Resource" id="Resource_vf8lm"]
+script = ExtResource("10_2p2k4")
+requiredTileBuildCounts = Array[Object]([])
+requiredTileBuildCount = SubResource("Resource_07x5j")
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_4njuu"]
 script = ExtResource("11_sqpaw")
-requirements = Array[Object]([SubResource("Resource_tx8ee")])
+requirements = Array[Object]([SubResource("Resource_tx8ee"), SubResource("Resource_vf8lm")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]

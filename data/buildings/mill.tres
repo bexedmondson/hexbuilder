@@ -56,6 +56,7 @@ metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
 [sub_resource type="Resource" id="Resource_frkme"]
 script = ExtResource("11_sn052")
 requiredTileBuildCounts = Array[ExtResource("11_ufexx")]([SubResource("Resource_sn052")])
+requiredTileBuildCount = SubResource("Resource_sn052")
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_wsah8"]

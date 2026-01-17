@@ -4,21 +4,28 @@ using Godot;
 public partial class AllTimeTileBuildRequirement : Requirement
 {
     [Export]
-    public Godot.Collections.Array<TileRequirementAmount> requiredTileBuildCounts = new();
+    public Godot.Collections.Array<TileRequirementAmount> requiredTileBuildCounts;
+    [Export]
+    public TileRequirementAmount requiredTileBuildCount;
+    [ExportToolButton("update")]
+    public Callable ClickMeButton => Callable.From(Update);
 
     public override bool IsSatisfied()
     {
         var statsTracker = InjectionManager.Get<CellBuildStatsTracker>();
         
-        if (requiredTileBuildCounts != null)
+        if (requiredTileBuildCount != null)
         {
-            foreach (var tileReqCount in requiredTileBuildCounts)
-            {
-                if (!statsTracker.GetBuildCount(tileReqCount.tile).IsPass(tileReqCount.comparison, tileReqCount.amount))
-                    return false;
-            }
+            if (!statsTracker.GetBuildCount(requiredTileBuildCount.tile).IsPass(requiredTileBuildCount.comparison, requiredTileBuildCount.amount))
+                return false;
         }
 
         return true;
+    }
+
+    public void Update()
+    {
+        requiredTileBuildCount = requiredTileBuildCounts[0] as TileRequirementAmount;
+        NotifyPropertyListChanged();
     }
 }
