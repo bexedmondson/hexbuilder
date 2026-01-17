@@ -4,7 +4,7 @@ using Godot;
 public partial class PopulationRequirement : Requirement
 {
     [Export]
-    private int threshold;
+    public int threshold;
 
     [Export]
     private Comparison comparison;

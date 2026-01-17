@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class ResidentNeedInfoUI : Control
@@ -6,16 +7,46 @@ public partial class ResidentNeedInfoUI : Control
     private Label text;
 
     [Export]
-    private TextureRect icon;
+    private TextureRect needIcon;
+
+    [Export]
+    private TextureRect intensityIcon;
 
     public void SetText(string textToSet)
     {
         text.Text = textToSet;
     }
 
-    public void SetIcon(Texture2D texture)
+    public void SetNeedIcon(Texture2D texture)
     {
         if (texture != null)
-            icon.Texture = texture;
+            needIcon.Texture = texture;
+    }
+
+    public void SetIntensity(int happinessEffect)
+    {
+        var happinessIconMapping = InjectionManager.Get<IconMapper>().happinessMap;
+        if (happinessIconMapping.TryGetValue(happinessEffect, out var happinessTexture))
+        {
+            intensityIcon.Texture = happinessTexture;
+            return;
+        }
+
+        int closestHappiness = int.MinValue;
+        foreach (var kvp in happinessIconMapping)
+        {
+            if (closestHappiness == int.MinValue)
+            {
+                closestHappiness = kvp.Key;
+                continue;
+            }
+
+            int prevBest = Mathf.Abs(happinessEffect - closestHappiness);
+            if (Mathf.Abs(happinessEffect - kvp.Key) < prevBest)
+                closestHappiness = kvp.Key;
+        }
+
+        if (closestHappiness != int.MinValue)
+            intensityIcon.Texture = happinessIconMapping[closestHappiness];
     }
 }

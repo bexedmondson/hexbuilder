@@ -46,8 +46,15 @@ public partial class ResidentInfoUI : Control
                 if (satisfactionRequirement is DataRequirement dataRequirement)
                 {
                     needInfoUI.SetText(needUIMapping.GetTextForNeedSatisfactionRequirement(dataRequirement));
-                    needInfoUI.SetIcon(needUIMapping.GetIconForNeedSatisfactionRequirement(dataRequirement));
+                    needInfoUI.SetNeedIcon(needUIMapping.GetIconForNeedSatisfactionRequirement(dataRequirement));
                 }
+                else if (satisfactionRequirement is Requirement requirement)
+                {
+                    needInfoUI.SetText(needUIMapping.GetTextForNeedSatisfactionRequirement(requirement));
+                    needInfoUI.SetNeedIcon(needUIMapping.GetIconForNeedSatisfactionRequirement(requirement));
+                }
+                
+                needInfoUI.SetIntensity(activeNeed.unsatisfiedHappinessPenalty);
             }
             
             needInfoParent.AddChild(needInfoUI);

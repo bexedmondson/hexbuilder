@@ -50,6 +50,7 @@
 [ext_resource type="Script" uid="uid://cgj4kupy76gd4" path="res://scripts/ui/popups/EncyclopediaPopup.cs" id="36_4b3q0"]
 [ext_resource type="ButtonGroup" uid="uid://caiuut1jdayfj" path="res://scenes/encyclopediaButtonGroup.tres" id="37_kj2ff"]
 [ext_resource type="PackedScene" uid="uid://dm7exjhepiwdn" path="res://scenes/encyclopedia_tile_option.tscn" id="37_y60pf"]
+[ext_resource type="Texture2D" uid="uid://m6p844tktvxg" path="res://assets/icons/icon_people.tres" id="38_3nmsy"]
 [ext_resource type="Script" uid="uid://b0a7x5oomorx4" path="res://scripts/ui/popups/StorageInfoUI.cs" id="38_hxced"]
 [ext_resource type="PackedScene" uid="uid://bjj73jr4pvi30" path="res://scenes/encyclopedia_effect_ui.tscn" id="39_e4lbj"]
 [ext_resource type="Material" uid="uid://jrcfkjx2d6od" path="res://materials_shaders/greyscale_material.tres" id="39_ue1v3"]
@@ -138,10 +139,6 @@ region = Rect2(1664, 1024, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ipk01"]
 atlas = ExtResource("15_nkuak")
 region = Rect2(1920, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1w2nm"]
-atlas = ExtResource("15_nkuak")
-region = Rect2(2176, 896, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4b3q0"]
 atlas = ExtResource("15_nkuak")
@@ -562,7 +559,7 @@ theme_type_variation = &"FlatButton"
 theme_override_font_sizes/font_size = 24
 text = "Residents
 "
-icon = SubResource("AtlasTexture_1w2nm")
+icon = ExtResource("38_3nmsy")
 alignment = 2
 expand_icon = true
 

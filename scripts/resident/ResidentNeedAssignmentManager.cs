@@ -26,7 +26,7 @@ public class ResidentNeedAssignmentManager : IInjectable
             {
                 if (needConfig.CanAssignToResident(resident))
                 {
-                    GD.Print($"Assigning new active need to {resident.Name}");
+                    GD.Print($"Assigning new active need {needConfig.satisfactionRequirements[0].GetType()} to {resident.Name}");
                     resident.activeNeeds.Add(needConfig);
                 }
             }
