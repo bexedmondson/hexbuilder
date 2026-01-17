@@ -31,6 +31,7 @@
 [ext_resource type="StyleBox" uid="uid://ijcks3fe2cy1" path="res://themes/clashy/panels/successClashButtonHover.tres" id="26_1nonf"]
 [ext_resource type="StyleBox" uid="uid://bw1fy6rgn16ft" path="res://themes/clashy/panels/clashy_ribbon.tres" id="26_iesbr"]
 [ext_resource type="StyleBox" uid="uid://b3bs0xywspv6c" path="res://themes/clashy/panels/successClashButton.tres" id="27_0wob6"]
+[ext_resource type="StyleBox" uid="uid://bunaup4lj56pa" path="res://themes/clashy/panels/speech_bubble_light.tres" id="28_o2yqt"]
 [ext_resource type="StyleBox" uid="uid://7gnfvusfrfqy" path="res://themes/clashy/panels/successClashButtonPress.tres" id="28_x27uw"]
 [ext_resource type="FontVariation" uid="uid://bbe5lqfpnh46x" path="res://themes/clashy/Acme-Regular-Variant.tres" id="29_j57xd"]
 
@@ -158,6 +159,8 @@ MarginContainer/constants/margin_right = 12
 MarginContainer/constants/margin_top = 12
 Panel/styles/panel = ExtResource("25_ihi0n")
 PanelContainer/styles/panel = ExtResource("25_ihi0n")
+PanelContainerBubble/base_type = &"PanelContainer"
+PanelContainerBubble/styles/panel = ExtResource("28_o2yqt")
 PanelContainerEmbedded/base_type = &"PanelContainer"
 PanelContainerEmbedded/styles/panel = ExtResource("23_1ivug")
 PanelContainerEmbeddedLight/base_type = &"PanelContainer"

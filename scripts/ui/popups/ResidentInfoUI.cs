@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using Godot;
 
 public partial class ResidentInfoUI : Control
@@ -10,10 +11,18 @@ public partial class ResidentInfoUI : Control
     private TextureRect happinessIcon;
 
     [Export]
-    private Label noHouseLabel; 
+    private Control noHouseLabel;
 
     [Export]
     private Label employmentLabel;
+
+    [Export]
+    private Control needInfoParent;
+
+    [Export]
+    private PackedScene needInfoScene;
+
+    private List<ResidentNeedInfoUI> needInfoUIs = new();
     
     public void SetResident(ResidentState residentState)
     {
@@ -21,5 +30,42 @@ public partial class ResidentInfoUI : Control
         happinessIcon.Texture = InjectionManager.Get<IconMapper>().happinessMap[residentState.happiness];
         noHouseLabel.Visible = !residentState.HasHouse;
         employmentLabel.Text = residentState.IsBusy ? $"is employed at {residentState.GetWorkplaceOrJobName()}" : "is not employed";
+
+        var needUIMapping = InjectionManager.Get<DataResourceContainer>().needUIMappingList;
+        
+        foreach (var activeNeed in residentState.activeNeeds)
+        {
+            if (activeNeed.IsSatisfied(residentState))
+                continue;
+            
+            var needInfoUI = needInfoScene.Instantiate<ResidentNeedInfoUI>();
+
+            foreach (var satisfactionRequirement in activeNeed.satisfactionRequirements)
+            {
+                //need to figure out handling >1 requirement and regular requirements
+                if (satisfactionRequirement is DataRequirement dataRequirement)
+                {
+                    needInfoUI.SetText(needUIMapping.GetTextForNeedSatisfactionRequirement(dataRequirement));
+                    needInfoUI.SetIcon(needUIMapping.GetIconForNeedSatisfactionRequirement(dataRequirement));
+                }
+            }
+            
+            needInfoParent.AddChild(needInfoUI);
+            needInfoUIs.Add(needInfoUI);
+        }
+    }
+
+    public void OnToggleNeedBubbles(bool toggleState)
+    {
+        needInfoParent.Visible = toggleState;
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        foreach (var needInfoUI in needInfoUIs)
+        {
+            needInfoUI.QueueFree();
+        }
     }
 }
