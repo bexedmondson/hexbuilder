@@ -52,7 +52,7 @@ public partial class UnlockedCellPopup : Popup
     [Export]
     private Button confirmButton;
     
-    private Vector2I cell;
+    private Vector2I cell = Vector2I.MinValue;
 
     private MapController mapController;
     private InventoryManager inventoryManager;
@@ -247,6 +247,8 @@ public partial class UnlockedCellPopup : Popup
     {
         base.Close();
         InjectionManager.Get<MapHighlightController>().Clear();
+
+        cell = Vector2I.MinValue;
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count > 0)
             tileSelectionGroup.Pressed -= OnSelectionChanged;

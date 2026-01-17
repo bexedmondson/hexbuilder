@@ -26,23 +26,30 @@ public class MapCurrencyChangeAnalyser : IInjectable
                 continue;
 
             var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
-
-            //TODO rework workerCount's effects on currency change?
-            if (workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplace) && workplace.workerCount <= 0)
-            {
+            if (cellTileData == null)
                 continue;
-            }
+            
+            bool isWorkplace = workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplace);
+            
+            //TODO rework workerCount's effects on currency change?
+            if (isWorkplace && workplace.workerCount <= 0)
+                continue;
             //don't get regular effects nor adjacency benefits for unstaffed workplaces
             //non-workplace tiles that have effects are fine though
             
             //don't get effects for residences without residents
             if (housingManager.TryGetHouseOnCell(cell, out var house) && house.occupants.Length <= 0)
-            {
                 continue;
-            }
             
             if (cellTileData?.baseTurnCurrencyChange != null && cellTileData.baseTurnCurrencyChange.Count > 0)
                 allCurrencyChanges.Add(new CurrencySum(cellTileData.baseTurnCurrencyChange));
+            
+            if (isWorkplace 
+                && workplace.workerCount == workplace.capacity
+                && cellTileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxWorkerBonus))
+            {
+                allCurrencyChanges.Add(new CurrencySum(maxWorkerBonus.extraBaseProduction));
+            }
 
             var adjacencyEffects = CalculateAdjacencyEffects(cell, cellTileData);
             if (adjacencyEffects.Count > 0)
