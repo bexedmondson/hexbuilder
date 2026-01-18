@@ -65,6 +65,8 @@
 [ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="58_bnbf5"]
 [ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="62_4g66p"]
 [ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="63_4cqqk"]
+[ext_resource type="Script" uid="uid://hy27agc14m2b" path="res://scripts/ui/toasts/ToastManager.cs" id="66_otuox"]
+[ext_resource type="PackedScene" uid="uid://dugii0837nslt" path="res://scenes/toast_label.tscn" id="67_tw5gc"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
 noise_type = 0
@@ -1399,6 +1401,10 @@ size_flags_horizontal = 0
 script = ExtResource("42_gqxrv")
 singleCurrencyDisplayScene = ExtResource("47_hxced")
 iconColor = Color(0.3529412, 0.37254903, 0.38431373, 1)
+
+[node name="ToastLayer" type="CanvasLayer" parent="." unique_id=2039348356]
+script = ExtResource("66_otuox")
+LabelResource = ExtResource("67_tw5gc")
 
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
 [connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]

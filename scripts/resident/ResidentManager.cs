@@ -66,6 +66,8 @@ public class ResidentManager : IInjectable
 
         UpdateResidentHousing();
         
+        InjectionManager.Get<ToastManager>().Show(new ToastConfig{text = $"new resident: {newResident.Name}"});
+        
         return newResident;
     }
 
