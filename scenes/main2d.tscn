@@ -63,6 +63,8 @@
 [ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="47_hxced"]
 [ext_resource type="Theme" uid="uid://c42r8558dvmyi" path="res://themes/clashy/clashy.tres" id="57_yi10l"]
 [ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="58_bnbf5"]
+[ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="62_4g66p"]
+[ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="63_4cqqk"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
 noise_type = 0
@@ -1122,8 +1124,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileDetails", "tileTextureRect", "defaultEffectDisplay", "affectsParent", "affectedByParent", "storageInfoUI")]
-visible = false
+[node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileNameLabel", "tileDetailsExpanders", "tileDetailsInfo", "tileTextureRect", "defaultEffectDisplay", "workerInfoContainer", "workerCountContainer", "maxBonusContainer", "maxBonusCurrencyDisplay", "affectsParent", "affectedByParent", "storageInfoUI")]
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
@@ -1134,10 +1135,17 @@ grow_vertical = 2
 script = ExtResource("36_4b3q0")
 tileSelector = NodePath("ScrollContainer/VBoxContainer")
 tileScene = ExtResource("37_y60pf")
-tileDetails = NodePath("TileDetailPanel/TileDetails")
+tileNameLabel = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/TileNameLabel")
+tileDetailsExpanders = NodePath("TileDetailPanel/TileDetails/Panel")
+tileDetailsInfo = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel")
 encyclopediaTileGroup = ExtResource("37_kj2ff")
-tileTextureRect = NodePath("TileDetailPanel/TileTextureRect")
-defaultEffectDisplay = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/HBoxContainer/CurrencyDisplay")
+tileTextureRect = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/TileTextureRect")
+defaultEffectDisplay = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/DefaultPerTurnHBoxContainer/CurrencyDisplay")
+workerInfoContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2")
+workerIconTexture = ExtResource("31_5n6k3")
+workerCountContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2/HFlowContainer")
+maxBonusContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer")
+maxBonusCurrencyDisplay = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer/CurrencyDisplay")
 affectsParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer/AffectsHBoxContainer")
 affectedByParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer/AffectedByHBoxContainer2")
 affectedByScene = ExtResource("39_e4lbj")
@@ -1178,19 +1186,113 @@ anchor_right = 0.95
 anchor_bottom = 0.9
 theme_type_variation = &"PanelEmbedded"
 
-[node name="TileTextureRect" type="TextureRect" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel" unique_id=99351365]
+[node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel" unique_id=480231425]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.4
-offset_top = 30.0
-offset_bottom = -20.0
 grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer" unique_id=622988553]
+layout_mode = 2
+split_offsets = PackedInt32Array(401)
+dragging_enabled = false
+dragger_visibility = 1
+split_offset = 401
+
+[node name="TileTextureRect" type="TextureRect" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer" unique_id=99351365]
+layout_mode = 2
 expand_mode = 3
 stretch_mode = 5
 script = ExtResource("40_e4lbj")
 greyscaleMaterial = ExtResource("39_ue1v3")
+
+[node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer" unique_id=1959157571]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel" unique_id=1875934146]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="TileNameLabel" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=488104432]
+layout_mode = 2
+theme_type_variation = &"Label_Title"
+horizontal_alignment = 1
+
+[node name="WorkerCountHBoxContainer2" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=476834259]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2" unique_id=1396730242]
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "workers:"
+horizontal_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2" unique_id=278234544]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DefaultPerTurnHBoxContainer" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=1155928371 node_paths=PackedStringArray("noneIndicator")]
+layout_mode = 2
+script = ExtResource("58_bnbf5")
+noneIndicator = NodePath("NoneLabel")
+
+[node name="Label" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=1721397639]
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "each turn:"
+horizontal_alignment = 1
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=555371366]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("42_gqxrv")
+singleCurrencyDisplayScene = ExtResource("47_hxced")
+displayAsDelta = true
+iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="NoneLabel" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=1331813899]
+layout_mode = 2
+text = "no resources given"
+
+[node name="MaxBonusInfoHBoxContainer" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=740784105]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=910492605 node_paths=PackedStringArray("itemWithShineShader")]
+material = ExtResource("62_4g66p")
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "max worker 
+bonus:"
+horizontal_alignment = 1
+script = ExtResource("63_4cqqk")
+itemWithShineShader = NodePath(".")
+finalShaderParamValue = 4.0
+finalShaderDurationValue = 2.0
+shineByDefault = true
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=1219382575]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("42_gqxrv")
+singleCurrencyDisplayScene = ExtResource("47_hxced")
+displayAsDelta = true
+iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
 [node name="TileDetails" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel" unique_id=984539928]
 layout_mode = 1
@@ -1205,26 +1307,13 @@ theme_type_variation = &"PanelEmbedded"
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails" unique_id=202839793]
 layout_mode = 2
 
-[node name="TileNameLabel" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel" unique_id=488104432]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 15.0
-offset_right = 20.0
-offset_bottom = 51.0
-grow_horizontal = 2
-theme_type_variation = &"Label_Title"
-horizontal_alignment = 1
-
 [node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel" unique_id=1244354597]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = 25.0
+offset_top = 10.0
 offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
@@ -1234,34 +1323,6 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1155928371]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=1721397639]
-layout_mode = 2
-text = "default change per turn:"
-
-[node name="CurrencyDisplay" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=2104441851]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-alignment = 1
-script = ExtResource("42_gqxrv")
-singleCurrencyDisplayScene = ExtResource("47_hxced")
-displayAsDelta = true
-iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
-
-[node name="AffectsLabel" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1562743749]
-visible = false
-layout_mode = 2
-text = "affects:"
-
-[node name="AffectedByLabel2" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1944021695]
-visible = false
-layout_mode = 2
-text = "affected by:"
 
 [node name="AffectsFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1401136013]
 layout_mode = 2

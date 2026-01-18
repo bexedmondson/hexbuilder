@@ -43,6 +43,8 @@ theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("3_idcl7")
 itemWithShineShader = NodePath(".")
+finalShaderParamValue = 0.5
+finalShaderDurationValue = 1.5
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1086277598]
 use_parent_material = true

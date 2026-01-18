@@ -5,9 +5,11 @@ using Godot;
 [GlobalClass][Tool]
 public partial class NeedUIMappingList : Resource
 {
-    [ExportGroup("Resident Better Housing")]
+    [ExportGroup("Housing")]
     [Export]
-    private Texture2D betterHousingIcon;
+    private Texture2D houseIcon;
+    [Export]
+    private string isHousedText;
     [Export]
     private string betterHousingText;
     
@@ -22,13 +24,22 @@ public partial class NeedUIMappingList : Resource
     private Texture2D allTimeBuildIcon;
     [Export]
     private string allTimeBuildText;
+    
+    [ExportGroup("Food")]
+    [Export]
+    private Texture2D foodIcon;
+    [Export]
+    private string sufficientFoodText;
+    
 
     public Texture2D GetIconForNeedSatisfactionRequirement(DataRequirement requirement)
     {
         switch (requirement)
         {
             case ResidentBetterHousingRequirement _:
-                return betterHousingIcon;
+                return houseIcon;
+            case IsHousedRequirement _:
+                return houseIcon;
         }
 
         return null; //TODO default icon?
@@ -42,6 +53,8 @@ public partial class NeedUIMappingList : Resource
                 return populationIcon;
             case AllTimeTileBuildRequirement _:
                 return allTimeBuildIcon;
+            case SufficientFoodRequirement _:
+                return foodIcon;
         }
 
         return null;
@@ -53,6 +66,8 @@ public partial class NeedUIMappingList : Resource
         {
             case ResidentBetterHousingRequirement _:
                 return betterHousingText;
+            case IsHousedRequirement _:
+                return isHousedText;
         }
 
         return string.Empty;
@@ -66,6 +81,8 @@ public partial class NeedUIMappingList : Resource
                 return populationText;
             case AllTimeTileBuildRequirement allTimeTileBuildRequirement:
                 return allTimeBuildText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.tile.GetFileName());
+            case SufficientFoodRequirement _:
+                return sufficientFoodText;
         }
 
         return string.Empty;

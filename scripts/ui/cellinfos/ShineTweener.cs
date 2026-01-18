@@ -6,7 +6,23 @@ public partial class ShineTweener : Control
     [Export]
     public Control itemWithShineShader;
 
+    [Export]
+    private float finalShaderParamValue;
+    
+    [Export]
+    private float finalShaderDurationValue;
+    
+    [Export]
+    private bool shineByDefault = false;
+
     private Tween tween;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        if (shineByDefault)
+            SetShining(true);
+    }
 
     public void SetShining(bool isOn)
     {
@@ -22,7 +38,7 @@ public partial class ShineTweener : Control
             tween.Kill();
 
         tween = itemWithShineShader.CreateTween();
-        tween.TweenProperty(itemWithShineShader.Material, "shader_parameter/shine_progress", 0.5f, 1.5f).From(0.0f);
+        tween.TweenProperty(itemWithShineShader.Material, "shader_parameter/shine_progress", finalShaderParamValue, finalShaderDurationValue).From(0.0f);
         tween.SetLoops();
         tween.Play();
     }

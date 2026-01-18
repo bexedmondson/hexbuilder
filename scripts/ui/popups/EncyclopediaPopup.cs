@@ -9,7 +9,13 @@ public partial class EncyclopediaPopup : Popup
     private PackedScene tileScene;
 
     [Export]
-    private Control tileDetails;
+    private Label tileNameLabel;
+
+    [Export]
+    private Control tileDetailsExpanders;
+    
+    [Export]
+    private Control tileDetailsInfo;
 
     [Export]
     private ButtonGroup encyclopediaTileGroup;
@@ -19,6 +25,21 @@ public partial class EncyclopediaPopup : Popup
 
     [Export]
     private CurrencyDisplay defaultEffectDisplay;
+
+    [Export]
+    private Control workerInfoContainer;
+
+    [Export]
+    private Texture2D workerIconTexture;
+
+    [Export]
+    private Control workerCountContainer;
+
+    [Export]
+    private Control maxBonusContainer;
+
+    [Export]
+    private CurrencyDisplay maxBonusCurrencyDisplay;
 
     [Export]
     private Control affectsParent;
@@ -44,7 +65,8 @@ public partial class EncyclopediaPopup : Popup
         {
             tileSelector.GetChild(i).QueueFree();
         }
-        tileDetails.Visible = false;
+        tileDetailsExpanders.Visible = false;
+        tileDetailsInfo.Visible = false;
         
         TileDatabase tileDatabase = InjectionManager.Get<TileDatabase>();
         var allBuildingTileInfos = tileDatabase.AllBuildingTileInfos;
@@ -66,21 +88,73 @@ public partial class EncyclopediaPopup : Popup
         this.Visible = true;
     }
 
+    public void ShowPopup(CustomTileData tileToShow)
+    {
+        ShowPopup();
+        foreach (var tileUINode in tileSelector.GetChildren())
+        {
+            if (!(tileUINode is TileOptionUI tileOptionUI))
+                continue;
+            
+            if (tileOptionUI.tileInfo.tileData == tileToShow)
+                tileOptionUI.SetPressed(true);
+        }
+    }
+
     private void OnSelectionChanged(BaseButton selectedButton)
     {
-        tileDetails.Visible = true;
+        tileDetailsExpanders.Visible = true;
+        tileDetailsInfo.Visible = true;
         
         var selectedOption = selectedButton as TileOptionUI;
         tileTextureRect.SetTile(selectedOption.tileInfo);
         var selectedTileData = selectedOption.tileInfo.tileData;
-        
+
+        tileNameLabel.Text = selectedTileData.GetFileName();
         defaultEffectDisplay.DisplayCurrencyAmount(new CurrencySum(selectedTileData.baseTurnCurrencyChange));
 
+        SetupWorkerCountDisplay(selectedTileData);
+        SetupMaxBonus(selectedTileData);
+        
         SetupAffects(selectedTileData);
-
         SetupAffectedBy(selectedTileData);
 
         SetupStorageInfo(selectedTileData);
+    }
+
+    private void SetupWorkerCountDisplay(CustomTileData tileData)
+    {
+        bool hasWorkerCapacity = tileData.TryGetComponent(out WorkerCapacityComponent workerCapacity) && workerCapacity.capacity > 0;
+        workerInfoContainer.Visible = hasWorkerCapacity;
+        
+        if (!hasWorkerCapacity)
+            return;
+        
+        for (int i = workerCountContainer.GetChildCount() - 1; i >= workerCapacity.capacity; i--)
+        {
+            workerCountContainer.GetChild(i).QueueFree();
+        }
+
+        for (int i = workerCountContainer.GetChildCount() - 1; i < workerCapacity.capacity; i++)
+        {
+            TextureRect workerIcon = new TextureRect();
+            workerIcon.Texture = workerIconTexture;
+            workerIcon.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
+            workerIcon.ExpandMode = TextureRect.ExpandModeEnum.FitWidthProportional;
+            workerIcon.CustomMinimumSize = Vector2I.One * 27;
+            workerIcon.SelfModulate = new Color("4c4c4c");
+            workerCountContainer.AddChild(workerIcon);
+        }
+    }
+
+    private void SetupMaxBonus(CustomTileData tileData)
+    {
+        bool hasMaxBonus = tileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxBonusComponent);
+        maxBonusContainer.Visible = hasMaxBonus;
+        if (!hasMaxBonus)
+            return;
+        
+        maxBonusCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(maxBonusComponent.extraBaseProduction));
     }
 
     private void SetupAffects(CustomTileData tileData)

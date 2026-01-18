@@ -22,7 +22,12 @@ metadata/_custom_type_script = "uid://nhjvba1rok7w"
 script = ExtResource("1_eima2")
 assignmentRequirements = Array[Object]([SubResource("Resource_il1fi")])
 satisfactionRequirements = Array[Object]([SubResource("Resource_eeyjv")])
+unsatisfiedHappinessPenalty = -3
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
+
+[sub_resource type="Resource" id="Resource_e4jau"]
+script = ExtResource("1_t5wp0")
+metadata/_custom_type_script = "uid://biim86els1cs8"
 
 [sub_resource type="Resource" id="Resource_7ri1s"]
 script = ExtResource("8_oee08")
@@ -30,8 +35,9 @@ metadata/_custom_type_script = "uid://cento2occpppv"
 
 [sub_resource type="Resource" id="Resource_pk0ri"]
 script = ExtResource("1_eima2")
-assignmentRequirements = Array[Object]([null])
+assignmentRequirements = Array[Object]([SubResource("Resource_e4jau")])
 satisfactionRequirements = [SubResource("Resource_7ri1s")]
+unsatisfiedHappinessPenalty = -2
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
 [sub_resource type="Resource" id="Resource_dex7m"]
