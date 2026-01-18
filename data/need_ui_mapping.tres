@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="NeedUIMappingList" format=3 uid="uid://rpjtimn5hoka"]
 
 [ext_resource type="Script" uid="uid://cflcy4b0jtftv" path="res://scripts/data/NeedUIMappingList.cs" id="1_drirf"]
-[ext_resource type="Texture2D" uid="uid://vesvjue8l2kq" path="res://assets/2d/building-house.png" id="1_igm1h"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="1_iki4q"]
 [ext_resource type="Texture2D" uid="uid://m6p844tktvxg" path="res://assets/icons/icon_people.tres" id="2_1am73"]
 [ext_resource type="Texture2D" uid="uid://syhv8okyicei" path="res://assets/icons/icon_house.tres" id="3_3a8gp"]
@@ -15,7 +14,6 @@ region = Rect2(1280, 1536, 128, 128)
 script = ExtResource("1_drirf")
 houseIcon = ExtResource("3_3a8gp")
 isHousedText = "I don't have anywhere to live!"
-betterHousingIcon = ExtResource("1_igm1h")
 betterHousingText = "I don't like the type of house I live in."
 populationIcon = ExtResource("2_1am73")
 populationText = "I wish we had more people living here."

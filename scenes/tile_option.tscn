@@ -6,8 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://byfu2r5i3mr06" path="res://assets/2d/building-castle.png" id="3_wgdtb"]
 [ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="4_goryc"]
 [ext_resource type="Material" uid="uid://jrcfkjx2d6od" path="res://materials_shaders/greyscale_material.tres" id="5_i0rf2"]
+[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="6_i0rf2"]
 
-[node name="TileOption" type="Button" unique_id=1032778022 node_paths=PackedStringArray("textureRect", "nameLabel", "currencyDisplay")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dfpb"]
+atlas = ExtResource("6_i0rf2")
+region = Rect2(512, 1536, 128, 128)
+
+[node name="TileOption" type="Button" unique_id=1032778022 node_paths=PackedStringArray("textureRect", "nameLabel", "currencyDisplay", "infoButton")]
 custom_minimum_size = Vector2(300, 170)
 offset_right = 170.0
 offset_bottom = 170.0
@@ -19,6 +24,7 @@ script = ExtResource("2_tjxx3")
 textureRect = NodePath("MarginContainer/Container/TileTexture")
 nameLabel = NodePath("MarginContainer/Container/VBoxContainer/NameDisplay")
 currencyDisplay = NodePath("MarginContainer/Container/VBoxContainer/CurrencyDisplay")
+infoButton = NodePath("MarginContainer/Container/TileTexture/InfoButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1203729135]
 layout_mode = 1
@@ -48,6 +54,33 @@ stretch_mode = 5
 script = ExtResource("4_goryc")
 greyscaleMaterial = ExtResource("5_i0rf2")
 
+[node name="InfoButton" type="Button" parent="MarginContainer/Container/TileTexture" unique_id=597461691]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -34.0
+offset_right = 32.0
+grow_vertical = 0
+theme_type_variation = &"GreenButton"
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Container/TileTexture/InfoButton" unique_id=1183852560]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_4dfpb")
+expand_mode = 3
+stretch_mode = 5
+flip_v = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Container" unique_id=1908694678]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -60,3 +93,5 @@ text = "placeholder"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+
+[connection signal="pressed" from="MarginContainer/Container/TileTexture/InfoButton" to="." method="OnInfoButton"]

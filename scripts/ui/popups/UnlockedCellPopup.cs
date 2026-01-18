@@ -23,6 +23,10 @@ public partial class UnlockedCellPopup : Popup
 
     [Export]
     private Control buildTab;
+
+
+    [Export]
+    private EncyclopediaPopup encyclopediaPopup;
     
     
     [Export]
@@ -206,6 +210,7 @@ public partial class UnlockedCellPopup : Popup
             var tileOptionUI = tileScene.Instantiate<TileOptionUI>();
             tileOptionUI.SetTile(compatibleTileInfo);
             tileOptionUI.SetButtonGroup(tileSelectionGroup);
+            tileOptionUI.SetupInfoButton(true, OnInfoButton);
             tileSelector.AddChild(tileOptionUI);
         }
         
@@ -213,6 +218,11 @@ public partial class UnlockedCellPopup : Popup
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count == 0)
             tileSelectionGroup.Pressed += OnSelectionChanged;
+    }
+
+    public void OnInfoButton(CustomTileData tileDataToShow)
+    {
+        encyclopediaPopup.ShowPopup(tileDataToShow);
     }
 
     private void OnSelectionChanged(BaseButton selectedButton)

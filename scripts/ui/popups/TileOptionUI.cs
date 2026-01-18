@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -14,6 +15,11 @@ public partial class TileOptionUI : Button
     
     [Export]
     private Control lockIndicator;
+
+    [Export]
+    private Button infoButton;
+
+    private Action<CustomTileData> OnInfoButtonCallback;
     
     public TileDatabase.TileInfo tileInfo { get; private set; }
 
@@ -36,5 +42,16 @@ public partial class TileOptionUI : Button
         
         var inventoryManager = InjectionManager.Get<InventoryManager>();
         this.Disabled = !inventoryManager.CanAfford(tilePrice);
+    }
+
+    public void SetupInfoButton(bool visible, Action<CustomTileData> action = null)
+    {
+        infoButton.Visible = visible;
+        OnInfoButtonCallback = action;
+    }
+
+    public void OnInfoButton()
+    {
+        OnInfoButtonCallback?.Invoke(tileInfo.tileData);
     }
 }
