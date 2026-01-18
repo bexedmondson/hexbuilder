@@ -21,12 +21,17 @@ public partial class AdjacencyEffectCellInfoUI : Node2D
     private AdjacencyEffectAnimationTree bottomRight;
     
     private MapController mapController;
+    private WorkplaceManager workplaceManager;
 
     public void Update(CustomTileData tileData, Vector2I cell)
     {
         mapController ??= InjectionManager.Get<MapController>();
+        workplaceManager = InjectionManager.Get<WorkplaceManager>();
         
         if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
+            return;
+
+        if (tileData.IsWorkplace && workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplaceState) && workplaceState.workerCount == 0)
             return;
         
         var adjacentCells = mapController.BaseMapLayer.GetSurroundingCells(cell);
@@ -37,8 +42,31 @@ public partial class AdjacencyEffectCellInfoUI : Node2D
                 continue;
             
             var adjacentData = mapController.BaseMapLayer.GetCellCustomData(adjacentCell);
-            if (!tileData.TryGetAdjacencyEffectFromTileData(adjacentData, out var receivedEffect))
-                continue;
+            CurrencySum receivedEffect;
+            
+            if (adjacentData.IsWorkplace)
+            {
+                if (!workplaceManager.TryGetWorkplaceAtLocation(adjacentCell, out var neighbourWorkplace))
+                {
+                    GD.PushError("workplace data from tile data but no workplace found here?? something's gone horribly wrong");
+                    continue;
+                }
+
+                receivedEffect = neighbourWorkplace.GetWorkerDependentAdjacencyEffects(tileData);
+
+                int total = 0;
+                foreach (var kvp in receivedEffect)
+                {
+                    total += kvp.Value;
+                }
+                
+                if (total == 0) //if workers (or lack thereof) actually causing zero effect, carry on
+                    continue;
+            } 
+            else if (!tileData.TryGetAdjacencyEffectFromTileData(adjacentData, out receivedEffect))
+            {
+                continue; //if not a workplace and therefore not undergoing above checks, and if no adjacence effect, carry on
+            }
 
             var direction = cell - adjacentCell;
 

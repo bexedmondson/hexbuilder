@@ -60,6 +60,5 @@ public class WorkplaceState(Vector2I location, CustomTileData tileData, Texture2
         bool hasEffect = affectedTileData.TryGetAdjacencyEffectFromTileData(tileData, out var baseEffectPerWorker);
 
         return !hasEffect ? new() : baseEffectPerWorker * _workers.Count;
-
     }
 }
