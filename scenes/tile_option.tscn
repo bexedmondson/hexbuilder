@@ -24,7 +24,7 @@ script = ExtResource("2_tjxx3")
 textureRect = NodePath("MarginContainer/Container/TileTexture")
 nameLabel = NodePath("MarginContainer/Container/VBoxContainer/NameDisplay")
 currencyDisplay = NodePath("MarginContainer/Container/VBoxContainer/CurrencyDisplay")
-infoButton = NodePath("MarginContainer/Container/TileTexture/InfoButton")
+infoButton = NodePath("InfoButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1203729135]
 layout_mode = 1
@@ -54,19 +54,36 @@ stretch_mode = 5
 script = ExtResource("4_goryc")
 greyscaleMaterial = ExtResource("5_i0rf2")
 
-[node name="InfoButton" type="Button" parent="MarginContainer/Container/TileTexture" unique_id=597461691]
-visible = false
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Container" unique_id=1908694678]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameDisplay" type="Label" parent="MarginContainer/Container/VBoxContainer" unique_id=1752738764]
+layout_mode = 2
+text = "placeholder"
+
+[node name="CurrencyDisplay" parent="MarginContainer/Container/VBoxContainer" unique_id=1826121471 instance=ExtResource("3_6d75x")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="InfoButton" type="Button" parent="." unique_id=597461691]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = -1
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -34.0
-offset_right = 32.0
+offset_left = -36.0
+offset_top = -44.0
+offset_right = -4.0
+offset_bottom = -10.0
+grow_horizontal = 0
 grow_vertical = 0
 theme_type_variation = &"GreenButton"
 expand_icon = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/Container/TileTexture/InfoButton" unique_id=1183852560]
+[node name="TextureRect" type="TextureRect" parent="InfoButton" unique_id=1183852560]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -81,17 +98,4 @@ expand_mode = 3
 stretch_mode = 5
 flip_v = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Container" unique_id=1908694678]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="NameDisplay" type="Label" parent="MarginContainer/Container/VBoxContainer" unique_id=1752738764]
-layout_mode = 2
-text = "placeholder"
-
-[node name="CurrencyDisplay" parent="MarginContainer/Container/VBoxContainer" unique_id=1826121471 instance=ExtResource("3_6d75x")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-
-[connection signal="pressed" from="MarginContainer/Container/TileTexture/InfoButton" to="." method="OnInfoButton"]
+[connection signal="pressed" from="InfoButton" to="." method="OnInfoButton"]
