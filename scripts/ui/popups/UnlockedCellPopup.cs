@@ -125,7 +125,7 @@ public partial class UnlockedCellPopup : Popup
         {
             hasEffects = true;
             var label = new Label();
-            StringBuilder sb = new StringBuilder("default effects: ");
+            StringBuilder sb = new StringBuilder("per turn: ");
 
             foreach (var kvp in cellCustomTileData.baseTurnCurrencyChange)
             {
@@ -207,6 +207,9 @@ public partial class UnlockedCellPopup : Popup
 
         foreach (var compatibleTileInfo in compatibleTileInfos)
         {
+            if (compatibleTileInfo.tileData.TryGetComponent(out HideInGameComponent _))
+                continue;
+            
             var tileOptionUI = tileScene.Instantiate<TileOptionUI>();
             tileOptionUI.SetTile(compatibleTileInfo);
             tileOptionUI.SetButtonGroup(tileSelectionGroup);

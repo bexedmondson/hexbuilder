@@ -75,7 +75,7 @@ public partial class EncyclopediaPopup : Popup
 
         foreach (var tileInfo in allBuildingTileInfos)
         {
-            if (tileInfo.tileData.TryGetComponent<HideInEncyclopediaComponent>(out _))
+            if (tileInfo.tileData.TryGetComponent<HideInGameComponent>(out _))
                 continue;
             
             var tileOptionUI = tileScene.Instantiate<TileOptionUI>();
