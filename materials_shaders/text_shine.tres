@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://v1xr7j7a0je0"]
+
+[ext_resource type="Shader" uid="uid://f57s777yv8ku" path="res://scenes/cell_ui/workplace_cell_info_ui_shine.gdshader" id="1_3kdx7"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_3kdx7")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_progress = 0.25462484
+shader_parameter/shine_size = 0.05
+shader_parameter/shine_angle = 45.0
+shader_parameter/text_size = Vector2(100, 100)

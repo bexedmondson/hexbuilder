@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://buovaj2q4fmqw"]
 
 [ext_resource type="Script" uid="uid://du33fkfjm2ema" path="res://scripts/ui/cellinfos/WorkplaceCellInfoUI.cs" id="1_rmpib"]
+[ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="2_qpyeb"]
+[ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="3_idcl7"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nma3w"]
 load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
@@ -9,7 +11,7 @@ load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.
 atlas = SubResource("CompressedTexture2D_nma3w")
 region = Rect2(2560, 896, 128, 128)
 
-[node name="WorkplaceCellInfoUi" type="Control" unique_id=560631437 node_paths=PackedStringArray("workerCountLabel", "alert")]
+[node name="WorkplaceCellInfoUi" type="Control" unique_id=560631437 node_paths=PackedStringArray("workerCountLabel", "alert", "shineTweener")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,8 +26,10 @@ mouse_filter = 2
 script = ExtResource("1_rmpib")
 workerCountLabel = NodePath("HBoxContainer/Label")
 alert = NodePath("Label")
+shineTweener = NodePath("HBoxContainer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1097447016]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1097447016 node_paths=PackedStringArray("itemWithShineShader")]
+material = ExtResource("2_qpyeb")
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -37,14 +41,18 @@ grow_horizontal = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
 alignment = 1
+script = ExtResource("3_idcl7")
+itemWithShineShader = NodePath(".")
 
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1086277598]
+use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"TooltipLabel"
 text = "0/0"
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=238225894]
 self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
+use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("AtlasTexture_rmpib")

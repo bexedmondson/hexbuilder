@@ -35,11 +35,15 @@ public partial class WorkplaceCellInfoUIContainer : Control
             if (workplaceCellInfoUis.TryGetValue(workplace.location, out var changedWorkplaceUI))
             {
                 changedWorkplaceUI.UpdateWorkerCountLabel(workplace.workerCount, workplace.capacity);
+                changedWorkplaceUI.SetWorkerMaxBonusEffect(workplace.workerCount == workplace.capacity
+                                                           && workplace.tileData.TryGetComponent(out MaximumWorkerProductionBonusComponent _));
             }
             else
             {
                 var newWorkplaceUI = cellInfoUIScene.Instantiate<WorkplaceCellInfoUI>();
                 newWorkplaceUI.UpdateWorkerCountLabel(workplace.workerCount, workplace.capacity);
+                newWorkplaceUI.SetWorkerMaxBonusEffect(workplace.workerCount == workplace.capacity
+                                                           && workplace.tileData.TryGetComponent(out MaximumWorkerProductionBonusComponent _));
                 newWorkplaceUI.GlobalPosition = baseTileMapLayer.ToGlobal(baseTileMapLayer.MapToLocal(workplace.location));
                 workplaceCellInfoUis[workplace.location] = newWorkplaceUI;
                 this.AddChild(newWorkplaceUI);
