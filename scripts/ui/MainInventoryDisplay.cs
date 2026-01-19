@@ -7,7 +7,7 @@ public partial class MainInventoryDisplay : Control
     private PackedScene singleCurrencyDisplayScene;
 
     [Export]
-    private Color iconColor = new Color(255, 255, 255);
+    private Color iconColor = Colors.Black;
 
     [Export]
     private Godot.Collections.Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();

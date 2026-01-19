@@ -2,18 +2,20 @@
 
 [resource]
 resource_local_to_scene = true
-bg_color = Color(0, 0, 0, 0.835294)
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-corner_detail = 10
-expand_margin_left = 15.0
-expand_margin_top = 10.0
-expand_margin_right = 15.0
-expand_margin_bottom = 10.0
-shadow_color = Color(0, 0, 0, 0.607843)
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.35686275, 0.6666667, 0.9254902, 0.8352941)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 12.0
+expand_margin_top = 7.0
+expand_margin_right = 12.0
+expand_margin_bottom = 7.0
+shadow_color = Color(0.06751915, 0.2773066, 0.43406126, 0.60784316)
 shadow_size = 2
-shadow_offset = Vector2(-2, 2)
+shadow_offset = Vector2(0, 2)
 anti_aliasing = false

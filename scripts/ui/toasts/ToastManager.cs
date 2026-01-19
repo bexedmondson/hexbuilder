@@ -65,7 +65,7 @@ public partial class ToastManager : CanvasLayer, IInjectable
 
 	public void RemoveLabelFromArray(ToastLabel label)
 	{
-		directionArrayMap[label.Direction].Remove(label);
+		directionArrayMap[label.direction].Remove(label);
 	}
 
 	//# Event resize

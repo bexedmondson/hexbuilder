@@ -10,7 +10,7 @@ public partial class CurrencyDisplay : Control
     private bool displayAsDelta = false;
 
     [Export]
-    private Color iconColor = new Color(255, 255, 255);
+    private Color iconColor = Colors.Black;
 
     private Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
 
