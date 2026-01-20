@@ -17,14 +17,14 @@ void vertex() {
 
 void fragment() {
 	vec4 tex = texture(TEXTURE, UV);
-	vec4 original_color = tex * COLOR;
+	vec4 original_color = COLOR;
 	// 1. Normalize position based on label size (0.0 to 1.0)
 	vec2 box_uv = pixel_pos / text_size;
 	
 	// 2. Calculate Direction Vector
     float rad = radians(shine_angle);
     vec2 dir = vec2(cos(rad), sin(rad));
-    float projection = dot(box_uv, dir);;
+    float projection = dot(box_uv, dir);
 	
 	// 4. Calculate dynamic boundaries
 	// We project all 4 corners of the box to find the exact start/end for this angle
