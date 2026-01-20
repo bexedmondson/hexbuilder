@@ -14,4 +14,10 @@ public partial class BaseTileMapLayer : TileMapLayer
     {
         return ToGlobal(MapToLocal(cell));
     }
+
+    public override bool _UseTileDataRuntimeUpdate(Vector2I coords)
+    {
+        return true; //enabling dynamic tile shading
+        //TODO consider if this should only return true for locked cells
+    }
 }

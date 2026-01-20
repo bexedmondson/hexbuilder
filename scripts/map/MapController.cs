@@ -5,10 +5,7 @@ public partial class MapController : Node2D, IInjectable
 {
     [Export]
     private BaseTileMapLayer baseMapLayer;
-    public BaseTileMapLayer BaseMapLayer => baseMapLayer; 
-
-    [Export]
-    private TileMapLayer lockedOverlayLayer;
+    public BaseTileMapLayer BaseMapLayer => baseMapLayer;
 
     [Export]
     private MapGenerator mapGenerator;
@@ -67,7 +64,6 @@ public partial class MapController : Node2D, IInjectable
     public void OnNewGame()
     {
         baseMapLayer.Clear();
-        lockedOverlayLayer.Clear();
 
         cellStatusManager.OnNewGame();
         mapGenerator.SubscribeIsReady(SetupInitialMap);
@@ -123,13 +119,19 @@ public partial class MapController : Node2D, IInjectable
     {
         mapGenerator.OnCellUnlocked(cell);
 
-        lockedOverlayLayer.EraseCell(cell);
+        int cellSourceId = baseMapLayer.GetCellSourceId(cell);
+        Vector2I cellAtlasCoords = baseMapLayer.GetCellAtlasCoords(cell);
+        if (cellSourceId != -1 && cellAtlasCoords != Vector2I.One * -1)
+            baseMapLayer.SetCell(cell, cellSourceId, cellAtlasCoords, 0); //setting to the default (i.e. not greyed out) version of the tile
         
         List<Vector2I> newlyShownCells = cellStatusManager.OnCellUnlocked(cell, baseMapLayer.GetSurroundingCells(cell));
 
         foreach (var newlyShownCell in newlyShownCells)
         {
-            lockedOverlayLayer.SetCell(newlyShownCell, lockedOverlayLayer.TileSet.GetSourceId(defaultLockedTileSourceIndex), defaultLockedTileAtlasCoords);
+            int newlyShownCellSourceId = baseMapLayer.GetCellSourceId(newlyShownCell);
+            Vector2I newlyShownCellAtlasCoords = baseMapLayer.GetCellAtlasCoords(newlyShownCell);
+            if (baseMapLayer.TileSet.GetSource(newlyShownCellSourceId).HasAlternativeTile(newlyShownCellAtlasCoords, 1))
+                baseMapLayer.SetCell(newlyShownCell, baseMapLayer.GetCellSourceId(newlyShownCell), baseMapLayer.GetCellAtlasCoords(newlyShownCell), 1); //where 1 is the modulated (darkened) version of the cell
         }
         
         eventDispatcher.Dispatch(new MapUpdatedEvent());

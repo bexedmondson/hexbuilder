@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://44qulkptwyjg" path="res://scripts/map/MapController.cs" id="2_m3sjc"]
 [ext_resource type="Resource" uid="uid://817ggbqehlrq" path="res://data/need_config_list.tres" id="3_ufsem"]
 [ext_resource type="Resource" uid="uid://rpjtimn5hoka" path="res://data/need_ui_mapping.tres" id="4_ariy3"]
-[ext_resource type="TileSet" uid="uid://dyh6lwi880plh" path="res://assets/locked_overlay_tileset.tres" id="5_2ntku"]
 [ext_resource type="Script" uid="uid://iflp0ejf4lyl" path="res://scripts/map/MapInputProcessor.cs" id="5_b68g4"]
 [ext_resource type="Script" uid="uid://dg45uh37x1ltw" path="res://scripts/map/VisualTileMapLayer.cs" id="5_c25qt"]
 [ext_resource type="Script" uid="uid://bmee1aa6tujj3" path="res://scripts/map/BaseTileMapLayer.cs" id="5_m7ly0"]
@@ -178,11 +177,10 @@ startAmounts = Dictionary[int, int]({
 3: 0
 })
 
-[node name="MapController" type="Node2D" parent="." unique_id=1433828285 node_paths=PackedStringArray("baseMapLayer", "lockedOverlayLayer", "mapGenerator")]
+[node name="MapController" type="Node2D" parent="." unique_id=1433828285 node_paths=PackedStringArray("baseMapLayer", "mapGenerator")]
 y_sort_enabled = true
 script = ExtResource("2_m3sjc")
 baseMapLayer = NodePath("BaseTileMapLayer")
-lockedOverlayLayer = NodePath("LockedOverlayTileMapLayer")
 mapGenerator = NodePath("MapGenerator")
 defaultCentreTileSourceIndex = 1
 defaultCentreTileCoords = Vector2i(3, 4)
@@ -208,15 +206,6 @@ occlusion_enabled = false
 navigation_enabled = false
 script = ExtResource("5_c25qt")
 tileMapLayerToEcho = NodePath("../BaseTileMapLayer")
-
-[node name="LockedOverlayTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=717388901]
-y_sort_enabled = true
-position = Vector2(-120, -40)
-scale = Vector2(0.5, 0.5)
-tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAD//wEAAAAAAAAAAAA=")
-tile_set = ExtResource("5_2ntku")
-occlusion_enabled = false
-navigation_enabled = false
 
 [node name="WorkplaceCellInfoContainer" type="Control" parent="MapController" unique_id=1661475013 node_paths=PackedStringArray("baseTileMapLayer")]
 z_index = 1
