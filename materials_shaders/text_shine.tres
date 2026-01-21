@@ -6,7 +6,7 @@
 resource_local_to_scene = true
 shader = ExtResource("1_3kdx7")
 shader_parameter/shine_color = Color(1, 1, 1, 1)
-shader_parameter/shine_progress = 1.8715111
+shader_parameter/shine_progress = 0.0
 shader_parameter/shine_size = 0.0999999977648
 shader_parameter/shine_angle = 45.0
 shader_parameter/text_size = Vector2(100, 100)

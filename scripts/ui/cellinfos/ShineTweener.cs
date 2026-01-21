@@ -1,6 +1,5 @@
 using Godot;
 
-[Tool]
 public partial class ShineTweener : Control
 {
     [Export]
