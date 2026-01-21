@@ -25,6 +25,20 @@ public class HousingManager : IInjectable
             return true;
         }
     }
+
+    public int TotalFreeHousingSpaces
+    {
+        get
+        {
+            int count = 0;
+            foreach (var houseData in houseDatas)
+            {
+                count += houseData.Value.capacity - houseData.Value.occupants.Length;
+            }
+
+            return count;
+        }
+    }
     
     public HousingManager(MapController mapController)
     {

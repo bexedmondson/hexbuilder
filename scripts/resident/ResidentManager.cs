@@ -53,7 +53,11 @@ public class ResidentManager : IInjectable
         if (InjectionManager.Get<HousingManager>().AllHousingFull)
             return;
 
-        CreateResident();
+        int spacesFree = InjectionManager.Get<HousingManager>().TotalFreeHousingSpaces;
+        for (int i = 0; i < spacesFree; i++)
+        {
+            CreateResident();
+        }
     }
 
     public ResidentState CreateResident()
