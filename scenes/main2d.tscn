@@ -56,6 +56,7 @@
 [ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="40_e4lbj"]
 [ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="42_gqxrv"]
 [ext_resource type="Texture2D" uid="uid://dqtssryuqvjcu" path="res://assets/icons/icon_wheat.tres" id="43_8od8w"]
+[ext_resource type="Script" uid="uid://bgcy7oymph28e" path="res://scripts/ui/toasts/ToastStack.cs" id="43_otuox"]
 [ext_resource type="Texture2D" uid="uid://ceqvtlo77pcfy" path="res://assets/icons/icon_wood.tres" id="44_3kpmb"]
 [ext_resource type="Texture2D" uid="uid://brlsqbuytsi4t" path="res://assets/icons/icon_stone.tres" id="45_5n6k3"]
 [ext_resource type="Texture2D" uid="uid://1g1gvjwkcrki" path="res://assets/icons/icon_fabric.tres" id="46_t4767"]
@@ -176,6 +177,9 @@ startAmounts = Dictionary[int, int]({
 2: 0,
 3: 0
 })
+
+[node name="ToastManager" type="Node2D" parent="." unique_id=1876344905]
+script = ExtResource("66_otuox")
 
 [node name="MapController" type="Node2D" parent="." unique_id=1433828285 node_paths=PackedStringArray("baseMapLayer", "mapGenerator")]
 y_sort_enabled = true
@@ -595,32 +599,42 @@ icon = SubResource("AtlasTexture_kj2ff")
 alignment = 2
 expand_icon = true
 
-[node name="ResidentCountDisplay" type="HBoxContainer" parent="CanvasLayer/UIMain" unique_id=663444247]
+[node name="ResidentCountAndNotifs" type="HBoxContainer" parent="CanvasLayer/UIMain" unique_id=428753738]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -107.0
-offset_top = 250.0
-offset_right = -100.0
-offset_bottom = 298.0
-grow_horizontal = 2
-pivot_offset_ratio = Vector2(0.5, 1)
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 115.0
+offset_bottom = 72.0
+theme_override_constants/separation = 20
+
+[node name="ResidentCountDisplay" type="HBoxContainer" parent="CanvasLayer/UIMain/ResidentCountAndNotifs" unique_id=663444247]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIMain/ResidentCountDisplay" unique_id=584537591]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIMain/ResidentCountAndNotifs/ResidentCountDisplay" unique_id=584537591]
 layout_mode = 2
 texture = ExtResource("31_5n6k3")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/UIMain/ResidentCountDisplay" unique_id=566206084]
+[node name="Label" type="Label" parent="CanvasLayer/UIMain/ResidentCountAndNotifs/ResidentCountDisplay" unique_id=566206084]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"Label_Title"
 theme_override_font_sizes/font_size = 40
 text = "0"
 script = ExtResource("32_t4767")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIMain/ResidentCountAndNotifs" unique_id=124966902]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 22
+script = ExtResource("43_otuox")
+stackId = "new_resident"
+toastLabelScene = ExtResource("67_tw5gc")
 
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
@@ -1396,10 +1410,6 @@ size_flags_horizontal = 0
 script = ExtResource("42_gqxrv")
 singleCurrencyDisplayScene = ExtResource("47_hxced")
 iconColor = Color(0.3529412, 0.37254903, 0.38431373, 1)
-
-[node name="ToastLayer" type="CanvasLayer" parent="." unique_id=2039348356]
-script = ExtResource("66_otuox")
-LabelResource = ExtResource("67_tw5gc")
 
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
 [connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]
