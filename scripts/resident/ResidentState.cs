@@ -15,6 +15,7 @@ public class ResidentState(string name, int moveInDay)
     public int happiness { get; private set; } = 0;
     public void UpdateHappiness()
     {
+        int prev = happiness;
         int happinessSum = 0;
         foreach (var activeNeed in activeNeeds)
         {
@@ -25,6 +26,12 @@ public class ResidentState(string name, int moveInDay)
         }
 
         happiness = happinessSum;
+        
+        if (happiness != prev)
+        {
+            string notification = $"{Name} {(happiness > prev ? "is feeling happier!" : "is feeling sadder...")}";
+            InjectionManager.Get<ToastManager>().RequestToast(new ToastConfig{text = notification, stackId = "happiness"});
+        }
     }
 
     public int TurnsWithoutHouse { get; private set; } = 0;
@@ -88,11 +95,5 @@ public class ResidentState(string name, int moveInDay)
         {
             return string.Empty;
         }
-    }
-
-    public void ChangeHappiness(int delta)
-    {
-        happiness = Mathf.Max(happiness + delta, -3);
-        happiness = Mathf.Min(happiness + delta, 3);
     }
 }

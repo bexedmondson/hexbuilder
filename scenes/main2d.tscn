@@ -657,6 +657,17 @@ script = ExtResource("43_otuox")
 stackId = "new_resident"
 toastLabelScene = SubResource("PackedScene_mgx77")
 
+[node name="HappinessNotifications" type="VBoxContainer" parent="CanvasLayer/UIMain" unique_id=1354822451]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+offset_top = 450.0
+offset_right = 500.0
+offset_bottom = 450.0
+size_flags_vertical = 0
+script = ExtResource("43_otuox")
+stackId = "happiness"
+toastLabelScene = SubResource("PackedScene_mgx77")
+
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
 
