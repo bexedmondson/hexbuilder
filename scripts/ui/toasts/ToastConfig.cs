@@ -1,9 +1,10 @@
 using Godot;
 
+[Tool]
 public class ToastConfig
 {
     public string text = "Toast Label";
-    public ToastDirection direction = ToastDirection.TopLeft;
+    public string stackId = string.Empty;
 }
 
 public enum ToastDirection

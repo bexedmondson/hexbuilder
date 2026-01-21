@@ -57,7 +57,9 @@
 [ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="42_gqxrv"]
 [ext_resource type="Texture2D" uid="uid://dqtssryuqvjcu" path="res://assets/icons/icon_wheat.tres" id="43_8od8w"]
 [ext_resource type="Script" uid="uid://bgcy7oymph28e" path="res://scripts/ui/toasts/ToastStack.cs" id="43_otuox"]
+[ext_resource type="Script" uid="uid://c2d6td5kvw1hw" path="res://scripts/ui/toasts/ToastLabel.cs" id="43_tw5gc"]
 [ext_resource type="Texture2D" uid="uid://ceqvtlo77pcfy" path="res://assets/icons/icon_wood.tres" id="44_3kpmb"]
+[ext_resource type="StyleBox" uid="uid://blt5gbhfsd0p5" path="res://scenes/toast_label_style.tres" id="44_7jl01"]
 [ext_resource type="Texture2D" uid="uid://brlsqbuytsi4t" path="res://assets/icons/icon_stone.tres" id="45_5n6k3"]
 [ext_resource type="Texture2D" uid="uid://1g1gvjwkcrki" path="res://assets/icons/icon_fabric.tres" id="46_t4767"]
 [ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="47_hxced"]
@@ -66,7 +68,6 @@
 [ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="62_4g66p"]
 [ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="63_4cqqk"]
 [ext_resource type="Script" uid="uid://hy27agc14m2b" path="res://scripts/ui/toasts/ToastManager.cs" id="66_otuox"]
-[ext_resource type="PackedScene" uid="uid://dugii0837nslt" path="res://scenes/toast_label.tscn" id="67_tw5gc"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
 noise_type = 0
@@ -151,6 +152,26 @@ region = Rect2(512, 1536, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj2ff"]
 atlas = ExtResource("15_nkuak")
 region = Rect2(2432, 1024, 128, 128)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xkd57"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m8wgh"]
+texture = SubResource("PlaceholderTexture2D_xkd57")
+
+[sub_resource type="PackedScene" id="PackedScene_mgx77"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [],
+"names": PackedStringArray("ToastPanel", "clip_children", "custom_minimum_size", "offset_right", "size_flags_horizontal", "theme_override_styles/panel", "script", "label", "Panel", "Label", "layout_mode", "offset_left", "offset_top", "offset_bottom", "theme_override_styles/normal", "text"),
+"node_count": 2,
+"node_ids": PackedInt32Array(831054919, 1711425040),
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 8, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 6, 5, 1073741831, 6, 0, 0, 0, 9, 9, -1, 7, 10, 3, 11, 7, 12, 8, 3, 9, 13, 10, 14, 11, 15, 12, 0),
+"variants": [1, Vector2(226, 0), 135.0, 0, SubResource("StyleBoxTexture_m8wgh"), ExtResource("43_tw5gc"), NodePath("Label"), 12.0, 7.0, 214.0, 43.0, ExtResource("44_7jl01"), "testing 1 2, testing 1 2"],
+"version": 3
+}
 
 [node name="Main2d" type="Node2D" unique_id=1053819598 node_paths=PackedStringArray("mapController", "inventoryManager")]
 script = ExtResource("1_vlfvj")
@@ -629,12 +650,12 @@ text = "0"
 script = ExtResource("32_t4767")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIMain/ResidentCountAndNotifs" unique_id=124966902]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_constants/separation = 22
 script = ExtResource("43_otuox")
 stackId = "new_resident"
-toastLabelScene = ExtResource("67_tw5gc")
+toastLabelScene = SubResource("PackedScene_mgx77")
 
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2

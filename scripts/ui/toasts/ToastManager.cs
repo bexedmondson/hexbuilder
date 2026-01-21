@@ -26,14 +26,14 @@ public partial class ToastManager : Node, IInjectable
 		stackById.Remove(stackId);
 	}
 
-	public void RequestToast(ToastConfig config, string stackId)
+	public void RequestToast(ToastConfig config)
 	{
-		if (!stackById.TryGetValue(stackId, out var stack))
+		if (!stackById.TryGetValue(config.stackId, out var stack))
 		{
-			GD.PushWarning($"[ToastManager] Toast stack for ID {stackId} not found. Discarding toast {config.text}");
+			GD.PushWarning($"[ToastManager] Toast stack for ID {config.stackId} not found. Discarding toast {config.text}");
 			return;
 		}
 		
-		stack.MakeToast(config);
+		stack.MakeToast(config.text);
 	}
 }

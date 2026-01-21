@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
+[Tool]
 public partial class ToastStack : VBoxContainer //well isn't this a cute class name
 {
 	[Export]
@@ -9,6 +10,9 @@ public partial class ToastStack : VBoxContainer //well isn't this a cute class n
 	[Export]
 	public PackedScene toastLabelScene;
 
+	[ExportToolButton("label")]
+	private Callable labelCall => Callable.From(TestLabel);
+
 	private ToastManager toastManager;
 	private List<ToastLabel> toasts = new();
 
@@ -16,10 +20,16 @@ public partial class ToastStack : VBoxContainer //well isn't this a cute class n
 	{
 		base._EnterTree();
 		toastManager = InjectionManager.Get<ToastManager>();
-		toastManager.RegisterStack(this, stackId);
+		if (toastManager != null)
+			toastManager.RegisterStack(this, stackId);
 	}
 
-	public void MakeToast(ToastConfig config)
+	private void TestLabel()
+	{
+		MakeToast("testing 1 2 3 4 5");
+	}
+
+	public void MakeToast(string toastText)
 	{
 		// Create a new label
 		var toast = toastLabelScene.Instantiate<ToastLabel>();
@@ -28,7 +38,7 @@ public partial class ToastStack : VBoxContainer //well isn't this a cute class n
 		toast.RemoveLabelAction = RemoveLabelFromArray;
 
 		// Configuration of the label
-		toast.Init(config);
+		toast.Init(toastText);
 	}
 
 	private void RemoveLabelFromArray(ToastLabel toast)
@@ -39,6 +49,7 @@ public partial class ToastStack : VBoxContainer //well isn't this a cute class n
     public override void _ExitTree()
     {
         base._ExitTree();
-        toastManager.DeregisterStack(this, stackId);
+        if (toastManager != null)
+	        toastManager.DeregisterStack(this, stackId);
     }
 }

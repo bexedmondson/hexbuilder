@@ -1,40 +1,52 @@
 using System;
 using Godot;
-using Godot.Collections;
 
-public partial class ToastLabel : Label
+[Tool]
+public partial class ToastLabel : Panel
 {
+    [Export]
+    private Label label;
+
+    [ExportToolButton("anim")]
+    private Callable test => Callable.From(() => Init("testing 1 2, testing 1 2"));
+    
     public Action<ToastLabel> RemoveLabelAction;
 
     // offset position box with screen position
-    private Vector2 buttonSize;
-    private Vector2 buttonPosition;
     private Tween tweenIn;
-    private int timerToDestroy = 3;
+    private int timerToDestroy = 3; //seconds
 
-    // seconds by default
-    public override void _Ready()
+    private float maskWidth;
+    private float maskHeight;
+
+    public void Init(string toastText)
     {
-        buttonPosition = this.Position;
-        buttonSize = this.Size;
-
-        // start position
-        _TweenDestroyLabelTimer();
+        label.Text = toastText;
+        Callable.From(Animate).CallDeferred();
     }
 
-    public void Init(ToastConfig config)
+    private void Animate()
     {
-        this.Text = config.text;
-        buttonSize = this.Size;
-        buttonPosition = this.Position;
-    }
+        float labelHeight = label.Size.Y;
+        StyleBoxFlat labelStylebox = label.GetThemeStylebox("normal") as StyleBoxFlat;
 
-    public void MoveTo(int index)
-    {
+        Vector2 initialLabelOffset = new Vector2(labelStylebox.ExpandMarginLeft, -labelHeight - labelStylebox.ExpandMarginBottom - labelStylebox.ShadowOffset.Y - labelStylebox.ShadowSize);
+        Vector2 targetLabelOffset = new Vector2(labelStylebox.ExpandMarginLeft, labelStylebox.ExpandMarginTop);
+        maskHeight = labelHeight + labelStylebox.ExpandMarginTop + labelStylebox.ExpandMarginBottom + labelStylebox.ShadowOffset.Y + labelStylebox.ShadowSize;
+        maskWidth = label.Size.X + labelStylebox.ExpandMarginLeft + labelStylebox.ExpandMarginLeft;
+        
+        //GD.Print($"label width: {label.Size.X}, init label offset: {initialLabelOffset}, target label offset: {targetLabelOffset}, target min mask height: {targetMinimumMaskHeight}");
+        
         tweenIn = GetTree().CreateTween();
         tweenIn.SetPauseMode(Tween.TweenPauseMode.Stop);
         tweenIn.Stop();
-        tweenIn.TweenProperty(this, "position", buttonPosition, 0.3).From(new Vector2(buttonPosition.X, buttonPosition.Y - buttonSize.Y)).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In).SetDelay(0.03);
+        tweenIn.SetParallel(true);
+        tweenIn.TweenProperty(this, "custom_minimum_size", new Vector2(maskWidth, maskHeight), 0.3).From(new Vector2(maskWidth, 0)).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In).SetDelay(0.03);
+        tweenIn.TweenProperty(label, "position", targetLabelOffset, 0.3).From(initialLabelOffset).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In).SetDelay(0.03);
+        tweenIn.SetParallel(false);
+        tweenIn.TweenProperty(this, "modulate:a", 0, 0.6).SetDelay(timerToDestroy);
+        tweenIn.TweenProperty(this, "custom_minimum_size", new Vector2(maskWidth, 0.0f), 0.2).From(new Vector2(maskWidth, maskHeight)).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In);
+        tweenIn.TweenCallback(Callable.From(_TweenDestroyLabelComplete));
         tweenIn.Play();
     }
 
@@ -42,16 +54,5 @@ public partial class ToastLabel : Label
     {
         RemoveLabelAction?.Invoke(this);
         QueueFree();
-    }
-
-    private void _TweenDestroyLabelTimer()
-    {
-        // tween alpha to 0 and shrink size
-        var tweenOut = GetTree().CreateTween();
-        tweenOut.SetPauseMode(Tween.TweenPauseMode.Stop);
-        // pause mode
-        tweenOut.TweenProperty(this, "modulate:a", 0, 0.8).SetDelay(timerToDestroy);
-        tweenOut.TweenProperty(this, "position", new Vector2(buttonPosition.X, buttonPosition.Y - buttonSize.Y), 0.5).From(buttonPosition).SetDelay(timerToDestroy + 0.3);
-        tweenOut.TweenCallback(Callable.From(_TweenDestroyLabelComplete));
     }
 }
