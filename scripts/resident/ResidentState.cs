@@ -26,6 +26,8 @@ public class ResidentState(string name, int moveInDay)
         }
 
         happiness = happinessSum;
+        happiness = Mathf.Min(3, happiness);
+        happiness = Mathf.Max(-3, happiness);
         
         if (happiness != prev)
         {

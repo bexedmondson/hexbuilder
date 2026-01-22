@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://bf0ivtyh7meiq" path="res://scripts/data/requirements/PopulationRequirement.cs" id="6_pjxgo"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="7_oee08"]
 [ext_resource type="Script" uid="uid://cento2occpppv" path="res://scripts/data/requirements/SufficientFoodRequirement.cs" id="8_oee08"]
+[ext_resource type="Script" uid="uid://bx4lsbuoarqa4" path="res://scripts/data/requirements/RandomnessRequirement.cs" id="9_exvii"]
+[ext_resource type="Script" uid="uid://dcio2ff1rmkiq" path="res://scripts/data/requirements/ResidentBetterHousingRequirement.cs" id="10_il1fi"]
+[ext_resource type="Resource" uid="uid://ds1q5vg3ldkkv" path="res://data/buildings/woodcutter.tres" id="11_eeyjv"]
 
 [sub_resource type="Resource" id="Resource_il1fi"]
 script = ExtResource("1_t5wp0")
@@ -65,7 +68,60 @@ satisfactionRequirements = [SubResource("Resource_pjxgo")]
 unsatisfiedHappinessPenalty = -1
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
+[sub_resource type="Resource" id="Resource_el656"]
+script = ExtResource("1_t5wp0")
+minimumDaysLived = 5
+metadata/_custom_type_script = "uid://biim86els1cs8"
+
+[sub_resource type="Resource" id="Resource_cxcpj"]
+script = ExtResource("9_exvii")
+threshold = 0.5
+metadata/_custom_type_script = "uid://bx4lsbuoarqa4"
+
+[sub_resource type="Resource" id="Resource_3mxfm"]
+script = ExtResource("10_il1fi")
+unacceptableHousing = Array[Object]([ExtResource("4_2ok8c")])
+metadata/_custom_type_script = "uid://dcio2ff1rmkiq"
+
+[sub_resource type="Resource" id="Resource_vs2ix"]
+script = ExtResource("1_eima2")
+assignmentRequirements = Array[Object]([SubResource("Resource_el656"), SubResource("Resource_cxcpj")])
+satisfactionRequirements = Array[Object]([SubResource("Resource_3mxfm")])
+unsatisfiedHappinessPenalty = -1
+satisfiedHappinessBonus = 1
+metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
+
+[sub_resource type="Resource" id="Resource_3lnfi"]
+script = ExtResource("6_oee08")
+tile = ExtResource("11_eeyjv")
+comparison = 3
+metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
+
+[sub_resource type="Resource" id="Resource_rph6w"]
+script = ExtResource("7_oee08")
+requiredTileBuildCount = SubResource("Resource_3lnfi")
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[sub_resource type="Resource" id="Resource_c18fv"]
+script = ExtResource("6_oee08")
+tile = ExtResource("11_eeyjv")
+amount = 1
+comparison = 5
+metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
+
+[sub_resource type="Resource" id="Resource_lxhse"]
+script = ExtResource("7_oee08")
+requiredTileBuildCount = SubResource("Resource_c18fv")
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[sub_resource type="Resource" id="Resource_7l06o"]
+script = ExtResource("1_eima2")
+assignmentRequirements = Array[Object]([SubResource("Resource_rph6w")])
+satisfactionRequirements = Array[Object]([SubResource("Resource_lxhse")])
+unsatisfiedHappinessPenalty = -1
+metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
+
 [resource]
 script = ExtResource("1_n2xuo")
-needConfigs = Array[Object]([SubResource("Resource_6t21s"), SubResource("Resource_pk0ri"), SubResource("Resource_6t21s"), SubResource("Resource_oee08")])
+needConfigs = Array[Object]([SubResource("Resource_6t21s"), SubResource("Resource_pk0ri"), SubResource("Resource_oee08"), SubResource("Resource_vs2ix"), SubResource("Resource_7l06o")])
 metadata/_custom_type_script = "uid://da02je0wt2q1i"
