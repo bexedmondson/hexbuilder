@@ -133,6 +133,17 @@ public partial class InventoryManager : Node2D, IInjectable
             }
         }
         
+        //send notifications
+        var toastManager = InjectionManager.Get<ToastManager>();
+        foreach (var add in actualAdd)
+        {
+            toastManager.RequestToast(new ToastConfig{text = $"+{add.Value}", stackId = $"{add.Key.ToString().ToLower()}_add"});;
+        }
+        foreach (var minus in totalMinus)
+        {
+            toastManager.RequestToast(new ToastConfig{text = $"{minus.Value}", stackId = $"{minus.Key.ToString().ToLower()}_minus"});
+        }
+        
         /*foreach (var currencyChange in allCurrencyChanges)
         {
             foreach (var kvp in currencyChange)

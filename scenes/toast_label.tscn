@@ -10,7 +10,7 @@ texture = SubResource("PlaceholderTexture2D_xkd57")
 
 [node name="ToastPanel" type="Panel" unique_id=831054919 node_paths=PackedStringArray("label")]
 clip_children = 1
-custom_minimum_size = Vector2(226, 0)
+custom_minimum_size = Vector2(0, 50)
 offset_right = 135.0
 size_flags_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_m8wgh")

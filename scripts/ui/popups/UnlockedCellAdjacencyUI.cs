@@ -52,6 +52,10 @@ public partial class UnlockedCellAdjacencyUI : Control
             if (adjacentWorkplace.workerCount == 0)
                 this.Modulate = disabledColour;
         }
+        else
+        {
+            noWorkerIndicator.Visible = false;
+        }
     }
 
     public void SetGivenEffects(CurrencySum givenEffects)

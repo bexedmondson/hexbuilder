@@ -134,6 +134,13 @@ public partial class UnlockedCellPopup : Popup
 
             label.Text = sb.ToString();
             effectInfoParent.AddChild(label);
+            
+            //TODO indicate when nothing is being produced (including all of the below!) if no workers, if this is a workplace
+        }
+
+        if (cellCustomTileData.IsWorkplace && cellCustomTileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxWorkerBonus))
+        {
+            //TODO add max bonus info
         }
 
         foreach (var adjacentCell in adjacentCells)

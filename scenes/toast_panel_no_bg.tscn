@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c1jy3h6un84tw"]
+
+[ext_resource type="PackedScene" uid="uid://dugii0837nslt" path="res://scenes/toast_label.tscn" id="1_v7ijl"]
+[ext_resource type="StyleBox" uid="uid://dcsrra27rhc51" path="res://scenes/toast_label_style_transparentbox.tres" id="2_xk5l3"]
+
+[node name="ToastPanel" unique_id=831054919 instance=ExtResource("1_v7ijl")]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 0)
+
+[node name="Label" parent="." index="0" unique_id=1711425040]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 207.0
+offset_bottom = 41.0
+theme_override_styles/normal = ExtResource("2_xk5l3")

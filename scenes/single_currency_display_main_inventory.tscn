@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cp5syr2x5kiub"]
+
+[ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="1_b8y5p"]
+
+[node name="SingleCurrencyDisplay" unique_id=913887442 instance=ExtResource("1_b8y5p")]
