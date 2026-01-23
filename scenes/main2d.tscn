@@ -753,7 +753,7 @@ toastLabelScene = SubResource("PackedScene_mgx77")
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
 
-[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "buildTab", "encyclopediaPopup", "effectInfoParent", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "tileSelector", "confirmButton")]
+[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "buildTab", "effectInfoParent", "defaultEffectDisplay", "maxBonusContainer", "maxBonusCurrencyDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "tileSelector", "encyclopediaPopup", "confirmButton")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -773,15 +773,18 @@ residentTab = NodePath("TabContainer/Residents")
 workerTab = NodePath("TabContainer/Workers")
 storageTab = NodePath("TabContainer/Storage")
 buildTab = NodePath("TabContainer/Build")
-encyclopediaPopup = NodePath("../EncyclopediaPopup")
 effectInfoParent = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/NearbyTileEffectsVBoxContainer")
+defaultEffectDisplay = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer/CurrencyDisplay")
 unlockedCellAdjacencyUIScene = ExtResource("23_cpah3")
+maxBonusContainer = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer")
+maxBonusCurrencyDisplay = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer/CurrencyDisplay")
 storageInfoUI = NodePath("TabContainer/Storage/StoragePanel")
 residentDetailsParent = NodePath("TabContainer/Residents/ResidentPanel/VBoxContainer")
 workplaceInfoUI = NodePath("TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI")
 tileSelector = NodePath("TabContainer/Build/Panel/ScrollPanel/ScrollContainer/TileSelectionGrid")
 tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
+encyclopediaPopup = NodePath("../EncyclopediaPopup")
 confirmButton = NodePath("TabContainer/Build/Panel/ConfirmButton")
 
 [node name="CloseButton" type="Button" parent="PopupLayer/UnlockedCellPopup" unique_id=1763966649]

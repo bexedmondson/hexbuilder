@@ -6,6 +6,7 @@ public partial class UnlockedCellPopup : Popup
     [Export]
     private Label title;
 
+    [ExportGroup("Tabs")]
     [Export]
     private TabContainer tabContainer;
 
@@ -23,27 +24,36 @@ public partial class UnlockedCellPopup : Popup
 
     [Export]
     private Control buildTab;
-
-
-    [Export]
-    private EncyclopediaPopup encyclopediaPopup;
     
-    
+    [ExportGroup("Effects Tab")]
     [Export]
     private Control effectInfoParent;
+
+    [Export]
+    private CurrencyDisplay defaultEffectDisplay;
 
     [Export]
     private PackedScene unlockedCellAdjacencyUIScene;
 
     [Export]
+    private Control maxBonusContainer;
+
+    [Export]
+    private CurrencyDisplay maxBonusCurrencyDisplay;
+
+    [ExportGroup("Storage Tab")]
+    [Export]
     private StorageInfoUI storageInfoUI;
 
+    [ExportGroup("Residents Tab")]
     [Export]
     private Control residentDetailsParent;
     
+    [ExportGroup("Workers Tab")]
     [Export]
     private WorkplaceInfoUI workplaceInfoUI;
     
+    [ExportGroup("BuildTab")]
     [Export]
     private Control tileSelector;
 
@@ -54,12 +64,17 @@ public partial class UnlockedCellPopup : Popup
     private ButtonGroup tileSelectionGroup;
 
     [Export]
+    private EncyclopediaPopup encyclopediaPopup;
+
+    [Export]
     private Button confirmButton;
     
     private Vector2I cell = Vector2I.MinValue;
+    private CustomTileData cellCustomTileData;
 
     private MapController mapController;
     private InventoryManager inventoryManager;
+    private WorkplaceManager workplaceManager;
 
     public override void _Ready()
     {
@@ -74,19 +89,20 @@ public partial class UnlockedCellPopup : Popup
             return;
         
         inventoryManager ??= InjectionManager.Get<InventoryManager>();
+        workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
         confirmButton.Disabled = true;
         
         cell = setCell;
-        var cellCustomTileData = baseMapLayer.GetCellTileData(cell).GetCustomData("data").Obj as CustomTileData;
+        cellCustomTileData = baseMapLayer.GetCellTileData(cell).GetCustomData("data").Obj as CustomTileData;
 
         title.Text = cellCustomTileData.GetFileName();
         
-        SetupInfo(cellCustomTileData);
+        SetupInfo();
 
         tabContainer.SetTabHidden(workerTab.GetIndex(), !cellCustomTileData.IsWorkplace);
         if (cellCustomTileData.IsWorkplace)
         {
-            InjectionManager.Get<WorkplaceManager>().TryGetWorkplaceAtLocation(cell, out var workplaceState);
+            workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplaceState);
             workplaceInfoUI.SetWorkplaceInfo(workplaceState, null);
         }
 
@@ -100,9 +116,9 @@ public partial class UnlockedCellPopup : Popup
             tabContainer.SetTabHidden(storageTab.GetIndex(), true);
         }
             
-        SetupResidents(cellCustomTileData);
+        SetupResidents();
 
-        SetupTileSelector(cellCustomTileData);
+        SetupTileSelector();
 
         tabContainer.SetCurrentTab(0);
         if (tabContainer.IsTabHidden(0))
@@ -110,7 +126,7 @@ public partial class UnlockedCellPopup : Popup
         this.SetVisible(true);
     }
 
-    private void SetupInfo(CustomTileData cellCustomTileData)
+    private void SetupInfo()
     {
         for (int i = effectInfoParent.GetChildCount() - 1; i >= 0; i--)
         {
@@ -124,7 +140,7 @@ public partial class UnlockedCellPopup : Popup
         if (cellCustomTileData.baseTurnCurrencyChange?.Count > 0)
         {
             hasEffects = true;
-            var label = new Label();
+            /*var label = new Label();
             StringBuilder sb = new StringBuilder("per turn: ");
 
             foreach (var kvp in cellCustomTileData.baseTurnCurrencyChange)
@@ -133,14 +149,20 @@ public partial class UnlockedCellPopup : Popup
             }
 
             label.Text = sb.ToString();
-            effectInfoParent.AddChild(label);
+            effectInfoParent.AddChild(label);*/
+            
+            defaultEffectDisplay.DisplayCurrencyAmount(new CurrencySum(cellCustomTileData.baseTurnCurrencyChange));
             
             //TODO indicate when nothing is being produced (including all of the below!) if no workers, if this is a workplace
         }
 
-        if (cellCustomTileData.IsWorkplace && cellCustomTileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxWorkerBonus))
+        if (cellCustomTileData.IsWorkplace)
         {
-            //TODO add max bonus info
+            SetupMaxBonus(cellCustomTileData);
+        }
+        else
+        {
+            maxBonusContainer.Visible = false;
         }
 
         foreach (var adjacentCell in adjacentCells)
@@ -165,8 +187,30 @@ public partial class UnlockedCellPopup : Popup
 
         tabContainer.SetTabHidden(effectsTab.GetIndex(), !hasEffects);
     }
+
+    private void SetupMaxBonus(CustomTileData tileData)
+    {
+        bool hasMaxBonus = tileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxBonusComponent);
+        workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplaceState);
+        maxBonusContainer.Visible = hasMaxBonus && workplaceState.workerCount >= workplaceState.capacity;
+        if (!hasMaxBonus)
+            return;
+        
+        InjectionManager.Get<EventDispatcher>().Add<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
+        maxBonusCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(maxBonusComponent.extraBaseProduction));
+    }
+
+    private void OnWorkplaceUpdated(WorkplaceUpdatedEvent e)
+    {
+        workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplaceState);
+        if (!e.newOrChangedWorkplaces.Contains(workplaceState))
+            return;
+        
+        maxBonusContainer.Visible = workplaceState.workerCount >= workplaceState.capacity;
+        //don't need to do the rest of the setup - shouldn't have gotten here if no max bonus component/not a workplace
+    }
     
-    private void SetupResidents(CustomTileData cellCustomTileData)
+    private void SetupResidents()
     {
         if (!cellCustomTileData.IsResidence)
         {
@@ -198,7 +242,7 @@ public partial class UnlockedCellPopup : Popup
         }
     }
 
-    private void SetupTileSelector(CustomTileData cellCustomTileData)
+    private void SetupTileSelector()
     {
         for (int i = tileSelector.GetChildCount() - 1; i >= 0; i--)
         {
@@ -267,7 +311,11 @@ public partial class UnlockedCellPopup : Popup
     {
         base.Close();
         InjectionManager.Get<MapHighlightController>().Clear();
-
+        
+        bool hasMaxBonus = cellCustomTileData.IsWorkplace &&cellCustomTileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxBonusComponent);
+        if (hasMaxBonus)
+            InjectionManager.Get<EventDispatcher>().Remove<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
+        
         cell = Vector2I.MinValue;
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count > 0)
