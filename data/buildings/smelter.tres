@@ -38,16 +38,8 @@ tile = ExtResource("1_8qq32")
 amount = 1
 comparison = 5
 
-[sub_resource type="Resource" id="Resource_3wf7h"]
-script = ExtResource("8_8i360")
-tile = ExtResource("1_8qq32")
-amount = 1
-comparison = 5
-metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
-
 [sub_resource type="Resource" id="Resource_f4a35"]
 script = ExtResource("9_fssqy")
-requiredTileBuildCounts = Array[ExtResource("8_8i360")]([SubResource("Resource_3wf7h")])
 requiredTileBuildCount = SubResource("Resource_8i360")
 metadata/_custom_type_script = "uid://b8yvq1vldnsav"
 

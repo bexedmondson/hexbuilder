@@ -26,6 +26,10 @@ public partial class RequirementUIMappingList : Resource
     private string allTimeBuildUnlockText;
     [Export]
     private string currentTileBuildUnlockText;
+
+    [ExportGroup("Currency")]
+    [Export]
+    private string lifetimeGainedText;
     
     [ExportGroup("Food")]
     [Export]
@@ -59,6 +63,8 @@ public partial class RequirementUIMappingList : Resource
                 return allTimeBuildIcon;
             case SufficientFoodRequirement _:
                 return foodIcon;
+           // case LifetimeGainedRequirement lifetimeGainedRequirement:
+             //   return InjectionManager.Get<InventoryManager>().GetIcon(lifetimeGainedRequirement.)
         }
 
         return null;
@@ -104,6 +110,8 @@ public partial class RequirementUIMappingList : Resource
                 return currentTileBuildUnlockText.Replace("{building}", currentTilePresenceCountRequirement.requiredTileBuildCount.tile.GetFileName());
             case SufficientFoodRequirement _:
                 return sufficientFoodText;
+            //case LifetimeGainedRequirement ltgr:
+                //return lifetimeGainedText.Replace("{currency}", );
         }
 
         return string.Empty;

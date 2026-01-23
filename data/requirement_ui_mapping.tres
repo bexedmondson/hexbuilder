@@ -21,5 +21,6 @@ allTimeBuildIcon = SubResource("AtlasTexture_3a8gp")
 allTimeBuildNeedText = "We need to build more {building}s!"
 allTimeBuildUnlockText = "build more {building}s"
 currentTileBuildUnlockText = "have more {building}s"
+lifetimeGainedText = "gather more {currency}"
 foodIcon = ExtResource("2_ohvbe")
 sufficientFoodText = "I'm hungry - there isn't enough food for everyone."

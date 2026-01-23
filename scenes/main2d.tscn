@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dymo2w1h17tkh" path="res://scripts/inventory/InventoryManager.cs" id="2_j1s7q"]
 [ext_resource type="Script" uid="uid://44qulkptwyjg" path="res://scripts/map/MapController.cs" id="2_m3sjc"]
 [ext_resource type="Resource" uid="uid://817ggbqehlrq" path="res://data/need_config_list.tres" id="3_ufsem"]
-[ext_resource type="Resource" uid="uid://rpjtimn5hoka" path="res://data/need_ui_mapping.tres" id="4_ariy3"]
+[ext_resource type="Resource" uid="uid://rpjtimn5hoka" path="res://data/requirement_ui_mapping.tres" id="4_7jl01"]
 [ext_resource type="Script" uid="uid://iflp0ejf4lyl" path="res://scripts/map/MapInputProcessor.cs" id="5_b68g4"]
 [ext_resource type="Script" uid="uid://dg45uh37x1ltw" path="res://scripts/map/VisualTileMapLayer.cs" id="5_c25qt"]
 [ext_resource type="Script" uid="uid://bmee1aa6tujj3" path="res://scripts/map/BaseTileMapLayer.cs" id="5_m7ly0"]
@@ -68,6 +68,7 @@
 [ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="58_bnbf5"]
 [ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="62_4g66p"]
 [ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="63_4cqqk"]
+[ext_resource type="PackedScene" uid="uid://de6euexkasfhm" path="res://scenes/encyclopedia_unlock_ui.tscn" id="66_mgx77"]
 [ext_resource type="Script" uid="uid://hy27agc14m2b" path="res://scripts/ui/toasts/ToastManager.cs" id="66_otuox"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
@@ -182,7 +183,7 @@ inventoryManager = NodePath("InventoryManager")
 [node name="DataResourceContainer" type="Node" parent="." unique_id=1711643282]
 script = ExtResource("2_bi4yo")
 needConfigList = ExtResource("3_ufsem")
-needUIMappingList = ExtResource("4_ariy3")
+requirementUIMappingList = ExtResource("4_7jl01")
 
 [node name="InventoryManager" type="Node2D" parent="." unique_id=1197391878 node_paths=PackedStringArray("mainInventoryDisplay")]
 script = ExtResource("2_j1s7q")
@@ -315,6 +316,7 @@ sandyNoise = SubResource("NoiseTexture2D_nkuak")
 vegetationNoise = SubResource("NoiseTexture2D_mcgvi")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667094040]
+visible = false
 limit_smoothed = true
 position_smoothing_speed = 20.0
 editor_draw_limits = true
@@ -754,6 +756,7 @@ toastLabelScene = SubResource("PackedScene_mgx77")
 layer = 2
 
 [node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "buildTab", "effectInfoParent", "defaultEffectDisplay", "maxBonusContainer", "maxBonusCurrencyDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "tileSelector", "encyclopediaPopup", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1306,8 +1309,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileNameLabel", "tileDetailsExpanders", "tileDetailsInfo", "tileTextureRect", "defaultEffectDisplay", "workerInfoContainer", "workerCountContainer", "maxBonusContainer", "maxBonusCurrencyDisplay", "affectsParent", "affectedByParent", "storageInfoUI")]
-visible = false
+[node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileNameLabel", "tileDetailsExpanders", "tileDetailsInfo", "tileTextureRect", "defaultEffectDisplay", "workerInfoContainer", "workerCountContainer", "maxBonusContainer", "maxBonusCurrencyDisplay", "unlockReqParent", "affectsParent", "affectedByParent", "storageInfoUI")]
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
@@ -1329,6 +1331,8 @@ workerIconTexture = ExtResource("31_5n6k3")
 workerCountContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2/HFlowContainer")
 maxBonusContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer")
 maxBonusCurrencyDisplay = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer/CurrencyDisplay")
+unlockReqParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer")
+unlockReqScene = ExtResource("66_mgx77")
 affectsParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer/AffectsHBoxContainer")
 affectedByParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer/AffectedByHBoxContainer2")
 affectedByScene = ExtResource("39_e4lbj")
@@ -1506,6 +1510,23 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="UnlockRequirementsFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=705216036]
+layout_mode = 2
+title = "how to unlock"
+
+[node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer" unique_id=894922644]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer" unique_id=1840344444]
+layout_mode = 2
+theme = ExtResource("57_yi10l")
+
+[node name="UnlockRequirementsHBoxContainer" type="GridContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer/MarginContainer" unique_id=1581441240]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
 
 [node name="AffectsFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1401136013]
 layout_mode = 2

@@ -17,6 +17,7 @@ script = ExtResource("4_ut87k")
 requiredAmountsGained = Dictionary[int, int]({
 0: 10
 })
+requiredAmount = 10
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_r5dkk"]

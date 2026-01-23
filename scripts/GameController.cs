@@ -19,7 +19,7 @@ public partial class GameController : Node2D
     {
         base._EnterTree();
 
-        eventDispatcher = new EventDispatcher();
+        eventDispatcher = new EventDispatcher(); 
 
         tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase ??= new TileDatabase();

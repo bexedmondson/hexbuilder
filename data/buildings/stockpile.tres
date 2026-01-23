@@ -27,11 +27,26 @@ requiredAmountsGained = Dictionary[int, int]({
 1: 10,
 2: 5
 })
+requiredAmount = 10
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_so5qk"]
+script = ExtResource("7_so5qk")
+requiredAmountsGained = Dictionary[int, int]({})
+currency = 1
+requiredAmount = 10
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_qpt5s"]
+script = ExtResource("7_so5qk")
+requiredAmountsGained = null
+currency = 2
+requiredAmount = 5
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_b476h"]
 script = ExtResource("8_so5qk")
-requirements = Array[Object]([SubResource("Resource_6lq31")])
+requirements = Array[Object]([SubResource("Resource_6lq31"), SubResource("Resource_so5qk"), SubResource("Resource_qpt5s")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]

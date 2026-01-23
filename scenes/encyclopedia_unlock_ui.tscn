@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://de6euexkasfhm"]
+
+[ext_resource type="Script" uid="uid://dppwatay6yawk" path="res://scripts/ui/popups/UnlockRequirementUI.cs" id="1_3qc7g"]
+[ext_resource type="Texture2D" uid="uid://syhv8okyicei" path="res://assets/icons/icon_house.tres" id="2_3qc7g"]
+
+[node name="EncyclopediaUnlockUI" type="VBoxContainer" unique_id=624940474 node_paths=PackedStringArray("icon", "text", "completeIndicator")]
+offset_right = 176.0
+offset_bottom = 108.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_3qc7g")
+icon = NodePath("TextureRect")
+text = NodePath("Label")
+completeIndicator = NodePath("TextureRect/CheckmarkLabel")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1788234310]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("2_3qc7g")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="CheckmarkLabel" type="Label" parent="TextureRect" unique_id=672683029]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 5.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.101960786, 0.93333334, 0.24705882, 1)
+theme_override_font_sizes/font_size = 72
+text = "✔"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="." unique_id=1483766645]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "requirement text here"
+horizontal_alignment = 1
