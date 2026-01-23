@@ -28,7 +28,7 @@ public partial class TileAdjacencyMainNode : GraphNode
     public void OnCustomTileDataSet()
     {
         Title = tileData.GetFileName();
-        textureRect.Texture ??= InjectionManager.Get<TileDatabase>().GetTileTexture(customTileData);
+        textureRect.Texture ??= EditorTileDatabase.GetTileTexture(customTileData);
     }
 
     public void SetupOptionDropdown()

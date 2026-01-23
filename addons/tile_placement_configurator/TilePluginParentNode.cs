@@ -8,6 +8,25 @@ public partial class TilePluginParentNode : Control
 
     public override void _EnterTree()
     {
-        InjectionManager.Get<TileDatabase>().AddTileSetTileData(tileSet);
+        EditorTileDatabase.AddTileSetTileData(tileSet);
+        //GD.Print("enter");
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        EditorTileDatabase.AddTileSetTileData(tileSet);
+    }
+
+    public void AddTileData()
+    {
+        EditorTileDatabase.AddTileSetTileData(tileSet);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree(); 
+        //GD.Print("exit");
     }
 }
+ 

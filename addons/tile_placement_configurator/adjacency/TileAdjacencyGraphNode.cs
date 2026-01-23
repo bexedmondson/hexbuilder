@@ -28,7 +28,7 @@ public partial class TileAdjacencyGraphNode : GraphNode
     public void OnAdjacencyConfigSet()
     {
         Title = adjacencyConfig.requiredTile.GetFileName();
-        textureRect.Texture = InjectionManager.Get<TileDatabase>().GetTileTexture(adjacencyConfig.requiredTile);
+        textureRect.Texture = EditorTileDatabase.GetTileTexture(adjacencyConfig.requiredTile);
 
         foreach (var kvp in propertyEditors)
         {

@@ -2,17 +2,8 @@ using System;
 using System.Collections.Generic;
 using Godot;
 
-[Tool]
-public partial class InjectionManager : Node
+public static class InjectionManager
 {
-    private static InjectionManager s_instance;
-    public static InjectionManager Instance()
-    {
-        if (s_instance == null)
-            s_instance = new InjectionManager();
-        return s_instance;
-    }
-
     private static Dictionary<Type, IInjectable> s_injectableMap = new Dictionary<Type, IInjectable>();
 
     public static void Register<T>(T injectable) where T : IInjectable
