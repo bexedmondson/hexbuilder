@@ -137,11 +137,13 @@ public partial class InventoryManager : Node2D, IInjectable
         var toastManager = InjectionManager.Get<ToastManager>();
         foreach (var add in actualAdd)
         {
-            toastManager.RequestToast(new ToastConfig{text = $"+{add.Value}", stackId = $"{add.Key.ToString().ToLower()}_add"});;
+            if (add.Value != 0)
+                toastManager.RequestToast(new ToastConfig{text = $"+{add.Value}", stackId = $"{add.Key.ToString().ToLower()}_add"});;
         }
         foreach (var minus in totalMinus)
         {
-            toastManager.RequestToast(new ToastConfig{text = $"{minus.Value}", stackId = $"{minus.Key.ToString().ToLower()}_minus"});
+            if (minus.Value != 0)
+                toastManager.RequestToast(new ToastConfig{text = $"{minus.Value}", stackId = $"{minus.Key.ToString().ToLower()}_minus"});
         }
         
         /*foreach (var currencyChange in allCurrencyChanges)

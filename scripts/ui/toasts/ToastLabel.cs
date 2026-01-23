@@ -6,15 +6,17 @@ public partial class ToastLabel : Panel
 {
     [Export]
     private Label label;
+    
+    [Export]
+    private int duration = 3; //seconds
 
     [ExportToolButton("anim")]
-    private Callable test => Callable.From(() => Init("testing 1 2, testing 1 2"));
+    private Callable test => Callable.From(() => Init("+10"));
     
     public Action<ToastLabel> RemoveLabelAction;
 
     // offset position box with screen position
     private Tween tweenIn;
-    private int timerToDestroy = 3; //seconds
 
     private float maskWidth;
     private float maskHeight;
@@ -44,7 +46,7 @@ public partial class ToastLabel : Panel
         tweenIn.TweenProperty(this, "custom_minimum_size", new Vector2(maskWidth, maskHeight), 0.3).From(new Vector2(maskWidth, 0)).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In).SetDelay(0.03);
         tweenIn.TweenProperty(label, "position", targetLabelOffset, 0.3).From(initialLabelOffset).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In).SetDelay(0.03);
         tweenIn.SetParallel(false);
-        tweenIn.TweenProperty(this, "modulate:a", 0, 0.6).SetDelay(timerToDestroy);
+        tweenIn.TweenProperty(this, "modulate:a", 0, 0.6).SetDelay(duration);
         tweenIn.TweenProperty(this, "custom_minimum_size", new Vector2(maskWidth, 0.0f), 0.2).From(new Vector2(maskWidth, maskHeight)).SetTrans(Tween.TransitionType.Quint).SetEase(Tween.EaseType.In);
         tweenIn.TweenCallback(Callable.From(_TweenDestroyLabelComplete));
         tweenIn.Play();

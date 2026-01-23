@@ -45,6 +45,7 @@
 [ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/popups/WorkplaceInfoUI.cs" id="28_l3nqq"]
 [ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="31_5n6k3"]
 [ext_resource type="Script" uid="uid://b68wnht32wyfj" path="res://scripts/ui/ResidentCountDisplay.cs" id="32_t4767"]
+[ext_resource type="PackedScene" uid="uid://c1jy3h6un84tw" path="res://scenes/toast_panel_no_bg.tscn" id="34_7jl01"]
 [ext_resource type="Texture2D" uid="uid://syhv8okyicei" path="res://assets/icons/icon_house.tres" id="35_2a4bv"]
 [ext_resource type="Script" uid="uid://cgj4kupy76gd4" path="res://scripts/ui/popups/EncyclopediaPopup.cs" id="36_4b3q0"]
 [ext_resource type="ButtonGroup" uid="uid://caiuut1jdayfj" path="res://scenes/encyclopediaButtonGroup.tres" id="37_kj2ff"]
@@ -348,18 +349,19 @@ happinessIconMap = Dictionary[int, AtlasTexture]({
 3: SubResource("AtlasTexture_2a4bv")
 })
 
-[node name="MainInventoryDisplay" type="VBoxContainer" parent="CanvasLayer/UIMain" unique_id=1653779922 node_paths=PackedStringArray("currencyDisplays", "capacityLabels", "currencyDeltas", "storageIndicators")]
+[node name="MainInventoryDisplay" type="GridContainer" parent="CanvasLayer/UIMain" unique_id=1975599504 node_paths=PackedStringArray("currencyDisplays", "capacityLabels", "currencyDeltas", "storageIndicators")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -320.0
+offset_left = -307.0
 offset_top = 10.0
-offset_right = -20.0
+offset_right = -7.0
 offset_bottom = 234.0
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
+columns = 2
 script = ExtResource("21_wf2ql")
 singleCurrencyDisplayScene = ExtResource("47_hxced")
 currencyDisplays = {
@@ -387,17 +389,31 @@ storageIndicators = {
 3: NodePath("SingleCurrencyDisplay4/CapacityIndicator")
 }
 
+[node name="FoodNotifHBoxContainer" type="HBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=884019175]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ChangeNotifsAdd2" type="VBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay/FoodNotifHBoxContainer" unique_id=2049792587]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("43_otuox")
+stackId = "food_add"
+toastLabelScene = ExtResource("34_7jl01")
+
+[node name="ChangeNotifsMinus2" type="VBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay/FoodNotifHBoxContainer" unique_id=1155490022]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("43_otuox")
+stackId = "food_minus"
+toastLabelScene = ExtResource("34_7jl01")
+
 [node name="SingleCurrencyDisplay" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=913887442 instance=ExtResource("47_hxced")]
 layout_mode = 2
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 
-[node name="ChangeNotifsAdd" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" index="0" unique_id=2122133207]
-stackId = "food_add"
-
-[node name="ChangeNotifsMinus" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" index="1" unique_id=1670413624]
-stackId = "food_minus"
-
-[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" index="2" unique_id=854191337]
+[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" index="0" unique_id=854191337]
 texture = ExtResource("43_8od8w")
 
 [node name="CapacityLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay" unique_id=275555590]
@@ -420,17 +436,31 @@ script = ExtResource("26_gqxrv")
 fullIcon = ExtResource("27_3kpmb")
 overflowingIcon = ExtResource("28_5n6k3")
 
+[node name="WoodNotifHBoxContainer2" type="HBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=1145604279]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ChangeNotifsAdd2" type="VBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay/WoodNotifHBoxContainer2" unique_id=1068161707]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("43_otuox")
+stackId = "wood_add"
+toastLabelScene = ExtResource("34_7jl01")
+
+[node name="ChangeNotifsMinus2" type="VBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay/WoodNotifHBoxContainer2" unique_id=883548220]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("43_otuox")
+stackId = "wood_minus"
+toastLabelScene = ExtResource("34_7jl01")
+
 [node name="SingleCurrencyDisplay2" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=1857846353 instance=ExtResource("47_hxced")]
 layout_mode = 2
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 
-[node name="ChangeNotifsAdd" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" index="0" unique_id=2122133207]
-stackId = "wood_add"
-
-[node name="ChangeNotifsMinus" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" index="1" unique_id=1670413624]
-stackId = "wood_minus"
-
-[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" index="2" unique_id=854191337]
+[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" index="0" unique_id=854191337]
 texture = ExtResource("44_3kpmb")
 
 [node name="CapacityLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2" unique_id=1092083990]
@@ -453,11 +483,31 @@ script = ExtResource("26_gqxrv")
 fullIcon = ExtResource("27_3kpmb")
 overflowingIcon = ExtResource("28_5n6k3")
 
+[node name="StoneNotifHBoxContainer3" type="HBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=19040967]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ChangeNotifsAdd2" type="VBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay/StoneNotifHBoxContainer3" unique_id=1816808052]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("43_otuox")
+stackId = "stone_add"
+toastLabelScene = ExtResource("34_7jl01")
+
+[node name="ChangeNotifsMinus2" type="VBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay/StoneNotifHBoxContainer3" unique_id=151575759]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("43_otuox")
+stackId = "stone_minus"
+toastLabelScene = ExtResource("34_7jl01")
+
 [node name="SingleCurrencyDisplay3" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=304845638 instance=ExtResource("47_hxced")]
 layout_mode = 2
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 
-[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" index="2" unique_id=854191337]
+[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" index="0" unique_id=854191337]
 texture = ExtResource("45_5n6k3")
 
 [node name="CapacityLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay3" unique_id=716238772]
@@ -480,17 +530,31 @@ script = ExtResource("26_gqxrv")
 fullIcon = ExtResource("27_3kpmb")
 overflowingIcon = ExtResource("28_5n6k3")
 
+[node name="FabricNotifHBoxContainer4" type="HBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=644886984]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ChangeNotifsAdd2" type="VBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay/FabricNotifHBoxContainer4" unique_id=1056155454]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("43_otuox")
+stackId = "fabric_add"
+toastLabelScene = ExtResource("34_7jl01")
+
+[node name="ChangeNotifsMinus2" type="VBoxContainer" parent="CanvasLayer/UIMain/MainInventoryDisplay/FabricNotifHBoxContainer4" unique_id=1376998262]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("43_otuox")
+stackId = "fabric_minus"
+toastLabelScene = ExtResource("34_7jl01")
+
 [node name="SingleCurrencyDisplay4" parent="CanvasLayer/UIMain/MainInventoryDisplay" unique_id=1817663077 instance=ExtResource("47_hxced")]
 layout_mode = 2
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 
-[node name="ChangeNotifsAdd" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" index="0" unique_id=2122133207]
-stackId = "fabric_add"
-
-[node name="ChangeNotifsMinus" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" index="1" unique_id=1670413624]
-stackId = "fabric_minus"
-
-[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" index="2" unique_id=854191337]
+[node name="TextureRect" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" index="0" unique_id=854191337]
 texture = ExtResource("46_t4767")
 
 [node name="CapacityLabel" type="Label" parent="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay4" unique_id=1730336907]
@@ -710,7 +774,7 @@ workerTab = NodePath("TabContainer/Workers")
 storageTab = NodePath("TabContainer/Storage")
 buildTab = NodePath("TabContainer/Build")
 encyclopediaPopup = NodePath("../EncyclopediaPopup")
-effectInfoParent = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer")
+effectInfoParent = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/NearbyTileEffectsVBoxContainer")
 unlockedCellAdjacencyUIScene = ExtResource("23_cpah3")
 storageInfoUI = NodePath("TabContainer/Storage/StoragePanel")
 residentDetailsParent = NodePath("TabContainer/Residents/ResidentPanel/VBoxContainer")
@@ -780,6 +844,60 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DefaultPerTurnHBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=988230601 node_paths=PackedStringArray("noneIndicator")]
+layout_mode = 2
+script = ExtResource("58_bnbf5")
+noneIndicator = NodePath("NoneLabel")
+
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=1313980424]
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "each turn:"
+horizontal_alignment = 1
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=1052117027]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("42_gqxrv")
+singleCurrencyDisplayScene = ExtResource("47_hxced")
+displayAsDelta = true
+iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="NoneLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=652602105]
+layout_mode = 2
+text = "no resources given"
+
+[node name="MaxBonusInfoHBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=1849797886]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=2000203827 node_paths=PackedStringArray("itemWithShineShader")]
+material = ExtResource("62_4g66p")
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "max worker 
+bonus:"
+horizontal_alignment = 1
+script = ExtResource("63_4cqqk")
+itemWithShineShader = NodePath(".")
+finalShaderParamValue = 4.0
+finalShaderDurationValue = 2.0
+shineByDefault = true
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=881676749]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("42_gqxrv")
+singleCurrencyDisplayScene = ExtResource("47_hxced")
+displayAsDelta = true
+iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="NearbyTileEffectsVBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=1274881698]
+layout_mode = 2
 
 [node name="Storage" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=816071196]
 visible = false
@@ -1333,7 +1451,7 @@ text = "no resources given"
 [node name="MaxBonusInfoHBoxContainer" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=740784105]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=910492605]
+[node name="Label" type="Label" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=910492605 node_paths=PackedStringArray("itemWithShineShader")]
 material = ExtResource("62_4g66p")
 custom_minimum_size = Vector2(109, 0)
 layout_mode = 2
@@ -1341,6 +1459,10 @@ text = "max worker
 bonus:"
 horizontal_alignment = 1
 script = ExtResource("63_4cqqk")
+itemWithShineShader = NodePath(".")
+finalShaderParamValue = 4.0
+finalShaderDurationValue = 2.0
+shineByDefault = true
 
 [node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=1219382575]
 layout_mode = 2

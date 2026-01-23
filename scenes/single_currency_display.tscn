@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://bjdcf535b0agr"]
 
 [ext_resource type="Script" uid="uid://bni0n2i0y4vao" path="res://scripts/ui/SingleCurrencyDisplay.cs" id="1_qis18"]
-[ext_resource type="Script" uid="uid://bgcy7oymph28e" path="res://scripts/ui/toasts/ToastStack.cs" id="2_hk68u"]
-[ext_resource type="PackedScene" uid="uid://c1jy3h6un84tw" path="res://scenes/toast_panel_no_bg.tscn" id="3_c5cy3"]
 
 [node name="SingleCurrencyDisplay" type="HBoxContainer" unique_id=913887442 node_paths=PackedStringArray("icon", "quantityLabel")]
 offset_left = 20.0
@@ -14,20 +12,6 @@ size_flags_vertical = 4
 script = ExtResource("1_qis18")
 icon = NodePath("TextureRect")
 quantityLabel = NodePath("Label")
-
-[node name="ChangeNotifsAdd" type="VBoxContainer" parent="." unique_id=2122133207]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-script = ExtResource("2_hk68u")
-stackId = "stone_add"
-toastLabelScene = ExtResource("3_c5cy3")
-
-[node name="ChangeNotifsMinus" type="VBoxContainer" parent="." unique_id=1670413624]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-script = ExtResource("2_hk68u")
-stackId = "stone_minus"
-toastLabelScene = ExtResource("3_c5cy3")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=854191337]
 custom_minimum_size = Vector2(50, 50)

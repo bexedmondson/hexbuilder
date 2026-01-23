@@ -1,15 +1,50 @@
 [gd_scene format=3 uid="uid://c1jy3h6un84tw"]
 
 [ext_resource type="PackedScene" uid="uid://dugii0837nslt" path="res://scenes/toast_label.tscn" id="1_v7ijl"]
-[ext_resource type="StyleBox" uid="uid://dcsrra27rhc51" path="res://scenes/toast_label_style_transparentbox.tres" id="2_xk5l3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qqrl"]
+resource_local_to_scene = true
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.35686275, 0.6666667, 0.9254902, 0)
+draw_center = false
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+shadow_color = Color(0.06751915, 0.2773066, 0.43406126, 0.60784316)
+shadow_offset = Vector2(0, 2)
+anti_aliasing = false
 
 [node name="ToastPanel" unique_id=831054919 instance=ExtResource("1_v7ijl")]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 0)
+custom_minimum_size = Vector2(50, 0)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_right = 0.0
+grow_horizontal = 0
+duration = 1
 
 [node name="Label" parent="." index="0" unique_id=1711425040]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 207.0
-offset_bottom = 41.0
-theme_override_styles/normal = ExtResource("2_xk5l3")
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -18.0
+offset_right = -166.0
+offset_bottom = 14.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_6qqrl")
+text = "+10"
+horizontal_alignment = 2
