@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass][Tool]
-public partial class NeedUIMappingList : Resource
+public partial class RequirementUIMappingList : Resource
 {
     [ExportGroup("Housing")]
     [Export]
@@ -21,7 +21,11 @@ public partial class NeedUIMappingList : Resource
     [Export]
     private Texture2D allTimeBuildIcon;
     [Export]
-    private string allTimeBuildText;
+    private string allTimeBuildNeedText;
+    [Export]
+    private string allTimeBuildUnlockText;
+    [Export]
+    private string currentTileBuildUnlockText;
     
     [ExportGroup("Food")]
     [Export]
@@ -30,7 +34,7 @@ public partial class NeedUIMappingList : Resource
     private string sufficientFoodText;
     
 
-    public Texture2D GetIconForNeedSatisfactionRequirement(DataRequirement requirement)
+    public Texture2D GetIconForRequirement(DataRequirement requirement)
     {
         switch (requirement)
         {
@@ -43,13 +47,15 @@ public partial class NeedUIMappingList : Resource
         return null; //TODO default icon?
     }
     
-    public Texture2D GetIconForNeedSatisfactionRequirement(Requirement requirement)
+    public Texture2D GetIconForRequirement(Requirement requirement)
     {
         switch (requirement)
         {
             case PopulationRequirement _:
                 return populationIcon;
             case AllTimeTileBuildRequirement _:
+                return allTimeBuildIcon;
+            case CurrentTilePresenceCountRequirement _:
                 return allTimeBuildIcon;
             case SufficientFoodRequirement _:
                 return foodIcon;
@@ -78,7 +84,24 @@ public partial class NeedUIMappingList : Resource
             case PopulationRequirement _:
                 return populationText;
             case AllTimeTileBuildRequirement allTimeTileBuildRequirement:
-                return allTimeBuildText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.tile.GetFileName());
+                return allTimeBuildNeedText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.tile.GetFileName());
+            case SufficientFoodRequirement _:
+                return sufficientFoodText;
+        }
+
+        return string.Empty;
+    }
+    
+    public string GetTextForUnlockRequirement(Requirement requirement)
+    {
+        switch (requirement)
+        {
+            case PopulationRequirement _:
+                return populationText;
+            case AllTimeTileBuildRequirement allTimeTileBuildRequirement:
+                return allTimeBuildUnlockText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.tile.GetFileName());
+            case CurrentTilePresenceCountRequirement currentTilePresenceCountRequirement:
+                return currentTileBuildUnlockText.Replace("{building}", currentTilePresenceCountRequirement.requiredTileBuildCount.tile.GetFileName());
             case SufficientFoodRequirement _:
                 return sufficientFoodText;
         }

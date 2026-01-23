@@ -4,12 +4,12 @@ using Godot;
 public partial class AllTimeTileBuildRequirement : Requirement
 {
     [Export]
-    public TileRequirementAmount requiredTileBuildCount;
+    public TileRequirementAmount requiredTileBuildCount = new();
 
     public override bool IsSatisfied()
     {
         var buildCount = InjectionManager.Get<CellBuildStatsTracker>().GetBuildCount(requiredTileBuildCount.tile);
 
-        return buildCount.IsPass(requiredTileBuildCount.comparison, requiredTileBuildCount.amount);
+        return requiredTileBuildCount.IsPass(buildCount);
     }
 }
