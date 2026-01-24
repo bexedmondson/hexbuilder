@@ -43,6 +43,9 @@ public partial class EncyclopediaPopup : Popup
 
     [Export]
     private Control unlockReqParent;
+    
+    [Export]
+    private Control unlockReqContainer;
 
     [Export]
     private PackedScene unlockReqScene;
@@ -167,9 +170,9 @@ public partial class EncyclopediaPopup : Popup
 
     private void SetupUnlockRequirements(CustomTileData tileData)
     {
-        for (int i = unlockReqParent.GetChildCount() - 1; i >= 0; i--)
+        for (int i = unlockReqContainer.GetChildCount() - 1; i >= 0; i--)
         {
-            unlockReqParent.GetChild(i).QueueFree();
+            unlockReqContainer.GetChild(i).QueueFree();
         }
 
         if (tileData.IsUnlocked() || !tileData.TryGetComponent(out UnlockRequirementsComponent unlockRequirementsComponent))
@@ -178,11 +181,12 @@ public partial class EncyclopediaPopup : Popup
             return;
         }
 
+        unlockReqParent.Visible = true;
         foreach (var requirement in unlockRequirementsComponent.requirements)
         {
             var requirementUI = unlockReqScene.Instantiate<UnlockRequirementUI>();
             requirementUI.Setup(requirement);
-            unlockReqParent.AddChild(requirementUI);
+            unlockReqContainer.AddChild(requirementUI);
         }
     }
 

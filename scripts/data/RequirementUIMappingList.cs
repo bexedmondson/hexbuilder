@@ -63,8 +63,8 @@ public partial class RequirementUIMappingList : Resource
                 return allTimeBuildIcon;
             case SufficientFoodRequirement _:
                 return foodIcon;
-           // case LifetimeGainedRequirement lifetimeGainedRequirement:
-             //   return InjectionManager.Get<InventoryManager>().GetIcon(lifetimeGainedRequirement.)
+            case LifetimeGainedRequirement lifetimeGainedRequirement:
+                return InjectionManager.Get<InventoryManager>().GetIcon(lifetimeGainedRequirement.currency);
         }
 
         return null;
@@ -110,8 +110,8 @@ public partial class RequirementUIMappingList : Resource
                 return currentTileBuildUnlockText.Replace("{building}", currentTilePresenceCountRequirement.requiredTileBuildCount.tile.GetFileName());
             case SufficientFoodRequirement _:
                 return sufficientFoodText;
-            //case LifetimeGainedRequirement ltgr:
-                //return lifetimeGainedText.Replace("{currency}", );
+            case LifetimeGainedRequirement ltgr:
+                return lifetimeGainedText.Replace("{currency}", ltgr.currency.ToString().ToLower());
         }
 
         return string.Empty;
