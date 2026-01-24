@@ -4,9 +4,6 @@ using Godot;
 public partial class LifetimeGainedRequirement : Requirement
 {
     [Export]
-    public Godot.Collections.Dictionary<CurrencyType, int> requiredAmountsGained;
-
-    [Export]
     public CurrencyType currency;
 
     [Export]

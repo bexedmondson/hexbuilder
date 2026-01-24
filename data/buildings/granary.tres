@@ -28,9 +28,6 @@ metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_6lq31"]
 script = ExtResource("8_svi34")
-requiredAmountsGained = Dictionary[int, int]({
-0: 5
-})
 requiredAmount = 5
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
