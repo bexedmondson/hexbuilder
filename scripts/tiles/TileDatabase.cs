@@ -86,9 +86,6 @@ public class TileDatabase : IInjectable
         {
             if (tileInfo.tileData?.canBePlacedOn?.Contains(customTileData) != true)
                 continue;
-
-            if (!tileInfo.tileData.IsUnlocked())
-                continue;
             
             compatibleTileInfos.Add(tileInfo);
         }

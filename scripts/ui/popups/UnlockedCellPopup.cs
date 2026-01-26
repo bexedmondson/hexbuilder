@@ -140,16 +140,6 @@ public partial class UnlockedCellPopup : Popup
         if (cellCustomTileData.baseTurnCurrencyChange?.Count > 0)
         {
             hasEffects = true;
-            /*var label = new Label();
-            StringBuilder sb = new StringBuilder("per turn: ");
-
-            foreach (var kvp in cellCustomTileData.baseTurnCurrencyChange)
-            {
-                sb.Append($" {(kvp.Value > 0 ? "+" : string.Empty)}{kvp.Value.ToString()} {kvp.Key.ToString()}");
-            }
-
-            label.Text = sb.ToString();
-            effectInfoParent.AddChild(label);*/
             
             defaultEffectDisplay.DisplayCurrencyAmount(new CurrencySum(cellCustomTileData.baseTurnCurrencyChange));
             
@@ -193,7 +183,7 @@ public partial class UnlockedCellPopup : Popup
         bool hasMaxBonus = tileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxBonusComponent);
         workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplaceState);
         maxBonusContainer.Visible = hasMaxBonus && workplaceState.workerCount >= workplaceState.capacity;
-        if (!hasMaxBonus)
+        if (!hasMaxBonus) 
             return;
         
         InjectionManager.Get<EventDispatcher>().Add<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
@@ -312,7 +302,7 @@ public partial class UnlockedCellPopup : Popup
         base.Close();
         InjectionManager.Get<MapHighlightController>().Clear();
         
-        bool hasMaxBonus = cellCustomTileData.IsWorkplace &&cellCustomTileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxBonusComponent);
+        bool hasMaxBonus = cellCustomTileData.IsWorkplace && cellCustomTileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxBonusComponent);
         if (hasMaxBonus)
             InjectionManager.Get<EventDispatcher>().Remove<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
         
