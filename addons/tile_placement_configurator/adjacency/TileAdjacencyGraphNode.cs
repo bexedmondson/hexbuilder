@@ -14,15 +14,20 @@ public partial class TileAdjacencyGraphNode : GraphNode
 
     private Dictionary<string, EditorProperty> propertyEditors = new();
 
-    private AdjacencyConfig config;
-    public AdjacencyConfig adjacencyConfig
+    public AdjacencyConfig adjacencyConfig { get; private set; }
+    
+    public void SetAdjacencyConfig(AdjacencyConfig adjacencyConfig)
     {
-        get => config;
-        set
-        {
-            config = value;
+        this.adjacencyConfig = adjacencyConfig;
+        
+        OnAdjacencyConfigSet();
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        if (adjacencyConfig != null)
             OnAdjacencyConfigSet();
-        }
     }
     
     public void OnAdjacencyConfigSet()
@@ -81,7 +86,7 @@ public partial class TileAdjacencyGraphNode : GraphNode
     
     public void OnDeleteButton()
     {
-        selectedTileData.adjacencies.Remove(config);
+        selectedTileData.adjacencies.Remove(adjacencyConfig);
         ResourceSaver.Save(selectedTileData);
 
         graph.OnNodeDataUpdated();
