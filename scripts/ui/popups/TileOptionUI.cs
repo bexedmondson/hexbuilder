@@ -41,7 +41,7 @@ public partial class TileOptionUI : Button
         currencyDisplay.DisplayCurrencyAmount(tilePrice);
         
         var inventoryManager = InjectionManager.Get<InventoryManager>();
-        this.Disabled = !inventoryManager.CanAfford(tilePrice);
+        this.Disabled = !inventoryManager.CanAfford(tilePrice) || !tileInfo.tileData.IsUnlocked();
     }
 
     public void SetupInfoButton(bool visible, Action<CustomTileData> action = null)

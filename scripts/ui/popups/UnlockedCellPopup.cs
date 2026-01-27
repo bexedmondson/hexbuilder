@@ -244,7 +244,14 @@ public partial class UnlockedCellPopup : Popup
         TileDatabase tileDatabase = InjectionManager.Get<TileDatabase>();
         var compatibleTileInfos = tileDatabase.GetAllCompatibleTileInfos(cellCustomTileData);
         
-        compatibleTileInfos.Sort((lhs, rhs) => lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName()));
+        compatibleTileInfos.Sort((lhs, rhs) =>
+        {
+            var lockedCompare = rhs.tileData.IsUnlocked().CompareTo(lhs.tileData.IsUnlocked());
+            if (lockedCompare == 0)
+                lockedCompare = lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName());
+
+            return lockedCompare;
+        });
 
         foreach (var compatibleTileInfo in compatibleTileInfos)
         {
@@ -257,8 +264,6 @@ public partial class UnlockedCellPopup : Popup
             tileOptionUI.SetupInfoButton(true, OnInfoButton);
             tileSelector.AddChild(tileOptionUI);
         }
-        
-        //TODO add locked options as well
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count == 0)
             tileSelectionGroup.Pressed += OnSelectionChanged;
