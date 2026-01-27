@@ -61,6 +61,7 @@ public partial class TileInfoGraphNode : GraphNode
 
                 editor.SetObjectAndProperty(tileData, nameProperty);
                 editor.Label = nameProperty;
+                editor.NameSplitRatio = 0.2f;
                 editor.PropertyChanged += OnPropChanged;
                 editor.Selected += OnPropSelected;
                 editor.MinimumSizeChanged += OnPropSizeChanged;

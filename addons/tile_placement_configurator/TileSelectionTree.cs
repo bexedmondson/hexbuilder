@@ -7,6 +7,9 @@ public partial class TileSelectionTree : Tree
     [Export]
     private AbstractTileGraph tileGraph;
 
+    [Export]
+    private TilePluginParentNode tilePluginParentNode;
+
     public override void _EnterTree()
     {
         base._EnterTree();
@@ -73,8 +76,12 @@ public partial class TileSelectionTree : Tree
         var selected = this.GetSelected();
         var metadata = selected.GetMetadata(0).Obj;
         if (metadata is not CustomTileData tileData)
+        {
+            tilePluginParentNode.ShowGenericResourceInspector(metadata);
             return;
+        }
         
+        tilePluginParentNode.HideGenericResourceInspector();
         tileGraph.OnTreeItemSelected(tileData);
     }
 }

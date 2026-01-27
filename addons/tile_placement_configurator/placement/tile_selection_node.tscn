@@ -60,6 +60,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Button" type="Button" parent="." unique_id=1081456943]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"DangerButton"

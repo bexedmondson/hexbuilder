@@ -10,7 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://dcoyh6o3odmvx" path="res://addons/tile_placement_configurator/adjacency/tile_adjacency_node_main.tscn" id="8_l4udw"]
 [ext_resource type="PackedScene" uid="uid://d1esbhagclee1" path="res://addons/tile_placement_configurator/adjacency/tile_adjacency_node.tscn" id="9_slyvr"]
 
-[node name="TilePlacementConfigurator" type="MarginContainer" unique_id=2080178140]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l4udw"]
+bg_color = Color(0.25882354, 0.25882354, 0.25882354, 1)
+
+[node name="TilePlacementConfigurator" type="MarginContainer" unique_id=2080178140 node_paths=PackedStringArray("genericInspectorFloatingWindow", "genericInspectorContainer")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,6 +22,8 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_fdmax")
 tileSet = ExtResource("2_dw6tw")
+genericInspectorFloatingWindow = NodePath("Control/Panel")
+genericInspectorContainer = NodePath("Control/Panel/MarginContainer")
 
 [node name="TabContainer" type="TabContainer" parent="." unique_id=1229941988]
 layout_mode = 2
@@ -31,12 +36,13 @@ split_offsets = PackedInt32Array(200)
 split_offset = 200
 metadata/_tab_index = 0
 
-[node name="Tree" type="Tree" parent="TabContainer/Placement" unique_id=901786713 node_paths=PackedStringArray("tileGraph")]
+[node name="Tree" type="Tree" parent="TabContainer/Placement" unique_id=901786713 node_paths=PackedStringArray("tileGraph", "tilePluginParentNode")]
 layout_mode = 2
 hide_root = true
 scroll_horizontal_enabled = false
 script = ExtResource("1_dlr7g")
 tileGraph = NodePath("../GraphEdit")
+tilePluginParentNode = NodePath("../../..")
 
 [node name="GraphEdit" type="GraphEdit" parent="TabContainer/Placement" unique_id=869670020 node_paths=PackedStringArray("tree")]
 layout_mode = 2
@@ -55,14 +61,16 @@ split_offsets = PackedInt32Array(200)
 split_offset = 200
 metadata/_tab_index = 1
 
-[node name="Tree" type="Tree" parent="TabContainer/Adjacency" unique_id=1738642950 node_paths=PackedStringArray("tileGraph")]
+[node name="Tree" type="Tree" parent="TabContainer/Adjacency" unique_id=1738642950 node_paths=PackedStringArray("tileGraph", "tilePluginParentNode")]
 layout_mode = 2
 hide_root = true
 scroll_horizontal_enabled = false
 script = ExtResource("1_dlr7g")
 tileGraph = NodePath("../GraphEdit")
+tilePluginParentNode = NodePath("../../..")
 
 [node name="GraphEdit" type="GraphEdit" parent="TabContainer/Adjacency" unique_id=438107853 node_paths=PackedStringArray("tree")]
+visible = false
 layout_mode = 2
 panning_scheme = 1
 minimap_enabled = false
@@ -71,6 +79,29 @@ script = ExtResource("7_g3dy6")
 tileAdjacencyMainNodeScene = ExtResource("8_l4udw")
 tileAdjacencyNodeScene = ExtResource("9_slyvr")
 tree = NodePath("../Tree")
+
+[node name="Panel" type="Panel" parent="TabContainer/Adjacency" unique_id=222505358]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="." unique_id=68025842]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Control" unique_id=1156381711]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125
+anchor_top = 0.063
+anchor_right = 0.994
+anchor_bottom = 0.987
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_l4udw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Panel" unique_id=1803851722]
+layout_mode = 2
 
 [connection signal="item_selected" from="TabContainer/Placement/Tree" to="TabContainer/Placement/Tree" method="OnTreeItemSelected"]
 [connection signal="item_selected" from="TabContainer/Adjacency/Tree" to="TabContainer/Adjacency/Tree" method="OnTreeItemSelected"]
