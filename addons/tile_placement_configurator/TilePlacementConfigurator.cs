@@ -6,12 +6,17 @@ public partial class TilePlacementConfigurator : EditorPlugin
 {
 	private PackedScene mainPanelScene = ResourceLoader.Load<PackedScene>("res://addons/tile_placement_configurator/tile_placement_configurator.tscn");
 	private TilePluginParentNode mainPanelInstance;
+
+	private RedoSplitEditorInspectorPlugin redoSplitEditorInspectorPlugin;
 	
 	public override void _EnterTree()
 	{
 		mainPanelInstance = (TilePluginParentNode)mainPanelScene.Instantiate();
 		EditorInterface.Singleton.GetEditorMainScreen().AddChild(mainPanelInstance);
 		_MakeVisible(false);
+
+		redoSplitEditorInspectorPlugin = new();
+		//AddInspectorPlugin(redoSplitEditorInspectorPlugin);
 	}
 
 	public override void _Ready() 
@@ -22,6 +27,7 @@ public partial class TilePlacementConfigurator : EditorPlugin
 
 	public override void _ExitTree()
 	{
+		//RemoveInspectorPlugin(redoSplitEditorInspectorPlugin);
 		if (mainPanelInstance != null)
 			mainPanelInstance.QueueFree();
 	}
