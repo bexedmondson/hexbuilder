@@ -22,17 +22,30 @@ metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_y25w2"]
 script = ExtResource("6_e35tn")
-requiredAmountsGained = Dictionary[int, int]({
-0: 20,
-1: 15,
-2: 10,
-3: 10
-})
+requiredAmount = 20
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_e35tn"]
+script = ExtResource("6_e35tn")
+currency = 1
+requiredAmount = 15
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_dggx0"]
+script = ExtResource("6_e35tn")
+currency = 2
+requiredAmount = 10
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_dl86n"]
+script = ExtResource("6_e35tn")
+currency = 3
+requiredAmount = 10
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_svrqe"]
 script = ExtResource("7_e35tn")
-requirements = Array[Object]([SubResource("Resource_y25w2")])
+requirements = Array[Object]([SubResource("Resource_y25w2"), SubResource("Resource_e35tn"), SubResource("Resource_dggx0"), SubResource("Resource_dl86n")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [sub_resource type="Resource" id="Resource_6fu0t"]

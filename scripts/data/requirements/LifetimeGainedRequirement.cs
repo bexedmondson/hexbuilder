@@ -4,18 +4,14 @@ using Godot;
 public partial class LifetimeGainedRequirement : Requirement
 {
     [Export]
-    public Godot.Collections.Dictionary<CurrencyType, int> requiredAmountsGained;
+    public CurrencyType currency;
+
+    [Export]
+    public int requiredAmount;
 
     public override bool IsSatisfied()
     {
         var statsTracker = InjectionManager.Get<InventoryStatsTracker>();
-        
-        foreach (var kvp in requiredAmountsGained)
-        {
-            if (statsTracker.GetGainedAmount(kvp.Key) < kvp.Value)
-                return false;
-        }
-
-        return true;
+        return statsTracker.GetGainedAmount(currency) >= requiredAmount;
     }
 }

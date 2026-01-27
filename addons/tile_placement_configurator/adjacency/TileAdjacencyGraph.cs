@@ -57,7 +57,7 @@ public partial class TileAdjacencyGraph : AbstractTileGraph
     {
         TileAdjacencyGraphNode graphNode = tileAdjacencyNodeScene.Instantiate() as TileAdjacencyGraphNode;
         graphNode.selectedTileData = tileAdjacencyMainNode.customTileData;
-        graphNode.adjacencyConfig = adjacencyConfig;
+        graphNode.SetAdjacencyConfig(adjacencyConfig);
         graphNode.graph = this;
         graphNode.ResetSize();
         this.AddChild(graphNode);

@@ -29,7 +29,7 @@ public partial class TileInfoMainNode : TileInfoGraphNode
             {
                 if (dir.CurrentIsDir())
                 {
-                    AddSortedOptions(optionsToSort, optionButton, customTileData.canBePlacedOn);
+                    AddSortedOptions(optionsToSort, optionButton, tileData.canBePlacedOn);
                     
                     optionButton.AddSeparator(fileName);
                     DirContents(DirAccess.Open(dir.GetCurrentDir() +"/"+ fileName));
@@ -46,7 +46,7 @@ public partial class TileInfoMainNode : TileInfoGraphNode
             
             if (optionsToSort.Count > 0)
             {
-                AddSortedOptions(optionsToSort, optionButton, customTileData.canBePlacedOn);
+                AddSortedOptions(optionsToSort, optionButton, tileData.canBePlacedOn);
             }
         }
         else
@@ -73,7 +73,7 @@ public partial class TileInfoMainNode : TileInfoGraphNode
     {
         for (int i = 0; i < optionButton.ItemCount; i++)
         {
-            optionButton.SetItemDisabled(i, customTileData.canBePlacedOn.Contains(optionButton.GetItemMetadata(i).Obj as CustomTileData));
+            optionButton.SetItemDisabled(i, tileData.canBePlacedOn.Contains(optionButton.GetItemMetadata(i).Obj as CustomTileData));
         }
     }
 
@@ -83,8 +83,8 @@ public partial class TileInfoMainNode : TileInfoGraphNode
             return;
         
         var selectedTileData = optionButton.GetSelectedMetadata().Obj as CustomTileData;
-        customTileData.canBePlacedOn.Add(selectedTileData);
-        ResourceSaver.Save(customTileData);
+        tileData.canBePlacedOn.Add(selectedTileData);
+        ResourceSaver.Save(tileData);
 
         graph.OnNodeDataUpdated();
 

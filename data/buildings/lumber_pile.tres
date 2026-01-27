@@ -25,9 +25,8 @@ metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_6lq31"]
 script = ExtResource("5_xqx0b")
-requiredAmountsGained = Dictionary[int, int]({
-1: 10
-})
+currency = 1
+requiredAmount = 10
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_um5bx"]
@@ -39,7 +38,6 @@ metadata/_custom_type_script = "uid://7pquj0428dp5"
 script = ExtResource("1_24cbf")
 canBePlacedOn = Array[Object]([ExtResource("1_7jax1")])
 buildPrice = {
-0: 0,
 1: 5
 }
 baseTurnCurrencyChange = {}

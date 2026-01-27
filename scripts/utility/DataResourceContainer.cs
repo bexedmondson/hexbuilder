@@ -6,7 +6,7 @@ public partial class DataResourceContainer : Node, IInjectable
     public NeedConfigList needConfigList;
 
     [Export]
-    public NeedUIMappingList needUIMappingList;
+    public RequirementUIMappingList requirementUIMappingList;
     
     public override void _EnterTree()
     {

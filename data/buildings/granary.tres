@@ -1,7 +1,5 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://6iu3vhfh63aa"]
 
-[ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="1_lqgrp"]
-[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_fweq6"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_8x755"]
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="3_fweq6"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="4_7vfwx"]
@@ -10,14 +8,6 @@
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="5_svi34"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="8_svi34"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="9_svi34"]
-
-[sub_resource type="Resource" id="Resource_g314a"]
-script = ExtResource("2_fweq6")
-requiredTile = ExtResource("1_lqgrp")
-distance = 1
-currencyEffect = {
-1: 1
-}
 
 [sub_resource type="Resource" id="Resource_8xsi5"]
 script = ExtResource("4_7vfwx")
@@ -28,9 +18,7 @@ metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_6lq31"]
 script = ExtResource("8_svi34")
-requiredAmountsGained = Dictionary[int, int]({
-0: 5
-})
+requiredAmount = 5
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_lbsoj"]
@@ -46,6 +34,6 @@ buildPrice = {
 2: 4
 }
 baseTurnCurrencyChange = {}
-adjacencies = Array[Object]([SubResource("Resource_g314a")])
+adjacencies = Array[Object]([])
 components = Array[ExtResource("3_8x755")]([SubResource("Resource_8xsi5"), SubResource("Resource_lbsoj")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

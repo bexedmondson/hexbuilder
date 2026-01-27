@@ -174,7 +174,7 @@ public partial class MapGenerator : Node
                 GenerateCell(affectedCell);
         }
         
-        var riverCells = FindRiverCells();
+        //var riverCells = FindRiverCells();
         
         /*StringBuilder sb1 = new("river cells: ");
         foreach (var cell in riverCells)
@@ -189,7 +189,7 @@ public partial class MapGenerator : Node
         List<Vector2I> allCellsToUpdate = new();
         foreach (var affectedCell in allAffectedCells)
         {
-            if (riverCells.Contains(affectedCell) && mapController.GetCellStatus(affectedCell) == CellStatus.Hidden)
+            //if (riverCells.Contains(affectedCell) && mapController.GetCellStatus(affectedCell) == CellStatus.Hidden)
                 allCellsToUpdate.Add(affectedCell);
         }
 

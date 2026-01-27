@@ -23,14 +23,14 @@ public partial class TileInfoGraph : AbstractTileGraph
         {
             if (this.GetChild(i) is TileInfoGraphNode graphNode)
             {
-                nodes.Remove(graphNode.customTileData);
+                nodes.Remove(graphNode.tileData);
                 this.GetChild(i).Free();
             }
         }
 
         tileGraphMainNode = tileGraphMainNodeScene.Instantiate() as TileInfoMainNode;
         tileGraphMainNode.graph = this;
-        tileGraphMainNode.customTileData = selectedTileData;
+        tileGraphMainNode.SetCustomTileData(selectedTileData); 
         tileGraphMainNode.SetupOptionDropdown();
         tileGraphMainNode.ResetSize();
         this.AddChild(tileGraphMainNode);
@@ -66,8 +66,8 @@ public partial class TileInfoGraph : AbstractTileGraph
     {
         TileInfoGraphNode newGraphNode = tileGraphNodeScene.Instantiate() as TileInfoGraphNode;
         newGraphNode.graph = this;
-        newGraphNode.selectedTileData = sourceNode.customTileData;
-        newGraphNode.customTileData = customTileData;
+        newGraphNode.selectedTileData = sourceNode.tileData;
+        newGraphNode.SetCustomTileData(customTileData);
         newGraphNode.SetupAsEditable(shouldBeEditable);
         newGraphNode.ResetSize();
         this.AddChild(newGraphNode);
@@ -109,7 +109,7 @@ public partial class TileInfoGraph : AbstractTileGraph
     public override void OnNodeDataUpdated()
     {
         var connectionListFromNode = GetConnectionListFromNode(tileGraphMainNode.Name);
-        foreach (var canBePlacedOn in tileGraphMainNode.customTileData.canBePlacedOn)
+        foreach (var canBePlacedOn in tileGraphMainNode.tileData.canBePlacedOn)
         {
             Dictionary foundConnection = null;
             foreach (var connection in connectionListFromNode)
@@ -120,7 +120,7 @@ public partial class TileInfoGraph : AbstractTileGraph
                 {
                     //TODO remove?? how did we get here
                 }
-                else if (tileInfoGraphNode.customTileData == canBePlacedOn)
+                else if (tileInfoGraphNode.tileData == canBePlacedOn)
                 {
                     foundConnection = connection;
                     break;
@@ -143,7 +143,7 @@ public partial class TileInfoGraph : AbstractTileGraph
             else
             {
                 this.RemoveChild(tileInfoGraphNode);
-                nodes.Remove(tileInfoGraphNode.customTileData);
+                nodes.Remove(tileInfoGraphNode.tileData);
                 tileInfoGraphNode.QueueFree();
             }
         }

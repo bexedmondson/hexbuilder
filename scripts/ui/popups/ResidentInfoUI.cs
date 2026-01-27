@@ -31,7 +31,7 @@ public partial class ResidentInfoUI : Control
         noHouseLabel.Visible = !residentState.HasHouse;
         employmentLabel.Text = residentState.IsBusy ? $"is employed at {residentState.GetWorkplaceOrJobName()}" : "is not employed";
 
-        var needUIMapping = InjectionManager.Get<DataResourceContainer>().needUIMappingList;
+        var needUIMapping = InjectionManager.Get<DataResourceContainer>().requirementUIMappingList;
         
         foreach (var activeNeed in residentState.activeNeeds)
         {
@@ -46,12 +46,12 @@ public partial class ResidentInfoUI : Control
                 if (satisfactionRequirement is DataRequirement dataRequirement)
                 {
                     needInfoUI.SetText(needUIMapping.GetTextForNeedSatisfactionRequirement(dataRequirement));
-                    needInfoUI.SetNeedIcon(needUIMapping.GetIconForNeedSatisfactionRequirement(dataRequirement));
+                    needInfoUI.SetNeedIcon(needUIMapping.GetIconForRequirement(dataRequirement));
                 }
                 else if (satisfactionRequirement is Requirement requirement)
                 {
                     needInfoUI.SetText(needUIMapping.GetTextForNeedSatisfactionRequirement(requirement));
-                    needInfoUI.SetNeedIcon(needUIMapping.GetIconForNeedSatisfactionRequirement(requirement));
+                    needInfoUI.SetNeedIcon(needUIMapping.GetIconForRequirement(requirement));
                 }
                 
                 needInfoUI.SetIntensity(activeNeed.unsatisfiedHappinessPenalty);

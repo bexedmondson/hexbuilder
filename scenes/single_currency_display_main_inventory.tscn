@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cp5syr2x5kiub"]
+
+[ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="1_b8y5p"]
+[ext_resource type="Script" uid="uid://bgcy7oymph28e" path="res://scripts/ui/toasts/ToastStack.cs" id="2_5m37b"]
+[ext_resource type="PackedScene" uid="uid://c1jy3h6un84tw" path="res://scenes/toast_panel_no_bg.tscn" id="3_tthao"]
+
+[node name="SingleCurrencyDisplay" unique_id=913887442 instance=ExtResource("1_b8y5p")]
+
+[node name="ChangeNotifsAdd2" type="VBoxContainer" parent="." index="4" unique_id=64282855]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("2_5m37b")
+stackId = "stone_add"
+toastLabelScene = ExtResource("3_tthao")
+
+[node name="ChangeNotifsMinus2" type="VBoxContainer" parent="." index="5" unique_id=1523213849]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+script = ExtResource("2_5m37b")
+stackId = "stone_minus"
+toastLabelScene = ExtResource("3_tthao")

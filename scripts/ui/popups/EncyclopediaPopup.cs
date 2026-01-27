@@ -42,6 +42,15 @@ public partial class EncyclopediaPopup : Popup
     private CurrencyDisplay maxBonusCurrencyDisplay;
 
     [Export]
+    private Control unlockReqParent;
+    
+    [Export]
+    private Control unlockReqContainer;
+
+    [Export]
+    private PackedScene unlockReqScene;
+
+    [Export]
     private Control affectsParent;
 
     [Export]
@@ -115,6 +124,8 @@ public partial class EncyclopediaPopup : Popup
 
         SetupWorkerCountDisplay(selectedTileData);
         SetupMaxBonus(selectedTileData);
+
+        SetupUnlockRequirements(selectedTileData);
         
         SetupAffects(selectedTileData);
         SetupAffectedBy(selectedTileData);
@@ -155,6 +166,28 @@ public partial class EncyclopediaPopup : Popup
             return;
         
         maxBonusCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(maxBonusComponent.extraBaseProduction));
+    }
+
+    private void SetupUnlockRequirements(CustomTileData tileData)
+    {
+        for (int i = unlockReqContainer.GetChildCount() - 1; i >= 0; i--)
+        {
+            unlockReqContainer.GetChild(i).QueueFree();
+        }
+
+        if (tileData.IsUnlocked() || !tileData.TryGetComponent(out UnlockRequirementsComponent unlockRequirementsComponent))
+        {
+            unlockReqParent.Visible = false;
+            return;
+        }
+
+        unlockReqParent.Visible = true;
+        foreach (var requirement in unlockRequirementsComponent.requirements)
+        {
+            var requirementUI = unlockReqScene.Instantiate<UnlockRequirementUI>();
+            requirementUI.Setup(requirement);
+            unlockReqContainer.AddChild(requirementUI);
+        }
     }
 
     private void SetupAffects(CustomTileData tileData)

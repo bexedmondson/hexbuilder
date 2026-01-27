@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Godot;
 
 [Tool]
-public class TileDatabase : IInjectable
+public static class EditorTileDatabase
 {
     public record TileInfo
     {
@@ -13,12 +13,12 @@ public class TileDatabase : IInjectable
         public CustomTileData tileData;
     }
     
-    private List<TileInfo> tileInfos = new();
+    private static List<TileInfo> tileInfos = new();
 
-    public List<TileInfo> AllTileInfos => new(tileInfos);
+    public static List<TileInfo> AllTileInfos => new(tileInfos);
 
-    private List<TileInfo> allBuildingTileInfos = null;
-    public List<TileInfo> AllBuildingTileInfos
+    private static List<TileInfo> allBuildingTileInfos = null;
+    public static List<TileInfo> AllBuildingTileInfos
     {
         get
         {
@@ -35,18 +35,8 @@ public class TileDatabase : IInjectable
             return allBuildingTileInfos;
         }
     }
-    
-    public TileDatabase()
-    {
-        InjectionManager.Register(this);
-    }
 
-    ~TileDatabase()
-    {
-        InjectionManager.Deregister(this);
-    }
-
-    public void AddTileSetTileData(TileSet tileSet)
+    public static void AddTileSetTileData(TileSet tileSet)
     {
         for (int i = 0; i < tileSet.GetSourceCount(); i++)
         {
@@ -79,20 +69,7 @@ public class TileDatabase : IInjectable
         }
     }
 
-    public List<TileInfo> GetAllCompatibleTileInfos(CustomTileData customTileData)
-    {
-        List<TileInfo> compatibleTileInfos = new();
-        foreach (var tileInfo in tileInfos)
-        {
-            if (tileInfo.tileData?.canBePlacedOn?.Contains(customTileData) != true)
-                continue;
-            
-            compatibleTileInfos.Add(tileInfo);
-        }
-        return compatibleTileInfos;
-    }
-
-    public AtlasTexture GetTileTexture(CustomTileData customTileData)
+    public static AtlasTexture GetTileTexture(CustomTileData customTileData)
     {
         foreach (var tileInfo in tileInfos)
         {

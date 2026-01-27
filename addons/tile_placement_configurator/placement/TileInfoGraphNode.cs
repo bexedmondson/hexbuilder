@@ -17,40 +17,51 @@ public partial class TileInfoGraphNode : GraphNode
 
     private Dictionary<string, EditorProperty> propertyEditors = new();
 
-    private CustomTileData tileData;
-    public CustomTileData customTileData
-    {
-        get => tileData;
-        set
-        {
-            tileData = value;
-            OnCustomTileDataSet();
-        }
-    }
-    
-    public void OnCustomTileDataSet()
-    {
-        Title = customTileData.GetFileName();
-        textureRect.Texture ??= InjectionManager.Get<TileDatabase>().GetTileTexture(customTileData);
+    public CustomTileData tileData { get; private set; }
 
+    public void SetCustomTileData(CustomTileData customTileData)
+    {
+        tileData = customTileData;
+        
+        OnCustomTileDataSet();
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        if (tileData != null)
+            OnCustomTileDataSet();
+    }
+
+    private void OnCustomTileDataSet()
+    {
+        Title = tileData.GetFileName();
+        /*GD.Print(" ");
+        GD.Print("texture rect: " + textureRect);
+        GD.Print(new System.Diagnostics.StackTrace().ToString());*/
+        textureRect.Texture = EditorTileDatabase.GetTileTexture(tileData);
+        //GD.Print("texture: " + textureRect.Texture);
+        //GD.Print(" ");
+        
         foreach (var kvp in propertyEditors)
         {
             kvp.Value.QueueFree();
         }
         propertyEditors.Clear();
 
-        var props = customTileData.GetPropertyList();
+        var props = tileData.GetPropertyList();
 
         foreach (var prop in props)
         {
             var nameProperty = (string)prop["name"].Obj;
             if (nameProperty is "components" or "buildPrice" or "baseTurnCurrencyChange")
             {
-                var editor = EditorInspector.InstantiatePropertyEditor(customTileData, (Variant.Type)prop["type"].Obj, nameProperty, (PropertyHint)prop["hint"].Obj, (string)prop["hint_string"].Obj, Convert.ToUInt32(prop["usage"].Obj));
+                var editor = EditorInspector.InstantiatePropertyEditor(tileData, (Variant.Type)prop["type"].Obj, nameProperty, (PropertyHint)prop["hint"].Obj, (string)prop["hint_string"].Obj, Convert.ToUInt32(prop["usage"].Obj));
                 this.AddChild(editor);
 
-                editor.SetObjectAndProperty(customTileData, nameProperty);
+                editor.SetObjectAndProperty(tileData, nameProperty);
                 editor.Label = nameProperty;
+                editor.NameSplitRatio = 0.2f;
                 editor.PropertyChanged += OnPropChanged;
                 editor.Selected += OnPropSelected;
                 editor.MinimumSizeChanged += OnPropSizeChanged;
@@ -72,7 +83,7 @@ public partial class TileInfoGraphNode : GraphNode
 
     private void OnPropChanged(StringName property, Variant value, StringName field, bool changing)
     {
-        customTileData.Set(property, value);
+        tileData.Set(property, value);
         
         if (value.VariantType >= Variant.Type.Dictionary)
             propertyEditors[property].UpdateProperty();
@@ -97,7 +108,6 @@ public partial class TileInfoGraphNode : GraphNode
 
     public void OnFocusButton()
     {
-        graph.SelectItem(customTileData);
-        //this.QueueFree();
+        graph.SelectItem(tileData);
     }
 }

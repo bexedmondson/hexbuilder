@@ -73,7 +73,7 @@ public class ResidentManager : IInjectable
         InjectionManager.Get<ToastManager>().RequestToast(new ToastConfig{text = $"new resident: {newResident.Name}", stackId = "new_resident"});
         
         return newResident;
-    }
+    } 
 
     private void UpdateResidentHousing(IEvent e = null)
     {

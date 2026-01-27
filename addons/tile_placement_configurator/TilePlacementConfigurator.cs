@@ -5,52 +5,27 @@ using Godot;
 public partial class TilePlacementConfigurator : EditorPlugin
 {
 	private PackedScene mainPanelScene = ResourceLoader.Load<PackedScene>("res://addons/tile_placement_configurator/tile_placement_configurator.tscn");
-	private Control mainPanelInstance;
-
-	private TileDatabase tileDatabase;
+	private TilePluginParentNode mainPanelInstance;
 	
 	public override void _EnterTree()
 	{
-		HandleTileDB(true);
-		
-		mainPanelInstance = (Control)mainPanelScene.Instantiate();
+		mainPanelInstance = (TilePluginParentNode)mainPanelScene.Instantiate();
 		EditorInterface.Singleton.GetEditorMainScreen().AddChild(mainPanelInstance);
 		_MakeVisible(false);
 	}
 
-	public override void _EnablePlugin()
+	public override void _Ready() 
 	{
-		base._EnablePlugin();
-		HandleTileDB(true);
-	}
-	
-	public override void _DisablePlugin()
-	{
-		base._DisablePlugin();
-		HandleTileDB(false);
+		base._Ready();
+		MainScreenChanged += _ => mainPanelInstance.AddTileData();
 	}
 
 	public override void _ExitTree()
 	{
-		HandleTileDB(false);
 		if (mainPanelInstance != null)
 			mainPanelInstance.QueueFree();
 	}
-
-	private void HandleTileDB(bool shouldDbExist)
-	{
-		if (shouldDbExist && tileDatabase == null)
-		{
-			tileDatabase = new TileDatabase();
-		}
-		else if (!shouldDbExist && tileDatabase != null)
-		{
-			if (InjectionManager.Has<TileDatabase>())
-				InjectionManager.Deregister(tileDatabase);
-			tileDatabase = null;
-		}
-	}
-
+	
 	public override bool _HasMainScreen()
 	{
 		return true;
@@ -59,9 +34,7 @@ public partial class TilePlacementConfigurator : EditorPlugin
 	public override void _MakeVisible(bool visible)
 	{
 		if (mainPanelInstance != null)
-		{
 			mainPanelInstance.Visible = visible;
-		}
 	}
 
 	public override string _GetPluginName()
