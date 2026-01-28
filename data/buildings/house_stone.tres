@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://cprbbiv623dht"]
 
-[ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="1_wb84i"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_fhh4w"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="2_r8hfn"]
+[ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/house.tres" id="3_bdlm4"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_r8hfn"]
 [ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="3_x13tf"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="5_x13tf"]
@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_poee0"]
 script = ExtResource("6_fl3f3")
-tile = ExtResource("1_wb84i")
+tile = ExtResource("3_bdlm4")
 amount = 2
 comparison = 5
 metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
@@ -39,12 +39,12 @@ metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [sub_resource type="Resource" id="Resource_0c8fp"]
 script = ExtResource("9_fl3f3")
-capacity = 2
+capacity = 3
 metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
 
 [resource]
 script = ExtResource("3_r8hfn")
-canBePlacedOn = Array[Object]([ExtResource("1_wb84i"), ExtResource("2_r8hfn"), ExtResource("3_x13tf")])
+canBePlacedOn = Array[Object]([ExtResource("2_r8hfn"), ExtResource("3_x13tf"), ExtResource("3_bdlm4")])
 buildPrice = {
 2: 3
 }
