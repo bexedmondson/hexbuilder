@@ -11,6 +11,9 @@ public class ResidentState(string name, int moveInDay)
     public List<NeedConfig> activeNeeds = new();
 
     public int moveInDay { get; private set; } = moveInDay;
+
+    public static int maxHappiness = 3;
+    public static int minHappiness = -3;
     
     public int happiness { get; private set; } = 0;
     public void UpdateHappiness()
@@ -26,8 +29,8 @@ public class ResidentState(string name, int moveInDay)
         }
 
         happiness = happinessSum;
-        happiness = Mathf.Min(3, happiness);
-        happiness = Mathf.Max(-3, happiness);
+        happiness = Mathf.Min(maxHappiness, happiness);
+        happiness = Mathf.Max(minHappiness, happiness);
         
         if (happiness != prev)
         {

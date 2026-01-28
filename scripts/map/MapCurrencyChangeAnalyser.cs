@@ -100,6 +100,16 @@ public class MapCurrencyChangeAnalyser : IInjectable
             && workplace.workerCount == workplace.capacity
             && cellTileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxWorkerBonus))
         {
+            //no max worker bonus if any of the workers are maximum depressed
+            foreach (var worker in workplace.workers)
+            {
+                if (worker.happiness <= ResidentState.minHappiness)
+                {
+                    result = null;
+                    return false;
+                }
+            }
+            
             result = new CurrencySum(maxWorkerBonus.extraBaseProduction);
             return true;
         }
