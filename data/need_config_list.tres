@@ -41,7 +41,7 @@ metadata/_custom_type_script = "uid://cento2occpppv"
 script = ExtResource("1_eima2")
 assignmentRequirements = Array[Object]([SubResource("Resource_e4jau")])
 satisfactionRequirements = [SubResource("Resource_7ri1s")]
-unsatisfiedHappinessPenalty = -2
+unsatisfiedHappinessPenalty = -3
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
 [sub_resource type="Resource" id="Resource_dex7m"]

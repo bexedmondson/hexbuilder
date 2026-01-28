@@ -29,6 +29,22 @@ public partial class ResidentInfoPopup : Popup
 
         this.Visible = true;
     }
+    
+    public void ShowPopup(ResidentState residentState)
+    {
+        ShowPopup();
+        foreach (var residentNode in residentInfoContainer.GetChildren())
+        {
+            if (!(residentNode is ResidentInfoUI residentInfoUI))
+                continue;
+
+            if (residentInfoUI.residentState == residentState)
+            {
+                residentInfoUI.GrabFocus();
+                return;
+            }
+        }
+    }
 
     public override void Close()
     {

@@ -307,9 +307,7 @@ public partial class UnlockedCellPopup : Popup
         base.Close();
         InjectionManager.Get<MapHighlightController>().Clear();
         
-        bool hasMaxBonus = cellCustomTileData.IsWorkplace && cellCustomTileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxBonusComponent);
-        if (hasMaxBonus)
-            InjectionManager.Get<EventDispatcher>().Remove<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
+        InjectionManager.Get<EventDispatcher>().Remove<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
         
         cell = Vector2I.MinValue;
 

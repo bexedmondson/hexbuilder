@@ -36,6 +36,12 @@ public partial class RequirementUIMappingList : Resource
     private Texture2D foodIcon;
     [Export]
     private string sufficientFoodText;
+
+    [ExportGroup("Housemates")]
+    [Export]
+    private Texture2D noDepressedHousematesIcon;
+    [Export]
+    private string noDepressedHousematesText;
     
 
     public Texture2D GetIconForRequirement(DataRequirement requirement)
@@ -46,6 +52,8 @@ public partial class RequirementUIMappingList : Resource
                 return houseIcon;
             case IsHousedRequirement _:
                 return houseIcon;
+            case ResidentNoDepressedHousematesRequirement _:
+                return noDepressedHousematesIcon;
         }
 
         return null; //TODO default icon?
@@ -78,6 +86,8 @@ public partial class RequirementUIMappingList : Resource
                 return betterHousingText;
             case IsHousedRequirement _:
                 return isHousedText;
+            case ResidentNoDepressedHousematesRequirement _:
+                return noDepressedHousematesText;
         }
 
         return string.Empty;

@@ -24,8 +24,12 @@ public partial class ResidentInfoUI : Control
 
     private List<ResidentNeedInfoUI> needInfoUIs = new();
     
+    public ResidentState residentState { get; private set; }
+    
     public void SetResident(ResidentState residentState)
     {
+        this.residentState = residentState;
+        
         residentLabel.Text = residentState.Name;
         happinessIcon.Texture = InjectionManager.Get<IconMapper>().happinessMap[residentState.happiness];
         noHouseLabel.Visible = !residentState.HasHouse;

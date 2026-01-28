@@ -24,3 +24,5 @@ currentTileBuildUnlockText = "have more {building}s"
 lifetimeGainedText = "gather more {currency}"
 foodIcon = ExtResource("2_ohvbe")
 sufficientFoodText = "I'm hungry - there isn't enough food for everyone."
+noDepressedHousematesIcon = ExtResource("4_phppg")
+noDepressedHousematesText = "One of my housemates is really sad..."
