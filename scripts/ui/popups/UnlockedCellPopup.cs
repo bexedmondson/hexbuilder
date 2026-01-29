@@ -6,6 +6,9 @@ public partial class UnlockedCellPopup : Popup
     [Export]
     private Label title;
 
+    [Export]
+    private Control selectedCellInfoButton;
+
     [ExportGroup("Tabs")]
     [Export]
     private TabContainer tabContainer;
@@ -84,6 +87,7 @@ public partial class UnlockedCellPopup : Popup
         this.SetVisible(false);
         
         mapController = InjectionManager.Get<MapController>();
+        selectedCellInfoButton.Visible = false;
     }
     
     public void ShowForCell(TileMapLayer baseMapLayer, Vector2I setCell)
@@ -97,6 +101,9 @@ public partial class UnlockedCellPopup : Popup
         
         cell = setCell;
         cellCustomTileData = baseMapLayer.GetCellTileData(cell).GetCustomData("data").Obj as CustomTileData;
+        
+        TileDatabase tileDatabase = InjectionManager.Get<TileDatabase>();
+        selectedCellInfoButton.Visible = tileDatabase.AllBuildingTileInfos.Exists(tileInfo => tileInfo.tileData == cellCustomTileData);
 
         title.Text = cellCustomTileData.GetFileName();
         
@@ -224,6 +231,11 @@ public partial class UnlockedCellPopup : Popup
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count == 0)
             tileSelectionGroup.Pressed += OnSelectionChanged;
+    }
+
+    public void OnSelectedCellInfoButton()
+    {
+        encyclopediaPopup.ShowPopup(cellCustomTileData);
     }
 
     public void OnInfoButton(CustomTileData tileDataToShow)
