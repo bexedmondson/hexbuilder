@@ -24,8 +24,11 @@ public partial class UnlockedCellPopup : Popup
 
     [Export]
     private Control buildTab;
+
+    [ExportGroup("Resources Tab")]
+    [Export]
+    private UnlockedCellPopup_Resources resourcesDisplay;
     
-    [ExportGroup("Effects Tab")]
     [Export]
     private Control effectInfoParent;
 
@@ -128,54 +131,8 @@ public partial class UnlockedCellPopup : Popup
 
     private void SetupInfo()
     {
-        for (int i = effectInfoParent.GetChildCount() - 1; i >= 0; i--)
-        {
-            effectInfoParent.GetChild(i).QueueFree();
-        }
-        
-        var adjacentCells = mapController.BaseMapLayer.GetSurroundingCells(cell);
-
-        bool hasEffects = false;
-        
-        if (cellCustomTileData.baseTurnCurrencyChange?.Count > 0)
-        {
-            hasEffects = true;
-            
-            defaultEffectDisplay.DisplayCurrencyAmount(new CurrencySum(cellCustomTileData.baseTurnCurrencyChange));
-            
-            //TODO indicate when nothing is being produced (including all of the below!) if no workers, if this is a workplace
-        }
-
-        if (cellCustomTileData.IsWorkplace)
-        {
-            SetupMaxBonus(cellCustomTileData);
-        }
-        else
-        {
-            maxBonusContainer.Visible = false;
-        }
-
-        foreach (var adjacentCell in adjacentCells)
-        {
-            var adjacentData = mapController.BaseMapLayer.GetCellCustomData(adjacentCell);
-            bool hasGivenEffect = cellCustomTileData.TryGetAdjacencyEffectFromTileData(adjacentData, out var givenEffect);
-            bool hasReceivedEffect = adjacentData.TryGetAdjacencyEffectFromTileData(cellCustomTileData, out var receivedEffect);
-
-            if (!hasGivenEffect && !hasReceivedEffect)
-                continue;
-            
-            hasEffects = true;
-            
-            var adjacencyEffectUI = unlockedCellAdjacencyUIScene.Instantiate<UnlockedCellAdjacencyUI>();
-            adjacencyEffectUI.Setup(adjacentData, cell, adjacentCell);
-            if (hasGivenEffect)
-                adjacencyEffectUI.SetGivenEffects(givenEffect);
-            if (hasReceivedEffect)
-                adjacencyEffectUI.SetReceivedEffects(receivedEffect);
-            effectInfoParent.AddChild(adjacencyEffectUI);
-        }
-
-        tabContainer.SetTabHidden(effectsTab.GetIndex(), !hasEffects);
+        resourcesDisplay.Setup(cellCustomTileData, cell, out bool hasAnyEffects);
+        tabContainer.SetTabHidden(effectsTab.GetIndex(), !hasAnyEffects);
     }
 
     private void SetupMaxBonus(CustomTileData tileData)

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://hd50lh5054ow"]
+
+[ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="1_3qpwm"]
+
+[node name="SingleCurrencyDisplay" unique_id=913887442 instance=ExtResource("1_3qpwm")]
+
+[node name="Label" parent="." index="1" unique_id=2097351834]
+theme_type_variation = &"LightOutlineLabel"

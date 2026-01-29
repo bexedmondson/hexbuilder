@@ -18,6 +18,11 @@ public partial class ResidentInfoPopup : Popup
 
     public void ShowPopup()
     {
+        foreach (var child in residentInfoContainer.GetChildren())
+        {
+            child.QueueFree();
+        }
+        
         residentManager ??= InjectionManager.Get<ResidentManager>();
         
         foreach (var residentData in residentManager.AllResidents)

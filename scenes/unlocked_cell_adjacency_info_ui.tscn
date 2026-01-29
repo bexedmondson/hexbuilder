@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djnscpwua3iqw" path="res://scripts/ui/popups/UnlockedCellAdjacencyUI.cs" id="1_rjnxt"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="2_re3pf"]
+[ext_resource type="PackedScene" uid="uid://hd50lh5054ow" path="res://scenes/single_currency_display_light-outline-label.tscn" id="3_6v8bx"]
 [ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="3_re3pf"]
 
 [node name="AdjacencyInfoHBoxContainer" type="HBoxContainer" unique_id=1052811575 node_paths=PackedStringArray("effectGivenUI", "effectReceivedUI", "name", "direction", "giveEffectDisplay", "receiveEffectDisplay", "noWorkerIndicator")]
@@ -17,22 +18,26 @@ noWorkerIndicator = NodePath("GivesHBoxContainer/NoWorkerIndicator")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1314120367]
 layout_mode = 2
+theme_type_variation = &"LightOutlineLabel"
 
 [node name="DirectionLabel" type="Label" parent="." unique_id=8296357]
 layout_mode = 2
+theme_type_variation = &"LightOutlineLabel"
 
 [node name="GivesHBoxContainer" type="HBoxContainer" parent="." unique_id=1760846320]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="GivesHBoxContainer" unique_id=888050520]
 layout_mode = 2
+theme_type_variation = &"LightOutlineLabel"
 text = "gives:"
 
 [node name="CurrencyDisplay" parent="GivesHBoxContainer" unique_id=767577572 instance=ExtResource("2_re3pf")]
 layout_mode = 2
 size_flags_horizontal = 2
+singleCurrencyDisplayScene = ExtResource("3_6v8bx")
 displayAsDelta = true
-iconColor = Color(0, 0, 0, 1)
+iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 
 [node name="NoWorkerIndicator" type="HBoxContainer" parent="GivesHBoxContainer" unique_id=680998968]
 modulate = Color(0.85490197, 0, 0, 1)
@@ -41,6 +46,7 @@ theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="GivesHBoxContainer/NoWorkerIndicator" unique_id=401943985]
 layout_mode = 2
+theme_type_variation = &"LightOutlineLabel"
 text = "! 0"
 
 [node name="TextureRect" type="TextureRect" parent="GivesHBoxContainer/NoWorkerIndicator" unique_id=1008687498]
@@ -60,5 +66,5 @@ text = "receives:"
 [node name="CurrencyDisplay" parent="ReceivesHBoxContainer2" unique_id=929819009 instance=ExtResource("2_re3pf")]
 layout_mode = 2
 size_flags_horizontal = 2
+singleCurrencyDisplayScene = ExtResource("3_6v8bx")
 displayAsDelta = true
-iconColor = Color(0, 0, 0, 1)

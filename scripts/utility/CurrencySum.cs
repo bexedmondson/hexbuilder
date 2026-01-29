@@ -43,6 +43,21 @@ public class CurrencySum : Dictionary<CurrencyType, int>
         
         return final;
     }
+    
+    public static bool operator ==(CurrencySum left, CurrencySum right)
+    {
+        if (ReferenceEquals(left, right))
+            return true;
+        if (left is null || right is null)
+            return false;
+        
+        return left.Equals(right);
+    }
+    
+    public static bool operator !=(CurrencySum left, CurrencySum right)
+    {
+        return !(left == right);
+    }
 
     public void Add(CurrencySum sumToAdd)
     { 
@@ -107,6 +122,41 @@ public class CurrencySum : Dictionary<CurrencyType, int>
     public CurrencySum Get(CurrencyType currencyType)
     {
         return TryGetValue(currencyType, out int amount) ? new CurrencySum(currencyType, amount) : new CurrencySum(currencyType);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is not CurrencySum otherSum)
+            return false;
+
+        foreach (var kvp in otherSum)
+        {
+            if (!this.TryGetValue(kvp.Key, out var val))
+                return false;
+            if (val != kvp.Value)
+                return false;
+        }
+        
+        foreach (var kvp in this)
+        {
+            if (!otherSum.TryGetValue(kvp.Key, out var val))
+                return false;
+            if (val != kvp.Value)
+                return false;
+        }
+        
+        return true;
+    }
+
+    public override int GetHashCode()
+    {
+        int code = 0;
+        foreach (var kvp in this)
+        {
+            code += kvp.Key.GetHashCode();
+            code += kvp.Value.GetHashCode();
+        }
+        return code;
     }
 
     public override string ToString()

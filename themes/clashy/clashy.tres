@@ -74,6 +74,10 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 corner_detail = 5
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_o2yqt"]
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+thickness = 2
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ml68f"]
 texture = ExtResource("3_i7pvi")
 texture_margin_left = 10.0
@@ -143,6 +147,7 @@ GreenButton/styles/normal = ExtResource("19_bp2cy")
 GreenButton/styles/pressed = ExtResource("20_7xukr")
 HBoxContainer/constants/separation = 8
 HScrollBar/styles/scroll = SubResource("StyleBoxFlat_kx8pi")
+HSeparator/styles/separator = SubResource("StyleBoxLine_o2yqt")
 Label/colors/font_outline_color = Color(0.262932, 0.262932, 0.262932, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 13
@@ -152,6 +157,8 @@ Label/constants/shadow_outline_size = 5
 Label/font_sizes/font_size = 20
 Label_Title/base_type = &"Label"
 Label_Title/font_sizes/font_size = 28
+LightOutlineLabel/base_type = &"Label"
+LightOutlineLabel/colors/font_outline_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
 LineEdit/colors/font_uneditable_color = Color(0.83497256, 0.8510168, 0.85637206, 1)
 MarginContainer/constants/margin_bottom = 12
 MarginContainer/constants/margin_left = 12

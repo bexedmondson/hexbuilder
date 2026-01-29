@@ -25,49 +25,83 @@ public class MapCurrencyChangeAnalyser : IInjectable
         
         foreach (var cell in mapController.BaseMapLayer.GetUsedCells())
         {
-            if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
+            List<CurrencySum> cellCurrencyChanges = GetCellCurrencyChanges(cell);
+
+            if (cellCurrencyChanges.IsNullOrEmpty())
                 continue;
-
-            var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
-            if (cellTileData == null)
-                continue;
-
-            bool noProduction = IsCellProductionProhibited(cell, cellTileData);
-            bool noConsumption = IsCellConsumptionProhibited(cell, cellTileData);
-
-            if (cellTileData?.baseTurnCurrencyChange != null && cellTileData.baseTurnCurrencyChange.Count > 0)
-            {
-                CurrencySum finalBaseDelta = new();
-                foreach (var kvp in cellTileData.baseTurnCurrencyChange)
-                {
-                    if (kvp.Value > 0 && !noProduction)
-                        finalBaseDelta.Add(kvp.Key, kvp.Value);
-                    else if (kvp.Value < 0 && !noConsumption)
-                        finalBaseDelta.Add(kvp.Key, kvp.Value);
-                }
-                
-                if (finalBaseDelta.Count > 0)
-                    allCurrencyChanges.Add(finalBaseDelta);
-            }
             
-            //all the below are production bonuses, so with no production we can early exit here
-            if (noProduction)
-                continue;
-
-            if (TryGetWorkplaceMaxWorkerBonus(cell, cellTileData, out CurrencySum maxWorkerBonus))
-            {
-                allCurrencyChanges.Add(maxWorkerBonus);
-            }
-            
-            var adjacencyEffects = CalculateAdjacencyEffects(cell, cellTileData);
-            if (adjacencyEffects.Count > 0)
-                allCurrencyChanges.Add(adjacencyEffects);
+            allCurrencyChanges.AddRange(cellCurrencyChanges);
         }
         
         return allCurrencyChanges;
     }
 
-    private bool IsCellProductionProhibited(Vector2I cell, CustomTileData cellTileData)
+    public CurrencySum GetTotalCellCurrencyChange(Vector2I cell)
+    {
+        CurrencySum sum = new();
+        var changes = GetCellCurrencyChanges(cell);
+        foreach (var change in changes)
+        {
+            sum += change;
+        }
+        return sum;
+    }
+
+    private List<CurrencySum> GetCellCurrencyChanges(Vector2I cell)
+    {
+        if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
+            return null;
+
+        var cellTileData = mapController.BaseMapLayer.GetCellCustomData(cell);
+        if (cellTileData == null)
+            return null;
+
+        List<CurrencySum> cellCurrencyChanges = new();
+
+        CurrencySum baseCurrencyChange = GetActualCellBaseCurrencyChange(cell, cellTileData);
+        if (baseCurrencyChange != null && baseCurrencyChange.Count > 0)
+            cellCurrencyChanges.Add(baseCurrencyChange);
+            
+        //all the below are production bonuses, so with no production we can early exit here
+        if (IsCellProductionProhibited(cell, cellTileData))
+            return cellCurrencyChanges;
+
+        if (TryGetWorkplaceMaxWorkerBonus(cell, cellTileData, out CurrencySum maxWorkerBonus))
+        {
+            cellCurrencyChanges.Add(maxWorkerBonus);
+        }
+            
+        var adjacencyEffects = CalculateAdjacencyEffects(cell, cellTileData);
+        if (adjacencyEffects.Count > 0)
+            cellCurrencyChanges.Add(adjacencyEffects);
+
+        return cellCurrencyChanges;
+    }
+
+    public CurrencySum GetActualCellBaseCurrencyChange(Vector2I cell, CustomTileData cellTileData)
+    {
+        if (cellTileData.baseTurnCurrencyChange.IsNullOrEmpty())
+            return null;
+        
+        bool noProduction = IsCellProductionProhibited(cell, cellTileData);
+        bool noConsumption = IsCellConsumptionProhibited(cell, cellTileData);
+
+        if (!noProduction && !noConsumption)
+            return new CurrencySum(cellTileData.baseTurnCurrencyChange);
+
+        CurrencySum finalBaseDelta = new();
+        foreach (var kvp in cellTileData.baseTurnCurrencyChange)
+        {
+            if (kvp.Value > 0 && !noProduction)
+                finalBaseDelta.Add(kvp.Key, kvp.Value);
+            else if (kvp.Value < 0 && !noConsumption)
+                finalBaseDelta.Add(kvp.Key, kvp.Value);
+        }
+
+        return finalBaseDelta;
+    }
+
+    public bool IsCellProductionProhibited(Vector2I cell, CustomTileData cellTileData)
     {
         //if it's not a workplace, can't be affected by lack of workers
         if (!cellTileData.TryGetComponent(out WorkerCapacityComponent _))
@@ -81,15 +115,16 @@ public class MapCurrencyChangeAnalyser : IInjectable
         return !isWorkplace || workplace.workerCount <= 0;
     }
 
-    private bool IsCellConsumptionProhibited(Vector2I cell, CustomTileData cellTileData)
+    public bool IsCellConsumptionProhibited(Vector2I cell, CustomTileData cellTileData)
     {
         //don't apply consumption effects for residences without residents in them
         if (housingManager.TryGetHouseOnCell(cell, out var house))
             return house.occupants.Length <= 0;
 
         //don't apply consumption effects for workplaces without workers in them
-        if (workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplace))
-            return workplace.workerCount <= 0;
+        //update: above is true, but no production warning from no workers is more important. removing for now 
+        //if (workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplace))
+        //    return workplace.workerCount <= 0;
 
         return false;
     }

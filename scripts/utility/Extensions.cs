@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public static class Extensions
@@ -26,5 +29,10 @@ public static class Extensions
         return tileMapLayer.GetCellSourceId(cell) == -1
                && tileMapLayer.GetCellAtlasCoords(cell) == (Vector2I.One * -1)
                && tileMapLayer.GetCellAlternativeTile(cell) == -1;
+    }
+
+    public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
+    {
+        return collection == null || !collection.Any();
     }
 }
