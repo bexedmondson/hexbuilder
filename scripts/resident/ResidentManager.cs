@@ -14,6 +14,7 @@ public class ResidentManager : IInjectable
     public ResidentState[] AllResidents => residents.ToArray();
 
     private string[] names;
+    private List<string> unusedNames = new();
     
     public ResidentManager(MapController mapController)
     {
@@ -31,6 +32,26 @@ public class ResidentManager : IInjectable
         housingManager ??= InjectionManager.Get<HousingManager>();
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
         InjectionManager.Get<EventDispatcher>().Add<HouseUpdatedEvent>(UpdateResidentHousing);
+        
+        RefreshUnusedNamesList();
+    }
+
+    private void RefreshUnusedNamesList()
+    {
+        unusedNames.Clear();
+
+        if (residents.Count > names.Length) //if more residents than names, just let selection happen randomly
+        {
+            unusedNames.AddRange(names);
+            return;
+        }
+        
+        foreach (string name in names)
+        {
+            if (residents.Exists(resident => resident.Name == name))
+                continue;
+            unusedNames.Add(name);
+        }
     }
 
     public void OnNextTurn()
@@ -63,7 +84,12 @@ public class ResidentManager : IInjectable
     public ResidentState CreateResident()
     {
         turnCounter ??= InjectionManager.Get<TurnCounter>();
-        var newResident = new ResidentState(names[GD.RandRange(0, names.Length - 1)], turnCounter.turnCount);
+        var newResident = new ResidentState(unusedNames[GD.RandRange(0, unusedNames.Count - 1)], turnCounter.turnCount);
+        if (residents.Count > names.Length)
+            RefreshUnusedNamesList();
+        else
+            unusedNames.Remove(newResident.Name);
+        
         residents.Add(newResident);
         
         InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentCountUpdatedEvent(residents.Count));
