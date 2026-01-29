@@ -9,13 +9,12 @@ public partial class CurrencyDisplay_Strikethroughable : CurrencyDisplay
     private Color defaultColor = Colors.White;
 
     [Export]
-    private Color struckOutColor = Color.FromHtml("4c4c4cff");
+    private Color struckOutColor = Color.FromHtml("ffffffb3");
 
     public override void _Ready()
     {
         base._Ready();
         this.Modulate = defaultColor;
-        strikethrough.Visible = false;
     }
 
     public void SetStrikethrough(bool strikeActive)

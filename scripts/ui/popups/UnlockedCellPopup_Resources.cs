@@ -6,6 +6,9 @@ public partial class UnlockedCellPopup_Resources : Control
     private CurrencyDisplay overallEffectDisplay;
 
     [Export]
+    private Control defaultBaseEffectContainer;
+
+    [Export]
     private CurrencyDisplay_Strikethroughable defaultBaseEffectDisplay;
 
     [Export]
@@ -64,6 +67,7 @@ public partial class UnlockedCellPopup_Resources : Control
         if (selectedCellTileData.baseTurnCurrencyChange?.Count > 0)
         {
             hasEffects = true;
+            defaultBaseEffectContainer.Visible = true;
             CurrencySum defaultBaseChange = new CurrencySum(selectedCellTileData.baseTurnCurrencyChange);
             
             defaultBaseEffectDisplay.DisplayCurrencyAmount(defaultBaseChange);
@@ -84,6 +88,10 @@ public partial class UnlockedCellPopup_Resources : Control
                 noConsumptionIndicator.Visible = false;
             }
         }
+        else
+        {
+            defaultBaseEffectContainer.Visible = false;
+        }
 
         if (selectedCellTileData.IsWorkplace)
         {
@@ -96,21 +104,24 @@ public partial class UnlockedCellPopup_Resources : Control
 
         foreach (var adjacentCell in adjacentCells)
         {
+            if (mapController.GetCellStatus(adjacentCell) != CellStatus.Unlocked)
+                continue;
+            
             var adjacentData = mapController.BaseMapLayer.GetCellCustomData(adjacentCell);
             bool hasGivenEffect = selectedCellTileData.TryGetAdjacencyEffectFromTileData(adjacentData, out var givenEffect);
             bool hasReceivedEffect = adjacentData.TryGetAdjacencyEffectFromTileData(selectedCellTileData, out var receivedEffect);
 
-            if (!hasGivenEffect && !hasReceivedEffect)
+            if (!hasGivenEffect)// && !hasReceivedEffect)
                 continue;
             
             hasEffects = true;
             
             var adjacencyEffectUI = adjacencyEffectUIScene.Instantiate<UnlockedCellAdjacencyUI>();
-            adjacencyEffectUI.Setup(adjacentData, cell, adjacentCell);
+            adjacencyEffectUI.Setup(adjacentData, cell, adjacentCell, currencyChangeAnalyser.IsCellProductionProhibited(cell, cellTileData));
             if (hasGivenEffect)
                 adjacencyEffectUI.SetGivenEffects(givenEffect);
-            if (hasReceivedEffect)
-                adjacencyEffectUI.SetReceivedEffects(receivedEffect);
+            //if (hasReceivedEffect)
+            //    adjacencyEffectUI.SetReceivedEffects(receivedEffect);
             adjacencyEffectContainer.AddChild(adjacencyEffectUI);
         }
     }

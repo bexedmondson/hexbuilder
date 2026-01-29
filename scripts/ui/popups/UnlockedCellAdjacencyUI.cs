@@ -16,7 +16,7 @@ public partial class UnlockedCellAdjacencyUI : Control
     private Label direction;
 
     [Export]
-    private CurrencyDisplay giveEffectDisplay;
+    private CurrencyDisplay_Strikethroughable giveEffectDisplay;
     
     [Export]
     private CurrencyDisplay receiveEffectDisplay;
@@ -36,7 +36,7 @@ public partial class UnlockedCellAdjacencyUI : Control
         { new Vector2I(-1, 1), "N"}
     };
 
-    public void Setup(CustomTileData adjacentTileData, Vector2I centreCell, Vector2I adjacentCell)
+    public void Setup(CustomTileData adjacentTileData, Vector2I centreCell, Vector2I adjacentCell, bool centreCellNoEffects)
     {
         name.Text = adjacentTileData.GetFileName();
         direction.Text = coordsToDirectionMap[centreCell - adjacentCell];
@@ -49,13 +49,15 @@ public partial class UnlockedCellAdjacencyUI : Control
         if (workplaceManager.TryGetWorkplaceAtLocation(adjacentCell, out var adjacentWorkplace))
         {
             noWorkerIndicator.Visible = adjacentWorkplace.workerCount == 0;
-            if (adjacentWorkplace.workerCount == 0)
-                this.Modulate = disabledColour;
+            //if (adjacentWorkplace.workerCount == 0)
+                //this.Modulate = disabledColour;
         }
         else
         {
             noWorkerIndicator.Visible = false;
         }
+        
+        giveEffectDisplay.SetStrikethrough(centreCellNoEffects);
     }
 
     public void SetGivenEffects(CurrencySum givenEffects)

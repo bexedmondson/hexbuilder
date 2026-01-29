@@ -840,7 +840,7 @@ current_tab = 0
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects" unique_id=2065032771 node_paths=PackedStringArray("overallEffectDisplay", "defaultBaseEffectDisplay", "actualBaseEffectDisplay", "noProductionIndicator", "noConsumptionIndicator", "maxBonusContainer", "maxBonusCurrencyDisplay", "maxBonusNegationReason", "adjacencyEffectContainer")]
+[node name="InfoSubpanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects" unique_id=2065032771 node_paths=PackedStringArray("overallEffectDisplay", "defaultBaseEffectContainer", "defaultBaseEffectDisplay", "actualBaseEffectDisplay", "noProductionIndicator", "noConsumptionIndicator", "maxBonusContainer", "maxBonusCurrencyDisplay", "maxBonusNegationReason", "adjacencyEffectContainer")]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -849,6 +849,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("50_go0uc")
 overallEffectDisplay = NodePath("VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer/CurrencyDisplay")
+defaultBaseEffectContainer = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2")
 defaultBaseEffectDisplay = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
 actualBaseEffectDisplay = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/ActualBaseMarginContainer/CurrencyDisplay")
 noProductionIndicator = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/NoProductionLabel")
@@ -899,7 +900,7 @@ iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
 [node name="NoneLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=652602105]
 layout_mode = 2
-text = "no resources given"
+text = "no change"
 
 [node name="HSeparator" type="HSeparator" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=236185397]
 layout_mode = 2
@@ -937,7 +938,6 @@ size_flags_vertical = 4
 alignment = 1
 script = ExtResource("53_822nj")
 strikethrough = NodePath("../StrikeTextureRect")
-struckOutColor = Color(1, 1, 1, 0.7019608)
 singleCurrencyDisplayScene = ExtResource("54_822nj")
 displayAsDelta = true
 iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
@@ -1006,7 +1006,7 @@ iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 [node name="NoneLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=234801300]
 layout_mode = 2
 theme_type_variation = &"LightOutlineLabel"
-text = "no resources given"
+text = "no change"
 
 [node name="MaxBonusInfoHBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=1849797886]
 layout_mode = 2
@@ -1042,7 +1042,6 @@ size_flags_vertical = 4
 alignment = 1
 script = ExtResource("53_822nj")
 strikethrough = NodePath("../StrikeTextureRect")
-struckOutColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 singleCurrencyDisplayScene = ExtResource("54_822nj")
 displayAsDelta = true
 iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)

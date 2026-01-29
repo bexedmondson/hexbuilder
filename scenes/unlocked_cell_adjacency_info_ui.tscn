@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://nrnjv42wsci4"]
 
 [ext_resource type="Script" uid="uid://djnscpwua3iqw" path="res://scripts/ui/popups/UnlockedCellAdjacencyUI.cs" id="1_rjnxt"]
+[ext_resource type="Script" uid="uid://dxy7i1dyipgd8" path="res://scripts/ui/popups/CurrencyDisplay_Strikethroughable.cs" id="2_ib470"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="2_re3pf"]
 [ext_resource type="PackedScene" uid="uid://hd50lh5054ow" path="res://scenes/single_currency_display_light-outline-label.tscn" id="3_6v8bx"]
-[ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="3_re3pf"]
+[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="4_rc7kf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m5kp"]
+atlas = ExtResource("4_rc7kf")
+region = Rect2(1536, 1536, 128, 128)
 
 [node name="AdjacencyInfoHBoxContainer" type="HBoxContainer" unique_id=1052811575 node_paths=PackedStringArray("effectGivenUI", "effectReceivedUI", "name", "direction", "giveEffectDisplay", "receiveEffectDisplay", "noWorkerIndicator")]
 script = ExtResource("1_rjnxt")
@@ -11,10 +16,10 @@ effectGivenUI = NodePath("GivesHBoxContainer")
 effectReceivedUI = NodePath("ReceivesHBoxContainer2")
 name = NodePath("NameLabel")
 direction = NodePath("DirectionLabel")
-giveEffectDisplay = NodePath("GivesHBoxContainer/CurrencyDisplay")
+giveEffectDisplay = NodePath("GivesHBoxContainer/MarginContainer/CurrencyDisplay")
 receiveEffectDisplay = NodePath("ReceivesHBoxContainer2/CurrencyDisplay")
 disabledColour = Color(0.27450982, 0.27450982, 0.27450982, 1)
-noWorkerIndicator = NodePath("GivesHBoxContainer/NoWorkerIndicator")
+noWorkerIndicator = NodePath("GivesHBoxContainer/MarginContainer/StrikeTextureRect/NoWorkersLabel")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1314120367]
 layout_mode = 2
@@ -32,28 +37,51 @@ layout_mode = 2
 theme_type_variation = &"LightOutlineLabel"
 text = "gives:"
 
-[node name="CurrencyDisplay" parent="GivesHBoxContainer" unique_id=767577572 instance=ExtResource("2_re3pf")]
+[node name="MarginContainer" type="MarginContainer" parent="GivesHBoxContainer" unique_id=2025826741]
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="GivesHBoxContainer/MarginContainer" unique_id=1023051961 node_paths=PackedStringArray("strikethrough")]
+modulate = Color(0.46727073, 0.46727073, 0.46727067, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("2_ib470")
+strikethrough = NodePath("../StrikeTextureRect")
 singleCurrencyDisplayScene = ExtResource("3_6v8bx")
 displayAsDelta = true
 iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 
-[node name="NoWorkerIndicator" type="HBoxContainer" parent="GivesHBoxContainer" unique_id=680998968]
-modulate = Color(0.85490197, 0, 0, 1)
+[node name="StrikeTextureRect" type="TextureRect" parent="GivesHBoxContainer/MarginContainer" unique_id=412174318]
+visible = false
+self_modulate = Color(0.39607844, 0, 0.08627451, 0.90588236)
 layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Label" type="Label" parent="GivesHBoxContainer/NoWorkerIndicator" unique_id=401943985]
-layout_mode = 2
-theme_type_variation = &"LightOutlineLabel"
-text = "! 0"
-
-[node name="TextureRect" type="TextureRect" parent="GivesHBoxContainer/NoWorkerIndicator" unique_id=1008687498]
-layout_mode = 2
-texture = ExtResource("3_re3pf")
+texture = SubResource("AtlasTexture_0m5kp")
 expand_mode = 3
-stretch_mode = 5
+
+[node name="NoWorkersLabel" type="Label" parent="GivesHBoxContainer/MarginContainer/StrikeTextureRect" unique_id=847901187]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_type_variation = &"LightOutlineLabel"
+theme_override_colors/font_outline_color = Color(0.4, 0.09411765, 0.16078432, 1)
+theme_override_font_sizes/font_size = 14
+text = "no workers!"
+horizontal_alignment = 1
 
 [node name="ReceivesHBoxContainer2" type="HBoxContainer" parent="." unique_id=1356682576]
 visible = false
