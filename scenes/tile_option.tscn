@@ -2,12 +2,13 @@
 
 [ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="1_whmtt"]
 [ext_resource type="Script" uid="uid://cois7vh5ul7c7" path="res://scripts/ui/popups/TileOptionUI.cs" id="2_tjxx3"]
-[ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="3_6d75x"]
 [ext_resource type="Texture2D" uid="uid://byfu2r5i3mr06" path="res://assets/2d/building-castle.png" id="3_wgdtb"]
 [ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="4_goryc"]
 [ext_resource type="Material" uid="uid://jrcfkjx2d6od" path="res://materials_shaders/greyscale_material.tres" id="5_i0rf2"]
 [ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="6_4dfpb"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="6_i0rf2"]
+[ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="7_n11l1"]
+[ext_resource type="PackedScene" uid="uid://c4lsexualag0i" path="res://scenes/single_currency_display_shrinkable.tscn" id="11_1g24y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4dfpb"]
 atlas = ExtResource("6_i0rf2")
@@ -24,7 +25,7 @@ button_group = ExtResource("1_whmtt")
 script = ExtResource("2_tjxx3")
 textureRect = NodePath("MarginContainer/Container/TileTexture")
 nameLabel = NodePath("MarginContainer/Container/VBoxContainer/NameDisplay")
-currencyDisplay = NodePath("MarginContainer/Container/VBoxContainer/CurrencyDisplay")
+currencyDisplay = NodePath("MarginContainer/Container/VBoxContainer/PanelContainer/MarginContainer/CurrencyDisplay")
 lockIndicator = NodePath("MarginContainer/Container/TileTexture/LockTextureRect")
 infoButton = NodePath("InfoButton")
 
@@ -44,7 +45,6 @@ theme_override_constants/margin_bottom = 10
 [node name="Container" type="HBoxContainer" parent="MarginContainer" unique_id=2134865771]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
-theme_override_constants/separation = 4
 
 [node name="TileTexture" type="TextureRect" parent="MarginContainer/Container" unique_id=1644242724]
 custom_minimum_size = Vector2(150, 0)
@@ -75,15 +75,41 @@ texture = ExtResource("6_4dfpb")
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Container" unique_id=1908694678]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 4
 
 [node name="NameDisplay" type="Label" parent="MarginContainer/Container/VBoxContainer" unique_id=1752738764]
 layout_mode = 2
 text = "placeholder"
+horizontal_alignment = 1
 
-[node name="CurrencyDisplay" parent="MarginContainer/Container/VBoxContainer" unique_id=1826121471 instance=ExtResource("3_6d75x")]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/Container/VBoxContainer" unique_id=448592025]
 layout_mode = 2
-size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/PanelContainer" unique_id=124386633]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="MarginContainer/Container/VBoxContainer/PanelContainer/MarginContainer" unique_id=1618969733]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+last_wrap_alignment = 2
+script = ExtResource("7_n11l1")
+singleCurrencyDisplayScene = ExtResource("11_1g24y")
+
+[node name="Label" type="Label" parent="MarginContainer/Container/VBoxContainer/PanelContainer" unique_id=724785915]
+layout_mode = 2
 size_flags_vertical = 0
+theme_type_variation = &"LightOutlineLabel"
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "price"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="InfoButton" type="Button" parent="." unique_id=597461691]
 layout_mode = 1
