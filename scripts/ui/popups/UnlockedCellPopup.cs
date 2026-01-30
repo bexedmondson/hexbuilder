@@ -114,6 +114,8 @@ public partial class UnlockedCellPopup : Popup
         {
             workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplaceState);
             workplaceInfoUI.SetWorkplaceInfo(workplaceState, null);
+            
+            InjectionManager.Get<EventDispatcher>().Add<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
         }
 
         if (cellCustomTileData.TryGetComponent<StorageCapacityDataComponent>(out var storageComponent))
@@ -150,7 +152,6 @@ public partial class UnlockedCellPopup : Popup
         if (!hasMaxBonus) 
             return;
         
-        InjectionManager.Get<EventDispatcher>().Add<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
         maxBonusCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(maxBonusComponent.extraBaseProduction));
     }
 
@@ -160,8 +161,7 @@ public partial class UnlockedCellPopup : Popup
         if (!e.newOrChangedWorkplaces.Contains(workplaceState))
             return;
         
-        maxBonusContainer.Visible = workplaceState.workerCount >= workplaceState.capacity;
-        //don't need to do the rest of the setup - shouldn't have gotten here if no max bonus component/not a workplace
+        resourcesDisplay.Setup(cellCustomTileData, cell, out _);
     }
     
     private void SetupResidents()

@@ -18,7 +18,7 @@ name = NodePath("NameLabel")
 direction = NodePath("DirectionLabel")
 giveEffectDisplay = NodePath("GivesHBoxContainer/MarginContainer/CurrencyDisplay")
 receiveEffectDisplay = NodePath("ReceivesHBoxContainer2/CurrencyDisplay")
-disabledColour = Color(0.27450982, 0.27450982, 0.27450982, 1)
+disabledColour = Color(1, 1, 1, 1)
 noWorkerIndicator = NodePath("GivesHBoxContainer/MarginContainer/StrikeTextureRect/NoWorkersLabel")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1314120367]

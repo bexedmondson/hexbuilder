@@ -49,8 +49,6 @@ public partial class UnlockedCellAdjacencyUI : Control
         if (workplaceManager.TryGetWorkplaceAtLocation(adjacentCell, out var adjacentWorkplace))
         {
             noWorkerIndicator.Visible = adjacentWorkplace.workerCount == 0;
-            //if (adjacentWorkplace.workerCount == 0)
-                //this.Modulate = disabledColour;
         }
         else
         {
