@@ -51,6 +51,12 @@ public partial class EncyclopediaPopup : Popup
     private PackedScene unlockReqScene;
 
     [Export]
+    private Control buildPriceContainer;
+
+    [Export]
+    private CurrencyDisplay buildPriceDisplay;
+
+    [Export]
     private Control affectsParent;
 
     [Export]
@@ -126,6 +132,8 @@ public partial class EncyclopediaPopup : Popup
         SetupMaxBonus(selectedTileData);
 
         SetupUnlockRequirements(selectedTileData);
+
+        SetupBuildCosts(selectedTileData);
         
         SetupAffects(selectedTileData);
         SetupAffectedBy(selectedTileData);
@@ -187,6 +195,19 @@ public partial class EncyclopediaPopup : Popup
             var requirementUI = unlockReqScene.Instantiate<UnlockRequirementUI>();
             requirementUI.Setup(requirement);
             unlockReqContainer.AddChild(requirementUI);
+        }
+    }
+
+    private void SetupBuildCosts(CustomTileData tileData)
+    {
+        if (tileData.buildPrice != null && tileData.buildPrice.Count > 0)
+        {
+            buildPriceContainer.Visible = true;
+            buildPriceDisplay.DisplayCurrencyAmount(new CurrencySum(tileData.buildPrice));
+        }
+        else
+        {
+            buildPriceContainer.Visible = false;
         }
     }
 

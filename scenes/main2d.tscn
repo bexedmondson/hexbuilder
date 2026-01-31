@@ -767,6 +767,7 @@ toastLabelScene = SubResource("PackedScene_mgx77")
 layer = 2
 
 [node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "buildTab", "resourcesDisplay", "effectInfoParent", "defaultEffectDisplay", "maxBonusContainer", "maxBonusCurrencyDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "tileSelector", "encyclopediaPopup", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1514,8 +1515,7 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileNameLabel", "tileDetailsExpanders", "tileDetailsInfo", "tileTextureRect", "defaultEffectDisplay", "workerInfoContainer", "workerCountContainer", "maxBonusContainer", "maxBonusCurrencyDisplay", "unlockReqParent", "unlockReqContainer", "affectsParent", "affectedByParent", "storageInfoUI")]
-visible = false
+[node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileNameLabel", "tileDetailsExpanders", "tileDetailsInfo", "tileTextureRect", "defaultEffectDisplay", "workerInfoContainer", "workerCountContainer", "maxBonusContainer", "maxBonusCurrencyDisplay", "unlockReqParent", "unlockReqContainer", "buildPriceContainer", "buildPriceDisplay", "affectsParent", "affectedByParent", "storageInfoUI")]
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
@@ -1540,6 +1540,8 @@ maxBonusCurrencyDisplay = NodePath("TileDetailPanel/MarginContainer/HSplitContai
 unlockReqParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer")
 unlockReqContainer = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer/MarginContainer/UnlockRequirementsHBoxContainer")
 unlockReqScene = ExtResource("66_mgx77")
+buildPriceContainer = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice")
+buildPriceDisplay = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice/MarginContainer/CurrencyDisplay")
 affectsParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer/AffectsHBoxContainer")
 affectedByParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer/AffectedByHBoxContainer2")
 affectedByScene = ExtResource("39_e4lbj")
@@ -1733,6 +1735,27 @@ layout_mode = 2
 custom_minimum_size = Vector2(737, 0)
 layout_mode = 2
 columns = 4
+
+[node name="BuildPrice" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=103270035]
+layout_mode = 2
+folded = true
+title = "build price"
+
+[node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice" unique_id=1903494528]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice" unique_id=1073653414]
+visible = false
+layout_mode = 2
+theme = ExtResource("57_yi10l")
+
+[node name="CurrencyDisplay" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice/MarginContainer" unique_id=1815110079]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("42_gqxrv")
+singleCurrencyDisplayScene = ExtResource("47_hxced")
+iconColor = Color(0.3529412, 0.37254903, 0.38431373, 1)
 
 [node name="AffectsFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1401136013]
 layout_mode = 2
