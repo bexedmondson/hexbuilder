@@ -70,7 +70,6 @@ tileGraph = NodePath("../GraphEdit")
 tilePluginParentNode = NodePath("../../..")
 
 [node name="GraphEdit" type="GraphEdit" parent="TabContainer/Adjacency" unique_id=438107853 node_paths=PackedStringArray("tree")]
-visible = false
 layout_mode = 2
 panning_scheme = 1
 minimap_enabled = false
@@ -81,6 +80,7 @@ tileAdjacencyNodeScene = ExtResource("9_slyvr")
 tree = NodePath("../Tree")
 
 [node name="Panel" type="Panel" parent="TabContainer/Adjacency" unique_id=222505358]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -89,6 +89,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Panel" type="PanelContainer" parent="Control" unique_id=1156381711]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125

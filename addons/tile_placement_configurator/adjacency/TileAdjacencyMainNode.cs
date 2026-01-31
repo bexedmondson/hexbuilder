@@ -12,15 +12,19 @@ public partial class TileAdjacencyMainNode : GraphNode
 
     public TileAdjacencyGraph graph;
 
-    private CustomTileData tileData;
-    public CustomTileData customTileData
+    public CustomTileData tileData { get; private set; }
+    public void SetCustomTileData(CustomTileData customTileData)
     {
-        get { return tileData; }
-        set
-        {
-            tileData = value;
+        tileData = customTileData;
+        
+        OnCustomTileDataSet();
+    }
+
+    public override void _Ready()
+    {
+        base._Ready();
+        if (tileData != null)
             OnCustomTileDataSet();
-        }
     }
     
     private Dictionary<string, EditorProperty> propertyEditors = new();
@@ -28,7 +32,7 @@ public partial class TileAdjacencyMainNode : GraphNode
     public void OnCustomTileDataSet()
     {
         Title = tileData.GetFileName();
-        textureRect.Texture ??= EditorTileDatabase.GetTileTexture(customTileData);
+        textureRect.Texture = EditorTileDatabase.GetTileTexture(tileData);
     }
 
     public void SetupOptionDropdown()
@@ -42,7 +46,7 @@ public partial class TileAdjacencyMainNode : GraphNode
     public void DirContents(DirAccess dir)
     {
         List<CustomTileData> adjacentTileData = new();
-        foreach (var adjacency in customTileData.adjacencies)
+        foreach (var adjacency in tileData.adjacencies)
         {
             adjacentTileData.Add(adjacency.requiredTile);
         }
@@ -66,8 +70,8 @@ public partial class TileAdjacencyMainNode : GraphNode
                 }
                 else
                 {
-                    var tileDataResource = ResourceLoader.Load(dir.GetCurrentDir() + "/" + fileName) as CustomTileData;
-                    optionsToSort[fileName.TrimSuffix("." + fileName.GetExtension())] = tileDataResource;
+                    if (ResourceLoader.Load(dir.GetCurrentDir() + "/" + fileName) is CustomTileData tileDataResource)
+                        optionsToSort[fileName.TrimSuffix("." + fileName.GetExtension())] = tileDataResource;
                 }
 
                 fileName = dir.GetNext();
@@ -101,7 +105,7 @@ public partial class TileAdjacencyMainNode : GraphNode
     public void OnAdjacenciesUpdated()
     {
         List<CustomTileData> adjacentTileData = new();
-        foreach (var adjacency in customTileData.adjacencies)
+        foreach (var adjacency in tileData.adjacencies)
         {
             adjacentTileData.Add(adjacency.requiredTile);
         }
@@ -121,8 +125,8 @@ public partial class TileAdjacencyMainNode : GraphNode
         var newAdjacency = new AdjacencyConfig();
         newAdjacency.requiredTile = selectedTileData;
         newAdjacency.distance = 1;
-        customTileData.adjacencies.Add(newAdjacency);
-        ResourceSaver.Save(customTileData);
+        tileData.adjacencies.Add(newAdjacency);
+        ResourceSaver.Save(tileData);
 
         graph.OnNodeDataUpdated();
 

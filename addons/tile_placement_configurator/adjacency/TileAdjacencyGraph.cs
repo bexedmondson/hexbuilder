@@ -23,7 +23,7 @@ public partial class TileAdjacencyGraph : AbstractTileGraph
         }
 
         tileAdjacencyMainNode = tileAdjacencyMainNodeScene.Instantiate() as TileAdjacencyMainNode;
-        tileAdjacencyMainNode.customTileData = selectedTileData;
+        tileAdjacencyMainNode.SetCustomTileData(selectedTileData);
         tileAdjacencyMainNode.graph = this;
         tileAdjacencyMainNode.SetupOptionDropdown();
         tileAdjacencyMainNode.ResetSize();
@@ -56,7 +56,7 @@ public partial class TileAdjacencyGraph : AbstractTileGraph
     private TileAdjacencyGraphNode AddTileNode(AdjacencyConfig adjacencyConfig)
     {
         TileAdjacencyGraphNode graphNode = tileAdjacencyNodeScene.Instantiate() as TileAdjacencyGraphNode;
-        graphNode.selectedTileData = tileAdjacencyMainNode.customTileData;
+        graphNode.selectedTileData = tileAdjacencyMainNode.tileData;
         graphNode.SetAdjacencyConfig(adjacencyConfig);
         graphNode.graph = this;
         graphNode.ResetSize();
@@ -71,7 +71,7 @@ public partial class TileAdjacencyGraph : AbstractTileGraph
     public override void OnNodeDataUpdated()
     {
         var connectionListFromNode = GetConnectionListFromNode(tileAdjacencyMainNode.Name);
-        foreach (var adjacency in tileAdjacencyMainNode.customTileData.adjacencies)
+        foreach (var adjacency in tileAdjacencyMainNode.tileData.adjacencies)
         {
             Dictionary foundConnection = null;
             foreach (var connection in connectionListFromNode)

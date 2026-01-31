@@ -37,8 +37,8 @@ public partial class TileInfoMainNode : TileInfoGraphNode
                 }
                 else
                 {
-                    var tileDataResource = ResourceLoader.Load(dir.GetCurrentDir() + "/" + fileName) as CustomTileData;
-                    optionsToSort[fileName.TrimSuffix("." + fileName.GetExtension())] = tileDataResource;
+                    if (ResourceLoader.Load(dir.GetCurrentDir() + "/" + fileName) is CustomTileData tileDataResource)
+                        optionsToSort[fileName.TrimSuffix("." + fileName.GetExtension())] = tileDataResource;
                 }
 
                 fileName = dir.GetNext();
