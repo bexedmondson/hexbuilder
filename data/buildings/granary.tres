@@ -6,7 +6,10 @@
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="4_8x755"]
 [ext_resource type="Resource" uid="uid://dylx1bgqm5eh3" path="res://data/terrain/hill.tres" id="5_7vfwx"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="5_svi34"]
+[ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="7_lbsoj"]
+[ext_resource type="Resource" uid="uid://cj02mf2c7m6bl" path="res://data/buildings/mill.tres" id="8_423qi"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="8_svi34"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="9_qbtjn"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="9_svi34"]
 
 [sub_resource type="Resource" id="Resource_8xsi5"]
@@ -21,17 +24,29 @@ script = ExtResource("8_svi34")
 requiredAmount = 5
 metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
+[sub_resource type="Resource" id="Resource_6xom8"]
+script = ExtResource("7_lbsoj")
+tile = ExtResource("8_423qi")
+amount = 1
+comparison = 5
+
+[sub_resource type="Resource" id="Resource_iil2o"]
+script = ExtResource("9_qbtjn")
+requiredTileBuildCount = SubResource("Resource_6xom8")
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
 [sub_resource type="Resource" id="Resource_lbsoj"]
 script = ExtResource("9_svi34")
-requirements = Array[Object]([SubResource("Resource_6lq31")])
+requirements = Array[Object]([SubResource("Resource_6lq31"), SubResource("Resource_iil2o")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("5_svi34")
 canBePlacedOn = Array[Object]([ExtResource("3_fweq6"), ExtResource("4_8x755"), ExtResource("5_7vfwx")])
 buildPrice = {
-1: 4,
-2: 4
+0: 10,
+1: 15,
+3: 6
 }
 baseTurnCurrencyChange = {}
 adjacencies = Array[Object]([])

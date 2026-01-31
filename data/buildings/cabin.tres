@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="4_71r3f"]
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="5_m3t3u"]
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="6_0gy0h"]
-[ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/house.tres" id="7_0gy0h"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="8_m3t3u"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="9_0gy0h"]
+[ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/hut.tres" id="9_vur5l"]
 
 [sub_resource type="Resource" id="Resource_1nllx"]
 script = ExtResource("4_71r3f")
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
 
 [sub_resource type="Resource" id="Resource_0gy0h"]
 script = ExtResource("6_0gy0h")
-tile = ExtResource("7_0gy0h")
+tile = ExtResource("9_vur5l")
 amount = 1
 comparison = 5
 metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
@@ -45,10 +45,10 @@ metadata/_custom_type_script = "uid://7pquj0428dp5"
 script = ExtResource("1_24cbf")
 canBePlacedOn = Array[Object]([ExtResource("2_oxwtk"), ExtResource("1_fu5n7")])
 buildPrice = {
-1: 4
+1: 6
 }
 baseTurnCurrencyChange = {
-0: -1,
+0: -2,
 1: -2
 }
 adjacencies = Array[Object]([])

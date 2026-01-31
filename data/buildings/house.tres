@@ -1,26 +1,38 @@
-[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://8dv6hfd67ini"]
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://cprbbiv623dht"]
 
-[ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="1_22yc1"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Resource" uid="uid://dpachnm1ahqgj" path="res://data/buildings/carpenter.tres" id="1_o50m0"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_j1ids"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_jxhb8"]
+[ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_6nnr6"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_wvt6a"]
+[ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="4_jdqbx"]
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="4_poee0"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="5_4nmjt"]
+[ext_resource type="Resource" uid="uid://8dv6hfd67ini" path="res://data/buildings/hut.tres" id="5_w4u4b"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="6_4nmjt"]
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="7_poee0"]
 
-[sub_resource type="Resource" id="Resource_ti82r"]
+[sub_resource type="Resource" id="Resource_u3t5s"]
+script = ExtResource("2_jxhb8")
+requiredTile = ExtResource("1_o50m0")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+1: 1
+})
+
+[sub_resource type="Resource" id="Resource_3hw8u"]
 script = ExtResource("3_wvt6a")
 capacities = Dictionary[int, int]({
 0: 2,
-1: 1,
+2: 2,
 3: 1
 })
 metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [sub_resource type="Resource" id="Resource_poee0"]
 script = ExtResource("4_poee0")
-tile = ExtResource("1_22yc1")
+tile = ExtResource("5_w4u4b")
 amount = 2
 comparison = 5
 metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
@@ -30,26 +42,27 @@ script = ExtResource("5_4nmjt")
 requiredTileBuildCount = SubResource("Resource_poee0")
 metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
-[sub_resource type="Resource" id="Resource_iyw0n"]
+[sub_resource type="Resource" id="Resource_bdlm4"]
 script = ExtResource("6_4nmjt")
 requirements = Array[Object]([SubResource("Resource_j1ids")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
-[sub_resource type="Resource" id="Resource_ifxl0"]
+[sub_resource type="Resource" id="Resource_0c8fp"]
 script = ExtResource("7_poee0")
-capacity = 2
+capacity = 3
 metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = Array[Object]([ExtResource("1_22yc1")])
+canBePlacedOn = Array[Object]([ExtResource("3_6nnr6"), ExtResource("4_jdqbx"), ExtResource("5_w4u4b")])
 buildPrice = {
-1: 5
+2: 5
 }
 baseTurnCurrencyChange = {
-0: -1,
-1: -1
+0: -3,
+1: -2,
+3: -1
 }
-adjacencies = Array[Object]([])
-components = Array[ExtResource("2_j1ids")]([SubResource("Resource_ti82r"), SubResource("Resource_iyw0n"), SubResource("Resource_ifxl0")])
+adjacencies = Array[Object]([SubResource("Resource_u3t5s")])
+components = Array[ExtResource("2_j1ids")]([SubResource("Resource_3hw8u"), SubResource("Resource_bdlm4"), SubResource("Resource_0c8fp")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

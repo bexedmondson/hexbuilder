@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://8dv6hfd67ini"]
+
+[ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="1_s2385"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_ubfow"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_vf0vc"]
+[ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="4_l5n23"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="5_2ur7h"]
+[ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="6_k07fx"]
+[ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="7_it70e"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="8_ypmdl"]
+
+[sub_resource type="Resource" id="Resource_s2385"]
+script = ExtResource("3_vf0vc")
+capacities = Dictionary[int, int]({
+0: 2,
+1: 1
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
+
+[sub_resource type="Resource" id="Resource_poee0"]
+script = ExtResource("4_l5n23")
+tile = ExtResource("1_s2385")
+amount = 2
+comparison = 5
+metadata/_custom_type_script = "uid://c6o4h30wjk7j5"
+
+[sub_resource type="Resource" id="Resource_j1ids"]
+script = ExtResource("5_2ur7h")
+requiredTileBuildCount = SubResource("Resource_poee0")
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[sub_resource type="Resource" id="Resource_iyw0n"]
+script = ExtResource("6_k07fx")
+requirements = Array[Object]([SubResource("Resource_j1ids")])
+metadata/_custom_type_script = "uid://7pquj0428dp5"
+
+[sub_resource type="Resource" id="Resource_ifxl0"]
+script = ExtResource("7_it70e")
+capacity = 2
+metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
+
+[resource]
+script = ExtResource("8_ypmdl")
+canBePlacedOn = Array[Object]([ExtResource("1_s2385")])
+buildPrice = {
+1: 5
+}
+baseTurnCurrencyChange = {
+0: -2,
+1: -1
+}
+adjacencies = Array[Object]([])
+components = Array[ExtResource("2_ubfow")]([SubResource("Resource_s2385"), SubResource("Resource_iyw0n"), SubResource("Resource_ifxl0")])
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
