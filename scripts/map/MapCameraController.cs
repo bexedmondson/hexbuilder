@@ -27,6 +27,7 @@ public partial class MapCameraController : Camera2D, IInjectable
         if (@event is InputEventScreenDrag dragEvent)
         {
             Position -= dragEvent.ScreenRelative;
+            this.GetViewport().SetInputAsHandled();
         }
         else if (@event is InputEventMagnifyGesture pinchGesture)
         {
