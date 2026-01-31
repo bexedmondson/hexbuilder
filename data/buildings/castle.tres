@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://c42v6g70vxci2"]
 
+[ext_resource type="Resource" uid="uid://b8hvwxf5jgsix" path="res://archive/wall.tres" id="1_k53h4"]
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_uw7xw"]
 [ext_resource type="Resource" uid="uid://cc5jv204rhvnk" path="res://data/buildings/tower.tres" id="3_58okd"]
-[ext_resource type="Resource" uid="uid://b8hvwxf5jgsix" path="res://data/buildings/wall.tres" id="3_uw7xw"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="4_f5q5i"]
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="5_k53h4"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="8_58okd"]
 
 [sub_resource type="Resource" id="Resource_s5lrj"]
 script = ExtResource("2_uw7xw")
-requiredTile = ExtResource("3_uw7xw")
+requiredTile = ExtResource("1_k53h4")
 distance = 2
 currencyEffect = {}
 

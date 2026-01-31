@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://d1qikhlvit8wo"]
+
+[ext_resource type="Resource" uid="uid://b8hvwxf5jgsix" path="res://archive/wall.tres" id="1_laqbe"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_kdsi4"]
+[ext_resource type="Script" uid="uid://kl2tmf4tnglp" path="res://scripts/data/tilecomponents/HideInGameComponent.cs" id="3_cjud5"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="4_bopob"]
+
+[sub_resource type="Resource" id="Resource_iwqtf"]
+script = ExtResource("3_cjud5")
+metadata/_custom_type_script = "uid://kl2tmf4tnglp"
+
+[resource]
+script = ExtResource("4_bopob")
+canBePlacedOn = [ExtResource("1_laqbe")]
+buildPrice = {
+1: 2,
+2: 8
+}
+baseTurnCurrencyChange = {
+0: -1
+}
+adjacencies = Array[Object]([])
+components = Array[ExtResource("2_kdsi4")]([SubResource("Resource_iwqtf")])
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
