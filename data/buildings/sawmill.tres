@@ -1,0 +1,96 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://c4yvqahf3a3p6"]
+
+[ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="1_fsgec"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_4sv2n"]
+[ext_resource type="Resource" uid="uid://de8ocg7h3ig78" path="res://data/buildings/lumber_pile.tres" id="3_kl74a"]
+[ext_resource type="Resource" uid="uid://b3q1fs33ftuv3" path="res://data/buildings/logger.tres" id="4_5p8kn"]
+[ext_resource type="Resource" uid="uid://dpachnm1ahqgj" path="res://data/buildings/carpenter.tres" id="4_33hju"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="6_33hju"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="7_rxyhn"]
+[ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="8_0jgd4"]
+[ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="8_kj20f"]
+[ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="9_33hju"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="9_u7xsk"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="10_rxyhn"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="11_0jgd4"]
+[ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="12_u7xsk"]
+
+[sub_resource type="Resource" id="Resource_kp0b5"]
+script = ExtResource("2_4sv2n")
+requiredTile = ExtResource("1_fsgec")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+1: 2
+})
+
+[sub_resource type="Resource" id="Resource_rh5oq"]
+script = ExtResource("2_4sv2n")
+requiredTile = ExtResource("3_kl74a")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+1: 1
+})
+
+[sub_resource type="Resource" id="Resource_masw2"]
+script = ExtResource("2_4sv2n")
+requiredTile = ExtResource("4_33hju")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+1: 1
+})
+
+[sub_resource type="Resource" id="Resource_33hju"]
+script = ExtResource("7_rxyhn")
+capacities = Dictionary[int, int]({
+1: 4
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
+
+[sub_resource type="Resource" id="Resource_rxyhn"]
+script = ExtResource("8_0jgd4")
+capacity = 4
+metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
+
+[sub_resource type="Resource" id="Resource_0jgd4"]
+script = ExtResource("8_kj20f")
+extraBaseProduction = Dictionary[int, int]({
+1: 3
+})
+metadata/_custom_type_script = "uid://bt32fndy2yjlv"
+
+[sub_resource type="Resource" id="Resource_u7xsk"]
+script = ExtResource("9_33hju")
+tile = ExtResource("4_5p8kn")
+amount = 2
+comparison = 5
+
+[sub_resource type="Resource" id="Resource_00esu"]
+script = ExtResource("10_rxyhn")
+requiredTileBuildCount = SubResource("Resource_u7xsk")
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[sub_resource type="Resource" id="Resource_tyq42"]
+script = ExtResource("11_0jgd4")
+currency = 1
+requiredAmount = 80
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_7nw81"]
+script = ExtResource("12_u7xsk")
+requirements = Array[Resource]([SubResource("Resource_00esu"), SubResource("Resource_tyq42")])
+metadata/_custom_type_script = "uid://7pquj0428dp5"
+
+[resource]
+script = ExtResource("9_u7xsk")
+canBePlacedOn = Array[Object]([ExtResource("4_5p8kn")])
+buildPrice = {
+1: 20,
+2: 8,
+3: 5
+}
+baseTurnCurrencyChange = {
+1: 5
+}
+adjacencies = Array[Object]([SubResource("Resource_kp0b5"), SubResource("Resource_rh5oq"), SubResource("Resource_masw2")])
+components = Array[ExtResource("6_33hju")]([SubResource("Resource_33hju"), SubResource("Resource_rxyhn"), SubResource("Resource_0jgd4"), SubResource("Resource_7nw81")])
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

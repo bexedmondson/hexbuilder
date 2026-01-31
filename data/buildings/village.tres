@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://dri684d2te7kl"]
 
+[ext_resource type="Resource" uid="uid://dpachnm1ahqgj" path="res://data/buildings/carpenter.tres" id="1_6xnfj"]
 [ext_resource type="Resource" uid="uid://cprbbiv623dht" path="res://data/buildings/house_stone.tres" id="1_owtlh"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_6pgn7"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_53xvg"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="2_n4ucp"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_owtlh"]
@@ -8,6 +10,12 @@
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="5_wc63r"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="6_6dsyo"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="7_6xnfj"]
+
+[sub_resource type="Resource" id="Resource_bta20"]
+script = ExtResource("2_6pgn7")
+requiredTile = ExtResource("1_6xnfj")
+distance = 1
+currencyEffect = null
 
 [sub_resource type="Resource" id="Resource_3mor3"]
 script = ExtResource("3_owtlh")
@@ -49,9 +57,9 @@ buildPrice = {
 }
 baseTurnCurrencyChange = {
 0: -4,
-1: -2,
+1: -3,
 3: -2
 }
-adjacencies = Array[Object]([])
+adjacencies = Array[Object]([SubResource("Resource_bta20")])
 components = Array[ExtResource("2_53xvg")]([SubResource("Resource_3mor3"), SubResource("Resource_q1g43"), SubResource("Resource_qa4en")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

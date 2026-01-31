@@ -1,0 +1,86 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://b3q1fs33ftuv3"]
+
+[ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="1_i3j37"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_y08ay"]
+[ext_resource type="Resource" uid="uid://de8ocg7h3ig78" path="res://data/buildings/lumber_pile.tres" id="3_t7vnt"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="6_jn3nt"]
+[ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="7_ekmm3"]
+[ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="8_vw2no"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="9_vgfrp"]
+[ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="9_y08ay"]
+[ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="10_jn3nt"]
+[ext_resource type="Resource" uid="uid://ds1q5vg3ldkkv" path="res://data/buildings/woodcutter.tres" id="11_ekmm3"]
+[ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="12_vw2no"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="13_ekmm3"]
+[ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="13_vgfrp"]
+
+[sub_resource type="Resource" id="Resource_kp0b5"]
+script = ExtResource("2_y08ay")
+requiredTile = ExtResource("1_i3j37")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+1: 1
+})
+
+[sub_resource type="Resource" id="Resource_rh5oq"]
+script = ExtResource("2_y08ay")
+requiredTile = ExtResource("3_t7vnt")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+1: 1
+})
+
+[sub_resource type="Resource" id="Resource_g5o2c"]
+script = ExtResource("7_ekmm3")
+capacities = Dictionary[int, int]({
+1: 3
+})
+metadata/_custom_type_script = "uid://be4uqqgw38s0q"
+
+[sub_resource type="Resource" id="Resource_jn3nt"]
+script = ExtResource("8_vw2no")
+capacity = 2
+metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
+
+[sub_resource type="Resource" id="Resource_ekmm3"]
+script = ExtResource("9_y08ay")
+extraBaseProduction = Dictionary[int, int]({
+1: 1
+})
+metadata/_custom_type_script = "uid://bt32fndy2yjlv"
+
+[sub_resource type="Resource" id="Resource_vw2no"]
+script = ExtResource("10_jn3nt")
+tile = ExtResource("11_ekmm3")
+amount = 2
+comparison = 5
+
+[sub_resource type="Resource" id="Resource_vgfrp"]
+script = ExtResource("12_vw2no")
+requiredTileBuildCount = SubResource("Resource_vw2no")
+metadata/_custom_type_script = "uid://begyr0mqsjkto"
+
+[sub_resource type="Resource" id="Resource_utcxu"]
+script = ExtResource("13_ekmm3")
+currency = 1
+requiredAmount = 50
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_wb8cf"]
+script = ExtResource("13_vgfrp")
+requirements = Array[Resource]([SubResource("Resource_vgfrp"), SubResource("Resource_utcxu")])
+metadata/_custom_type_script = "uid://7pquj0428dp5"
+
+[resource]
+script = ExtResource("9_vgfrp")
+canBePlacedOn = Array[Object]([ExtResource("11_ekmm3")])
+buildPrice = {
+1: 7,
+2: 2
+}
+baseTurnCurrencyChange = {
+1: 3
+}
+adjacencies = Array[Object]([SubResource("Resource_kp0b5"), SubResource("Resource_rh5oq")])
+components = Array[ExtResource("6_jn3nt")]([SubResource("Resource_g5o2c"), SubResource("Resource_jn3nt"), SubResource("Resource_ekmm3"), SubResource("Resource_wb8cf")])
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
