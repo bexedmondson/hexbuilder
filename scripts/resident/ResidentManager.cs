@@ -24,7 +24,7 @@ public class ResidentManager : IInjectable
         needAssignmentManager = new(this);
 
         var json = InjectionManager.Get<DataResourceContainer>().residentNames;
-        names = json.Data.AsStringArray(); //System.Text.Json.JsonSerializer.Deserialize<string[]>(json.Data.AsString());
+        names = json.Data.AsStringArray();
     }
 
     public void OnNewGame()
