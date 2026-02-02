@@ -245,7 +245,8 @@ public partial class MapGenerator : Node
 
     private void SetWater(Vector2I cell, float rockiness)
     {
-        bt.SetCell(cell, oceanTerrain);
+        //TODO restore after fixing rivers?
+        //bt.SetCell(cell, oceanTerrain);
         baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? waterRocksCoords : waterCoords);
     }
 

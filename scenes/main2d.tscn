@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://nv6cdjovbrw8" path="res://scripts/utility/DataResourceContainer.cs" id="2_bi4yo"]
 [ext_resource type="Script" uid="uid://dymo2w1h17tkh" path="res://scripts/inventory/InventoryManager.cs" id="2_j1s7q"]
 [ext_resource type="Script" uid="uid://44qulkptwyjg" path="res://scripts/map/MapController.cs" id="2_m3sjc"]
+[ext_resource type="JSON" path="res://data/residents/firstNames.json" id="3_gibx0"]
 [ext_resource type="Resource" uid="uid://817ggbqehlrq" path="res://data/need_config_list.tres" id="3_ufsem"]
 [ext_resource type="Resource" uid="uid://rpjtimn5hoka" path="res://data/requirement_ui_mapping.tres" id="4_7jl01"]
 [ext_resource type="Script" uid="uid://iflp0ejf4lyl" path="res://scripts/map/MapInputProcessor.cs" id="5_b68g4"]
@@ -193,6 +194,7 @@ inventoryManager = NodePath("InventoryManager")
 
 [node name="DataResourceContainer" type="Node" parent="." unique_id=1711643282]
 script = ExtResource("2_bi4yo")
+residentNames = ExtResource("3_gibx0")
 needConfigList = ExtResource("3_ufsem")
 requirementUIMappingList = ExtResource("4_7jl01")
 

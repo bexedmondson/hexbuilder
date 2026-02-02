@@ -3,6 +3,9 @@ using Godot;
 public partial class DataResourceContainer : Node, IInjectable
 {
     [Export]
+    public Json residentNames;
+    
+    [Export]
     public NeedConfigList needConfigList;
 
     [Export]
