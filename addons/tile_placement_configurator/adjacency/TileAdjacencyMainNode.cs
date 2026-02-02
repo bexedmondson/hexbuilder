@@ -1,3 +1,4 @@
+#if TOOLS
 using System.Collections.Generic;
 using Godot;
 
@@ -133,3 +134,4 @@ public partial class TileAdjacencyMainNode : GraphNode
         OnAdjacenciesUpdated();
     }
 }
+#endif

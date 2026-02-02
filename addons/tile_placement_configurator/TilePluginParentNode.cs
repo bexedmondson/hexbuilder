@@ -1,3 +1,4 @@
+#if TOOLS
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -125,4 +126,4 @@ public partial class TilePluginParentNode : Control
         //GD.Print("exit");
     }
 }
- 
+#endif

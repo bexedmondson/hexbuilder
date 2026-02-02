@@ -1,3 +1,4 @@
+#if TOOLS
 using System.Collections.Generic;
 using Godot;
 
@@ -80,3 +81,4 @@ public static class EditorTileDatabase
         return null;
     }
 }
+#endif

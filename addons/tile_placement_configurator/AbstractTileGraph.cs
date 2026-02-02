@@ -1,4 +1,4 @@
-
+#if TOOLS
 using Godot;
 
 [Tool]
@@ -30,3 +30,4 @@ public abstract partial class AbstractTileGraph : GraphEdit
         }
     }
 }
+#endif

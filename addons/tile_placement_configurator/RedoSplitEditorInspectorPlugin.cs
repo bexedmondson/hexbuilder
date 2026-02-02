@@ -1,3 +1,4 @@
+#if TOOLS
 using Godot;
 
 [Tool]
@@ -16,6 +17,5 @@ public partial class RedoSplitEditorInspectorPlugin : EditorInspectorPlugin
     {
         return @object is Resource;
     }
-
-    
 }
+#endif

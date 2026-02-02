@@ -1,4 +1,4 @@
-
+#if TOOLS
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -153,3 +153,4 @@ public partial class TileInfoGraph : AbstractTileGraph
         tileGraphMainNode.OnCanPlacedOnUpdated();
     }
 }
+#endif

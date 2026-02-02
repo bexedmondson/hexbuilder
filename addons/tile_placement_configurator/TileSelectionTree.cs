@@ -1,3 +1,4 @@
+#if TOOLS
 using System;
 using Godot;
 
@@ -85,3 +86,4 @@ public partial class TileSelectionTree : Tree
         tileGraph.OnTreeItemSelected(tileData);
     }
 }
+#endif
