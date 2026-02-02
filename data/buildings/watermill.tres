@@ -11,7 +11,7 @@
 script = ExtResource("2_lqy8a")
 requiredTile = ExtResource("1_rddn4")
 distance = 1
-currencyEffect = null
+currencyEffect = {}
 
 [sub_resource type="Resource" id="Resource_3o0cq"]
 script = ExtResource("2_imprr")

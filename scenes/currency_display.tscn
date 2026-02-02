@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://hst2gqk22rpc"]
 
 [ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="1_efedh"]
-[ext_resource type="Texture2D" uid="uid://dqtssryuqvjcu" path="res://assets/icons/icon_wheat.tres" id="2_ujfmj"]
-[ext_resource type="Texture2D" uid="uid://ceqvtlo77pcfy" path="res://assets/icons/icon_wood.tres" id="3_n7w83"]
 [ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="3_xcsyn"]
-[ext_resource type="Texture2D" uid="uid://brlsqbuytsi4t" path="res://assets/icons/icon_stone.tres" id="4_rhhx4"]
-[ext_resource type="Texture2D" uid="uid://1g1gvjwkcrki" path="res://assets/icons/icon_fabric.tres" id="5_vr474"]
 
 [node name="CurrencyDisplay" type="VBoxContainer" unique_id=767577572]
 offset_left = 20.0
@@ -15,10 +11,4 @@ offset_bottom = 70.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 script = ExtResource("1_efedh")
-currencyIcons = Dictionary[int, Resource]({
-0: ExtResource("2_ujfmj"),
-1: ExtResource("3_n7w83"),
-2: ExtResource("4_rhhx4"),
-3: ExtResource("5_vr474")
-})
 singleCurrencyDisplayScene = ExtResource("3_xcsyn")

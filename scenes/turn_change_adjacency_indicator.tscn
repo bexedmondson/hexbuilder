@@ -167,7 +167,6 @@ modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 0)
 position = Vector2(-184, 0)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_h03gx")
 
 [node name="Icon" type="Sprite2D" parent="TL/Currency" unique_id=1294843258]
 scale = Vector2(0.99999994, 0.99999994)

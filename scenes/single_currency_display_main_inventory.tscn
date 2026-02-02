@@ -6,14 +6,14 @@
 
 [node name="SingleCurrencyDisplay" unique_id=913887442 instance=ExtResource("1_b8y5p")]
 
-[node name="ChangeNotifsAdd2" type="VBoxContainer" parent="." index="4" unique_id=64282855]
+[node name="ChangeNotifsAdd2" type="VBoxContainer" parent="." index="2" unique_id=64282855]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 script = ExtResource("2_5m37b")
 stackId = "stone_add"
 toastLabelScene = ExtResource("3_tthao")
 
-[node name="ChangeNotifsMinus2" type="VBoxContainer" parent="." index="5" unique_id=1523213849]
+[node name="ChangeNotifsMinus2" type="VBoxContainer" parent="." index="3" unique_id=1523213849]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 script = ExtResource("2_5m37b")

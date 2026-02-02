@@ -7,8 +7,6 @@
 script = ExtResource("2_0vevw")
 canBePlacedOn = []
 buildPrice = {}
-unlockRequirements = []
 baseTurnCurrencyChange = {}
 adjacencies = []
-storageCapacity = null
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
