@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="3_mxci2"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="4_lhcf5"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_8jgwh"]
+[ext_resource type="Script" uid="uid://coar33jbxnbhl" path="res://scripts/data/tilecomponents/HideInBuildTabComponent.cs" id="6_ilupn"]
 [ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="6_mw1ca"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="7_tjxvc"]
 
@@ -30,6 +31,10 @@ extraBaseProduction = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://bt32fndy2yjlv"
 
+[sub_resource type="Resource" id="Resource_e7kx1"]
+script = ExtResource("6_ilupn")
+metadata/_custom_type_script = "uid://coar33jbxnbhl"
+
 [resource]
 script = ExtResource("7_tjxvc")
 canBePlacedOn = Array[Object]([])
@@ -38,5 +43,5 @@ baseTurnCurrencyChange = {
 0: 3
 }
 adjacencies = Array[Object]([])
-components = Array[ExtResource("2_e7kx1")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi")])
+components = Array[ExtResource("2_e7kx1")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi"), SubResource("Resource_e7kx1")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
