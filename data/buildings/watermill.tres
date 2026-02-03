@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://dpachnm1ahqgj" path="res://data/buildings/carpenter.tres" id="1_rddn4"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="2_imprr"]
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_lqy8a"]
-[ext_resource type="Script" uid="uid://kl2tmf4tnglp" path="res://scripts/data/tilecomponents/HideInGameComponent.cs" id="3_3o0cq"]
+[ext_resource type="Script" uid="uid://kl2tmf4tnglp" path="res://scripts/data/tilecomponents/HideInEncyclopediaComponent.cs" id="3_3o0cq"]
 
 [sub_resource type="Resource" id="Resource_kfto2"]
 script = ExtResource("2_lqy8a")

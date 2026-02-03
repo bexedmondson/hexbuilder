@@ -219,7 +219,7 @@ public partial class UnlockedCellPopup : Popup
 
         foreach (var compatibleTileInfo in compatibleTileInfos)
         {
-            if (compatibleTileInfo.tileData.TryGetComponent(out HideInGameComponent _))
+            if (compatibleTileInfo.tileData.TryGetComponent(out HideInEncyclopediaComponent _))
                 continue;
             
             var tileOptionUI = tileScene.Instantiate<TileOptionUI>();
