@@ -35,7 +35,7 @@ script = ExtResource("7_tjxvc")
 canBePlacedOn = Array[Object]([])
 buildPrice = {}
 baseTurnCurrencyChange = {
-0: 2
+0: 3
 }
 adjacencies = Array[Object]([])
 components = Array[ExtResource("2_e7kx1")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi")])

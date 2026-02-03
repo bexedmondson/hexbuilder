@@ -35,8 +35,8 @@ metadata/_custom_type_script = "uid://bt32fndy2yjlv"
 script = ExtResource("6_gxu1q")
 canBePlacedOn = Array[Object]([ExtResource("1_4yy3r")])
 buildPrice = {
-0: 2,
-1: 4
+0: 15,
+1: 5
 }
 baseTurnCurrencyChange = {
 0: 2

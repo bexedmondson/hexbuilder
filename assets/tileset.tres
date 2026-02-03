@@ -12,13 +12,13 @@
 [ext_resource type="Resource" uid="uid://c2ws0p6gue60j" path="res://data/terrain/rocks.tres" id="10_tkdha"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq4" path="res://data/terrain/island.tres" id="11_040ux"]
 [ext_resource type="Resource" uid="uid://dri684d2te7kl" path="res://data/buildings/village.tres" id="13_4fte4"]
-[ext_resource type="Resource" uid="uid://bhdo22lh6munn" path="res://data/buildings/bridge.tres" id="13_5kckd"]
 [ext_resource type="Resource" uid="uid://cd4473yab66g4" path="res://data/buildings/market.tres" id="15_131hj"]
 [ext_resource type="Resource" uid="uid://cc5jv204rhvnk" path="res://data/buildings/tower.tres" id="16_56aw7"]
 [ext_resource type="Resource" uid="uid://bhnebodpuroy" path="res://data/buildings/rowboat.tres" id="16_f2vc7"]
 [ext_resource type="Resource" uid="uid://de8ocg7h3ig78" path="res://data/buildings/lumber_pile.tres" id="17_f2vc7"]
 [ext_resource type="Resource" uid="uid://b8n5chruakol7" path="res://data/buildings/cabin.tres" id="18_eklle"]
 [ext_resource type="Resource" uid="uid://leiuscrygyq7" path="res://data/buildings/cow.tres" id="19_8nlen"]
+[ext_resource type="Resource" uid="uid://wdo108wjhl3s" path="res://data/buildings/cowshed.tres" id="19_67nna"]
 [ext_resource type="Resource" uid="uid://cj02mf2c7m6bl" path="res://data/buildings/mill.tres" id="19_powct"]
 [ext_resource type="Resource" uid="uid://c42v6g70vxci2" path="res://data/buildings/castle.tres" id="21_tkdha"]
 [ext_resource type="Resource" uid="uid://b26b1kiyr2vjc" path="res://data/buildings/mine.tres" id="22_5umvd"]
@@ -218,7 +218,7 @@ texture = ExtResource("37_eklle")
 texture_region_size = Vector2i(480, 480)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 69)
-0:0/0/custom_data_0 = ExtResource("13_5kckd")
+0:0/0/custom_data_0 = ExtResource("19_8nlen")
 0:0/0/metadata/_better_terrain = {
 4: [0, 3],
 12: [0, 3],
@@ -227,7 +227,7 @@ texture_region_size = Vector2i(480, 480)
 }
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 69)
-1:0/0/custom_data_0 = ExtResource("19_8nlen")
+1:0/0/custom_data_0 = ExtResource("19_67nna")
 1:0/0/metadata/_better_terrain = {
 2: [0, 3],
 10: [0, 3],

@@ -1,6 +1,6 @@
 import bpy, os
 
-dirpath = '/home/bex/Documents/blender/hexagonset_renders'
+dirpath = '/home/bex/Repos/hexart/hexagonset_renders'
 
 def set_render_self_and_children(glb, show):
     glb.hide_render = not show

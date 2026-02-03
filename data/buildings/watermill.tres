@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="1_3u1s7"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://dpachnm1ahqgj" path="res://data/buildings/carpenter.tres" id="1_rddn4"]
-[ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="2_imprr"]
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="2_lqy8a"]
 
 [sub_resource type="Resource" id="Resource_kfto2"]
@@ -11,14 +10,6 @@ script = ExtResource("2_lqy8a")
 requiredTile = ExtResource("1_rddn4")
 distance = 1
 currencyEffect = {}
-
-[sub_resource type="Resource" id="Resource_3o0cq"]
-script = ExtResource("2_imprr")
-capacity = 1
-metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
-
-[sub_resource type="Resource" id="Resource_a0md4"]
-metadata/_custom_type_script = "uid://kl2tmf4tnglp"
 
 [resource]
 script = ExtResource("1_24cbf")
@@ -30,5 +21,4 @@ baseTurnCurrencyChange = {
 0: -1
 }
 adjacencies = Array[Object]([SubResource("Resource_kfto2")])
-components = Array[ExtResource("1_3u1s7")]([SubResource("Resource_3o0cq"), SubResource("Resource_a0md4")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
