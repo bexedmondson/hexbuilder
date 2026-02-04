@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 
 [GlobalClass][Tool]
-public partial class NeedConfig : Resource
+public partial class NeedConfig : Resource, IRequirementContainer
 {
     [Export]
     public Array<AbstractRequirement> assignmentRequirements;
@@ -15,62 +15,17 @@ public partial class NeedConfig : Resource
     
     [Export]
     public int satisfiedHappinessBonus;
-
+    
     public bool CanAssignToResident(ResidentState resident)
     {
         if (resident.activeNeeds.Contains(this))
             return false;
-        
-        foreach (var assignmentRequirement in assignmentRequirements)
-        {
-            switch (assignmentRequirement)
-            {
-                case DataRequirement dataRequirement:
-                    var processor = dataRequirement.GetDataRequirementProcessor();
-                    if (GetDataRequirementSatisfaction(processor, resident))
-                        continue;
-                    break;
-                case Requirement requirement:
-                    if (requirement.IsSatisfied())
-                        continue;
-                    break;
-            }
-            
-            return false;
-        }
 
-        return true;
+        return (this as IRequirementContainer).GetAreRequirementsSatisfied(assignmentRequirements, resident);
     }
 
-    public bool IsSatisfied(ResidentState resident)
+    public bool IsNeedSatisfied<T>(T data) where T : class
     {
-        foreach (var satisfactionRequirement in satisfactionRequirements)
-        {
-            switch (satisfactionRequirement)
-            {
-                case DataRequirement dataRequirement:
-                    var processor = dataRequirement.GetDataRequirementProcessor();
-                    if (GetDataRequirementSatisfaction(processor, resident))
-                        continue;
-                    break;
-                case Requirement requirement:
-                    if (requirement.IsSatisfied())
-                        continue;
-                    break;
-            }
-            
-            return false;
-        }
-        
-        return true;
-    }
-
-    private bool GetDataRequirementSatisfaction(DataRequirementProcessor dataRequirementProcessor, ResidentState resident)
-    {
-        if (dataRequirementProcessor is DataRequirementProcessor<ResidentState> residentRequirementProcessor)
-            return residentRequirementProcessor.IsSatisfied(resident);
-        
-        GD.PushError("NeedConfig IsSatisfied: found data requirement that isn't handled!");
-        return false;
+        return (this as IRequirementContainer).GetAreRequirementsSatisfied(satisfactionRequirements, data);
     }
 }

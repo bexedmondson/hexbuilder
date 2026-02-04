@@ -39,7 +39,7 @@ public partial class ResidentInfoUI : Control
         
         foreach (var activeNeed in residentState.activeNeeds)
         {
-            if (activeNeed.IsSatisfied(residentState))
+            if (activeNeed.IsNeedSatisfied(residentState))
                 continue;
             
             var needInfoUI = needInfoScene.Instantiate<ResidentNeedInfoUI>();

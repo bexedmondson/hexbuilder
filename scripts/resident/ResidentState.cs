@@ -22,7 +22,7 @@ public class ResidentState(string name, int moveInDay)
         int happinessSum = 0;
         foreach (var activeNeed in activeNeeds)
         {
-            if (activeNeed.IsSatisfied(this))
+            if (activeNeed.IsNeedSatisfied(this))
                 happinessSum += activeNeed.satisfiedHappinessBonus;
             else
                 happinessSum += activeNeed.unsatisfiedHappinessPenalty;
