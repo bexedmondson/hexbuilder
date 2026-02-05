@@ -46,18 +46,9 @@ public partial class ResidentInfoUI : Control
 
             foreach (var satisfactionRequirement in activeNeed.satisfactionRequirements)
             {
-                //need to figure out handling >1 requirement and regular requirements
-                if (satisfactionRequirement is DataRequirement dataRequirement)
-                {
-                    needInfoUI.SetText(needUIMapping.GetTextForNeedSatisfactionRequirement(dataRequirement));
-                    needInfoUI.SetNeedIcon(needUIMapping.GetIconForRequirement(dataRequirement));
-                }
-                else if (satisfactionRequirement is Requirement requirement)
-                {
-                    needInfoUI.SetText(needUIMapping.GetTextForNeedSatisfactionRequirement(requirement));
-                    needInfoUI.SetNeedIcon(needUIMapping.GetIconForRequirement(requirement));
-                }
-                
+                //TODO need to figure out handling >1 requirement
+                needInfoUI.SetText(needUIMapping.GetTextForRequirement(satisfactionRequirement, RequirementUIType.Need));
+                needInfoUI.SetNeedIcon(needUIMapping.GetIconForRequirement(satisfactionRequirement, RequirementUIType.Need));
                 needInfoUI.SetIntensity(activeNeed.unsatisfiedHappinessPenalty);
             }
             

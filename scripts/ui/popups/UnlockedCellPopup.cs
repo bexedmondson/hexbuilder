@@ -26,26 +26,14 @@ public partial class UnlockedCellPopup : Popup
     private Control storageTab;
 
     [Export]
+    private Control autoUpgradeTab;
+
+    [Export]
     private Control buildTab;
 
     [ExportGroup("Resources Tab")]
     [Export]
     private UnlockedCellPopup_Resources resourcesDisplay;
-    
-    [Export]
-    private Control effectInfoParent;
-
-    [Export]
-    private CurrencyDisplay defaultEffectDisplay;
-
-    [Export]
-    private PackedScene unlockedCellAdjacencyUIScene;
-
-    [Export]
-    private Control maxBonusContainer;
-
-    [Export]
-    private CurrencyDisplay maxBonusCurrencyDisplay;
 
     [ExportGroup("Storage Tab")]
     [Export]
@@ -58,6 +46,10 @@ public partial class UnlockedCellPopup : Popup
     [ExportGroup("Workers Tab")]
     [Export]
     private WorkplaceInfoUI workplaceInfoUI;
+    
+    [ExportGroup("AutoUpgrade Tab")]
+    [Export]
+    private UnlockedCellPopup_AutoUpgrade autoUpgradeDisplay;
     
     [ExportGroup("BuildTab")]
     [Export]
@@ -144,17 +136,6 @@ public partial class UnlockedCellPopup : Popup
         tabContainer.SetTabHidden(effectsTab.GetIndex(), !hasAnyEffects);
     }
 
-    private void SetupMaxBonus(CustomTileData tileData)
-    {
-        bool hasMaxBonus = tileData.TryGetComponent(out MaximumWorkerProductionBonusComponent maxBonusComponent);
-        workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplaceState);
-        maxBonusContainer.Visible = hasMaxBonus && workplaceState.workerCount >= workplaceState.capacity;
-        if (!hasMaxBonus) 
-            return;
-        
-        maxBonusCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(maxBonusComponent.extraBaseProduction));
-    }
-
     private void OnWorkplaceUpdated(WorkplaceUpdatedEvent e)
     {
         workplaceManager.TryGetWorkplaceAtLocation(cell, out var workplaceState);
@@ -194,6 +175,14 @@ public partial class UnlockedCellPopup : Popup
             residentLabel.Text = occupantData.Name;
             residentDetailsParent.AddChild(residentLabel);
         }
+    }
+
+    private void SetupAutoUpgradeTab()
+    {
+        bool hasAutoUpgrade = cellCustomTileData.TryGetComponent(out AutoUpgradeComponent _);
+        
+        autoUpgradeDisplay.Setup(cellCustomTileData, cell);
+        tabContainer.SetTabHidden(autoUpgradeTab.GetIndex(), !hasAutoUpgrade);
     }
 
     private void SetupTileSelector()
@@ -282,15 +271,13 @@ public partial class UnlockedCellPopup : Popup
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count > 0)
             tileSelectionGroup.Pressed -= OnSelectionChanged;
+        
+        resourcesDisplay.Cleanup();
+        autoUpgradeDisplay.Cleanup();
 
         foreach (var residentInfo in residentDetailsParent.GetChildren())
         {
             residentInfo.QueueFree();
-        }
-        
-        foreach (var effectInfo in effectInfoParent.GetChildren())
-        {
-            effectInfo.QueueFree();
         }
 
         foreach (var tileSelectionInfo in tileSelector.GetChildren())

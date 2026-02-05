@@ -193,7 +193,7 @@ public partial class EncyclopediaPopup : Popup
         foreach (var requirement in unlockRequirementsComponent.requirements)
         {
             var requirementUI = unlockReqScene.Instantiate<UnlockRequirementUI>();
-            requirementUI.Setup(requirement);
+            requirementUI.Setup(requirement, tileData);
             unlockReqContainer.AddChild(requirementUI);
         }
     }

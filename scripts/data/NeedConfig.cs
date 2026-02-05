@@ -2,7 +2,7 @@ using Godot;
 using Godot.Collections;
 
 [GlobalClass][Tool]
-public partial class NeedConfig : Resource, IRequirementContainer
+public partial class NeedConfig : Resource
 {
     [Export]
     public Array<AbstractRequirement> assignmentRequirements;
@@ -21,11 +21,11 @@ public partial class NeedConfig : Resource, IRequirementContainer
         if (resident.activeNeeds.Contains(this))
             return false;
 
-        return (this as IRequirementContainer).GetAreRequirementsSatisfied(assignmentRequirements, resident);
+        return RequirementCalculation.GetAreRequirementsSatisfied(assignmentRequirements, resident);
     }
 
     public bool IsNeedSatisfied<T>(T data) where T : new()
     {
-        return (this as IRequirementContainer).GetAreRequirementsSatisfied(satisfactionRequirements, data);
+        return RequirementCalculation.GetAreRequirementsSatisfied(satisfactionRequirements, data);
     }
 }

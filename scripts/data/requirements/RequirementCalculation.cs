@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Godot;
 
-public interface IRequirementContainer
+public static class RequirementCalculation
 {
-    public bool GetAreRequirementsSatisfied<T>(IEnumerable<AbstractRequirement> requirements, T data) where T : new()
+    public static bool GetAreRequirementsSatisfied<T>(IEnumerable<AbstractRequirement> requirements, T data) where T : new()
     {
         foreach (var satisfactionRequirement in requirements)
         {
@@ -26,7 +26,7 @@ public interface IRequirementContainer
         return true;
     }
 
-    public bool GetDataRequirementSatisfaction<T>(DataRequirementProcessor dataRequirementProcessor, T data) where T : new()
+    public static bool GetDataRequirementSatisfaction<T>(DataRequirementProcessor dataRequirementProcessor, T data) where T : new()
     {
         if (data == null)
         {

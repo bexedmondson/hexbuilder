@@ -43,10 +43,9 @@ public partial class RequirementUIMappingList : Resource
     [Export]
     private string noDepressedHousematesText;
     
-
-    public Texture2D GetIconForRequirement(DataRequirement requirement)
+    public Texture2D GetIconForRequirement(AbstractRequirement abstractRequirement, RequirementUIType requirementUIType)
     {
-        switch (requirement)
+        switch (abstractRequirement)
         {
             case ResidentBetterHousingRequirement _:
                 return houseIcon;
@@ -54,15 +53,6 @@ public partial class RequirementUIMappingList : Resource
                 return houseIcon;
             case ResidentNoDepressedHousematesRequirement _:
                 return noDepressedHousematesIcon;
-        }
-
-        return null; //TODO default icon?
-    }
-    
-    public Texture2D GetIconForRequirement(Requirement requirement)
-    {
-        switch (requirement)
-        {
             case PopulationRequirement _:
                 return populationIcon;
             case AllTimeTileBuildRequirement _:
@@ -75,12 +65,12 @@ public partial class RequirementUIMappingList : Resource
                 return InjectionManager.Get<InventoryManager>().GetIcon(lifetimeGainedRequirement.currency);
         }
 
-        return null;
+        return null; //TODO default icon?
     }
     
-    public string GetTextForNeedSatisfactionRequirement(DataRequirement requirement)
+    public string GetTextForRequirement(AbstractRequirement abstractRequirement, RequirementUIType requirementUIType)
     {
-        switch (requirement)
+        switch (abstractRequirement)
         {
             case ResidentBetterHousingRequirement _:
                 return betterHousingText;
@@ -88,38 +78,16 @@ public partial class RequirementUIMappingList : Resource
                 return isHousedText;
             case ResidentNoDepressedHousematesRequirement _:
                 return noDepressedHousematesText;
-        }
-
-        return string.Empty;
-    }
-    
-    public string GetTextForNeedSatisfactionRequirement(Requirement requirement)
-    {
-        switch (requirement)
-        {
             case PopulationRequirement _:
                 return populationText;
-            case AllTimeTileBuildRequirement allTimeTileBuildRequirement:
+            case AllTimeTileBuildRequirement allTimeTileBuildRequirement when requirementUIType == RequirementUIType.Need:
                 return allTimeBuildNeedText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.tile.GetFileName());
+            case AllTimeTileBuildRequirement allTimeTileBuildRequirement: //when requirementUIType != RequirementUIType.Need
+                return allTimeBuildUnlockText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.tile.GetFileName());
             case SufficientFoodRequirement _:
                 return sufficientFoodText;
-        }
-
-        return string.Empty;
-    }
-    
-    public string GetTextForUnlockRequirement(Requirement requirement)
-    {
-        switch (requirement)
-        {
-            case PopulationRequirement _:
-                return populationText;
-            case AllTimeTileBuildRequirement allTimeTileBuildRequirement:
-                return allTimeBuildUnlockText.Replace("{building}", allTimeTileBuildRequirement.requiredTileBuildCount.tile.GetFileName());
             case CurrentTilePresenceCountRequirement currentTilePresenceCountRequirement:
                 return currentTileBuildUnlockText.Replace("{building}", currentTilePresenceCountRequirement.requiredTileBuildCount.tile.GetFileName());
-            case SufficientFoodRequirement _:
-                return sufficientFoodText;
             case LifetimeGainedRequirement ltgr:
                 return lifetimeGainedText.Replace("{currency}", ltgr.currency.ToString().ToLower());
         }

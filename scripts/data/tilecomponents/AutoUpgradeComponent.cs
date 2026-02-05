@@ -1,7 +1,7 @@
 using Godot;
 
 [GlobalClass][Tool]
-public partial class AutoUpgradeComponent : AbstractTileDataComponent, IRequirementContainer
+public partial class AutoUpgradeComponent : AbstractTileDataComponent
 {
     [Export]
     public Godot.Collections.Array<AbstractRequirement> upgradeStartRequirements = new();
@@ -14,7 +14,7 @@ public partial class AutoUpgradeComponent : AbstractTileDataComponent, IRequirem
 
     public bool CanStartUpgrade(Vector2I cell)
     {
-        bool canStart = (this as IRequirementContainer).GetAreRequirementsSatisfied(upgradeStartRequirements, cell);
+        bool canStart = RequirementCalculation.GetAreRequirementsSatisfied(upgradeStartRequirements, cell);
         if (canStart)
             GD.Print($"AutoUpgradeComponent: Starting upgrade at {cell} to {afterUpgradeTile.GetFileName()}");
         return canStart;

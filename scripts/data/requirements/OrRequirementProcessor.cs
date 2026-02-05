@@ -1,6 +1,6 @@
 using Godot;
 
-public class OrRequirementProcessor(OrRequirement dataRequirement) : DataRequirementProcessor<object>, IRequirementContainer
+public class OrRequirementProcessor(OrRequirement dataRequirement) : DataRequirementProcessor<object>
 {
     public override bool IsSatisfied(object data)
     {
@@ -10,7 +10,7 @@ public class OrRequirementProcessor(OrRequirement dataRequirement) : DataRequire
             {
                 case DataRequirement dRequirement:
                     var processor = dRequirement.GetDataRequirementProcessor();
-                    if ((this as IRequirementContainer).GetDataRequirementSatisfaction(processor, data))
+                    if (RequirementCalculation.GetDataRequirementSatisfaction(processor, data))
                         return true;
                     break;
                 case Requirement requirement:

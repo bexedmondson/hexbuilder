@@ -70,7 +70,9 @@
 [ext_resource type="PackedScene" uid="uid://hd50lh5054ow" path="res://scenes/single_currency_display_light-outline-label.tscn" id="54_822nj"]
 [ext_resource type="Theme" uid="uid://c42r8558dvmyi" path="res://themes/clashy/clashy.tres" id="57_yi10l"]
 [ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="58_bnbf5"]
+[ext_resource type="Script" uid="uid://oge0v8nx381v" path="res://scripts/ui/popups/UnlockedCellPopup_AutoUpgrade.cs" id="60_r3ix6"]
 [ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="62_4g66p"]
+[ext_resource type="Texture2D" uid="uid://kmvcv0ngfdpc" path="res://assets/icons/icon_arrow_right.tres" id="62_052xa"]
 [ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="63_4cqqk"]
 [ext_resource type="PackedScene" uid="uid://de6euexkasfhm" path="res://scenes/encyclopedia_unlock_ui.tscn" id="66_mgx77"]
 [ext_resource type="Script" uid="uid://hy27agc14m2b" path="res://scripts/ui/toasts/ToastManager.cs" id="66_otuox"]
@@ -768,8 +770,7 @@ toastLabelScene = SubResource("PackedScene_mgx77")
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
 
-[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "buildTab", "resourcesDisplay", "effectInfoParent", "defaultEffectDisplay", "maxBonusContainer", "maxBonusCurrencyDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "tileSelector", "encyclopediaPopup", "confirmButton")]
-visible = false
+[node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "autoUpgradeTab", "buildTab", "resourcesDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "autoUpgradeDisplay", "tileSelector", "encyclopediaPopup", "confirmButton")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -789,16 +790,13 @@ effectsTab = NodePath("TabContainer/Effects")
 residentTab = NodePath("TabContainer/Residents")
 workerTab = NodePath("TabContainer/Workers")
 storageTab = NodePath("TabContainer/Storage")
+autoUpgradeTab = NodePath("TabContainer/Upgrade")
 buildTab = NodePath("TabContainer/Build")
 resourcesDisplay = NodePath("TabContainer/Effects/InfoSubpanel")
-effectInfoParent = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/NearbyTileEffectsVBoxContainer")
-defaultEffectDisplay = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer/CurrencyDisplay")
-unlockedCellAdjacencyUIScene = ExtResource("23_cpah3")
-maxBonusContainer = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer")
-maxBonusCurrencyDisplay = NodePath("TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
 storageInfoUI = NodePath("TabContainer/Storage/StoragePanel")
 residentDetailsParent = NodePath("TabContainer/Residents/ResidentPanel/VBoxContainer")
 workplaceInfoUI = NodePath("TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI")
+autoUpgradeDisplay = NodePath("TabContainer/Upgrade/AutoUpgradePanel")
 tileSelector = NodePath("TabContainer/Build/Panel/ScrollPanel/ScrollContainer/TileSelectionGrid")
 tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
@@ -871,9 +869,10 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 4
 
 [node name="Effects" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=536292955]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -1251,10 +1250,85 @@ size_flags_horizontal = 8
 size_flags_vertical = 4
 text = "+"
 
+[node name="Upgrade" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=2071387724]
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="AutoUpgradePanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade" unique_id=1847209980 node_paths=PackedStringArray("upgradeResultTile", "upgradeRequirementsContainer", "upgradeRequirementsParent")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("60_r3ix6")
+upgradeResultTile = NodePath("TileTextureRect")
+upgradeRequirementsContainer = NodePath("Panel")
+upgradeRequirementsParent = NodePath("Panel/ScrollContainer/GridContainer")
+upgradeRequirementScene = ExtResource("66_mgx77")
+
+[node name="ArrowIcon" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel" unique_id=739985182]
+self_modulate = Color(0.105882354, 0.80784315, 0.18039216, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.158
+anchor_top = 0.05
+anchor_right = 0.4
+anchor_bottom = 0.35
+offset_left = -40.000023
+offset_right = -1.5258789e-05
+offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("62_052xa")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="TileTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel" unique_id=671590706]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.9
+anchor_bottom = 0.35
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("40_e4lbj")
+greyscaleMaterial = ExtResource("39_ue1v3")
+
+[node name="Panel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel" unique_id=692461845]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.45
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel/Panel" unique_id=1106117811]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel/Panel/ScrollContainer" unique_id=575079935]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
 [node name="Build" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=459481767]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 4
+metadata/_tab_index = 5
 
 [node name="Panel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build" unique_id=1320820301]
 layout_mode = 1
