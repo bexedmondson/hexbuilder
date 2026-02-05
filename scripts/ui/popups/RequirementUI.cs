@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class UnlockRequirementUI : Control
+public partial class RequirementUI : Control
 {
     [Export]
     private TextureRect icon;
@@ -11,7 +11,7 @@ public partial class UnlockRequirementUI : Control
     [Export]
     private Control completeIndicator;
 
-    public void Setup<T>(AbstractRequirement requirement, T data) where T : new()
+    public virtual void Setup<T>(AbstractRequirement requirement, T data) where T : new()
     {
         var requirementUiMappingList = InjectionManager.Get<DataResourceContainer>().requirementUIMappingList;
         bool isSatisfied = false;
@@ -30,6 +30,13 @@ public partial class UnlockRequirementUI : Control
         var requirementUiMappingList = InjectionManager.Get<DataResourceContainer>().requirementUIMappingList;
         icon.Texture = requirementUiMappingList.GetIconForRequirement(dataRequirement, RequirementUIType.Unlock);
         text.Text = requirementUiMappingList.GetTextForRequirement(dataRequirement, RequirementUIType.Unlock);
+
+        if (dataRequirement is AdjacentToSelfRequirement && data is Vector2I cellCoords)
+        {
+            var tileData = InjectionManager.Get<MapController>().BaseMapLayer.GetCellCustomData(cellCoords);
+            text.Text = text.Text.Replace("{tile}", tileData.GetFileName());
+        }
+        
         isSatisfied = RequirementCalculation.GetDataRequirementSatisfaction(dataRequirement.GetDataRequirementProcessor(), data);
     }
 

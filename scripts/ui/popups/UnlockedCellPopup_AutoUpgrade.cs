@@ -11,9 +11,6 @@ public partial class UnlockedCellPopup_AutoUpgrade : Control
     [Export]
     private Control upgradeRequirementsParent;
 
-    [Export]
-    private PackedScene upgradeRequirementScene;
-
     private MapController mapController;
 
     private CustomTileData selectedCellTileData;
@@ -36,34 +33,13 @@ public partial class UnlockedCellPopup_AutoUpgrade : Control
         this.selectedCell = cell;
         
         upgradeResultTile.SetTile(autoUpgradeComponent.afterUpgradeTile);
-        
+
+        var factory = InjectionManager.Get<DataResourceContainer>().requirementUIMappingList;
         foreach (var upgradeStartRequirement in autoUpgradeComponent.upgradeStartRequirements)
         {
-            var unlockRequirementUI = upgradeRequirementScene.Instantiate<UnlockRequirementUI>();
+            var unlockRequirementUI = factory.CreateUIInstanceForRequirement(upgradeStartRequirement);
             unlockRequirementUI.Setup(upgradeStartRequirement, cell);
             upgradeRequirementsContainer.AddChild(unlockRequirementUI);
-        }
-    }
-    
-    private void SetupUnlockRequirements(CustomTileData tileData, Vector2I cell)
-    {
-        for (int i = upgradeRequirementsContainer.GetChildCount() - 1; i >= 0; i--)
-        {
-            upgradeRequirementsContainer.GetChild(i).QueueFree();
-        }
-
-        if (tileData.IsUnlocked() || !tileData.TryGetComponent(out UnlockRequirementsComponent unlockRequirementsComponent))
-        {
-            upgradeRequirementsParent.Visible = false;
-            return;
-        }
-
-        upgradeRequirementsParent.Visible = true;
-        foreach (var requirement in unlockRequirementsComponent.requirements)
-        {
-            var requirementUI = upgradeRequirementScene.Instantiate<UnlockRequirementUI>();
-            requirementUI.Setup(requirement, cell);
-            upgradeRequirementsContainer.AddChild(requirementUI);
         }
     }
     

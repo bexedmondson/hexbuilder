@@ -3,6 +3,13 @@ using Godot;
 [GlobalClass][Tool]
 public partial class RequirementUIMappingList : Resource
 {
+    [ExportGroup("Requirement UI Scenes")]
+    [Export]
+    private PackedScene defaultRequirementScene;
+
+    [Export]
+    private PackedScene orRequirementScene;
+    
     [ExportGroup("Housing")]
     [Export]
     private Texture2D houseIcon;
@@ -42,6 +49,12 @@ public partial class RequirementUIMappingList : Resource
     private Texture2D noDepressedHousematesIcon;
     [Export]
     private string noDepressedHousematesText;
+
+    [ExportGroup("Adjacency")]
+    [Export]
+    private Texture2D adjacencyIcon;
+    [Export]
+    private string adjacencyText;
     
     public Texture2D GetIconForRequirement(AbstractRequirement abstractRequirement, RequirementUIType requirementUIType)
     {
@@ -63,6 +76,10 @@ public partial class RequirementUIMappingList : Resource
                 return foodIcon;
             case LifetimeGainedRequirement lifetimeGainedRequirement:
                 return InjectionManager.Get<InventoryManager>().GetIcon(lifetimeGainedRequirement.currency);
+            case AdjacencyRequirement _:
+                return adjacencyIcon;
+            case AdjacentToSelfRequirement _:
+                return adjacencyIcon;
         }
 
         return null; //TODO default icon?
@@ -90,8 +107,23 @@ public partial class RequirementUIMappingList : Resource
                 return currentTileBuildUnlockText.Replace("{building}", currentTilePresenceCountRequirement.requiredTileBuildCount.tile.GetFileName());
             case LifetimeGainedRequirement ltgr:
                 return lifetimeGainedText.Replace("{currency}", ltgr.currency.ToString().ToLower());
+            case AdjacencyRequirement adj:
+                return adjacencyText.Replace("{tile}", adj.neighbourTile.GetFileName());
+            case AdjacentToSelfRequirement _:
+                return adjacencyText;
         }
 
         return string.Empty;
+    }
+
+    public RequirementUI CreateUIInstanceForRequirement(AbstractRequirement requirement)
+    {
+        switch (requirement)
+        {
+            case OrRequirement:
+                return orRequirementScene.Instantiate<OrRequirementUI>();
+            default:
+                return defaultRequirementScene.Instantiate<RequirementUI>();
+        }
     }
 }

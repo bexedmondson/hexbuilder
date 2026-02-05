@@ -72,9 +72,7 @@
 [ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="58_bnbf5"]
 [ext_resource type="Script" uid="uid://oge0v8nx381v" path="res://scripts/ui/popups/UnlockedCellPopup_AutoUpgrade.cs" id="60_r3ix6"]
 [ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="62_4g66p"]
-[ext_resource type="Texture2D" uid="uid://kmvcv0ngfdpc" path="res://assets/icons/icon_arrow_right.tres" id="62_052xa"]
 [ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="63_4cqqk"]
-[ext_resource type="PackedScene" uid="uid://de6euexkasfhm" path="res://scenes/encyclopedia_unlock_ui.tscn" id="66_mgx77"]
 [ext_resource type="Script" uid="uid://hy27agc14m2b" path="res://scripts/ui/toasts/ToastManager.cs" id="66_otuox"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
@@ -1263,35 +1261,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("60_r3ix6")
 upgradeResultTile = NodePath("TileTextureRect")
-upgradeRequirementsContainer = NodePath("Panel")
-upgradeRequirementsParent = NodePath("Panel/ScrollContainer/GridContainer")
-upgradeRequirementScene = ExtResource("66_mgx77")
-
-[node name="ArrowIcon" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel" unique_id=739985182]
-self_modulate = Color(0.105882354, 0.80784315, 0.18039216, 1)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.158
-anchor_top = 0.05
-anchor_right = 0.4
-anchor_bottom = 0.35
-offset_left = -40.000023
-offset_right = -1.5258789e-05
-offset_bottom = 40.0
-grow_horizontal = 0
-texture = ExtResource("62_052xa")
-expand_mode = 5
-stretch_mode = 5
+upgradeRequirementsContainer = NodePath("Panel/ScrollContainer/HFlowContainer")
+upgradeRequirementsParent = NodePath("Panel")
 
 [node name="TileTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel" unique_id=671590706]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
+anchor_left = 0.1
 anchor_top = 0.05
 anchor_right = 0.9
-anchor_bottom = 0.35
-offset_left = -40.0
-offset_bottom = 40.0
+anchor_bottom = 0.4
 grow_horizontal = 0
 expand_mode = 3
 stretch_mode = 5
@@ -1319,11 +1298,12 @@ offset_right = -10.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel/Panel/ScrollContainer" unique_id=575079935]
+[node name="HFlowContainer" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel/Panel/ScrollContainer" unique_id=619475025]
 layout_mode = 2
 size_flags_horizontal = 3
-columns = 3
+alignment = 1
 
 [node name="Build" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=459481767]
 visible = false
@@ -1616,7 +1596,6 @@ maxBonusContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Pa
 maxBonusCurrencyDisplay = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer/CurrencyDisplay")
 unlockReqParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer")
 unlockReqContainer = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer/MarginContainer/UnlockRequirementsHBoxContainer")
-unlockReqScene = ExtResource("66_mgx77")
 buildPriceContainer = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice")
 buildPriceDisplay = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice/MarginContainer/CurrencyDisplay")
 affectsParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer/AffectsHBoxContainer")

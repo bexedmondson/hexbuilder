@@ -121,6 +121,8 @@ public partial class UnlockedCellPopup : Popup
         }
             
         SetupResidents();
+        
+        SetupAutoUpgradeTab();
 
         SetupTileSelector();
 

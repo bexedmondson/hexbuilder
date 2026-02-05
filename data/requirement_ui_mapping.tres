@@ -2,9 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="1_2xq6f"]
 [ext_resource type="Texture2D" uid="uid://dqtssryuqvjcu" path="res://assets/icons/icon_wheat.tres" id="2_ohvbe"]
+[ext_resource type="PackedScene" uid="uid://de6euexkasfhm" path="res://scenes/requirement_ui_default.tscn" id="2_p0lh0"]
 [ext_resource type="Texture2D" uid="uid://syhv8okyicei" path="res://assets/icons/icon_house.tres" id="3_p0lh0"]
 [ext_resource type="Texture2D" uid="uid://m6p844tktvxg" path="res://assets/icons/icon_people.tres" id="4_phppg"]
 [ext_resource type="Script" uid="uid://cflcy4b0jtftv" path="res://scripts/data/RequirementUIMappingList.cs" id="5_wcdwj"]
+[ext_resource type="PackedScene" uid="uid://c2p2iwj7rq3ys" path="res://scenes/requirement_ui_or.tscn" id="6_phppg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0lh0"]
+atlas = ExtResource("1_2xq6f")
+region = Rect2(1792, 1536, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3a8gp"]
 atlas = ExtResource("1_2xq6f")
@@ -12,6 +18,8 @@ region = Rect2(1280, 1536, 128, 128)
 
 [resource]
 script = ExtResource("5_wcdwj")
+defaultRequirementScene = ExtResource("2_p0lh0")
+orRequirementScene = ExtResource("6_phppg")
 houseIcon = ExtResource("3_p0lh0")
 isHousedText = "I don't have anywhere to live!"
 betterHousingText = "I don't like the type of house I live in."
@@ -26,3 +34,5 @@ foodIcon = ExtResource("2_ohvbe")
 sufficientFoodText = "I'm hungry - there isn't enough food for everyone."
 noDepressedHousematesIcon = ExtResource("4_phppg")
 noDepressedHousematesText = "One of my housemates is really sad..."
+adjacencyIcon = SubResource("AtlasTexture_p0lh0")
+adjacencyText = "next to {tile}"

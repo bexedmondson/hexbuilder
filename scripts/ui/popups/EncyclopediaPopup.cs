@@ -48,9 +48,6 @@ public partial class EncyclopediaPopup : Popup
     private Control unlockReqContainer;
 
     [Export]
-    private PackedScene unlockReqScene;
-
-    [Export]
     private Control buildPriceContainer;
 
     [Export]
@@ -190,9 +187,10 @@ public partial class EncyclopediaPopup : Popup
         }
 
         unlockReqParent.Visible = true;
+        var factory = InjectionManager.Get<DataResourceContainer>().requirementUIMappingList;
         foreach (var requirement in unlockRequirementsComponent.requirements)
         {
-            var requirementUI = unlockReqScene.Instantiate<UnlockRequirementUI>();
+            var requirementUI = factory.CreateUIInstanceForRequirement(requirement);
             requirementUI.Setup(requirement, tileData);
             unlockReqContainer.AddChild(requirementUI);
         }
