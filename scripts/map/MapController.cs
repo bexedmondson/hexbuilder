@@ -32,6 +32,7 @@ public partial class MapController : Node2D, IInjectable
     private TimedJobManager timedJobManager;
     private EventDispatcher eventDispatcher;
     private CellStatusManager cellStatusManager;
+    private AutoUpgradeManager autoUpgradeManager;
     
     private CellBuildStatsTracker cellBuildStatsTracker;
 
@@ -53,12 +54,12 @@ public partial class MapController : Node2D, IInjectable
         timedJobManager = new TimedJobManager(this);
         residentManager = new ResidentManager(this);
         cellBuildStatsTracker = new CellBuildStatsTracker();
+        autoUpgradeManager = new AutoUpgradeManager(this);
         
         var tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase ??= new TileDatabase();
         tileDatabase.AddTileSetTileData(baseMapLayer.TileSet);
         mapGenerator.Setup();
-        
     }
 
     public void OnNewGame()

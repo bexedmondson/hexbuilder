@@ -7,7 +7,7 @@ public partial class AutoUpgradeComponent : AbstractTileDataComponent, IRequirem
     public Godot.Collections.Array<AbstractRequirement> upgradeStartRequirements = new();
 
     [Export]
-    public int upgradeDuration; //TODO implement
+    public int upgradeDuration;
 
     [Export]
     public CustomTileData afterUpgradeTile;

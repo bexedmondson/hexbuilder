@@ -102,4 +102,14 @@ public class TileDatabase : IInjectable
 
         return null;
     }
+
+    public TileInfo GetTileInfoForCustomTileData(CustomTileData customTileData)
+    {
+        foreach (var tileInfo in AllTileInfos)
+        {
+            if (tileInfo.tileData == customTileData)
+                return tileInfo;
+        }
+        return null;
+    }
 }
