@@ -14,6 +14,9 @@ public partial class AutoUpgradeComponent : AbstractTileDataComponent, IRequirem
 
     public bool CanStartUpgrade(Vector2I cell)
     {
-        return (this as IRequirementContainer).GetAreRequirementsSatisfied(upgradeStartRequirements, cell);
+        bool canStart = (this as IRequirementContainer).GetAreRequirementsSatisfied(upgradeStartRequirements, cell);
+        if (canStart)
+            GD.Print($"AutoUpgradeComponent: Starting upgrade at {cell} to {afterUpgradeTile.GetFileName()}");
+        return canStart;
     }
 }
