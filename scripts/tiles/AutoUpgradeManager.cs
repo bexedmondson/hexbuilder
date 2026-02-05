@@ -36,7 +36,7 @@ public class AutoUpgradeManager : IInjectable
             if (timedJobManager.TryGetTimedJobAt(usedCell, out _))
                 continue;
 
-            if (!autoUpgradeComponent.CanStartUpgrade())
+            if (!autoUpgradeComponent.CanStartUpgrade(usedCell))
                 continue;
 
             var autoUpgradeJob = new AutoUpgradeTimedJobState(usedCell, autoUpgradeComponent.upgradeDuration, 0);

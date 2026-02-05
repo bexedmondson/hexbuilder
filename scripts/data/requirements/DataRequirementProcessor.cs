@@ -1,3 +1,5 @@
+using Godot;
+
 public abstract class DataRequirementProcessor
 {
 }
@@ -9,6 +11,12 @@ public abstract class DataRequirementProcessor<TData> : DataRequirementProcessor
 
 public abstract class ResidentStateRequirementProcessor<TRequirement>(TRequirement dataRequirement) 
     : DataRequirementProcessor<ResidentState> where TRequirement : DataRequirement
+{
+    protected TRequirement dataRequirement = dataRequirement;
+}
+
+public abstract class CellInfoRequirementProcessor<TRequirement>(TRequirement dataRequirement) 
+    : DataRequirementProcessor<Vector2I> where TRequirement : DataRequirement
 {
     protected TRequirement dataRequirement = dataRequirement;
 }

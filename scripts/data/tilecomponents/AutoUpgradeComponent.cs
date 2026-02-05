@@ -12,8 +12,8 @@ public partial class AutoUpgradeComponent : AbstractTileDataComponent, IRequirem
     [Export]
     public CustomTileData afterUpgradeTile;
 
-    public bool CanStartUpgrade(WorkplaceState workplaceState = null)
+    public bool CanStartUpgrade(Vector2I cell)
     {
-        return (this as IRequirementContainer).GetAreRequirementsSatisfied(upgradeStartRequirements, workplaceState);
+        return (this as IRequirementContainer).GetAreRequirementsSatisfied(upgradeStartRequirements, cell);
     }
 }

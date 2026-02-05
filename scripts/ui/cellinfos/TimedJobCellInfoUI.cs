@@ -17,8 +17,10 @@ public partial class TimedJobCellInfoUI : Control
 
     public void UpdateWorkerCountLabel(int count, int capacity)
     {
+        workerCountLabel.Visible = capacity != 0;
+        
         workerCountLabel.Text = $"{count}/{capacity}";
-        alert.Visible = count <= 0;
+        alert.Visible = count <= 0 && capacity != 0;
     }
 
     public void AnimateOut(Action OnAnimationFinished)
