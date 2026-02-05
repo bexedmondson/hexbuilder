@@ -24,7 +24,7 @@ public partial class NeedConfig : Resource, IRequirementContainer
         return (this as IRequirementContainer).GetAreRequirementsSatisfied(assignmentRequirements, resident);
     }
 
-    public bool IsNeedSatisfied<T>(T data) where T : class
+    public bool IsNeedSatisfied<T>(T data) where T : new()
     {
         return (this as IRequirementContainer).GetAreRequirementsSatisfied(satisfactionRequirements, data);
     }

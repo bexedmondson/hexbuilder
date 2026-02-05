@@ -3,7 +3,7 @@ using Godot;
 
 public interface IRequirementContainer
 {
-    public bool GetAreRequirementsSatisfied<T>(IEnumerable<AbstractRequirement> requirements, T data) where T : class
+    public bool GetAreRequirementsSatisfied<T>(IEnumerable<AbstractRequirement> requirements, T data) where T : new()
     {
         foreach (var satisfactionRequirement in requirements)
         {
@@ -26,7 +26,7 @@ public interface IRequirementContainer
         return true;
     }
 
-    private bool GetDataRequirementSatisfaction<T>(DataRequirementProcessor dataRequirementProcessor, T data) where T : class
+    private bool GetDataRequirementSatisfaction<T>(DataRequirementProcessor dataRequirementProcessor, T data) where T : new()
     {
         if (data == null)
         {

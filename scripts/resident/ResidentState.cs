@@ -2,15 +2,22 @@
 using System.Collections.Generic;
 using Godot;
 
-public class ResidentState(string name, int moveInDay)
-{
+public class ResidentState {
     private HousingManager housingManager;
-    
-    public string Name { get; private set; } = name;
+
+    public string Name { get; private set; }
 
     public List<NeedConfig> activeNeeds = new();
 
-    public int moveInDay { get; private set; } = moveInDay;
+    public int moveInDay { get; private set; }
+
+    public ResidentState(){} //adding this purely so it's compatible with the generics stuff in IsNeedSatisfied below
+
+    public ResidentState(string name, int moveInDay)
+    {
+        this.Name = name;
+        this.moveInDay = moveInDay;
+    }
 
     public static int maxHappiness = 3;
     public static int minHappiness = -3;
