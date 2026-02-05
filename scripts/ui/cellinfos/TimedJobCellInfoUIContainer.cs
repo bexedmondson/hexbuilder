@@ -36,7 +36,9 @@ public partial class TimedJobCellInfoUIContainer : Control
     {
         if (timedJobCellInfoUis.TryGetValue(timedJobEndedEvent.location, out var removedTimedJobInfoUI))
         {
-            removedTimedJobInfoUI.AnimateOut(() =>
+            removedTimedJobInfoUI.AnimateOut(
+                GetEndAnimationNameForJob(timedJobEndedEvent),
+                () =>
             {
                 this.RemoveChild(removedTimedJobInfoUI);
                 removedTimedJobInfoUI.QueueFree();
@@ -46,6 +48,17 @@ public partial class TimedJobCellInfoUIContainer : Control
         else
         {
             GD.PushError("how did this happen");
+        }
+    }
+
+    private string GetEndAnimationNameForJob(TimedJobEndedEvent timedJobEndedEvent)
+    {
+        switch (timedJobEndedEvent.timedJob)
+        {
+            case AutoUpgradeTimedJobState autoUpgradeTimedJob:
+                return "auto_upgrade";
+            default:
+                return "job_complete";
         }
     }
 }

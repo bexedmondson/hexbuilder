@@ -219,30 +219,12 @@ texture_region_size = Vector2i(480, 480)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 69)
 0:0/0/custom_data_0 = ExtResource("19_8nlen")
-0:0/0/metadata/_better_terrain = {
-4: [0, 3],
-12: [0, 3],
-&"symmetry": 1,
-&"type": 4
-}
 1:0/0 = 0
 1:0/0/texture_origin = Vector2i(0, 69)
 1:0/0/custom_data_0 = ExtResource("19_67nna")
-1:0/0/metadata/_better_terrain = {
-2: [0, 3],
-10: [0, 3],
-&"symmetry": 1,
-&"type": 4
-}
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 69)
 2:0/0/custom_data_0 = ExtResource("25_67nna")
-2:0/0/metadata/_better_terrain = {
-6: [0, 3],
-14: [0, 3],
-&"symmetry": 1,
-&"type": 4
-}
 3:0/0 = 0
 3:0/0/texture_origin = Vector2i(0, 69)
 3:0/0/custom_data_0 = ExtResource("30_ekhic")
@@ -1022,8 +1004,6 @@ metadata/_better_terrain = {
 }], ["ocean", Color(0.03125, 0, 1, 1), 2, [], {
 &"coord": Vector2i(3, 3),
 &"source_id": 0
-}], ["bridge", Color(0.23828125, 0.23828125, 0.23828125, 1), 0, [], {
-&"path": ""
 }]],
 &"version": "0.2"
 }

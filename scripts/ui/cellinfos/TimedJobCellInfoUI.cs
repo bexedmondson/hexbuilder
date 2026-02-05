@@ -7,7 +7,7 @@ public partial class TimedJobCellInfoUI : Control
     private Label workerCountLabel;
 
     [Export]
-    private Control alert;
+    private Control hourglass;
 
     [Export]
     private Container workerLabelContainer;
@@ -17,19 +17,19 @@ public partial class TimedJobCellInfoUI : Control
 
     public void UpdateWorkerCountLabel(int count, int capacity)
     {
-        workerCountLabel.Visible = capacity != 0;
+        workerLabelContainer.Visible = capacity != 0;
         
         workerCountLabel.Text = $"{count}/{capacity}";
-        alert.Visible = count <= 0 && capacity != 0;
+        hourglass.Visible = count <= 0;
     }
 
-    public void AnimateOut(Action OnAnimationFinished)
+    public void AnimateOut(string animationName, Action OnAnimationFinished)
     {
         //this is silly but such is godot's control pivot handling that i can't set it to just "50% of size" to
         //allow scaling to the center, instead i have to do this
         workerLabelContainer.SetPivotOffset(workerLabelContainer.Size / 2);
         animationPlayer.AnimationFinished += _ => OnAnimationFinished?.Invoke();
-        animationPlayer.Play("job_complete");
+        animationPlayer.Play(animationName);
     }
 }
 

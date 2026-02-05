@@ -1,3 +1,5 @@
+using Godot;
+
 public class AutoUpgradeManager : IInjectable
 {
     private MapController mapController;
@@ -38,11 +40,16 @@ public class AutoUpgradeManager : IInjectable
 
             if (!autoUpgradeComponent.CanStartUpgrade(usedCell))
                 continue;
+            GD.PushWarning($"AutoUpgradeComponent: Starting upgrade at {usedCell} to {autoUpgradeComponent.afterUpgradeTile.GetFileName()}");
 
             var autoUpgradeJob = new AutoUpgradeTimedJobState(usedCell, autoUpgradeComponent.upgradeDuration, 0);
 
             var tileInfo = tileDatabase.GetTileInfoForCustomTileData(autoUpgradeComponent.afterUpgradeTile);
-            autoUpgradeJob.SetCompleteCallback(() => mapController.BuildTileAtCell(usedCell, tileInfo));
+            autoUpgradeJob.SetCompleteCallback(() =>
+            {
+                GD.PushWarning($"AutoUpgradeComponent: Finishing upgrade at {usedCell} to {autoUpgradeComponent.afterUpgradeTile.GetFileName()}");
+                mapController.BuildTileAtCell(usedCell, tileInfo);
+            });
             
             timedJobManager.AddNewTimedJob(autoUpgradeJob);
         }

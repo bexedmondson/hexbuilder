@@ -19,7 +19,7 @@ public class TimedJobManager : IInjectable
 
     public void OnNextTurn()
     {
-        List<Vector2I> locationsOfJobsToRemove = new();
+        List<KeyValuePair<Vector2I, TimedJobState>> timedJobLocationPairsToRemove = new();
         foreach (var kvp in timedJobDatas)
         {
             var timedJobData = kvp.Value;
@@ -33,15 +33,15 @@ public class TimedJobManager : IInjectable
             {
                 residentTimedJobMap.Remove(worker);
             }
-            locationsOfJobsToRemove.Add(kvp.Key);
+            timedJobLocationPairsToRemove.Add(kvp);
         }
 
-        foreach (var locationOfJobToRemove in locationsOfJobsToRemove)
+        foreach (var jobLocationPairToRemove in timedJobLocationPairsToRemove)
         {
-            timedJobDatas.Remove(locationOfJobToRemove);
+            timedJobDatas.Remove(jobLocationPairToRemove.Key);
             
             eventDispatcher ??= InjectionManager.Get<EventDispatcher>();
-            eventDispatcher.Dispatch(new TimedJobEndedEvent(locationOfJobToRemove));
+            eventDispatcher.Dispatch(new TimedJobEndedEvent(jobLocationPairToRemove.Value, jobLocationPairToRemove.Key));
         }
     }
 
