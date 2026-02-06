@@ -103,9 +103,14 @@ public partial class MapController : Node2D, IInjectable
         if (cellStatusManager.GetCellStatus(cellToStartUnlock) != CellStatus.Locked)
             return;
 
+        int unlockTurnCount = 1;
+        var cellCustomData = baseMapLayer.GetCellCustomData(cellToStartUnlock);
+        if (cellCustomData != null && cellCustomData.TryGetComponent(out TerrainUnlockTimeComponent unlockTimeComponent))
+            unlockTurnCount = unlockTimeComponent.turnCount;
+
         var workerCountRequirement = GetCellUnlockWorkerRequirement(cellToStartUnlock);
         
-        var cellUnlockTimedJobData = new CellUnlockTimedJobState(cellToStartUnlock, 1, workerCountRequirement);
+        var cellUnlockTimedJobData = new CellUnlockTimedJobState(cellToStartUnlock, unlockTurnCount, workerCountRequirement);
         timedJobManager.AddNewTimedJob(cellUnlockTimedJobData);
         
         for (int i = 0; i < workerCountRequirement; i++)

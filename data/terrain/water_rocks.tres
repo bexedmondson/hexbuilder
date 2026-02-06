@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_54yph"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="1_nffq5"]
+[ext_resource type="Script" uid="uid://clpq8ubelpdr6" path="res://scripts/data/tilecomponents/TerrainUnlockTimeComponent.cs" id="2_0pju1"]
+
+[sub_resource type="Resource" id="Resource_islj7"]
+script = ExtResource("2_0pju1")
+turnCount = 3
+metadata/_custom_type_script = "uid://clpq8ubelpdr6"
 
 [resource]
 script = ExtResource("1_54yph")
@@ -9,4 +15,5 @@ canBePlacedOn = []
 buildPrice = {}
 baseTurnCurrencyChange = {}
 adjacencies = Array[Object]([])
+components = Array[ExtResource("1_nffq5")]([SubResource("Resource_islj7")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -6,6 +6,9 @@ public partial class LockedCellPopup : Popup
     private Label workerCountLabel;
 
     [Export]
+    private Label turnCountLabel;
+
+    [Export]
     private Button confirmButton;
 
     private MapController mapController;
@@ -27,6 +30,11 @@ public partial class LockedCellPopup : Popup
         int availableResidents = residentManager.GetNotBusyResidentCount();
         
         workerCountLabel.Text = $"x{requiredWorkerCount}";
+
+        if (mapController.BaseMapLayer.GetCellCustomData(setCell)?.TryGetComponent(out TerrainUnlockTimeComponent unlockTimeComponent) == true)
+            turnCountLabel.Text = $"x{unlockTimeComponent.turnCount}";
+        else
+            turnCountLabel.Text = "x1";
 
         bool hasEnoughAvailableWorkers = requiredWorkerCount <= availableResidents;
         confirmButton.Disabled = !hasEnoughAvailableWorkers;

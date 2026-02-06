@@ -73,6 +73,7 @@
 [ext_resource type="Script" uid="uid://oge0v8nx381v" path="res://scripts/ui/popups/UnlockedCellPopup_AutoUpgrade.cs" id="60_r3ix6"]
 [ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="62_4g66p"]
 [ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="63_4cqqk"]
+[ext_resource type="Texture2D" uid="uid://cx3xw3vsdesuq" path="res://assets/icons/icon_hourglass_mid.tres" id="64_052xa"]
 [ext_resource type="Script" uid="uid://hy27agc14m2b" path="res://scripts/ui/toasts/ToastManager.cs" id="66_otuox"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
@@ -769,6 +770,7 @@ toastLabelScene = SubResource("PackedScene_mgx77")
 layer = 2
 
 [node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "autoUpgradeTab", "buildTab", "resourcesDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "autoUpgradeDisplay", "tileSelector", "encyclopediaPopup", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1370,8 +1372,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "OK"
 
-[node name="LockedCellPopup" type="Panel" parent="PopupLayer" unique_id=332027100 node_paths=PackedStringArray("workerCountLabel", "confirmButton")]
-visible = false
+[node name="LockedCellPopup" type="Panel" parent="PopupLayer" unique_id=332027100 node_paths=PackedStringArray("workerCountLabel", "turnCountLabel", "confirmButton")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1384,7 +1385,8 @@ offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_bn7pe")
-workerCountLabel = NodePath("PanelContainer/Panel2/WorkerCountContainer/WorkerCountLabel")
+workerCountLabel = NodePath("PanelContainer/VBoxContainer/Panel2/WorkerCountContainer/WorkerCountLabel")
+turnCountLabel = NodePath("PanelContainer/VBoxContainer/Panel3/TurnCountContainer/TurnCountLabel")
 confirmButton = NodePath("ConfirmButton")
 
 [node name="UnlockLabel" type="Label" parent="PopupLayer/LockedCellPopup" unique_id=961085592]
@@ -1408,28 +1410,56 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -44.5
-offset_top = -30.0
-offset_right = 44.5
-offset_bottom = 30.0
+offset_left = -101.0
+offset_top = -26.793
+offset_right = 101.0
+offset_bottom = 59.207
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"PanelContainerEmbeddedLight"
 
-[node name="Panel2" type="MarginContainer" parent="PopupLayer/LockedCellPopup/PanelContainer" unique_id=567307553]
+[node name="VBoxContainer" type="HBoxContainer" parent="PopupLayer/LockedCellPopup/PanelContainer" unique_id=1089110698]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="WorkerCountContainer" type="HBoxContainer" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2" unique_id=1726598082]
+[node name="Panel2" type="MarginContainer" parent="PopupLayer/LockedCellPopup/PanelContainer/VBoxContainer" unique_id=567307553]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+
+[node name="WorkerCountContainer" type="HBoxContainer" parent="PopupLayer/LockedCellPopup/PanelContainer/VBoxContainer/Panel2" unique_id=1726598082]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2/WorkerCountContainer" unique_id=233603291]
+[node name="TextureRect" type="TextureRect" parent="PopupLayer/LockedCellPopup/PanelContainer/VBoxContainer/Panel2/WorkerCountContainer" unique_id=233603291]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("31_5n6k3")
 expand_mode = 3
+stretch_mode = 5
 
-[node name="WorkerCountLabel" type="Label" parent="PopupLayer/LockedCellPopup/PanelContainer/Panel2/WorkerCountContainer" unique_id=283290819]
+[node name="WorkerCountLabel" type="Label" parent="PopupLayer/LockedCellPopup/PanelContainer/VBoxContainer/Panel2/WorkerCountContainer" unique_id=283290819]
+layout_mode = 2
+theme_type_variation = &"Label_Title"
+text = "x1"
+vertical_alignment = 1
+
+[node name="Panel3" type="MarginContainer" parent="PopupLayer/LockedCellPopup/PanelContainer/VBoxContainer" unique_id=1299312519]
+layout_mode = 2
+
+[node name="TurnCountContainer" type="HBoxContainer" parent="PopupLayer/LockedCellPopup/PanelContainer/VBoxContainer/Panel3" unique_id=1006780298]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PopupLayer/LockedCellPopup/PanelContainer/VBoxContainer/Panel3/TurnCountContainer" unique_id=708220484]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("64_052xa")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TurnCountLabel" type="Label" parent="PopupLayer/LockedCellPopup/PanelContainer/VBoxContainer/Panel3/TurnCountContainer" unique_id=9167507]
 layout_mode = 2
 theme_type_variation = &"Label_Title"
 text = "x1"

@@ -26,7 +26,10 @@ public class TimedJobManager : IInjectable
             timedJobData.TryIncrementTurnCount();
 
             if (!timedJobData.HasFinished)
+            {
+                eventDispatcher.Dispatch(new TimedJobUpdatedEvent(timedJobData, kvp.Key));
                 return;
+            }
             
             timedJobData.CompleteJob();
             foreach (var worker in timedJobData.workers)
@@ -50,7 +53,7 @@ public class TimedJobManager : IInjectable
         timedJobDatas.Add(newTimedJob.location, newTimedJob);
         
         eventDispatcher ??= InjectionManager.Get<EventDispatcher>();
-        eventDispatcher.Dispatch(new TimedJobStartedEvent(newTimedJob.location, newTimedJob.workerCount, newTimedJob.workerCountRequirement));
+        eventDispatcher.Dispatch(new TimedJobStartedEvent(newTimedJob, newTimedJob.location, newTimedJob.workerCount, newTimedJob.workerCountRequirement));
     }
 
     public bool TryGetTimedJobAt(Vector2I cell, out TimedJobState timedJobState)

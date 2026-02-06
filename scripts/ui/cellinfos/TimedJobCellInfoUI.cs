@@ -8,6 +8,9 @@ public partial class TimedJobCellInfoUI : Control
 
     [Export]
     private Control hourglass;
+    
+    [Export]
+    private Label turnCountLabel;
 
     [Export]
     private Container workerLabelContainer;
@@ -20,7 +23,18 @@ public partial class TimedJobCellInfoUI : Control
         workerLabelContainer.Visible = capacity != 0;
         
         workerCountLabel.Text = $"{count}/{capacity}";
-        hourglass.Visible = count <= 0;
+        hourglass.Visible = count >= 0;
+    }
+
+    public void UpdateTurnCountLabel(int turnCount)
+    {
+        turnCountLabel.Text = turnCount.ToString();
+    }
+
+    public void DoTurnAnim()
+    {
+        hourglass.SetPivotOffset(hourglass.Size / 2);
+        animationPlayer.Play("turn_hourglass");
     }
 
     public void AnimateOut(string animationName, Action OnAnimationFinished)

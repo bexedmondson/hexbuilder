@@ -15,6 +15,7 @@ public partial class TimedJobCellInfoUIContainer : Control
     {
         base._Ready();
         InjectionManager.Get<EventDispatcher>().Add<TimedJobStartedEvent>(OnTimedJobStarted);
+        InjectionManager.Get<EventDispatcher>().Add<TimedJobUpdatedEvent>(OnTimedJobUpdated);
         InjectionManager.Get<EventDispatcher>().Add<TimedJobEndedEvent>(OnTimedJobEnded);
     }
 
@@ -27,9 +28,20 @@ public partial class TimedJobCellInfoUIContainer : Control
 
         var newTimedJobCellInfoUI = cellInfoUIScene.Instantiate<TimedJobCellInfoUI>();
         newTimedJobCellInfoUI.UpdateWorkerCountLabel(timedJobStartedEvent.workerCount, timedJobStartedEvent.capacity);
+        newTimedJobCellInfoUI.UpdateTurnCountLabel(timedJobStartedEvent.timedJob.turnDuration);
         newTimedJobCellInfoUI.GlobalPosition = baseTileMapLayer.ToGlobal(baseTileMapLayer.MapToLocal(timedJobStartedEvent.location));
         timedJobCellInfoUis[timedJobStartedEvent.location] = newTimedJobCellInfoUI;
         this.AddChild(newTimedJobCellInfoUI);
+    }
+
+    private void OnTimedJobUpdated(TimedJobUpdatedEvent timedJobUpdatedEvent)
+    {
+        if (timedJobCellInfoUis.TryGetValue(timedJobUpdatedEvent.location, out var updatedJobUI))
+        {
+            updatedJobUI.UpdateTurnCountLabel(timedJobUpdatedEvent.timedJob.turnDuration - timedJobUpdatedEvent.timedJob.turnsElapsed);
+            updatedJobUI.UpdateWorkerCountLabel(timedJobUpdatedEvent.timedJob.workerCount, timedJobUpdatedEvent.timedJob.workerCountRequirement);
+            updatedJobUI.DoTurnAnim();
+        }
     }
     
     private void OnTimedJobEnded(TimedJobEndedEvent timedJobEndedEvent)
