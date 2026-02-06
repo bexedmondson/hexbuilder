@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://btw5ioruv2rfo" path="res://scripts/data/requirements/AdjacencyRequirement.cs" id="11_7ayar"]
 [ext_resource type="Script" uid="uid://c8yrd1yy0fx5q" path="res://scripts/data/requirements/AdjacentToSelfRequirement.cs" id="12_rhejc"]
 [ext_resource type="Script" uid="uid://dgio23ucufa58" path="res://scripts/data/requirements/OrRequirement.cs" id="13_3pelr"]
+[ext_resource type="Script" uid="uid://bx4lsbuoarqa4" path="res://scripts/data/requirements/RandomnessRequirement.cs" id="13_rhejc"]
 
 [sub_resource type="Resource" id="Resource_ut87k"]
 script = ExtResource("3_fhoxc")
@@ -51,9 +52,14 @@ script = ExtResource("13_3pelr")
 requirements = Array[ExtResource("8_rbypl")]([SubResource("Resource_ig4q8"), SubResource("Resource_m8xry")])
 metadata/_custom_type_script = "uid://dgio23ucufa58"
 
+[sub_resource type="Resource" id="Resource_3pelr"]
+script = ExtResource("13_rhejc")
+threshold = 0.5
+metadata/_custom_type_script = "uid://bx4lsbuoarqa4"
+
 [sub_resource type="Resource" id="Resource_uahqb"]
 script = ExtResource("7_fhoxc")
-upgradeStartRequirements = Array[ExtResource("8_rbypl")]([SubResource("Resource_a0woi")])
+upgradeStartRequirements = Array[ExtResource("8_rbypl")]([SubResource("Resource_a0woi"), SubResource("Resource_3pelr")])
 upgradeDuration = 2
 afterUpgradeTile = ExtResource("7_uahqb")
 

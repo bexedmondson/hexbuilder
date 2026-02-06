@@ -16,6 +16,10 @@ region = Rect2(1792, 1536, 128, 128)
 atlas = ExtResource("1_2xq6f")
 region = Rect2(1280, 1536, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_phppg"]
+atlas = ExtResource("1_2xq6f")
+region = Rect2(1920, 1536, 128, 128)
+
 [resource]
 script = ExtResource("5_wcdwj")
 defaultRequirementScene = ExtResource("2_p0lh0")
@@ -36,3 +40,5 @@ noDepressedHousematesIcon = ExtResource("4_phppg")
 noDepressedHousematesText = "One of my housemates is really sad..."
 adjacencyIcon = SubResource("AtlasTexture_p0lh0")
 adjacencyText = "next to {tile}"
+randomnessIcon = SubResource("AtlasTexture_phppg")
+randomnessText = "a bit of luck :)"

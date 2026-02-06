@@ -55,6 +55,12 @@ public partial class RequirementUIMappingList : Resource
     private Texture2D adjacencyIcon;
     [Export]
     private string adjacencyText;
+
+    [ExportGroup("Randomness")]
+    [Export]
+    private Texture2D randomnessIcon;
+    [Export]
+    private string randomnessText;
     
     public Texture2D GetIconForRequirement(AbstractRequirement abstractRequirement, RequirementUIType requirementUIType)
     {
@@ -80,6 +86,8 @@ public partial class RequirementUIMappingList : Resource
                 return adjacencyIcon;
             case AdjacentToSelfRequirement _:
                 return adjacencyIcon;
+            case RandomnessRequirement _:
+                return randomnessIcon;
         }
 
         return null; //TODO default icon?
@@ -111,6 +119,8 @@ public partial class RequirementUIMappingList : Resource
                 return adjacencyText.Replace("{tile}", adj.neighbourTile.GetFileName());
             case AdjacentToSelfRequirement _:
                 return adjacencyText;
+            case RandomnessRequirement _:
+                return randomnessText;
         }
 
         return string.Empty;

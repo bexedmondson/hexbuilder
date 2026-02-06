@@ -770,7 +770,6 @@ toastLabelScene = SubResource("PackedScene_mgx77")
 layer = 2
 
 [node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "autoUpgradeTab", "buildTab", "resourcesDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "autoUpgradeDisplay", "tileSelector", "encyclopediaPopup", "confirmButton")]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -869,9 +868,10 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 4
 
 [node name="Effects" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=536292955]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -1258,7 +1258,6 @@ size_flags_vertical = 4
 text = "+"
 
 [node name="Upgrade" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=2071387724]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -1316,6 +1315,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel" unique_id=194026075]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+text = "requirements"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="Build" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=459481767]
 visible = false
 layout_mode = 2
@@ -1351,6 +1365,7 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
+scroll_deadzone = 5
 
 [node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/ScrollPanel/ScrollContainer" unique_id=1964161459]
 layout_mode = 2
@@ -1373,6 +1388,7 @@ grow_vertical = 0
 text = "OK"
 
 [node name="LockedCellPopup" type="Panel" parent="PopupLayer" unique_id=332027100 node_paths=PackedStringArray("workerCountLabel", "turnCountLabel", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
