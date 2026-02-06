@@ -31,12 +31,16 @@ public class AutoUpgradeManager : IInjectable
             
             var cellData = mapController.BaseMapLayer.GetCellCustomData(usedCell);
             
-            if (!cellData.TryGetComponent<AutoUpgradeComponent>(out var autoUpgradeComponent))
+            if (!cellData.TryGetComponent(out AutoUpgradeComponent autoUpgradeComponent))
                 continue;
 
             //already unlocking, continue
             if (timedJobManager.TryGetTimedJobAt(usedCell, out _))
                 continue;
+
+            var workplaceManager = InjectionManager.Get<WorkplaceManager>();
+            if (workplaceManager.TryGetWorkplaceAtLocation(usedCell, out var workplaceState) && workplaceState.workerCount == 0)
+                continue; //TODO figure out how to use WorkplaceHasWorkersRequirement for this instead
 
             if (!autoUpgradeComponent.CanStartUpgrade(usedCell))
                 continue;
