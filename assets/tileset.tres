@@ -32,7 +32,6 @@
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="28_5kckd"]
 [ext_resource type="Resource" uid="uid://c4sgkb7bwedw5" path="res://data/buildings/sheep.tres" id="28_fjnr0"]
 [ext_resource type="Resource" uid="uid://no4wtwivctvf" path="res://data/buildings/sailboat.tres" id="28_xfaqi"]
-[ext_resource type="Resource" uid="uid://caf21i351x6aa" path="res://data/buildings/watermill.tres" id="29_8nlen"]
 [ext_resource type="Resource" uid="uid://cprbbiv623dht" path="res://data/buildings/house.tres" id="30_67nna"]
 [ext_resource type="Resource" uid="uid://bm7ifrp6v2jbu" path="res://data/buildings/chalet.tres" id="30_ekhic"]
 [ext_resource type="Resource" uid="uid://bu7kjauo40wv1" path="res://data/buildings/flax.tres" id="30_eklle"]
@@ -46,6 +45,7 @@
 [ext_resource type="Resource" uid="uid://d2ks5o3lef3w2" path="res://data/buildings/pit_mine.tres" id="36_tkdha"]
 [ext_resource type="Texture2D" uid="uid://cg1xv1drijb6b" path="res://assets/all_2d_buildings_2.png" id="37_eklle"]
 [ext_resource type="Resource" uid="uid://b72uoycdm7u8j" path="res://data/buildings/weaver.tres" id="38_powct"]
+[ext_resource type="Resource" uid="uid://dqlgosqx4q0av" path="res://data/buildings/cows2.tres" id="40_8nlen"]
 [ext_resource type="Resource" uid="uid://6iu3vhfh63aa" path="res://data/buildings/granary.tres" id="43_sn60b"]
 [ext_resource type="Resource" uid="uid://p340fpdf8cg4" path="res://data/buildings/stockpile.tres" id="44_fjnr0"]
 [ext_resource type="Resource" uid="uid://c4he7bm3m8lhi" path="res://data/buildings/cows_full.tres" id="45_8nlen"]
@@ -272,7 +272,7 @@ texture_region_size = Vector2i(480, 480)
 3:3/0/custom_data_0 = ExtResource("32_67nna")
 4:3/0 = 0
 4:3/0/texture_origin = Vector2i(0, 69)
-4:3/0/custom_data_0 = ExtResource("29_8nlen")
+4:3/0/custom_data_0 = ExtResource("40_8nlen")
 0:4/0 = 0
 0:4/0/texture_origin = Vector2i(0, 69)
 0:4/0/custom_data_0 = ExtResource("32_8liu1")

@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://dqlgosqx4q0av"]
+
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_mkjjm"]
+[ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="3_hr70l"]
+[ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="4_vgmdh"]
+[ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_5xqyi"]
+[ext_resource type="Script" uid="uid://coar33jbxnbhl" path="res://scripts/data/tilecomponents/HideInBuildTabComponent.cs" id="6_3mdas"]
+[ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="6_6vq28"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="7_7oeav"]
+
+[sub_resource type="Resource" id="Resource_ut87k"]
+script = ExtResource("3_hr70l")
+requiredAmount = 20
+metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
+
+[sub_resource type="Resource" id="Resource_1bw08"]
+script = ExtResource("4_vgmdh")
+requirements = Array[Object]([SubResource("Resource_ut87k")])
+metadata/_custom_type_script = "uid://7pquj0428dp5"
+
+[sub_resource type="Resource" id="Resource_xbks7"]
+script = ExtResource("5_5xqyi")
+capacity = 3
+metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
+
+[sub_resource type="Resource" id="Resource_nl4vi"]
+script = ExtResource("6_6vq28")
+extraBaseProduction = Dictionary[int, int]({
+0: 1,
+3: 2
+})
+metadata/_custom_type_script = "uid://bt32fndy2yjlv"
+
+[sub_resource type="Resource" id="Resource_mkjjm"]
+script = ExtResource("6_3mdas")
+metadata/_custom_type_script = "uid://coar33jbxnbhl"
+
+[resource]
+script = ExtResource("7_7oeav")
+canBePlacedOn = Array[Object]([])
+buildPrice = {}
+baseTurnCurrencyChange = {
+0: 4
+}
+adjacencies = Array[Object]([])
+components = Array[ExtResource("2_mkjjm")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi"), SubResource("Resource_mkjjm")])
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -24,6 +24,7 @@ public partial class TimedJobCellInfoUIContainer : Control
         if (timedJobCellInfoUis.ContainsKey(timedJobStartedEvent.location))
         {
             GD.PushError("how did this happen");
+            return;
         }
 
         var newTimedJobCellInfoUI = cellInfoUIScene.Instantiate<TimedJobCellInfoUI>();

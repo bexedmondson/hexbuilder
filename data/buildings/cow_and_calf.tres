@@ -6,7 +6,11 @@
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_8jgwh"]
 [ext_resource type="Script" uid="uid://coar33jbxnbhl" path="res://scripts/data/tilecomponents/HideInBuildTabComponent.cs" id="6_ilupn"]
 [ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="6_mw1ca"]
+[ext_resource type="Resource" uid="uid://dqlgosqx4q0av" path="res://data/buildings/cows2.tres" id="7_8jgwh"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="7_tjxvc"]
+[ext_resource type="Script" uid="uid://cfgg7k07r5r28" path="res://scripts/data/tilecomponents/AutoUpgradeComponent.cs" id="8_mw1ca"]
+[ext_resource type="Script" uid="uid://h7paiq4gf4yt" path="res://scripts/data/requirements/AbstractRequirement.cs" id="9_tjxvc"]
+[ext_resource type="Script" uid="uid://bx4lsbuoarqa4" path="res://scripts/data/requirements/RandomnessRequirement.cs" id="10_ru11o"]
 
 [sub_resource type="Resource" id="Resource_ut87k"]
 script = ExtResource("3_mxci2")
@@ -35,6 +39,18 @@ metadata/_custom_type_script = "uid://bt32fndy2yjlv"
 script = ExtResource("6_ilupn")
 metadata/_custom_type_script = "uid://coar33jbxnbhl"
 
+[sub_resource type="Resource" id="Resource_y682w"]
+script = ExtResource("10_ru11o")
+threshold = 0.5
+metadata/_custom_type_script = "uid://bx4lsbuoarqa4"
+
+[sub_resource type="Resource" id="Resource_l7214"]
+script = ExtResource("8_mw1ca")
+upgradeStartRequirements = Array[ExtResource("9_tjxvc")]([SubResource("Resource_y682w")])
+upgradeDuration = 5
+afterUpgradeTile = ExtResource("7_8jgwh")
+metadata/_custom_type_script = "uid://cfgg7k07r5r28"
+
 [resource]
 script = ExtResource("7_tjxvc")
 canBePlacedOn = Array[Object]([])
@@ -43,5 +59,5 @@ baseTurnCurrencyChange = {
 0: 3
 }
 adjacencies = Array[Object]([])
-components = Array[ExtResource("2_e7kx1")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi"), SubResource("Resource_e7kx1")])
+components = Array[ExtResource("2_e7kx1")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi"), SubResource("Resource_e7kx1"), SubResource("Resource_l7214")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
