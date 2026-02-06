@@ -867,10 +867,9 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 4
+current_tab = 0
 
 [node name="Effects" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=536292955]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -882,19 +881,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("50_go0uc")
-overallEffectDisplay = NodePath("VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer/CurrencyDisplay")
-defaultBaseEffectContainer = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2")
-defaultBaseEffectDisplay = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
-actualBaseEffectDisplay = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/ActualBaseMarginContainer/CurrencyDisplay")
-noProductionIndicator = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/NoProductionLabel")
-noConsumptionIndicator = NodePath("VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/NoConsumptionLabel")
-maxBonusContainer = NodePath("VBoxContainer/MaxBonusInfoHBoxContainer")
-maxBonusCurrencyDisplay = NodePath("VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
-maxBonusNegationReason = NodePath("VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/MaxBonusNegationLabel")
-adjacencyEffectContainer = NodePath("VBoxContainer/NearbyTileEffectsVBoxContainer")
+overallEffectDisplay = NodePath("ScrollContainer/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer/CurrencyDisplay")
+defaultBaseEffectContainer = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2")
+defaultBaseEffectDisplay = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
+actualBaseEffectDisplay = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/ActualBaseMarginContainer/CurrencyDisplay")
+noProductionIndicator = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/NoProductionLabel")
+noConsumptionIndicator = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/NoConsumptionLabel")
+maxBonusContainer = NodePath("ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer")
+maxBonusCurrencyDisplay = NodePath("ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
+maxBonusNegationReason = NodePath("ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/MaxBonusNegationLabel")
+adjacencyEffectContainer = NodePath("ScrollContainer/VBoxContainer/NearbyTileEffectsVBoxContainer")
 adjacencyEffectUIScene = ExtResource("23_cpah3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel" unique_id=1858583449]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel" unique_id=1303719584]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -903,26 +902,34 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer" unique_id=1858583449]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="PanelContainer" type="PanelContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=1479773698]
+[node name="PanelContainer" type="PanelContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=1479773698]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 theme_type_variation = &"PanelContainerEmbeddedLight"
 
-[node name="OverallPerTurnHBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/PanelContainer" unique_id=988230601 node_paths=PackedStringArray("noneIndicator", "listParent")]
+[node name="OverallPerTurnHBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/PanelContainer" unique_id=988230601 node_paths=PackedStringArray("noneIndicator", "listParent")]
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("58_bnbf5")
 noneIndicator = NodePath("NoneLabel")
 listParent = NodePath("CurrencyDisplay")
 
-[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=1313980424]
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=1313980424]
 layout_mode = 2
 text = "each turn:"
 horizontal_alignment = 1
 
-[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=1052117027]
+[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=1052117027]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -932,32 +939,32 @@ singleCurrencyDisplayScene = ExtResource("47_hxced")
 displayAsDelta = true
 iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
-[node name="NoneLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=652602105]
+[node name="NoneLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=652602105]
 layout_mode = 2
 text = "no change"
 
-[node name="HSeparator" type="HSeparator" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=236185397]
+[node name="HSeparator" type="HSeparator" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=236185397]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="DefaultPerTurnHBoxContainer2" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=1757415369 node_paths=PackedStringArray("noneIndicator", "listParent")]
+[node name="DefaultPerTurnHBoxContainer2" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=1757415369 node_paths=PackedStringArray("noneIndicator", "listParent")]
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("58_bnbf5")
 noneIndicator = NodePath("NoneLabel")
 listParent = NodePath("VBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
 
-[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=682575399]
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=682575399]
 custom_minimum_size = Vector2(109, 0)
 layout_mode = 2
 theme_type_variation = &"LightOutlineLabel"
 text = "default change:"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=1755351547]
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=1755351547]
 layout_mode = 2
 
-[node name="DefaultBaseMarginContainer" type="MarginContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer" unique_id=1988823943]
+[node name="DefaultBaseMarginContainer" type="MarginContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer" unique_id=1988823943]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/margin_left = 0
@@ -965,7 +972,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer" unique_id=1628419141 node_paths=PackedStringArray("strikethrough")]
+[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer" unique_id=1628419141 node_paths=PackedStringArray("strikethrough")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -976,13 +983,13 @@ singleCurrencyDisplayScene = ExtResource("54_822nj")
 displayAsDelta = true
 iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 
-[node name="StrikeTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer" unique_id=1130224225]
+[node name="StrikeTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer" unique_id=1130224225]
 self_modulate = Color(0.39607844, 0, 0.08627451, 0.90588236)
 layout_mode = 2
 texture = SubResource("AtlasTexture_gibx0")
 expand_mode = 3
 
-[node name="NoProductionLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=519996690]
+[node name="NoProductionLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=519996690]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1001,7 +1008,7 @@ theme_override_font_sizes/font_size = 14
 text = "no workers!"
 horizontal_alignment = 1
 
-[node name="NoConsumptionLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=275980545]
+[node name="NoConsumptionLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=275980545]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1019,7 +1026,7 @@ theme_override_font_sizes/font_size = 14
 text = "no residents"
 horizontal_alignment = 1
 
-[node name="ActualBaseMarginContainer" type="MarginContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer" unique_id=420486043]
+[node name="ActualBaseMarginContainer" type="MarginContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer" unique_id=420486043]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/margin_left = 0
@@ -1027,7 +1034,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/ActualBaseMarginContainer" unique_id=339726089]
+[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/ActualBaseMarginContainer" unique_id=339726089]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -1037,16 +1044,16 @@ singleCurrencyDisplayScene = ExtResource("54_822nj")
 displayAsDelta = true
 iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 
-[node name="NoneLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=234801300]
+[node name="NoneLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=234801300]
 layout_mode = 2
 theme_type_variation = &"LightOutlineLabel"
 text = "no change"
 
-[node name="MaxBonusInfoHBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=1849797886]
+[node name="MaxBonusInfoHBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=1849797886]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=2000203827 node_paths=PackedStringArray("itemWithShineShader")]
+[node name="Label" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=2000203827 node_paths=PackedStringArray("itemWithShineShader")]
 material = ExtResource("62_4g66p")
 custom_minimum_size = Vector2(109, 0)
 layout_mode = 2
@@ -1060,7 +1067,7 @@ finalShaderParamValue = 4.0
 finalShaderDurationValue = 2.0
 shineByDefault = true
 
-[node name="DefaultBaseMarginContainer" type="MarginContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=2110504916]
+[node name="DefaultBaseMarginContainer" type="MarginContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=2110504916]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/margin_left = 0
@@ -1068,7 +1075,7 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer" unique_id=928206325 node_paths=PackedStringArray("strikethrough")]
+[node name="CurrencyDisplay" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer" unique_id=928206325 node_paths=PackedStringArray("strikethrough")]
 modulate = Color(0.46727073, 0.46727073, 0.46727067, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1080,14 +1087,14 @@ singleCurrencyDisplayScene = ExtResource("54_822nj")
 displayAsDelta = true
 iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 
-[node name="StrikeTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer" unique_id=596507204]
+[node name="StrikeTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer" unique_id=596507204]
 visible = false
 self_modulate = Color(0.39607844, 0, 0.08627451, 0.90588236)
 layout_mode = 2
 texture = SubResource("AtlasTexture_gibx0")
 expand_mode = 3
 
-[node name="MaxBonusNegationLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=1041483433]
+[node name="MaxBonusNegationLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=1041483433]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1106,7 +1113,7 @@ theme_override_font_sizes/font_size = 14
 text = "unhappy workers!"
 horizontal_alignment = 1
 
-[node name="NearbyTileEffectsVBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/VBoxContainer" unique_id=1274881698]
+[node name="NearbyTileEffectsVBoxContainer" type="VBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=1274881698]
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -1249,6 +1256,7 @@ size_flags_vertical = 4
 text = "+"
 
 [node name="Upgrade" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=2071387724]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -1299,6 +1307,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="HFlowContainer" type="HFlowContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Upgrade/AutoUpgradePanel/Panel/ScrollContainer" unique_id=619475025]
 layout_mode = 2
@@ -1339,7 +1348,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 4
+vertical_scroll_mode = 3
 
 [node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/ScrollPanel/ScrollContainer" unique_id=1964161459]
 layout_mode = 2
@@ -1488,6 +1497,7 @@ anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/HousingInfoPopup/ScrollContainer" unique_id=594892982]
 layout_mode = 2
@@ -1527,6 +1537,7 @@ anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/WorkplaceInfoPopup/ScrollContainer" unique_id=1837231326]
 layout_mode = 2
@@ -1566,6 +1577,7 @@ anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/ResidentInfoPopup/ScrollContainer" unique_id=781010187]
 layout_mode = 2
@@ -1624,6 +1636,7 @@ anchor_top = 0.1
 anchor_right = 0.39
 anchor_bottom = 0.9
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/EncyclopediaPopup/ScrollContainer" unique_id=1510468466]
 layout_mode = 2
@@ -1771,6 +1784,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer" unique_id=1945425211]
 layout_mode = 2
@@ -1779,6 +1793,7 @@ size_flags_vertical = 3
 
 [node name="UnlockRequirementsFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=705216036]
 layout_mode = 2
+mouse_filter = 1
 title = "how to unlock"
 
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer" unique_id=894922644]
@@ -1794,6 +1809,7 @@ columns = 4
 
 [node name="BuildPrice" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=103270035]
 layout_mode = 2
+mouse_filter = 1
 folded = true
 title = "build price"
 
@@ -1815,6 +1831,7 @@ iconColor = Color(0.3529412, 0.37254903, 0.38431373, 1)
 
 [node name="AffectsFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1401136013]
 layout_mode = 2
+mouse_filter = 1
 folded = true
 title = "effects on other tiles"
 
@@ -1841,6 +1858,7 @@ noneIndicator = NodePath("../NoneLabel")
 
 [node name="AffectedByFoldableContainer2" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1457792366]
 layout_mode = 2
+mouse_filter = 1
 folded = true
 title = "effects from other tiles"
 
@@ -1867,6 +1885,7 @@ noneIndicator = NodePath("../NoneLabel")
 
 [node name="StorageFoldableContainer" type="FoldableContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1492439428 node_paths=PackedStringArray("storageCurrencyDisplay")]
 layout_mode = 2
+mouse_filter = 1
 folded = true
 title = "storage"
 script = ExtResource("38_hxced")

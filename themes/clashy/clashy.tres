@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://cijnbspbn0k6c" path="res://themes/clashy/graphics/button-disabled.svg" id="1_2vevx"]
 [ext_resource type="StyleBox" uid="uid://q222orvy57pf" path="res://themes/clashy/panels/clashButtonHover.tres" id="2_0hton"]
-[ext_resource type="Texture2D" uid="uid://dnnvgg848rp73" path="res://themes/clashy/graphics/panel.svg" id="3_i7pvi"]
 [ext_resource type="StyleBox" uid="uid://byx3e5blcxm1o" path="res://themes/clashy/panels/clashButton.tres" id="3_ih65r"]
 [ext_resource type="StyleBox" uid="uid://cxo32m6uciudf" path="res://themes/clashy/panels/clashButtonPress.tres" id="4_i7no0"]
 [ext_resource type="Texture2D" uid="uid://bdgaxjqjqj1u6" path="res://themes/clashy/graphics/check-box-checked.svg" id="5_6wiy0"]
@@ -34,6 +33,8 @@
 [ext_resource type="StyleBox" uid="uid://bunaup4lj56pa" path="res://themes/clashy/panels/speech_bubble_light.tres" id="28_o2yqt"]
 [ext_resource type="StyleBox" uid="uid://7gnfvusfrfqy" path="res://themes/clashy/panels/successClashButtonPress.tres" id="28_x27uw"]
 [ext_resource type="FontVariation" uid="uid://bbe5lqfpnh46x" path="res://themes/clashy/Acme-Regular-Variant.tres" id="29_j57xd"]
+[ext_resource type="StyleBox" uid="uid://cy5sbmx8jjm37" path="res://themes/clashy/panels/tab_selected.tres" id="33_irp0u"]
+[ext_resource type="StyleBox" uid="uid://e1bkpqre2j33" path="res://themes/clashy/panels/tab_unselected.tres" id="34_r1g0r"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o2rwg"]
 texture = ExtResource("1_2vevx")
@@ -77,13 +78,6 @@ corner_detail = 5
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_o2yqt"]
 color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 thickness = 2
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ml68f"]
-texture = ExtResource("3_i7pvi")
-texture_margin_left = 10.0
-texture_margin_top = 5.0
-texture_margin_right = 10.0
-texture_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j57xd"]
 bg_color = Color(0.8, 0.8, 0.8, 1)
@@ -189,6 +183,7 @@ SuccessButton/styles/hover = ExtResource("26_1nonf")
 SuccessButton/styles/normal = ExtResource("27_0wob6")
 SuccessButton/styles/pressed = ExtResource("28_x27uw")
 TabContainer/styles/panel = ExtResource("24_qau7n")
-TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_ml68f")
+TabContainer/styles/tab_selected = ExtResource("33_irp0u")
+TabContainer/styles/tab_unselected = ExtResource("34_r1g0r")
 VBoxContainer/constants/separation = 8
 VScrollBar/styles/scroll = SubResource("StyleBoxFlat_j57xd")

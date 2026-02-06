@@ -116,6 +116,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_filter = 1
 toggle_mode = true
 button_pressed = true
 icon_alignment = 1

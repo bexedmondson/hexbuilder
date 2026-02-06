@@ -20,3 +20,9 @@ public abstract class CellInfoRequirementProcessor<TRequirement>(TRequirement da
 {
     protected TRequirement dataRequirement = dataRequirement;
 }
+
+public abstract class WorkplaceStateRequirementProcessor<TRequirement>(TRequirement dataRequirement) 
+    : DataRequirementProcessor<WorkplaceState> where TRequirement : DataRequirement
+{
+    protected TRequirement dataRequirement = dataRequirement;
+}

@@ -23,6 +23,7 @@ offset_bottom = 68.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
+mouse_filter = 1
 icon = SubResource("AtlasTexture_mcgvi")
 icon_alignment = 1
 vertical_icon_alignment = 2

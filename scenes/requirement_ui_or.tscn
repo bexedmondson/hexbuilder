@@ -8,6 +8,7 @@ offset_right = 176.0
 offset_bottom = 124.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 theme_type_variation = &"PanelContainerEmbeddedLight"
 script = ExtResource("1_h1umx")
 subRequirementParent = NodePath("Container/MarginContainer/HBoxContainer")
@@ -44,6 +45,7 @@ vertical_alignment = 1
 [node name="Container" type="PanelContainer" parent="." unique_id=2011908533]
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 1
 theme_type_variation = &"PanelContainerLight"
 
 [node name="MarginContainer" type="MarginContainer" parent="Container" unique_id=1120851801]

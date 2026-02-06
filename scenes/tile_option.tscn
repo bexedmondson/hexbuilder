@@ -20,6 +20,7 @@ offset_right = 170.0
 offset_bottom = 170.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
+mouse_filter = 1
 toggle_mode = true
 button_group = ExtResource("1_whmtt")
 script = ExtResource("2_tjxx3")

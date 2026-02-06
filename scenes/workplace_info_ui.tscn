@@ -49,6 +49,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 1
 text = "-"
 
 [node name="CountLabel" type="Label" parent="HBoxContainer" unique_id=1351926437]
@@ -61,6 +62,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 1
 text = "+"
 
 [node name="GoToButton" type="Button" parent="HBoxContainer" unique_id=1978602028]
@@ -68,6 +70,7 @@ custom_minimum_size = Vector2(56, 58)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 1
 icon = SubResource("AtlasTexture_mcgvi")
 icon_alignment = 1
 vertical_icon_alignment = 2
