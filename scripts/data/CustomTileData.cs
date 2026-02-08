@@ -31,7 +31,14 @@ public partial class CustomTileData : Resource
 			componentDict = new System.Collections.Generic.Dictionary<Type, AbstractTileDataComponent>();
 			
 			foreach (var arrayComponent in components)
+			{
+				if (arrayComponent == null)
+				{
+					GD.PrintErr($"Null tile data component found in {this.GetFileName()}!");
+					continue;
+				}
 				componentDict[arrayComponent.GetType()] = arrayComponent;
+			}
 		}
 		
 		if (componentDict.ContainsKey(typeof(TComponent)))
