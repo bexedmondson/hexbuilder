@@ -3,7 +3,7 @@ using Godot;
 public partial class EncyclopediaPopup : Popup
 {
     [Export]
-    private Control tileSelector;
+    private TileSelectorList tileSelector;
 
     [Export]
     private PackedScene tileScene;
@@ -73,10 +73,8 @@ public partial class EncyclopediaPopup : Popup
 
     public void ShowPopup()
     {
-        for (int i = tileSelector.GetChildCount() - 1; i >= 0; i--)
-        {
-            tileSelector.GetChild(i).QueueFree();
-        }
+        tileSelector.Cleanup();
+        
         tileDetailsExpanders.Visible = false;
         tileDetailsInfo.Visible = false;
         
@@ -93,7 +91,7 @@ public partial class EncyclopediaPopup : Popup
             var tileOptionUI = tileScene.Instantiate<TileOptionUI>();
             tileOptionUI.SetTile(tileInfo);
             tileOptionUI.SetButtonGroup(encyclopediaTileGroup);
-            tileSelector.AddChild(tileOptionUI);
+            tileSelector.AddTileOptionUI(tileOptionUI);
         }
 
         encyclopediaTileGroup.Pressed += OnSelectionChanged;
@@ -103,11 +101,10 @@ public partial class EncyclopediaPopup : Popup
     public void ShowPopup(CustomTileData tileToShow)
     {
         ShowPopup();
-        foreach (var tileUINode in tileSelector.GetChildren())
+
+        var tileOptionUIs = tileSelector.GetTileOptionUIs();
+        foreach (var tileOptionUI in tileOptionUIs)
         {
-            if (!(tileUINode is TileOptionUI tileOptionUI))
-                continue;
-            
             if (tileOptionUI.tileInfo.tileData == tileToShow)
                 tileOptionUI.SetPressed(true);
         }

@@ -42,5 +42,5 @@ baseTurnCurrencyChange = {
 0: 5
 }
 adjacencies = Array[Object]([])
-components = Array[ExtResource("1_8ucn5")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi"), null])
+components = Array[ExtResource("1_8ucn5")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

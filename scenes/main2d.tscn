@@ -75,6 +75,11 @@
 [ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="63_4cqqk"]
 [ext_resource type="Texture2D" uid="uid://cx3xw3vsdesuq" path="res://assets/icons/icon_hourglass_mid.tres" id="64_052xa"]
 [ext_resource type="Script" uid="uid://hy27agc14m2b" path="res://scripts/ui/toasts/ToastManager.cs" id="66_otuox"]
+[ext_resource type="Texture2D" uid="uid://dsqnnfwfgx0k4" path="res://assets/icons/icon_filter.tres" id="75_ilknt"]
+[ext_resource type="Texture2D" uid="uid://bnfw8ei4di7oi" path="res://themes/clashy/graphics/panel-light.svg" id="75_ncvxs"]
+[ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="75_u143m"]
+[ext_resource type="Script" uid="uid://brpwebha3xuam" path="res://scripts/ui/popups/TileLockedFilterToggleButton.cs" id="76_diviy"]
+[ext_resource type="Script" uid="uid://c4yplprbhffky" path="res://scripts/ui/popups/TileSelectorList.cs" id="77_diviy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_b0365"]
 noise_type = 0
@@ -187,6 +192,18 @@ region = Rect2(512, 1536, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gibx0"]
 atlas = ExtResource("15_nkuak")
 region = Rect2(1536, 1536, 128, 128)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ilknt"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+texture = ExtResource("75_ncvxs")
+texture_margin_left = 8.0
+texture_margin_top = 7.0
+texture_margin_right = 8.0
+texture_margin_bottom = 13.0
+expand_margin_bottom = 3.0
 
 [node name="Main2d" type="Node2D" unique_id=1053819598 node_paths=PackedStringArray("mapController", "inventoryManager")]
 script = ExtResource("1_vlfvj")
@@ -796,7 +813,7 @@ storageInfoUI = NodePath("TabContainer/Storage/StoragePanel")
 residentDetailsParent = NodePath("TabContainer/Residents/ResidentPanel/VBoxContainer")
 workplaceInfoUI = NodePath("TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI")
 autoUpgradeDisplay = NodePath("TabContainer/Upgrade/AutoUpgradePanel")
-tileSelector = NodePath("TabContainer/Build/Panel/ScrollPanel/ScrollContainer/TileSelectionGrid")
+tileSelector = NodePath("TabContainer/Build/Panel/ScrollPanel/ScrollContainer")
 tileScene = ExtResource("9_hp2ex")
 tileSelectionGroup = ExtResource("10_dppk6")
 encyclopediaPopup = NodePath("../EncyclopediaPopup")
@@ -868,7 +885,7 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 4
+current_tab = 5
 
 [node name="Effects" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=536292955]
 visible = false
@@ -1258,6 +1275,7 @@ size_flags_vertical = 4
 text = "+"
 
 [node name="Upgrade" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=2071387724]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -1331,7 +1349,6 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Build" type="Button" parent="PopupLayer/UnlockedCellPopup/TabContainer" unique_id=459481767]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
@@ -1343,20 +1360,81 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="FilterIconTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel" unique_id=47028455]
+self_modulate = Color(0.08235294, 0.4627451, 0.8235294, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.03
+anchor_right = 0.04
+anchor_bottom = 0.03
+offset_left = 4.7683716e-05
+offset_top = -3.0
+offset_right = 40.0
+offset_bottom = 37.0
+texture = ExtResource("75_ilknt")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FilterPanelContainer" type="PanelContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel" unique_id=1350313423]
+self_modulate = Color(0.84645504, 0.84645504, 0.84645504, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.03
+anchor_right = 0.96
+anchor_bottom = 0.04
+offset_left = 40.0
+offset_top = 1.1444092e-05
+offset_right = 4.5776367e-05
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_type_variation = &"PanelContainerLight"
+theme_override_styles/panel = SubResource("StyleBoxTexture_ilknt")
+
+[node name="FiltersHBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/FilterPanelContainer" unique_id=806382042]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/FilterPanelContainer/FiltersHBoxContainer" unique_id=1289471079]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=985087065]
+self_modulate = Color(0.08235294, 0.4627451, 0.8235294, 1)
+custom_minimum_size = Vector2(21, 21)
+layout_mode = 2
+texture = ExtResource("75_u143m")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="LockCheckButton" type="CheckButton" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=1784140957]
+layout_mode = 2
+size_flags_vertical = 4
+button_pressed = true
+script = ExtResource("76_diviy")
+
+[node name="VSeparator" type="VSeparator" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/FilterPanelContainer/FiltersHBoxContainer" unique_id=578315904]
+visible = false
+layout_mode = 2
+
 [node name="ScrollPanel" type="Panel" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel" unique_id=216826276]
 layout_mode = 1
 anchors_preset = -1
+anchor_top = 0.03
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = 10.0
+offset_top = 43.0
 offset_right = -10.0
 offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"PanelEmbedded"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/ScrollPanel" unique_id=1052887503]
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/ScrollPanel" unique_id=1052887503 node_paths=PackedStringArray("tileOptionParent", "filterToggles")]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1366,6 +1444,9 @@ grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 scroll_deadzone = 5
+script = ExtResource("77_diviy")
+tileOptionParent = NodePath("TileSelectionGrid")
+filterToggles = [NodePath("../../FilterPanelContainer/FiltersHBoxContainer/HBoxContainer/LockCheckButton")]
 
 [node name="TileSelectionGrid" type="GridContainer" parent="PopupLayer/UnlockedCellPopup/TabContainer/Build/Panel/ScrollPanel/ScrollContainer" unique_id=1964161459]
 layout_mode = 2
@@ -1639,7 +1720,7 @@ anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("36_4b3q0")
-tileSelector = NodePath("ScrollContainer/VBoxContainer")
+tileSelector = NodePath("ScrollContainer")
 tileScene = ExtResource("37_y60pf")
 tileNameLabel = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/TileNameLabel")
 tileDetailsExpanders = NodePath("TileDetailPanel/TileDetails/Panel")
@@ -1674,7 +1755,64 @@ offset_bottom = 68.0
 grow_horizontal = 0
 text = "X"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/EncyclopediaPopup" unique_id=1501350034]
+[node name="FilterIconTextureRect" type="TextureRect" parent="PopupLayer/EncyclopediaPopup" unique_id=865864636]
+self_modulate = Color(0.08235294, 0.4627451, 0.8235294, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.04
+anchor_right = 0.05
+anchor_bottom = 0.04
+offset_top = -5.0
+offset_right = 50.0
+offset_bottom = 45.0
+texture = ExtResource("75_ilknt")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FilterPanelContainer" type="PanelContainer" parent="PopupLayer/EncyclopediaPopup" unique_id=980698100]
+self_modulate = Color(0.84705883, 0.84705883, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.04
+anchor_right = 0.39
+anchor_bottom = 0.04
+offset_left = 50.0
+offset_bottom = 37.599995
+grow_horizontal = 2
+theme_type_variation = &"PanelContainerLight"
+theme_override_styles/panel = SubResource("StyleBoxTexture_ilknt")
+
+[node name="FiltersHBoxContainer" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/FilterPanelContainer" unique_id=2032962694]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupLayer/EncyclopediaPopup/FilterPanelContainer/FiltersHBoxContainer" unique_id=2033853781]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="PopupLayer/EncyclopediaPopup/FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=1413619513]
+self_modulate = Color(0.08235294, 0.4627451, 0.8235294, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("75_u143m")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="LockCheckButton" type="CheckButton" parent="PopupLayer/EncyclopediaPopup/FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=184585142]
+layout_mode = 2
+size_flags_vertical = 4
+button_pressed = true
+script = ExtResource("76_diviy")
+
+[node name="VSeparator" type="VSeparator" parent="PopupLayer/EncyclopediaPopup/FilterPanelContainer/FiltersHBoxContainer" unique_id=599811102]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupLayer/EncyclopediaPopup" unique_id=1501350034 node_paths=PackedStringArray("tileOptionParent", "filterToggles")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -1683,6 +1821,9 @@ anchor_right = 0.39
 anchor_bottom = 0.9
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
+script = ExtResource("77_diviy")
+tileOptionParent = NodePath("VBoxContainer")
+filterToggles = [NodePath("../FilterPanelContainer/FiltersHBoxContainer/HBoxContainer/LockCheckButton")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/EncyclopediaPopup/ScrollContainer" unique_id=1510468466]
 layout_mode = 2

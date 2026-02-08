@@ -53,7 +53,7 @@ public partial class UnlockedCellPopup : Popup
     
     [ExportGroup("BuildTab")]
     [Export]
-    private Control tileSelector;
+    private TileSelectorList tileSelector;
 
     [Export]
     private PackedScene tileScene;
@@ -189,10 +189,7 @@ public partial class UnlockedCellPopup : Popup
 
     private void SetupTileSelector()
     {
-        for (int i = tileSelector.GetChildCount() - 1; i >= 0; i--)
-        {
-            tileSelector.GetChild(i).QueueFree();
-        }
+        tileSelector.Cleanup();
         
         tabContainer.SetTabHidden(buildTab.GetIndex(), false); //TODO change?
         
@@ -201,11 +198,12 @@ public partial class UnlockedCellPopup : Popup
         
         compatibleTileInfos.Sort((lhs, rhs) =>
         {
-            var lockedCompare = rhs.tileData.IsUnlocked().CompareTo(lhs.tileData.IsUnlocked());
+            /*var lockedCompare = rhs.tileData.IsUnlocked().CompareTo(lhs.tileData.IsUnlocked());
             if (lockedCompare == 0)
                 lockedCompare = lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName());
 
-            return lockedCompare;
+            return lockedCompare;*/
+            return lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName());
         });
 
         foreach (var compatibleTileInfo in compatibleTileInfos)
@@ -217,7 +215,7 @@ public partial class UnlockedCellPopup : Popup
             tileOptionUI.SetTile(compatibleTileInfo);
             tileOptionUI.SetButtonGroup(tileSelectionGroup);
             tileOptionUI.SetupInfoButton(true, OnInfoButton);
-            tileSelector.AddChild(tileOptionUI);
+            tileSelector.AddTileOptionUI(tileOptionUI);
         }
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count == 0)
@@ -282,10 +280,7 @@ public partial class UnlockedCellPopup : Popup
             residentInfo.QueueFree();
         }
 
-        foreach (var tileSelectionInfo in tileSelector.GetChildren())
-        {
-            tileSelectionInfo.QueueFree();
-        }
+        tileSelector.Cleanup();
         
         confirmButton.Disabled = true;
     }
