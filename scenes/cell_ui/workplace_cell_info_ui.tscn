@@ -3,13 +3,7 @@
 [ext_resource type="Script" uid="uid://du33fkfjm2ema" path="res://scripts/ui/cellinfos/WorkplaceCellInfoUI.cs" id="1_rmpib"]
 [ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="2_qpyeb"]
 [ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="3_idcl7"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nma3w"]
-load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rmpib"]
-atlas = SubResource("CompressedTexture2D_nma3w")
-region = Rect2(2560, 896, 128, 128)
+[ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="4_wohs3"]
 
 [node name="WorkplaceCellInfoUi" type="Control" unique_id=560631437 node_paths=PackedStringArray("workerCountLabel", "alert", "shineTweener")]
 layout_mode = 3
@@ -57,7 +51,7 @@ self_modulate = Color(0.827451, 0.827451, 0.827451, 1)
 use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
-texture = SubResource("AtlasTexture_rmpib")
+texture = ExtResource("4_wohs3")
 expand_mode = 3
 
 [node name="Label" type="Label" parent="." unique_id=1672258222]

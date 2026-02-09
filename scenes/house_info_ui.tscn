@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://b4jge416gxgmd"]
 
-[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="1_67grx"]
 [ext_resource type="Script" uid="uid://ce2k4fxtwokg2" path="res://scripts/ui/popups/HouseInfoUI.cs" id="1_ci78h"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mcgvi"]
-atlas = ExtResource("1_67grx")
-region = Rect2(1408, 1024, 128, 128)
+[ext_resource type="Texture2D" uid="uid://blnewmra3rg4j" path="res://assets/icons/icon_arrow_right_curve.tres" id="2_ci78h"]
 
 [node name="HouseInfo" type="Panel" unique_id=1826460449 node_paths=PackedStringArray("residenceLabel")]
 custom_minimum_size = Vector2(0, 80)
@@ -24,7 +20,7 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 mouse_filter = 1
-icon = SubResource("AtlasTexture_mcgvi")
+icon = ExtResource("2_ci78h")
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true

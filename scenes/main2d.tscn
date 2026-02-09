@@ -57,6 +57,7 @@
 [ext_resource type="Material" uid="uid://jrcfkjx2d6od" path="res://materials_shaders/greyscale_material.tres" id="39_ue1v3"]
 [ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="40_e4lbj"]
 [ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="42_gqxrv"]
+[ext_resource type="Texture2D" uid="uid://dc7r3axheslw6" path="res://assets/icons/icon_exclamation_mark.tres" id="42_hhm6y"]
 [ext_resource type="Texture2D" uid="uid://dqtssryuqvjcu" path="res://assets/icons/icon_wheat.tres" id="43_8od8w"]
 [ext_resource type="Script" uid="uid://bgcy7oymph28e" path="res://scripts/ui/toasts/ToastStack.cs" id="43_otuox"]
 [ext_resource type="Script" uid="uid://c2d6td5kvw1hw" path="res://scripts/ui/toasts/ToastLabel.cs" id="43_tw5gc"]
@@ -68,6 +69,7 @@
 [ext_resource type="Script" uid="uid://nsj47u7mvxt" path="res://scripts/ui/popups/UnlockedCellPopup_Resources.cs" id="50_go0uc"]
 [ext_resource type="Script" uid="uid://dxy7i1dyipgd8" path="res://scripts/ui/popups/CurrencyDisplay_Strikethroughable.cs" id="53_822nj"]
 [ext_resource type="PackedScene" uid="uid://hd50lh5054ow" path="res://scenes/single_currency_display_light-outline-label.tscn" id="54_822nj"]
+[ext_resource type="Texture2D" uid="uid://cf5di51mh2keo" path="res://assets/icons/icon_strike_horizontal.tres" id="57_imcdj"]
 [ext_resource type="Theme" uid="uid://c42r8558dvmyi" path="res://themes/clashy/clashy.tres" id="57_yi10l"]
 [ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="58_bnbf5"]
 [ext_resource type="Script" uid="uid://oge0v8nx381v" path="res://scripts/ui/popups/UnlockedCellPopup_AutoUpgrade.cs" id="60_r3ix6"]
@@ -157,10 +159,6 @@ region = Rect2(1664, 1024, 128, 128)
 atlas = ExtResource("15_nkuak")
 region = Rect2(1920, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4b3q0"]
-atlas = ExtResource("15_nkuak")
-region = Rect2(512, 1536, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj2ff"]
 atlas = ExtResource("15_nkuak")
 region = Rect2(2432, 1024, 128, 128)
@@ -188,10 +186,6 @@ _bundled = {
 [sub_resource type="AtlasTexture" id="AtlasTexture_822nj"]
 atlas = ExtResource("15_nkuak")
 region = Rect2(512, 1536, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gibx0"]
-atlas = ExtResource("15_nkuak")
-region = Rect2(1536, 1536, 128, 128)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ilknt"]
 content_margin_left = 3.0
@@ -708,7 +702,7 @@ offset_top = -35.0
 offset_right = 65.0
 offset_bottom = 25.0
 grow_vertical = 2
-texture = SubResource("AtlasTexture_4b3q0")
+texture = ExtResource("42_hhm6y")
 expand_mode = 2
 stretch_mode = 5
 script = ExtResource("23_rn43n")
@@ -1006,7 +1000,7 @@ iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 [node name="StrikeTextureRect" type="TextureRect" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer" unique_id=1130224225]
 self_modulate = Color(0.39607844, 0, 0.08627451, 0.90588236)
 layout_mode = 2
-texture = SubResource("AtlasTexture_gibx0")
+texture = ExtResource("57_imcdj")
 expand_mode = 3
 
 [node name="NoProductionLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=519996690]
@@ -1111,7 +1105,7 @@ iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 visible = false
 self_modulate = Color(0.39607844, 0, 0.08627451, 0.90588236)
 layout_mode = 2
-texture = SubResource("AtlasTexture_gibx0")
+texture = ExtResource("57_imcdj")
 expand_mode = 3
 
 [node name="MaxBonusNegationLabel" type="Label" parent="PopupLayer/UnlockedCellPopup/TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=1041483433]
@@ -1712,6 +1706,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileNameLabel", "tileDetailsExpanders", "tileDetailsInfo", "tileTextureRect", "defaultEffectDisplay", "workerInfoContainer", "workerCountContainer", "maxBonusContainer", "maxBonusCurrencyDisplay", "unlockReqParent", "unlockReqContainer", "buildPriceContainer", "buildPriceDisplay", "affectsParent", "affectedByParent", "storageInfoUI")]
+visible = false
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1

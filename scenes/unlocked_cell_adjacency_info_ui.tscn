@@ -4,11 +4,7 @@
 [ext_resource type="Script" uid="uid://dxy7i1dyipgd8" path="res://scripts/ui/popups/CurrencyDisplay_Strikethroughable.cs" id="2_ib470"]
 [ext_resource type="PackedScene" uid="uid://hst2gqk22rpc" path="res://scenes/currency_display.tscn" id="2_re3pf"]
 [ext_resource type="PackedScene" uid="uid://hd50lh5054ow" path="res://scenes/single_currency_display_light-outline-label.tscn" id="3_6v8bx"]
-[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="4_rc7kf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0m5kp"]
-atlas = ExtResource("4_rc7kf")
-region = Rect2(1536, 1536, 128, 128)
+[ext_resource type="Texture2D" uid="uid://cf5di51mh2keo" path="res://assets/icons/icon_strike_horizontal.tres" id="4_7bcin"]
 
 [node name="AdjacencyInfoHBoxContainer" type="HBoxContainer" unique_id=1052811575 node_paths=PackedStringArray("effectGivenUI", "effectReceivedUI", "name", "direction", "giveEffectDisplay", "receiveEffectDisplay", "noWorkerIndicator")]
 script = ExtResource("1_rjnxt")
@@ -61,7 +57,7 @@ iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
 visible = false
 self_modulate = Color(0.39607844, 0, 0.08627451, 0.90588236)
 layout_mode = 2
-texture = SubResource("AtlasTexture_0m5kp")
+texture = ExtResource("4_7bcin")
 expand_mode = 3
 
 [node name="NoWorkersLabel" type="Label" parent="GivesHBoxContainer/MarginContainer/StrikeTextureRect" unique_id=847901187]

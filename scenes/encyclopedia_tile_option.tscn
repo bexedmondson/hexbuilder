@@ -2,11 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="1_3473w"]
 [ext_resource type="Script" uid="uid://1yydqns8wpfo" path="res://scripts/ui/popups/EncyclopediaTileOptionUI.cs" id="2_e4nkf"]
+[ext_resource type="Texture2D" uid="uid://dc7r3axheslw6" path="res://assets/icons/icon_exclamation_mark.tres" id="3_ymdbp"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_e4nkf"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_4n6ei"]
 
 [node name="TileOption" unique_id=1032778022 instance=ExtResource("1_3473w")]
-button_group = SubResource("ButtonGroup_e4nkf")
+button_group = SubResource("ButtonGroup_4n6ei")
 script = ExtResource("2_e4nkf")
 
 [node name="VBoxContainer" parent="MarginContainer/Container" parent_id_path=PackedInt32Array(2134865771) index="1" unique_id=1908694678]
@@ -14,3 +15,6 @@ alignment = 1
 
 [node name="PanelContainer" parent="MarginContainer/Container/VBoxContainer" index="1" unique_id=448592025]
 visible = false
+
+[node name="TextureRect" parent="InfoButton" parent_id_path=PackedInt32Array(597461691) index="0" unique_id=1183852560]
+texture = ExtResource("3_ymdbp")

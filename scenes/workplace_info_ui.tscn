@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://rhtqjafh80s4"]
 
 [ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/popups/WorkplaceInfoUI.cs" id="1_bn0rj"]
-[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_s6cp8"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mcgvi"]
-atlas = ExtResource("2_s6cp8")
-region = Rect2(1408, 1024, 128, 128)
+[ext_resource type="Texture2D" uid="uid://blnewmra3rg4j" path="res://assets/icons/icon_arrow_right_curve.tres" id="2_bn0rj"]
 
 [node name="WorkplaceInfo" type="Panel" unique_id=509068780 node_paths=PackedStringArray("workplaceInfoLabel", "workplaceIcon", "workerNamesLabel", "workerCountLabel", "minusButton", "plusButton")]
 custom_minimum_size = Vector2(0, 80)
@@ -71,7 +67,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 mouse_filter = 1
-icon = SubResource("AtlasTexture_mcgvi")
+icon = ExtResource("2_bn0rj")
 icon_alignment = 1
 vertical_icon_alignment = 2
 expand_icon = true
