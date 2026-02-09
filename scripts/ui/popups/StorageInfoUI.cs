@@ -12,4 +12,9 @@ public partial class StorageInfoUI : Control
         
         storageCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(storageCapacityComponent.capacities));
     }
+
+    public void Cleanup()
+    {
+        storageCurrencyDisplay.Cleanup();
+    }
 }

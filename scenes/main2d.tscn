@@ -1805,7 +1805,6 @@ stretch_mode = 5
 [node name="LockCheckButton" type="CheckButton" parent="PopupLayer/EncyclopediaPopup/FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=184585142]
 layout_mode = 2
 size_flags_vertical = 4
-button_pressed = true
 script = ExtResource("76_diviy")
 
 [node name="VSeparator" type="VSeparator" parent="PopupLayer/EncyclopediaPopup/FilterPanelContainer/FiltersHBoxContainer" unique_id=599811102]

@@ -261,6 +261,32 @@ public partial class EncyclopediaPopup : Popup
     public override void Close()
     {
         base.Close();
+        
+        for (int i = workerCountContainer.GetChildCount() - 1; i > 0; i--)
+        {
+            workerCountContainer.GetChild(i).QueueFree();
+        }
+        
+        for (int i = unlockReqContainer.GetChildCount() - 1; i >= 0; i--)
+        {
+            unlockReqContainer.GetChild(i).QueueFree();
+        }
+        
+        for (int i = affectsParent.GetChildCount() - 1; i >= 0; i--)
+        {
+            affectsParent.GetChild(i).QueueFree();
+        }
+        
+        for (int i = affectedByParent.GetChildCount() - 1; i >= 0; i--)
+        {
+            affectedByParent.GetChild(i).QueueFree();
+        }
+        
+        tileTextureRect.Cleanup();
+        defaultEffectDisplay.Cleanup();
+        maxBonusCurrencyDisplay.Cleanup();
+        storageInfoUI.Cleanup();
+        
         if (encyclopediaTileGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count > 0)
             encyclopediaTileGroup.Pressed -= OnSelectionChanged;
     }

@@ -16,4 +16,10 @@ public partial class TileTextureRect : TextureRect
         Texture = InjectionManager.Get<TileDatabase>().GetTileTexture(tileData);
         Material = tileData.IsUnlocked() ? null : greyscaleMaterial;
     }
+
+    public void Cleanup()
+    {
+        Texture = null;
+        Material = null;
+    }
 }
