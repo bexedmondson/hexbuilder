@@ -787,6 +787,7 @@ toastLabelScene = SubResource("PackedScene_mgx77")
 layer = 2
 
 [node name="UnlockedCellPopup" type="Panel" parent="PopupLayer" unique_id=1962345434 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "autoUpgradeTab", "buildTab", "resourcesDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "autoUpgradeDisplay", "tileSelector", "encyclopediaPopup", "confirmButton")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1711,7 +1712,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EncyclopediaPopup" type="Panel" parent="PopupLayer" unique_id=1530883675 node_paths=PackedStringArray("tileSelector", "tileNameLabel", "tileDetailsExpanders", "tileDetailsInfo", "tileTextureRect", "defaultEffectDisplay", "workerInfoContainer", "workerCountContainer", "maxBonusContainer", "maxBonusCurrencyDisplay", "unlockReqParent", "unlockReqContainer", "buildPriceContainer", "buildPriceDisplay", "affectsParent", "affectedByParent", "storageInfoUI")]
-visible = false
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.1
@@ -1985,6 +1985,7 @@ title = "how to unlock"
 
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer" unique_id=894922644]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer" unique_id=1840344444]
 layout_mode = 2
@@ -2003,6 +2004,7 @@ title = "build price"
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice" unique_id=1903494528]
 visible = false
 layout_mode = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice" unique_id=1073653414]
 visible = false
@@ -2025,6 +2027,7 @@ title = "effects on other tiles"
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer" unique_id=484974843]
 visible = false
 layout_mode = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer" unique_id=1048054392]
 visible = false
@@ -2052,6 +2055,7 @@ title = "effects from other tiles"
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2" unique_id=551477341]
 visible = false
 layout_mode = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2" unique_id=828565747]
 visible = false
@@ -2081,6 +2085,7 @@ storageCurrencyDisplay = NodePath("MarginContainer/CurrencyDisplay")
 [node name="Panel" type="Panel" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer" unique_id=1397689692]
 visible = false
 layout_mode = 2
+mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupLayer/EncyclopediaPopup/TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer" unique_id=1997269909]
 visible = false
