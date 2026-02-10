@@ -4,5 +4,5 @@ using Godot;
 public partial class ResidentCapacityComponent : AbstractTileDataComponent
 {
     [Export]
-    public int capacity;
+    public int capacity { get; private set; }
 }

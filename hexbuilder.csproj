@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.6.0">
+<Project Sdk="Godot.NET.Sdk/4.6.1-rc.1">
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -9,8 +9,7 @@
         <DebuggerSupport>false</DebuggerSupport>
     </PropertyGroup>
     
-    <Target Name="RemoveAndroidBloat" AfterTargets="Publish"
-            Condition=" '$(GodotTargetPlatform)' == 'android' "> <!--And '$(Configuration)' == 'ExportRelease' -->
+    <Target Name="RemoveAndroidBloat" AfterTargets="Publish" Condition=" '$(GodotTargetPlatform)' == 'android' "> <!--And '$(Configuration)' == 'ExportRelease' -->
         <ItemGroup>
             <BloatFiles Include="$(PublishDir)\**\*.a" />
             <BloatFiles Include="$(PublishDir)\**\libmono-component-debugger.so" />

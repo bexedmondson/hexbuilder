@@ -4,13 +4,13 @@ using Godot;
 public partial class AutoUpgradeComponent : AbstractTileDataComponent
 {
     [Export]
-    public Godot.Collections.Array<AbstractRequirement> upgradeStartRequirements = new();
+    public Godot.Collections.Array<AbstractRequirement> upgradeStartRequirements  { get; private set; } = new();
 
     [Export]
-    public int upgradeDuration;
+    public int upgradeDuration { get; private set; }
 
     [Export]
-    public CustomTileData afterUpgradeTile;
+    public CustomTileData afterUpgradeTile { get; private set; }
 
     public bool CanStartUpgrade(Vector2I cell)
     {

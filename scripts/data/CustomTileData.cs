@@ -5,19 +5,19 @@ using Godot;
 public partial class CustomTileData : Resource
 {
     [Export]
-    public Godot.Collections.Array<CustomTileData> canBePlacedOn;
+    public Godot.Collections.Array<CustomTileData> canBePlacedOn { get; private set; } = new();
 
     [Export]
-    public Godot.Collections.Dictionary<CurrencyType, int> buildPrice;
+    public Godot.Collections.Dictionary<CurrencyType, int> buildPrice { get; private set; } = new();
 
     [Export]
-    public Godot.Collections.Dictionary<CurrencyType, int> baseTurnCurrencyChange;
+    public Godot.Collections.Dictionary<CurrencyType, int> baseTurnCurrencyChange { get; private set; } = new();
 
     [Export]
-    public Godot.Collections.Array<AdjacencyConfig> adjacencies;
+    public Godot.Collections.Array<AdjacencyConfig> adjacencies { get; private set; } = new();
 
     [Export]
-    public Godot.Collections.Array<AbstractTileDataComponent> components = new();
+    public Godot.Collections.Array<AbstractTileDataComponent> components { get; private set; } = new();
     
     public bool IsResidence => TryGetComponent(out ResidentCapacityComponent c) && c.capacity > 0;
     public bool IsWorkplace => TryGetComponent(out WorkerCapacityComponent c) && c.capacity > 0;

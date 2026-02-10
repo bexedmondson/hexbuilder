@@ -5,16 +5,16 @@ using Godot.Collections;
 public partial class NeedConfig : Resource
 {
     [Export]
-    public Array<AbstractRequirement> assignmentRequirements;
+    public Array<AbstractRequirement> assignmentRequirements { get; private set; } = new();
 
     [Export]
-    public Array<AbstractRequirement> satisfactionRequirements;
+    public Array<AbstractRequirement> satisfactionRequirements { get; private set; } = new();
 
     [Export]
-    public int unsatisfiedHappinessPenalty;
+    public int unsatisfiedHappinessPenalty { get; private set; }
     
     [Export]
-    public int satisfiedHappinessBonus;
+    public int satisfiedHappinessBonus { get; private set; }
     
     public bool CanAssignToResident(ResidentState resident)
     {

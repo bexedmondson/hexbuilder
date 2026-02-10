@@ -4,5 +4,5 @@ using Godot;
 public partial class TerrainUnlockTimeComponent : AbstractTileDataComponent
 {
     [Export]
-    public int turnCount = 1;
+    public int turnCount { get; private set; } = 1;
 }

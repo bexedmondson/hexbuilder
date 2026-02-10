@@ -4,5 +4,5 @@ using Godot;
 public partial class StorageCapacityDataComponent : AbstractTileDataComponent
 {
     [Export]
-    public Godot.Collections.Dictionary<CurrencyType, int> capacities;
+    public Godot.Collections.Dictionary<CurrencyType, int> capacities { get; private set; } = new();
 }

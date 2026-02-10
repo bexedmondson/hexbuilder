@@ -5,5 +5,5 @@ using Godot.Collections;
 public partial class NeedConfigList : Resource
 {
     [Export]
-    public Array<NeedConfig> needConfigs;
+    public Array<NeedConfig> needConfigs { get; private set; } = new();
 }
