@@ -28,7 +28,7 @@ public partial class ResidentInfoPopup : Popup
         foreach (var residentData in residentManager.AllResidents)
         {
             var residentInfoUI = residentInfoUIScene.Instantiate<ResidentInfoUI>();
-            residentInfoUI.SetResident(residentData);
+            residentInfoUI.SetResident(residentData, Close);
             residentInfoContainer.AddChild(residentInfoUI);
         }
 

@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -22,17 +23,24 @@ public partial class ResidentInfoUI : Control
     [Export]
     private PackedScene needInfoScene;
 
+    [Export]
+    private Control viewHouseButton;
+
     private List<ResidentNeedInfoUI> needInfoUIs = new();
+    private Action onGoToButtonAction;
     
     public ResidentState residentState { get; private set; }
     
-    public void SetResident(ResidentState residentState)
+    public void SetResident(ResidentState residentState, Action onGoToButtonAction)
     {
         this.residentState = residentState;
+        this.onGoToButtonAction = onGoToButtonAction;
         
         residentLabel.Text = residentState.Name;
         happinessIcon.Texture = InjectionManager.Get<IconMapper>().happinessMap[residentState.happiness];
-        noHouseLabel.Visible = !residentState.HasHouse;
+        bool hasHouse = residentState.HasHouse;
+        noHouseLabel.Visible = !hasHouse;
+        viewHouseButton.Visible = hasHouse;
         employmentLabel.Text = residentState.IsBusy ? $"is employed at {residentState.GetWorkplaceOrJobName()}" : "is not employed";
 
         var needUIMapping = InjectionManager.Get<DataResourceContainer>().requirementUIMappingList;
@@ -55,6 +63,16 @@ public partial class ResidentInfoUI : Control
             needInfoParent.AddChild(needInfoUI);
             needInfoUIs.Add(needInfoUI);
         }
+    }
+
+    public void OnGoToHouseButton()
+    {
+        if (!residentState.HasHouse)
+            return;
+
+        InjectionManager.Get<HousingManager>().TryGetHouseForResident(residentState, out HouseState houseState);
+        InjectionManager.Get<MapCameraController>().FlyToCell(houseState.location);
+        onGoToButtonAction?.Invoke();
     }
 
     public void OnToggleNeedBubbles(bool toggleState)

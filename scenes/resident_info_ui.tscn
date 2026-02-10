@@ -4,17 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="2_2s74l"]
 [ext_resource type="PackedScene" uid="uid://cyolru1m7qup7" path="res://scenes/resident_need_bubble.tscn" id="2_f7blf"]
 [ext_resource type="Texture2D" uid="uid://syhv8okyicei" path="res://assets/icons/icon_house.tres" id="3_a4o5h"]
-[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="4_1t3lr"]
+[ext_resource type="Texture2D" uid="uid://cxrln3ceoyp5l" path="res://assets/icons/icon_cross.tres" id="5_f7blf"]
+[ext_resource type="Texture2D" uid="uid://e7cx1cwx8uan" path="res://assets/icons/icon_magnifying_glass.tres" id="6_iqhh2"]
+[ext_resource type="Texture2D" uid="uid://dlmjv222ew7s5" path="res://assets/icons/icon_speech_bubble.tres" id="6_qadtl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f7blf"]
-atlas = ExtResource("4_1t3lr")
-region = Rect2(1024, 1536, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1t3lr"]
-atlas = ExtResource("4_1t3lr")
-region = Rect2(1152, 1536, 128, 128)
-
-[node name="ResidentInfo" type="PanelContainer" unique_id=330889481 node_paths=PackedStringArray("residentLabel", "happinessIcon", "noHouseLabel", "employmentLabel", "needInfoParent")]
+[node name="ResidentInfo" type="PanelContainer" unique_id=330889481 node_paths=PackedStringArray("residentLabel", "happinessIcon", "noHouseLabel", "employmentLabel", "needInfoParent", "viewHouseButton")]
 custom_minimum_size = Vector2(100, 80)
 offset_right = 253.0
 offset_bottom = 80.0
@@ -28,6 +22,7 @@ noHouseLabel = NodePath("VBoxContainer/HBoxContainer/HouseIcon")
 employmentLabel = NodePath("VBoxContainer/HBoxContainer/Workplace")
 needInfoParent = NodePath("VBoxContainer/NeedInfoVBoxContainer")
 needInfoScene = ExtResource("2_f7blf")
+viewHouseButton = NodePath("VBoxContainer/HBoxContainer/HouseIcon2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=314040104]
 layout_mode = 2
@@ -80,7 +75,46 @@ offset_right = 10.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_f7blf")
+texture = ExtResource("5_f7blf")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HouseIcon2" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=293229376]
+layout_mode = 2
+tooltip_text = "no house!"
+texture = ExtResource("3_a4o5h")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/HouseIcon2" unique_id=52436417]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MagnifierIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer/HouseIcon2" unique_id=313421873]
+self_modulate = Color(0.14901961, 0.4509804, 0.78431374, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -33.0
+offset_top = -38.0
+offset_right = -8.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 0
+tooltip_text = "no house!"
+texture = ExtResource("6_iqhh2")
 expand_mode = 3
 stretch_mode = 5
 
@@ -98,7 +132,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 tooltip_text = "no house!"
-texture = SubResource("AtlasTexture_1t3lr")
+texture = ExtResource("6_qadtl")
 expand_mode = 3
 stretch_mode = 5
 
@@ -125,4 +159,5 @@ icon_alignment = 1
 layout_mode = 2
 theme_override_constants/separation = 8
 
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/HouseIcon2/Button" to="." method="OnGoToHouseButton"]
 [connection signal="toggled" from="VBoxContainer/HBoxContainer/SpeechBubbleIcon/Button" to="." method="OnToggleNeedBubbles"]
