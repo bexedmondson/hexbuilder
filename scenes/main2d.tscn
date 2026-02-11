@@ -46,6 +46,7 @@
 [ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/popups/WorkplaceInfoUI.cs" id="28_l3nqq"]
 [ext_resource type="Texture2D" uid="uid://bxdqupspw52oj" path="res://assets/2d_clouds.png" id="30_imcdj"]
 [ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="31_5n6k3"]
+[ext_resource type="Script" uid="uid://b5smcb6ofauxq" path="res://scripts/map/CloudParticles.cs" id="31_kdw7e"]
 [ext_resource type="Script" uid="uid://b68wnht32wyfj" path="res://scripts/ui/ResidentCountDisplay.cs" id="32_t4767"]
 [ext_resource type="PackedScene" uid="uid://c1jy3h6un84tw" path="res://scenes/toast_panel_no_bg.tscn" id="34_7jl01"]
 [ext_resource type="Texture2D" uid="uid://syhv8okyicei" path="res://assets/icons/icon_house.tres" id="35_2a4bv"]
@@ -356,7 +357,7 @@ limit_smoothed = true
 position_smoothing_speed = 20.0
 editor_draw_limits = true
 script = ExtResource("9_k5e1m")
-minZoom = 0.3
+minZoom = 0.7
 maxZoom = 3.0
 scrollZoomIncrement = 0.1
 
@@ -367,15 +368,17 @@ emitting = false
 amount = 10
 texture = ExtResource("30_imcdj")
 lifetime = 20.0
-lifetime_randomness = 0.3
 emission_shape = 3
-emission_rect_extents = Vector2(2000, 2000)
-spread = 5.0
+emission_rect_extents = Vector2(3000, 3000)
+spread = 0.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 50.0
-initial_velocity_max = 100.0
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+scale_amount_min = 0.7
+scale_amount_max = 0.8
 color_ramp = SubResource("Gradient_kdw7e")
 anim_offset_max = 1.0
+script = ExtResource("31_kdw7e")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=423575324]
 
