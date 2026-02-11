@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b4lwxjw7fbxt0" path="res://scripts/data/NeedConfig.cs" id="1_eima2"]
 [ext_resource type="Script" uid="uid://da02je0wt2q1i" path="res://scripts/data/NeedConfigList.cs" id="1_n2xuo"]
 [ext_resource type="Script" uid="uid://biim86els1cs8" path="res://scripts/data/requirements/ResidentDaysLivedRequirement.cs" id="1_t5wp0"]
+[ext_resource type="Script" uid="uid://h7paiq4gf4yt" path="res://scripts/data/requirements/AbstractRequirement.cs" id="2_6t21s"]
 [ext_resource type="Script" uid="uid://nhjvba1rok7w" path="res://scripts/data/requirements/IsHousedRequirement.cs" id="2_pk0ri"]
 [ext_resource type="Resource" uid="uid://bakxd6oi5giwm" path="res://data/buildings/tent.tres" id="4_2ok8c"]
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="6_oee08"]
@@ -25,8 +26,8 @@ metadata/_custom_type_script = "uid://nhjvba1rok7w"
 
 [sub_resource type="Resource" id="Resource_6t21s"]
 script = ExtResource("1_eima2")
-assignmentRequirements = Array[Object]([SubResource("Resource_il1fi")])
-satisfactionRequirements = Array[Object]([SubResource("Resource_eeyjv")])
+assignmentRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_il1fi")])
+satisfactionRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_eeyjv")])
 unsatisfiedHappinessPenalty = -3
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
@@ -40,8 +41,8 @@ metadata/_custom_type_script = "uid://cento2occpppv"
 
 [sub_resource type="Resource" id="Resource_pk0ri"]
 script = ExtResource("1_eima2")
-assignmentRequirements = Array[Object]([SubResource("Resource_e4jau")])
-satisfactionRequirements = [SubResource("Resource_7ri1s")]
+assignmentRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_e4jau")])
+satisfactionRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_7ri1s")])
 unsatisfiedHappinessPenalty = -3
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
@@ -64,8 +65,8 @@ metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_oee08"]
 script = ExtResource("1_eima2")
-assignmentRequirements = Array[Object]([SubResource("Resource_dex7m")])
-satisfactionRequirements = [SubResource("Resource_pjxgo")]
+assignmentRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_dex7m")])
+satisfactionRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_pjxgo")])
 unsatisfiedHappinessPenalty = -1
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
@@ -86,8 +87,8 @@ metadata/_custom_type_script = "uid://dcio2ff1rmkiq"
 
 [sub_resource type="Resource" id="Resource_vs2ix"]
 script = ExtResource("1_eima2")
-assignmentRequirements = Array[Object]([SubResource("Resource_el656"), SubResource("Resource_cxcpj")])
-satisfactionRequirements = Array[Object]([SubResource("Resource_3mxfm")])
+assignmentRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_el656"), SubResource("Resource_cxcpj")])
+satisfactionRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_3mxfm")])
 unsatisfiedHappinessPenalty = -1
 satisfiedHappinessBonus = 1
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
@@ -117,8 +118,8 @@ metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_7l06o"]
 script = ExtResource("1_eima2")
-assignmentRequirements = Array[Object]([SubResource("Resource_rph6w")])
-satisfactionRequirements = Array[Object]([SubResource("Resource_lxhse")])
+assignmentRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_rph6w")])
+satisfactionRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_lxhse")])
 unsatisfiedHappinessPenalty = -1
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
@@ -132,8 +133,8 @@ minimumAcceptableHappiness = -2
 
 [sub_resource type="Resource" id="Resource_bt7ra"]
 script = ExtResource("1_eima2")
-assignmentRequirements = Array[Object]([SubResource("Resource_vymyy")])
-satisfactionRequirements = Array[Object]([SubResource("Resource_mxfrj")])
+assignmentRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_vymyy")])
+satisfactionRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_mxfrj")])
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
 [sub_resource type="Resource" id="Resource_de0cg"]
@@ -158,11 +159,11 @@ metadata/_custom_type_script = "uid://dcio2ff1rmkiq"
 
 [sub_resource type="Resource" id="Resource_skyn5"]
 script = ExtResource("1_eima2")
-assignmentRequirements = Array[Object]([SubResource("Resource_de0cg"), SubResource("Resource_3us8j"), SubResource("Resource_pox8x")])
-satisfactionRequirements = Array[Object]([SubResource("Resource_n4nnf")])
+assignmentRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_de0cg"), SubResource("Resource_3us8j"), SubResource("Resource_pox8x")])
+satisfactionRequirements = Array[ExtResource("2_6t21s")]([SubResource("Resource_n4nnf")])
 metadata/_custom_type_script = "uid://b4lwxjw7fbxt0"
 
 [resource]
 script = ExtResource("1_n2xuo")
-needConfigs = Array[Object]([SubResource("Resource_6t21s"), SubResource("Resource_pk0ri"), SubResource("Resource_oee08"), SubResource("Resource_vs2ix"), SubResource("Resource_7l06o"), SubResource("Resource_bt7ra"), SubResource("Resource_skyn5")])
+needConfigs = Array[ExtResource("1_eima2")]([SubResource("Resource_6t21s"), SubResource("Resource_pk0ri"), SubResource("Resource_oee08"), SubResource("Resource_vs2ix"), SubResource("Resource_7l06o"), SubResource("Resource_bt7ra"), SubResource("Resource_skyn5")])
 metadata/_custom_type_script = "uid://da02je0wt2q1i"

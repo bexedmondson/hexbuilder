@@ -31,6 +31,7 @@ public partial class MapCameraController : Camera2D, IInjectable
         }
         else if (@event is InputEventMagnifyGesture pinchGesture)
         {
+            GD.Print(pinchGesture);
             HandleZoom(pinchGesture.Factor);
         }
         else if (@event is InputEventMouseButton mouseWheelEvent && mouseWheelEvent.Pressed)

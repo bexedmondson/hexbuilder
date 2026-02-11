@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://c4sgkb7bwedw5"]
 
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_2vsbt"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="1_ku54e"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_xbjma"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="3_ut87k"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="4_p10oh"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="4_ut87k"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="5_p10oh"]
 
@@ -19,20 +21,19 @@ metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_r5dkk"]
 script = ExtResource("5_p10oh")
-requirements = Array[Object]([SubResource("Resource_ut87k")])
+requirements = Array[ExtResource("4_p10oh")]([SubResource("Resource_ut87k")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = Array[Object]([ExtResource("1_ku54e")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("1_24cbf")]([ExtResource("1_ku54e")])
+buildPrice = Dictionary[int, int]({
 0: 5,
 1: 2
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: 3,
 3: 1
-}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("2_xbjma")]([SubResource("Resource_2vsbt"), SubResource("Resource_r5dkk")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

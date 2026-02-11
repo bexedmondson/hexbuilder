@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bexg7lvpt0u4m" path="res://scripts/ui/cellinfos/AdjacencyEffectCellInfoUI.cs" id="1_06ica"]
 [ext_resource type="Texture2D" uid="uid://dlmbkw17dh1ip" path="res://assets/2d/selection_segment_overlay_atlas.png" id="1_h03gx"]
-[ext_resource type="Texture2D" uid="uid://ceqvtlo77pcfy" path="res://assets/icons/icon_wood.tres" id="2_h03gx"]
 [ext_resource type="Script" uid="uid://begvonsf33ldu" path="res://scripts/ui/cellinfos/AdjacencyEffectAnimationTree.cs" id="2_msroh"]
 [ext_resource type="AnimationLibrary" uid="uid://dlma8nh3kpl37" path="res://assets/anims/adjacency_TL_animation_library.tres" id="5_msroh"]
 [ext_resource type="AnimationLibrary" uid="uid://b123fpcs40fvp" path="res://assets/anims/adjacency_TR_animation_library.tres" id="6_06ica"]
@@ -260,7 +259,6 @@ modulate = Color(0, 0, 0, 0)
 self_modulate = Color(0, 0, 0, 0)
 position = Vector2(-184, 0)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_h03gx")
 
 [node name="Icon" type="Sprite2D" parent="TR/Currency" unique_id=1853176530]
 scale = Vector2(0.99999994, 0.99999994)

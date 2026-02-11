@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://chwut76ukbrlw"]
 
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_k7c6n"]
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_yw51q"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_7s1am"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_2xlp4"]
@@ -13,13 +14,12 @@ metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
 [resource]
 script = ExtResource("3_2xlp4")
-canBePlacedOn = Array[Object]([ExtResource("1_yw51q"), ExtResource("2_7s1am")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("3_2xlp4")]([ExtResource("1_yw51q"), ExtResource("2_7s1am")])
+buildPrice = Dictionary[int, int]({
 1: 2
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: 3
-}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("3_k7c6n")]([SubResource("Resource_8pu6x")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

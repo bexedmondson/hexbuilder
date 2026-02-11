@@ -2,10 +2,12 @@
 
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_0pk3v"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_svrqe"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_xd4gl"]
 [ext_resource type="Resource" uid="uid://c45irgldcys11" path="res://data/terrain/sand.tres" id="3_xd4gl"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="4_y25w2"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="5_y7xcg"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="6_dggx0"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="6_e35tn"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="7_e35tn"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="8_dggx0"]
@@ -45,7 +47,7 @@ metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_svrqe"]
 script = ExtResource("7_e35tn")
-requirements = Array[Object]([SubResource("Resource_y25w2"), SubResource("Resource_e35tn"), SubResource("Resource_dggx0"), SubResource("Resource_dl86n")])
+requirements = Array[ExtResource("6_dggx0")]([SubResource("Resource_y25w2"), SubResource("Resource_e35tn"), SubResource("Resource_dggx0"), SubResource("Resource_dl86n")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [sub_resource type="Resource" id="Resource_6fu0t"]
@@ -55,17 +57,16 @@ metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = Array[Object]([ExtResource("1_0pk3v"), ExtResource("2_xd4gl"), ExtResource("3_xd4gl")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("1_24cbf")]([ExtResource("1_0pk3v"), ExtResource("2_xd4gl"), ExtResource("3_xd4gl")])
+buildPrice = Dictionary[int, int]({
 1: 20,
 3: 4
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: 1,
 1: 1,
 2: 1,
 3: 1
-}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("4_y25w2")]([SubResource("Resource_u85og"), SubResource("Resource_svrqe"), SubResource("Resource_6fu0t")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="8_kj20f"]
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="9_33hju"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="9_u7xsk"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="10_0jgd4"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="10_rxyhn"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="11_0jgd4"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="12_u7xsk"]
@@ -77,20 +78,20 @@ metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_7nw81"]
 script = ExtResource("12_u7xsk")
-requirements = Array[Resource]([SubResource("Resource_00esu"), SubResource("Resource_tyq42")])
+requirements = Array[ExtResource("10_0jgd4")]([SubResource("Resource_00esu"), SubResource("Resource_tyq42")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("9_u7xsk")
-canBePlacedOn = Array[Object]([ExtResource("4_5p8kn")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("9_u7xsk")]([ExtResource("4_5p8kn")])
+buildPrice = Dictionary[int, int]({
 1: 20,
 2: 8,
 3: 5
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 1: 5
-}
-adjacencies = Array[Object]([SubResource("Resource_kp0b5"), SubResource("Resource_rh5oq"), SubResource("Resource_masw2")])
+})
+adjacencies = Array[ExtResource("2_4sv2n")]([SubResource("Resource_kp0b5"), SubResource("Resource_rh5oq"), SubResource("Resource_masw2")])
 components = Array[ExtResource("6_33hju")]([SubResource("Resource_33hju"), SubResource("Resource_rxyhn"), SubResource("Resource_0jgd4"), SubResource("Resource_7nw81")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

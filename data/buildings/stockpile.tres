@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://p340fpdf8cg4"]
 
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_qpt5s"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_ngqpg"]
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="3_8c7bd"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_boct3"]
@@ -7,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="5_b476h"]
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="5_qpt5s"]
 [ext_resource type="Resource" uid="uid://c45irgldcys11" path="res://data/terrain/sand.tres" id="5_so5qk"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="7_b476h"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="7_so5qk"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="8_so5qk"]
 
@@ -39,16 +41,14 @@ metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_b476h"]
 script = ExtResource("8_so5qk")
-requirements = Array[Object]([SubResource("Resource_6lq31"), SubResource("Resource_so5qk"), SubResource("Resource_qpt5s")])
+requirements = Array[ExtResource("7_b476h")]([SubResource("Resource_6lq31"), SubResource("Resource_so5qk"), SubResource("Resource_qpt5s")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("5_b476h")
-canBePlacedOn = Array[Object]([ExtResource("2_ngqpg"), ExtResource("3_8c7bd"), ExtResource("5_so5qk"), ExtResource("5_qpt5s")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("5_b476h")]([ExtResource("2_ngqpg"), ExtResource("3_8c7bd"), ExtResource("5_so5qk"), ExtResource("5_qpt5s")])
+buildPrice = Dictionary[int, int]({
 1: 3
-}
-baseTurnCurrencyChange = {}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("3_boct3")]([SubResource("Resource_8xsi5"), SubResource("Resource_b476h")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

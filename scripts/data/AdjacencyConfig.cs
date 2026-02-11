@@ -4,10 +4,10 @@ using Godot;
 public partial class AdjacencyConfig : Resource
 {
     [Export]
-    public CustomTileData requiredTile { get; private set; } = new();
+    public CustomTileData requiredTile = new();
 
     [Export]
-    public int distance { get; private set; }
+    public int distance;
 
     [Export]
     public Godot.Collections.Dictionary<CurrencyType, int> currencyEffect { get; private set; } = new();

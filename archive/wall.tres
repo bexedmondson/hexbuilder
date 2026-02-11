@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://b8hvwxf5jgsix"]
 
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_dwosh"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="1_tibgc"]
 [ext_resource type="Script" uid="uid://kl2tmf4tnglp" path="res://scripts/data/tilecomponents/HideInEncyclopediaComponent.cs" id="2_dwosh"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_nwrb3"]
@@ -10,11 +11,8 @@ metadata/_custom_type_script = "uid://kl2tmf4tnglp"
 
 [resource]
 script = ExtResource("3_nwrb3")
-canBePlacedOn = Array[Object]([])
-buildPrice = {
+buildPrice = Dictionary[int, int]({
 2: 4
-}
-baseTurnCurrencyChange = {}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("1_tibgc")]([SubResource("Resource_a67os")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

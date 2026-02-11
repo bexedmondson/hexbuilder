@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="5_1y7xi"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="6_u3b4o"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="7_u3b4o"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="8_7sf84"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="8_u3b4o"]
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="9_khrdj"]
 [ext_resource type="Resource" uid="uid://cprbbiv623dht" path="res://data/buildings/house.tres" id="10_khrdj"]
@@ -19,7 +20,6 @@
 script = ExtResource("2_wx0d3")
 requiredTile = ExtResource("1_5sslw")
 distance = 1
-currencyEffect = Dictionary[int, int]({})
 
 [sub_resource type="Resource" id="Resource_uqrft"]
 script = ExtResource("5_1y7xi")
@@ -45,7 +45,7 @@ metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_5sslw"]
 script = ExtResource("7_u3b4o")
-requirements = Array[Object]([SubResource("Resource_305jr"), SubResource("Resource_who0n")])
+requirements = Array[ExtResource("8_7sf84")]([SubResource("Resource_305jr"), SubResource("Resource_who0n")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [sub_resource type="Resource" id="Resource_wx0d3"]
@@ -60,13 +60,13 @@ metadata/_custom_type_script = "uid://be4uqqgw38s0q"
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = Array[Object]([ExtResource("1_x8ft0"), ExtResource("2_i4mag"), ExtResource("3_305jr")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("1_24cbf")]([ExtResource("1_x8ft0"), ExtResource("2_i4mag"), ExtResource("3_305jr")])
+buildPrice = Dictionary[int, int]({
 2: 8
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: -1
-}
-adjacencies = Array[Object]([SubResource("Resource_fq1lg")])
+})
+adjacencies = Array[ExtResource("2_wx0d3")]([SubResource("Resource_fq1lg")])
 components = Array[ExtResource("4_305jr")]([SubResource("Resource_uqrft"), SubResource("Resource_5sslw"), SubResource("Resource_wx0d3")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

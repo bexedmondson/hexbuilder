@@ -2,7 +2,9 @@
 
 [ext_resource type="Resource" uid="uid://dqlgosqx4q0av" path="res://data/buildings/cows2.tres" id="1_4yy3r"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="1_8ucn5"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_pmrks"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="2_4yy3r"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="3_pmrks"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="3_xmm2n"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="4_pmrks"]
 [ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="5_51j02"]
@@ -15,7 +17,7 @@ metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_1bw08"]
 script = ExtResource("3_xmm2n")
-requirements = Array[Object]([SubResource("Resource_ut87k")])
+requirements = Array[ExtResource("3_pmrks")]([SubResource("Resource_ut87k")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [sub_resource type="Resource" id="Resource_xbks7"]
@@ -33,14 +35,13 @@ metadata/_custom_type_script = "uid://bt32fndy2yjlv"
 
 [resource]
 script = ExtResource("6_gxu1q")
-canBePlacedOn = Array[Object]([ExtResource("1_4yy3r")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("6_gxu1q")]([ExtResource("1_4yy3r")])
+buildPrice = Dictionary[int, int]({
 0: 15,
 1: 5
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: 5
-}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("1_8ucn5")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

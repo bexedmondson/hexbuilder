@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_8nixi"]
 [ext_resource type="Resource" uid="uid://bhnebodpuroy" path="res://data/buildings/rowboat.tres" id="1_afrh2"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_wdgjh"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_f21t2"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="3_hptau"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="4_5vt4n"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="5_q8v16"]
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="5_uram4"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="6_5vt4n"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="7_uram4"]
@@ -41,18 +43,17 @@ metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_wdgjh"]
 script = ExtResource("8_uram4")
-requirements = Array[Object]([SubResource("Resource_qskiq"), SubResource("Resource_5vt4n")])
+requirements = Array[ExtResource("5_q8v16")]([SubResource("Resource_qskiq"), SubResource("Resource_5vt4n")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("1_8nixi")
-canBePlacedOn = Array[Object]([ExtResource("1_afrh2")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("1_8nixi")]([ExtResource("1_afrh2")])
+buildPrice = Dictionary[int, int]({
 1: 8
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: 2
-}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("2_f21t2")]([SubResource("Resource_uram4"), SubResource("Resource_q8v16"), SubResource("Resource_wdgjh")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

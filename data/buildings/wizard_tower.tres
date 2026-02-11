@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://dm2775ci1y87i"]
 
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_mpcog"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="4_ato36"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_5dl3r"]
 [ext_resource type="Script" uid="uid://kl2tmf4tnglp" path="res://scripts/data/tilecomponents/HideInEncyclopediaComponent.cs" id="6_5dl3r"]
@@ -16,13 +17,11 @@ metadata/_custom_type_script = "uid://kl2tmf4tnglp"
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = Array[Object]([])
-buildPrice = {
+buildPrice = Dictionary[int, int]({
 1: 2
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: -1
-}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("4_ato36")]([SubResource("Resource_flcca"), SubResource("Resource_i2eax")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

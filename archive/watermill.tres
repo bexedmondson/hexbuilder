@@ -9,16 +9,14 @@
 script = ExtResource("2_lqy8a")
 requiredTile = ExtResource("1_rddn4")
 distance = 1
-currencyEffect = {}
 
 [resource]
 script = ExtResource("1_24cbf")
-canBePlacedOn = []
-buildPrice = {
+buildPrice = Dictionary[int, int]({
 1: 2
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: -1
-}
-adjacencies = Array[Object]([SubResource("Resource_kfto2")])
+})
+adjacencies = Array[ExtResource("2_lqy8a")]([SubResource("Resource_kfto2")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

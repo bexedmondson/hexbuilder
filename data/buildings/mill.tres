@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="6_hv1c6"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="7_oq0j1"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="8_ury0i"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="9_ufexx"]
 [ext_resource type="Script" uid="uid://b8yvq1vldnsav" path="res://scripts/data/requirements/CurrentTilePresenceCountRequirement.cs" id="10_ury0i"]
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="11_sn052"]
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="11_ufexx"]
@@ -59,18 +60,18 @@ metadata/_custom_type_script = "uid://begyr0mqsjkto"
 
 [sub_resource type="Resource" id="Resource_wsah8"]
 script = ExtResource("12_sn052")
-requirements = Array[Object]([SubResource("Resource_hv1c6"), SubResource("Resource_frkme")])
+requirements = Array[ExtResource("9_ufexx")]([SubResource("Resource_hv1c6"), SubResource("Resource_frkme")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("6_hv1c6")
-canBePlacedOn = Array[Object]([ExtResource("1_8uj3x"), ExtResource("2_nky1h"), ExtResource("3_qw1qp")])
-buildPrice = {
+canBePlacedOn = Array[ExtResource("6_hv1c6")]([ExtResource("1_8uj3x"), ExtResource("2_nky1h"), ExtResource("3_qw1qp")])
+buildPrice = Dictionary[int, int]({
 1: 8
-}
-baseTurnCurrencyChange = {
+})
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: 2
-}
-adjacencies = Array[Object]([SubResource("Resource_j5x2k")])
+})
+adjacencies = Array[ExtResource("2_j5x2k")]([SubResource("Resource_j5x2k")])
 components = Array[ExtResource("6_3iw88")]([SubResource("Resource_lwfrp"), SubResource("Resource_ufexx"), SubResource("Resource_wsah8")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

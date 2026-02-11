@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://dydnajm8j3ny3"]
 
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_tjxvc"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_e7kx1"]
+[ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="2_mw1ca"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="3_mxci2"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="4_lhcf5"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_8jgwh"]
@@ -19,7 +21,7 @@ metadata/_custom_type_script = "uid://cna1dhkk0j7sa"
 
 [sub_resource type="Resource" id="Resource_1bw08"]
 script = ExtResource("4_lhcf5")
-requirements = Array[Object]([SubResource("Resource_ut87k")])
+requirements = Array[ExtResource("2_mw1ca")]([SubResource("Resource_ut87k")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [sub_resource type="Resource" id="Resource_xbks7"]
@@ -53,11 +55,8 @@ metadata/_custom_type_script = "uid://cfgg7k07r5r28"
 
 [resource]
 script = ExtResource("7_tjxvc")
-canBePlacedOn = Array[Object]([])
-buildPrice = {}
-baseTurnCurrencyChange = {
+baseTurnCurrencyChange = Dictionary[int, int]({
 0: 3
-}
-adjacencies = Array[Object]([])
+})
 components = Array[ExtResource("2_e7kx1")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi"), SubResource("Resource_e7kx1"), SubResource("Resource_l7214")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
