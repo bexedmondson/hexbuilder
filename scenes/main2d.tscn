@@ -44,6 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://b5cjn1sgivxbt" path="res://scenes/resident_info_ui.tscn" id="27_xvnm7"]
 [ext_resource type="Texture2D" uid="uid://cbig8tsmrjt7k" path="res://assets/icons/icon_bag_stop.tres" id="28_5n6k3"]
 [ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/popups/WorkplaceInfoUI.cs" id="28_l3nqq"]
+[ext_resource type="Texture2D" uid="uid://bxdqupspw52oj" path="res://assets/2d_clouds.png" id="30_imcdj"]
 [ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="31_5n6k3"]
 [ext_resource type="Script" uid="uid://b68wnht32wyfj" path="res://scripts/ui/ResidentCountDisplay.cs" id="32_t4767"]
 [ext_resource type="PackedScene" uid="uid://c1jy3h6un84tw" path="res://scenes/toast_panel_no_bg.tscn" id="34_7jl01"]
@@ -119,6 +120,16 @@ fractal_lacunarity = 4.0
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mcgvi"]
 noise = SubResource("FastNoiseLite_77sti")
 seamless = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kdw7e"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_imcdj"]
+offsets = PackedFloat32Array(0, 0.109586045, 0.8631086, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ufsem"]
 atlas = ExtResource("25_hxfgi")
@@ -341,7 +352,6 @@ sandyNoise = SubResource("NoiseTexture2D_nkuak")
 vegetationNoise = SubResource("NoiseTexture2D_mcgvi")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1667094040]
-visible = false
 limit_smoothed = true
 position_smoothing_speed = 20.0
 editor_draw_limits = true
@@ -349,6 +359,25 @@ script = ExtResource("9_k5e1m")
 minZoom = 0.3
 maxZoom = 3.0
 scrollZoomIncrement = 0.1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Camera2D" unique_id=447446821]
+material = SubResource("CanvasItemMaterial_kdw7e")
+position = Vector2(-2000, 0)
+amount = 10
+texture = ExtResource("30_imcdj")
+lifetime = 200.0
+randomness = 0.5
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(10, 1080)
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_max = 1.11
+color_ramp = SubResource("Gradient_imcdj")
+anim_offset_max = 1.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=423575324]
 
