@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dkxuca73wbe1x"]
+
+[ext_resource type="Shader" uid="uid://dwcoeicx1di4h" path="res://materials_shaders/testwater.gdshader" id="1_5uxvo"]
+
+[resource]
+shader = ExtResource("1_5uxvo")
+shader_parameter/WATER_COL = Color(0.43529412, 0.6, 0.7254902, 1)
+shader_parameter/WATER2_COL = Color(0.43529412, 0.6, 0.59607846, 1)
+shader_parameter/FOAM_COL = Color(0.58850366, 0.7486933, 0.744367, 1)
+shader_parameter/distortion_speed = 1.0
+shader_parameter/tile = Vector2(3, 5)
+shader_parameter/offset = Vector2(0, 0)
