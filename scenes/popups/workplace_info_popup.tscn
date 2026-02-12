@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://byvrpkakautsb"]
+
+[ext_resource type="Script" uid="uid://bq3b3u65l087x" path="res://scripts/ui/popups/WorkplaceInfoPopup.cs" id="1_yqkqx"]
+[ext_resource type="PackedScene" uid="uid://rhtqjafh80s4" path="res://scenes/workplace_info_ui.tscn" id="2_63tm2"]
+
+[node name="WorkplaceInfoPopup" type="Panel" unique_id=1044459158 node_paths=PackedStringArray("workplaceInfoContainer")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yqkqx")
+workplaceInfoContainer = NodePath("ScrollContainer/VBoxContainer")
+workplaceInfoScene = ExtResource("2_63tm2")
+
+[node name="CloseButton" type="Button" parent="." unique_id=1325528077]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=847685901]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1170757841]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="visibility_changed" from="." to="." method="OnVisibilityChanged"]
+[connection signal="pressed" from="CloseButton" to="." method="Close"]

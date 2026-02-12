@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://bh4wj37hv1clc"]
+
+[ext_resource type="Script" uid="uid://5ns5k1qjdur6" path="res://scripts/ui/popups/LockedCellPopup.cs" id="1_7ucwf"]
+[ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="2_oesoa"]
+[ext_resource type="Texture2D" uid="uid://cx3xw3vsdesuq" path="res://assets/icons/icon_hourglass_mid.tres" id="3_w7qgm"]
+
+[node name="LockedCellPopup" type="Panel" unique_id=1463822280 node_paths=PackedStringArray("workerCountLabel", "turnCountLabel", "confirmButton")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 250.0
+offset_top = -350.0
+offset_right = 750.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ucwf")
+workerCountLabel = NodePath("PanelContainer/VBoxContainer/Panel2/WorkerCountContainer/WorkerCountLabel")
+turnCountLabel = NodePath("PanelContainer/VBoxContainer/Panel3/TurnCountContainer/TurnCountLabel")
+confirmButton = NodePath("ConfirmButton")
+
+[node name="UnlockLabel" type="Label" parent="." unique_id=259086585]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.3
+anchor_right = 0.5
+anchor_bottom = 0.3
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"Label_Title"
+text = "Unlock?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1124516100]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -26.793
+offset_right = 101.0
+offset_bottom = 59.207
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelContainerEmbeddedLight"
+
+[node name="VBoxContainer" type="HBoxContainer" parent="PanelContainer" unique_id=1294581686]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Panel2" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1339921048]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+
+[node name="WorkerCountContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Panel2" unique_id=2111849345]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/Panel2/WorkerCountContainer" unique_id=802113866]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_oesoa")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="WorkerCountLabel" type="Label" parent="PanelContainer/VBoxContainer/Panel2/WorkerCountContainer" unique_id=454816942]
+layout_mode = 2
+theme_type_variation = &"Label_Title"
+text = "x1"
+vertical_alignment = 1
+
+[node name="Panel3" type="MarginContainer" parent="PanelContainer/VBoxContainer" unique_id=1279996255]
+layout_mode = 2
+
+[node name="TurnCountContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Panel3" unique_id=174001148]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/Panel3/TurnCountContainer" unique_id=746908235]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("3_w7qgm")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TurnCountLabel" type="Label" parent="PanelContainer/VBoxContainer/Panel3/TurnCountContainer" unique_id=2046688815]
+layout_mode = 2
+theme_type_variation = &"Label_Title"
+text = "x1"
+vertical_alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="." unique_id=362044681]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -58.0
+offset_right = 50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "OK"
+
+[node name="CloseButton" type="Button" parent="." unique_id=1485279088]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "X"
+
+[connection signal="pressed" from="ConfirmButton" to="." method="Confirm"]
+[connection signal="pressed" from="CloseButton" to="." method="Close"]

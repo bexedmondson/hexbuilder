@@ -1,0 +1,729 @@
+[gd_scene format=3 uid="uid://bfgvol6kcdx6w"]
+
+[ext_resource type="Script" uid="uid://qmsdrailj53" path="res://scripts/ui/popups/UnlockedCellPopup.cs" id="1_kp2wc"]
+[ext_resource type="PackedScene" uid="uid://uffj30rhdgvw" path="res://scenes/tile_option.tscn" id="2_hbwvp"]
+[ext_resource type="ButtonGroup" uid="uid://dy5ldroprvgcs" path="res://scenes/tileSelectButtonGroup.tres" id="3_52jpo"]
+[ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="4_431u3"]
+[ext_resource type="Script" uid="uid://nsj47u7mvxt" path="res://scripts/ui/popups/UnlockedCellPopup_Resources.cs" id="5_ktbrb"]
+[ext_resource type="PackedScene" uid="uid://nrnjv42wsci4" path="res://scenes/unlocked_cell_adjacency_info_ui.tscn" id="6_hqwqr"]
+[ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="7_nsrx4"]
+[ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="8_m2a12"]
+[ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="9_uexqw"]
+[ext_resource type="Script" uid="uid://dxy7i1dyipgd8" path="res://scripts/ui/popups/CurrencyDisplay_Strikethroughable.cs" id="10_6spc4"]
+[ext_resource type="PackedScene" uid="uid://hd50lh5054ow" path="res://scenes/single_currency_display_light-outline-label.tscn" id="11_4noe8"]
+[ext_resource type="Texture2D" uid="uid://cf5di51mh2keo" path="res://assets/icons/icon_strike_horizontal.tres" id="12_spry2"]
+[ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="13_g6j3o"]
+[ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="14_aqggg"]
+[ext_resource type="Script" uid="uid://b0a7x5oomorx4" path="res://scripts/ui/popups/StorageInfoUI.cs" id="15_hdcnd"]
+[ext_resource type="Script" uid="uid://dslmxo7kxw3oa" path="res://scripts/ui/popups/WorkplaceInfoUI.cs" id="16_xah1d"]
+[ext_resource type="Script" uid="uid://oge0v8nx381v" path="res://scripts/ui/popups/UnlockedCellPopup_AutoUpgrade.cs" id="17_4jb4p"]
+[ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="18_g2oy4"]
+[ext_resource type="Material" uid="uid://jrcfkjx2d6od" path="res://materials_shaders/greyscale_material.tres" id="19_gvrxf"]
+[ext_resource type="Texture2D" uid="uid://dsqnnfwfgx0k4" path="res://assets/icons/icon_filter.tres" id="20_v1bh3"]
+[ext_resource type="Texture2D" uid="uid://bnfw8ei4di7oi" path="res://themes/clashy/graphics/panel-light.svg" id="21_vb2r2"]
+[ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="22_do4d2"]
+[ext_resource type="Script" uid="uid://brpwebha3xuam" path="res://scripts/ui/popups/TileLockedFilterToggleButton.cs" id="23_7ubyd"]
+[ext_resource type="Script" uid="uid://c4yplprbhffky" path="res://scripts/ui/popups/TileSelectorList.cs" id="24_lpq16"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_822nj"]
+atlas = ExtResource("4_431u3")
+region = Rect2(512, 1536, 128, 128)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ilknt"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+texture = ExtResource("21_vb2r2")
+texture_margin_left = 8.0
+texture_margin_top = 7.0
+texture_margin_right = 8.0
+texture_margin_bottom = 13.0
+expand_margin_bottom = 3.0
+
+[node name="UnlockedCellPopup" type="Panel" unique_id=860641421 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "autoUpgradeTab", "buildTab", "resourcesDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "autoUpgradeDisplay", "tileSelector", "confirmButton")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 250.0
+offset_top = -350.0
+offset_right = 750.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kp2wc")
+title = NodePath("Label")
+selectedCellInfoButton = NodePath("InfoButton")
+tabContainer = NodePath("TabContainer")
+effectsTab = NodePath("TabContainer/Effects")
+residentTab = NodePath("TabContainer/Residents")
+workerTab = NodePath("TabContainer/Workers")
+storageTab = NodePath("TabContainer/Storage")
+autoUpgradeTab = NodePath("TabContainer/Upgrade")
+buildTab = NodePath("TabContainer/Build")
+resourcesDisplay = NodePath("TabContainer/Effects/InfoSubpanel")
+storageInfoUI = NodePath("TabContainer/Storage/StoragePanel")
+residentDetailsParent = NodePath("TabContainer/Residents/ResidentPanel/VBoxContainer")
+workplaceInfoUI = NodePath("TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI")
+autoUpgradeDisplay = NodePath("TabContainer/Upgrade/AutoUpgradePanel")
+tileSelector = NodePath("TabContainer/Build/Panel/ScrollPanel/ScrollContainer")
+tileScene = ExtResource("2_hbwvp")
+tileSelectionGroup = ExtResource("3_52jpo")
+confirmButton = NodePath("TabContainer/Build/Panel/ConfirmButton")
+
+[node name="CloseButton" type="Button" parent="." unique_id=1159126092]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 50.0
+grow_horizontal = 0
+theme_override_constants/h_separation = 0
+text = "X"
+
+[node name="InfoButton" type="Button" parent="." unique_id=138085404]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 55.0
+offset_bottom = 61.4
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="InfoButton" unique_id=296217763]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_left = -8.5
+offset_right = 8.5
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_822nj")
+expand_mode = 3
+stretch_mode = 5
+flip_v = true
+
+[node name="Label" type="Label" parent="." unique_id=1188004586]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -85.0
+offset_top = 25.0
+offset_right = 85.0
+offset_bottom = 61.0
+grow_horizontal = 2
+theme_type_variation = &"Label_Title"
+text = "tile name here"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1093622554]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Effects" type="Button" parent="TabContainer" unique_id=1597467461]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="InfoSubpanel" type="Panel" parent="TabContainer/Effects" unique_id=1400744014 node_paths=PackedStringArray("overallEffectDisplay", "defaultBaseEffectContainer", "defaultBaseEffectDisplay", "actualBaseEffectDisplay", "noProductionIndicator", "noConsumptionIndicator", "maxBonusContainer", "maxBonusCurrencyDisplay", "maxBonusNegationReason", "adjacencyEffectContainer")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_ktbrb")
+overallEffectDisplay = NodePath("ScrollContainer/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer/CurrencyDisplay")
+defaultBaseEffectContainer = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2")
+defaultBaseEffectDisplay = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
+actualBaseEffectDisplay = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/ActualBaseMarginContainer/CurrencyDisplay")
+noProductionIndicator = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/NoProductionLabel")
+noConsumptionIndicator = NodePath("ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/NoConsumptionLabel")
+maxBonusContainer = NodePath("ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer")
+maxBonusCurrencyDisplay = NodePath("ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
+maxBonusNegationReason = NodePath("ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect/MaxBonusNegationLabel")
+adjacencyEffectContainer = NodePath("ScrollContainer/VBoxContainer/NearbyTileEffectsVBoxContainer")
+adjacencyEffectUIScene = ExtResource("6_hqwqr")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Effects/InfoSubpanel" unique_id=580374813]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer" unique_id=1198776055]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=1866896625]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_type_variation = &"PanelContainerEmbeddedLight"
+
+[node name="OverallPerTurnHBoxContainer" type="HBoxContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/PanelContainer" unique_id=1832933500 node_paths=PackedStringArray("noneIndicator", "listParent")]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("7_nsrx4")
+noneIndicator = NodePath("NoneLabel")
+listParent = NodePath("CurrencyDisplay")
+
+[node name="Label" type="Label" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=306622429]
+layout_mode = 2
+text = "each turn:"
+horizontal_alignment = 1
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=1524566603]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("8_m2a12")
+singleCurrencyDisplayScene = ExtResource("9_uexqw")
+displayAsDelta = true
+iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="NoneLabel" type="Label" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/PanelContainer/OverallPerTurnHBoxContainer" unique_id=2133592615]
+layout_mode = 2
+text = "no change"
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=1612135907]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="DefaultPerTurnHBoxContainer2" type="HBoxContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=245972105 node_paths=PackedStringArray("noneIndicator", "listParent")]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("7_nsrx4")
+noneIndicator = NodePath("NoneLabel")
+listParent = NodePath("VBoxContainer/DefaultBaseMarginContainer/CurrencyDisplay")
+
+[node name="Label" type="Label" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=1319370859]
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+theme_type_variation = &"LightOutlineLabel"
+text = "default change:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=273456019]
+layout_mode = 2
+
+[node name="DefaultBaseMarginContainer" type="MarginContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer" unique_id=105281719]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer" unique_id=1895695084 node_paths=PackedStringArray("strikethrough")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("10_6spc4")
+strikethrough = NodePath("../StrikeTextureRect")
+singleCurrencyDisplayScene = ExtResource("11_4noe8")
+displayAsDelta = true
+iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
+
+[node name="StrikeTextureRect" type="TextureRect" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer" unique_id=971894505]
+self_modulate = Color(0.39607844, 0, 0.08627451, 0.90588236)
+layout_mode = 2
+texture = ExtResource("12_spry2")
+expand_mode = 3
+
+[node name="NoProductionLabel" type="Label" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=901785689]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_type_variation = &"LightOutlineLabel"
+theme_override_colors/font_outline_color = Color(0.4, 0.09411765, 0.16078432, 1)
+theme_override_font_sizes/font_size = 14
+text = "no workers!"
+horizontal_alignment = 1
+
+[node name="NoConsumptionLabel" type="Label" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=1885899199]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_type_variation = &"LightOutlineLabel"
+theme_override_font_sizes/font_size = 14
+text = "no residents"
+horizontal_alignment = 1
+
+[node name="ActualBaseMarginContainer" type="MarginContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer" unique_id=1364013498]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2/VBoxContainer/ActualBaseMarginContainer" unique_id=1569113333]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("8_m2a12")
+singleCurrencyDisplayScene = ExtResource("11_4noe8")
+displayAsDelta = true
+iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
+
+[node name="NoneLabel" type="Label" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/DefaultPerTurnHBoxContainer2" unique_id=719484451]
+layout_mode = 2
+theme_type_variation = &"LightOutlineLabel"
+text = "no change"
+
+[node name="MaxBonusInfoHBoxContainer" type="HBoxContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=1212821750]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=914930855 node_paths=PackedStringArray("itemWithShineShader")]
+material = ExtResource("13_g6j3o")
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+theme_type_variation = &"LightOutlineLabel"
+text = "max worker 
+bonus:"
+horizontal_alignment = 1
+script = ExtResource("14_aqggg")
+itemWithShineShader = NodePath(".")
+finalShaderParamValue = 4.0
+finalShaderDurationValue = 2.0
+shineByDefault = true
+
+[node name="DefaultBaseMarginContainer" type="MarginContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=1513931925]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer" unique_id=1700129044 node_paths=PackedStringArray("strikethrough")]
+modulate = Color(0.46727073, 0.46727073, 0.46727067, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("10_6spc4")
+strikethrough = NodePath("../StrikeTextureRect")
+singleCurrencyDisplayScene = ExtResource("11_4noe8")
+displayAsDelta = true
+iconColor = Color(0.4392157, 0.4392157, 0.4392157, 1)
+
+[node name="StrikeTextureRect" type="TextureRect" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer" unique_id=1957772756]
+visible = false
+self_modulate = Color(0.39607844, 0, 0.08627451, 0.90588236)
+layout_mode = 2
+texture = ExtResource("12_spry2")
+expand_mode = 3
+
+[node name="MaxBonusNegationLabel" type="Label" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer/MaxBonusInfoHBoxContainer/DefaultBaseMarginContainer/StrikeTextureRect" unique_id=1500732448]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_type_variation = &"LightOutlineLabel"
+theme_override_colors/font_outline_color = Color(0.4, 0.09411765, 0.16078432, 1)
+theme_override_font_sizes/font_size = 14
+text = "unhappy workers!"
+horizontal_alignment = 1
+
+[node name="NearbyTileEffectsVBoxContainer" type="VBoxContainer" parent="TabContainer/Effects/InfoSubpanel/ScrollContainer/VBoxContainer" unique_id=68678768]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Storage" type="Button" parent="TabContainer" unique_id=980717947]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="StoragePanel" type="Panel" parent="TabContainer/Storage" unique_id=1226893627 node_paths=PackedStringArray("storageCurrencyDisplay")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_hdcnd")
+storageCurrencyDisplay = NodePath("CurrencyDisplay")
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="TabContainer/Storage/StoragePanel" unique_id=2136697289]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("8_m2a12")
+singleCurrencyDisplayScene = ExtResource("9_uexqw")
+iconColor = Color(0.12156863, 0.16078432, 0.18431373, 1)
+
+[node name="Label" type="Label" parent="TabContainer/Storage/StoragePanel" unique_id=300326443]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 20.0
+offset_bottom = 37.0
+grow_horizontal = 2
+text = "storage capacity:"
+horizontal_alignment = 1
+
+[node name="Residents" type="Button" parent="TabContainer" unique_id=1967315340]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="ResidentPanel" type="Panel" parent="TabContainer/Residents" unique_id=1638170313]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Residents/ResidentPanel" unique_id=1928545053]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Workers" type="Button" parent="TabContainer" unique_id=1906736561]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="InfoSubpanel" type="Panel" parent="TabContainer/Workers" unique_id=819712003]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WorkplaceInfoUI" type="HBoxContainer" parent="TabContainer/Workers/InfoSubpanel" unique_id=1092623519 node_paths=PackedStringArray("workplaceIcon", "workerNamesLabel", "workerCountLabel", "minusButton", "plusButton", "noWorkerIndicator")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 58.0
+grow_horizontal = 2
+script = ExtResource("16_xah1d")
+workplaceIcon = NodePath("IconTextureRect")
+workerNamesLabel = NodePath("NamesLabel")
+workerCountLabel = NodePath("CountLabel")
+minusButton = NodePath("MinusButton")
+plusButton = NodePath("PlusButton")
+noWorkerIndicator = NodePath("InfoLabel")
+
+[node name="IconTextureRect" type="TextureRect" parent="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=1941881000]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+expand_mode = 5
+
+[node name="InfoLabel" type="Label" parent="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=831002456]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "no workers"
+
+[node name="NamesLabel" type="Label" parent="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=408341125]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "testing 1 2 3"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MinusButton" type="Button" parent="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=251068395]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "-"
+
+[node name="CountLabel" type="Label" parent="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=1669418985]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0/0"
+
+[node name="PlusButton" type="Button" parent="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" unique_id=1728103905]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "+"
+
+[node name="Upgrade" type="Button" parent="TabContainer" unique_id=1085678382]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="AutoUpgradePanel" type="Panel" parent="TabContainer/Upgrade" unique_id=1141215815 node_paths=PackedStringArray("upgradeResultTile", "upgradeRequirementsContainer", "upgradeRequirementsParent")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_4jb4p")
+upgradeResultTile = NodePath("TileTextureRect")
+upgradeRequirementsContainer = NodePath("Panel/ScrollContainer/HFlowContainer")
+upgradeRequirementsParent = NodePath("Panel")
+
+[node name="TileTextureRect" type="TextureRect" parent="TabContainer/Upgrade/AutoUpgradePanel" unique_id=843833940]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.05
+anchor_right = 0.9
+anchor_bottom = 0.4
+grow_horizontal = 0
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("18_g2oy4")
+greyscaleMaterial = ExtResource("19_gvrxf")
+
+[node name="Panel" type="Panel" parent="TabContainer/Upgrade/AutoUpgradePanel" unique_id=576270277]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.45
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Upgrade/AutoUpgradePanel/Panel" unique_id=1442453891]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="HFlowContainer" type="HFlowContainer" parent="TabContainer/Upgrade/AutoUpgradePanel/Panel/ScrollContainer" unique_id=990266236]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Upgrade/AutoUpgradePanel" unique_id=1777760914]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+text = "requirements"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Build" type="Button" parent="TabContainer" unique_id=1045470027]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
+
+[node name="Panel" type="Panel" parent="TabContainer/Build" unique_id=157361988]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FilterIconTextureRect" type="TextureRect" parent="TabContainer/Build/Panel" unique_id=318952818]
+self_modulate = Color(0.08235294, 0.4627451, 0.8235294, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.03
+anchor_right = 0.04
+anchor_bottom = 0.03
+offset_left = 4.7683716e-05
+offset_top = -3.0
+offset_right = 40.0
+offset_bottom = 37.0
+texture = ExtResource("20_v1bh3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FilterPanelContainer" type="PanelContainer" parent="TabContainer/Build/Panel" unique_id=1886069853]
+self_modulate = Color(0.84645504, 0.84645504, 0.84645504, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.03
+anchor_right = 0.96
+anchor_bottom = 0.04
+offset_left = 40.0
+offset_top = 1.1444092e-05
+offset_right = 4.5776367e-05
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_type_variation = &"PanelContainerLight"
+theme_override_styles/panel = SubResource("StyleBoxTexture_ilknt")
+
+[node name="FiltersHBoxContainer" type="HBoxContainer" parent="TabContainer/Build/Panel/FilterPanelContainer" unique_id=158491442]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Build/Panel/FilterPanelContainer/FiltersHBoxContainer" unique_id=1668226900]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Build/Panel/FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=1812143974]
+self_modulate = Color(0.08235294, 0.4627451, 0.8235294, 1)
+custom_minimum_size = Vector2(21, 21)
+layout_mode = 2
+texture = ExtResource("22_do4d2")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="LockCheckButton" type="CheckButton" parent="TabContainer/Build/Panel/FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=709114783]
+layout_mode = 2
+size_flags_vertical = 4
+button_pressed = true
+script = ExtResource("23_7ubyd")
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Build/Panel/FilterPanelContainer/FiltersHBoxContainer" unique_id=452458381]
+visible = false
+layout_mode = 2
+
+[node name="ScrollPanel" type="Panel" parent="TabContainer/Build/Panel" unique_id=641911135]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.03
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 43.0
+offset_right = -10.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelEmbedded"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Build/Panel/ScrollPanel" unique_id=1566065985 node_paths=PackedStringArray("tileOptionParent", "filterToggles")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+scroll_deadzone = 5
+script = ExtResource("24_lpq16")
+tileOptionParent = NodePath("TileSelectionGrid")
+filterToggles = [NodePath("../../FilterPanelContainer/FiltersHBoxContainer/HBoxContainer/LockCheckButton")]
+
+[node name="TileSelectionGrid" type="GridContainer" parent="TabContainer/Build/Panel/ScrollPanel/ScrollContainer" unique_id=1635294341]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="ConfirmButton" type="Button" parent="TabContainer/Build/Panel" unique_id=881378791]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -72.0
+offset_right = 50.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "OK"
+
+[connection signal="pressed" from="CloseButton" to="." method="Close"]
+[connection signal="pressed" from="InfoButton" to="." method="OnSelectedCellInfoButton"]
+[connection signal="pressed" from="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI/MinusButton" to="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" method="OnMinusButton"]
+[connection signal="pressed" from="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI/PlusButton" to="TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI" method="OnPlusButton"]
+[connection signal="pressed" from="TabContainer/Build/Panel/ConfirmButton" to="." method="Confirm"]

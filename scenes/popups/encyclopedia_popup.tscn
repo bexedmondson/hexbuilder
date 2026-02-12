@@ -1,0 +1,423 @@
+[gd_scene format=3 uid="uid://byrro66aeqdt5"]
+
+[ext_resource type="Script" uid="uid://cgj4kupy76gd4" path="res://scripts/ui/popups/EncyclopediaPopup.cs" id="1_plruj"]
+[ext_resource type="PackedScene" uid="uid://dm7exjhepiwdn" path="res://scenes/encyclopedia_tile_option.tscn" id="2_bbjj2"]
+[ext_resource type="ButtonGroup" uid="uid://caiuut1jdayfj" path="res://scenes/encyclopediaButtonGroup.tres" id="3_r1j01"]
+[ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="4_pnxpt"]
+[ext_resource type="PackedScene" uid="uid://bjj73jr4pvi30" path="res://scenes/encyclopedia_effect_ui.tscn" id="5_s1nx2"]
+[ext_resource type="Texture2D" uid="uid://dsqnnfwfgx0k4" path="res://assets/icons/icon_filter.tres" id="6_764vl"]
+[ext_resource type="Texture2D" uid="uid://bnfw8ei4di7oi" path="res://themes/clashy/graphics/panel-light.svg" id="7_ui2oj"]
+[ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="8_bjkko"]
+[ext_resource type="Script" uid="uid://brpwebha3xuam" path="res://scripts/ui/popups/TileLockedFilterToggleButton.cs" id="9_w8r2i"]
+[ext_resource type="Script" uid="uid://c4yplprbhffky" path="res://scripts/ui/popups/TileSelectorList.cs" id="10_gv3s3"]
+[ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="11_ycyxi"]
+[ext_resource type="Material" uid="uid://jrcfkjx2d6od" path="res://materials_shaders/greyscale_material.tres" id="12_vaa06"]
+[ext_resource type="Script" uid="uid://bsf7uvsug6xma" path="res://scripts/ui/ListContainerNoneIndicator.cs" id="13_ubiae"]
+[ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="14_v5rra"]
+[ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="15_evlkk"]
+[ext_resource type="Material" uid="uid://v1xr7j7a0je0" path="res://materials_shaders/text_shine.tres" id="16_n7a5n"]
+[ext_resource type="Script" uid="uid://dnrq4gmgsjcdp" path="res://scripts/ui/cellinfos/ShineTweener.cs" id="17_mdix7"]
+[ext_resource type="Theme" uid="uid://c42r8558dvmyi" path="res://themes/clashy/clashy.tres" id="18_2lros"]
+[ext_resource type="Script" uid="uid://b0a7x5oomorx4" path="res://scripts/ui/popups/StorageInfoUI.cs" id="19_pdowm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ilknt"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+texture = ExtResource("7_ui2oj")
+texture_margin_left = 8.0
+texture_margin_top = 7.0
+texture_margin_right = 8.0
+texture_margin_bottom = 13.0
+expand_margin_bottom = 3.0
+
+[node name="EncyclopediaPopup" type="Panel" unique_id=1275043952 node_paths=PackedStringArray("tileSelector", "tileNameLabel", "tileDetailsExpanders", "tileDetailsInfo", "tileTextureRect", "defaultEffectDisplay", "workerInfoContainer", "workerCountContainer", "maxBonusContainer", "maxBonusCurrencyDisplay", "unlockReqParent", "unlockReqContainer", "buildPriceContainer", "buildPriceDisplay", "affectsParent", "affectedByParent", "storageInfoUI")]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_plruj")
+tileSelector = NodePath("ScrollContainer")
+tileScene = ExtResource("2_bbjj2")
+tileNameLabel = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/TileNameLabel")
+tileDetailsExpanders = NodePath("TileDetailPanel/TileDetails/Panel")
+tileDetailsInfo = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel")
+encyclopediaTileGroup = ExtResource("3_r1j01")
+tileTextureRect = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/TileTextureRect")
+defaultEffectDisplay = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/DefaultPerTurnHBoxContainer/CurrencyDisplay")
+workerInfoContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2")
+workerIconTexture = ExtResource("4_pnxpt")
+workerCountContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2/HFlowContainer")
+maxBonusContainer = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer")
+maxBonusCurrencyDisplay = NodePath("TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer/CurrencyDisplay")
+unlockReqParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer")
+unlockReqContainer = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer/MarginContainer/UnlockRequirementsHBoxContainer")
+buildPriceContainer = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice")
+buildPriceDisplay = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice/MarginContainer/CurrencyDisplay")
+affectsParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer/AffectsHBoxContainer")
+affectedByParent = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer/AffectedByHBoxContainer2")
+affectedByScene = ExtResource("5_s1nx2")
+storageInfoUI = NodePath("TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer")
+
+[node name="CloseButton" type="Button" parent="." unique_id=1415640182]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 68.0
+grow_horizontal = 0
+text = "X"
+
+[node name="FilterIconTextureRect" type="TextureRect" parent="." unique_id=1860307637]
+self_modulate = Color(0.08235294, 0.4627451, 0.8235294, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.04
+anchor_right = 0.05
+anchor_bottom = 0.04
+offset_top = -5.0
+offset_right = 50.0
+offset_bottom = 45.0
+texture = ExtResource("6_764vl")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FilterPanelContainer" type="PanelContainer" parent="." unique_id=1731952139]
+self_modulate = Color(0.84705883, 0.84705883, 0.84705883, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.04
+anchor_right = 0.39
+anchor_bottom = 0.04
+offset_left = 50.0
+offset_bottom = 37.599995
+grow_horizontal = 2
+theme_type_variation = &"PanelContainerLight"
+theme_override_styles/panel = SubResource("StyleBoxTexture_ilknt")
+
+[node name="FiltersHBoxContainer" type="HBoxContainer" parent="FilterPanelContainer" unique_id=1116203715]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FilterPanelContainer/FiltersHBoxContainer" unique_id=1979022815]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=307030731]
+self_modulate = Color(0.08235294, 0.4627451, 0.8235294, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("8_bjkko")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="LockCheckButton" type="CheckButton" parent="FilterPanelContainer/FiltersHBoxContainer/HBoxContainer" unique_id=503057619]
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("9_w8r2i")
+
+[node name="VSeparator" type="VSeparator" parent="FilterPanelContainer/FiltersHBoxContainer" unique_id=1350054308]
+visible = false
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=648611048 node_paths=PackedStringArray("tileOptionParent", "filterToggles")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.39
+anchor_bottom = 0.9
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("10_gv3s3")
+tileOptionParent = NodePath("VBoxContainer")
+filterToggles = [NodePath("../FilterPanelContainer/FiltersHBoxContainer/HBoxContainer/LockCheckButton")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=745439719]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TileDetailPanel" type="Panel" parent="." unique_id=459732158]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+theme_type_variation = &"PanelEmbedded"
+
+[node name="MarginContainer" type="MarginContainer" parent="TileDetailPanel" unique_id=872877304]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.4
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TileDetailPanel/MarginContainer" unique_id=1184884124]
+layout_mode = 2
+split_offsets = PackedInt32Array(401)
+dragging_enabled = false
+dragger_visibility = 1
+split_offset = 401
+
+[node name="TileTextureRect" type="TextureRect" parent="TileDetailPanel/MarginContainer/HSplitContainer" unique_id=291435587]
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("11_ycyxi")
+greyscaleMaterial = ExtResource("12_vaa06")
+
+[node name="Panel" type="Panel" parent="TileDetailPanel/MarginContainer/HSplitContainer" unique_id=466085387]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel" unique_id=1141770712]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="TileNameLabel" type="Label" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=2077857602]
+layout_mode = 2
+theme_type_variation = &"Label_Title"
+horizontal_alignment = 1
+
+[node name="WorkerCountHBoxContainer2" type="HBoxContainer" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=829675047]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2" unique_id=664178402]
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "workers:"
+horizontal_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/WorkerCountHBoxContainer2" unique_id=1954149198]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DefaultPerTurnHBoxContainer" type="HBoxContainer" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=1375155543 node_paths=PackedStringArray("noneIndicator")]
+layout_mode = 2
+script = ExtResource("13_ubiae")
+noneIndicator = NodePath("NoneLabel")
+
+[node name="Label" type="Label" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=388286168]
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "each turn:"
+horizontal_alignment = 1
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=823719741]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("14_v5rra")
+singleCurrencyDisplayScene = ExtResource("15_evlkk")
+displayAsDelta = true
+iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="NoneLabel" type="Label" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/DefaultPerTurnHBoxContainer" unique_id=1527358579]
+layout_mode = 2
+text = "no resources given"
+
+[node name="MaxBonusInfoHBoxContainer" type="HBoxContainer" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer" unique_id=2007830544]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=352297419 node_paths=PackedStringArray("itemWithShineShader")]
+material = ExtResource("16_n7a5n")
+custom_minimum_size = Vector2(109, 0)
+layout_mode = 2
+text = "max worker 
+bonus:"
+horizontal_alignment = 1
+script = ExtResource("17_mdix7")
+itemWithShineShader = NodePath(".")
+finalShaderParamValue = 4.0
+finalShaderDurationValue = 2.0
+shineByDefault = true
+
+[node name="CurrencyDisplay" type="HFlowContainer" parent="TileDetailPanel/MarginContainer/HSplitContainer/Panel/VBoxContainer/MaxBonusInfoHBoxContainer" unique_id=420643294]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("14_v5rra")
+singleCurrencyDisplayScene = ExtResource("15_evlkk")
+displayAsDelta = true
+iconColor = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="TileDetails" type="MarginContainer" parent="TileDetailPanel" unique_id=1607558807]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelEmbedded"
+
+[node name="Panel" type="Panel" parent="TileDetailPanel/TileDetails" unique_id=1297705365]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TileDetailPanel/TileDetails/Panel" unique_id=1900097445]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer" unique_id=2101873663]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UnlockRequirementsFoldableContainer" type="FoldableContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1661949923]
+layout_mode = 2
+mouse_filter = 1
+title = "how to unlock"
+
+[node name="Panel" type="Panel" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer" unique_id=1772119246]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer" unique_id=551007934]
+layout_mode = 2
+
+[node name="UnlockRequirementsHBoxContainer" type="GridContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/UnlockRequirementsFoldableContainer/MarginContainer" unique_id=1431626782]
+custom_minimum_size = Vector2(737, 0)
+layout_mode = 2
+columns = 4
+
+[node name="BuildPrice" type="FoldableContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=484096535]
+layout_mode = 2
+mouse_filter = 1
+folded = true
+title = "build price"
+
+[node name="Panel" type="Panel" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice" unique_id=1323023411]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice" unique_id=1187735925]
+visible = false
+layout_mode = 2
+theme = ExtResource("18_2lros")
+
+[node name="CurrencyDisplay" type="HBoxContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/BuildPrice/MarginContainer" unique_id=1616891980]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("14_v5rra")
+singleCurrencyDisplayScene = ExtResource("15_evlkk")
+iconColor = Color(0.3529412, 0.37254903, 0.38431373, 1)
+
+[node name="AffectsFoldableContainer" type="FoldableContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1160140627]
+layout_mode = 2
+mouse_filter = 1
+folded = true
+title = "effects on other tiles"
+
+[node name="Panel" type="Panel" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer" unique_id=804487652]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer" unique_id=2049327982]
+visible = false
+layout_mode = 2
+theme = ExtResource("18_2lros")
+
+[node name="NoneLabel" type="Label" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer" unique_id=1553822536]
+layout_mode = 2
+text = " no other tiles affected"
+
+[node name="AffectsHBoxContainer" type="GridContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectsFoldableContainer/MarginContainer" unique_id=310012425 node_paths=PackedStringArray("noneIndicator")]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+script = ExtResource("13_ubiae")
+noneIndicator = NodePath("../NoneLabel")
+
+[node name="AffectedByFoldableContainer2" type="FoldableContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=319577700]
+layout_mode = 2
+mouse_filter = 1
+folded = true
+title = "effects from other tiles"
+
+[node name="Panel" type="Panel" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2" unique_id=743001128]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2" unique_id=565544851]
+visible = false
+layout_mode = 2
+theme = ExtResource("18_2lros")
+
+[node name="NoneLabel" type="Label" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer" unique_id=2010452749]
+layout_mode = 2
+text = " not affected by any other tiles"
+
+[node name="AffectedByHBoxContainer2" type="GridContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/AffectedByFoldableContainer2/MarginContainer" unique_id=543479358 node_paths=PackedStringArray("noneIndicator")]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+script = ExtResource("13_ubiae")
+noneIndicator = NodePath("../NoneLabel")
+
+[node name="StorageFoldableContainer" type="FoldableContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer" unique_id=1154891725 node_paths=PackedStringArray("storageCurrencyDisplay")]
+layout_mode = 2
+mouse_filter = 1
+folded = true
+title = "storage"
+script = ExtResource("19_pdowm")
+storageCurrencyDisplay = NodePath("MarginContainer/CurrencyDisplay")
+
+[node name="Panel" type="Panel" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer" unique_id=525739527]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer" unique_id=1952097900]
+visible = false
+layout_mode = 2
+theme = ExtResource("18_2lros")
+
+[node name="CurrencyDisplay" type="HBoxContainer" parent="TileDetailPanel/TileDetails/Panel/ScrollContainer/VBoxContainer/StorageFoldableContainer/MarginContainer" unique_id=2098252545]
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("14_v5rra")
+singleCurrencyDisplayScene = ExtResource("15_evlkk")
+iconColor = Color(0.3529412, 0.37254903, 0.38431373, 1)
+
+[connection signal="visibility_changed" from="." to="." method="OnVisibilityChanged"]
+[connection signal="pressed" from="CloseButton" to="." method="Close"]

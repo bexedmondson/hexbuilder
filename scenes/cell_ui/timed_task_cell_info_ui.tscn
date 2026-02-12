@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2crqakku64ae"]
 
-[ext_resource type="Script" uid="uid://njf8gojp3x73" path="res://scripts/ui/cellinfos/TimedJobCellInfoUI.cs" id="1_b8jlu"]
+[ext_resource type="Script" uid="uid://njf8gojp3x73" path="res://scripts/ui/cellinfos/TimedTaskCellInfoUI.cs" id="1_b8jlu"]
 [ext_resource type="Texture2D" uid="uid://c6ggj4uyqpdho" path="res://assets/uiIcons.png" id="2_22lh2"]
 [ext_resource type="Texture2D" uid="uid://xrixc51vi7oj" path="res://assets/icons/icon_hourglass_low.tres" id="2_oshs8"]
 [ext_resource type="Texture2D" uid="uid://cx3xw3vsdesuq" path="res://assets/icons/icon_hourglass_mid.tres" id="3_54nom"]
