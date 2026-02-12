@@ -10,7 +10,7 @@ public partial class StorageInfoUI : Control
         if (storageCapacityComponent.capacities == null || storageCapacityComponent.capacities.Count == 0)
             return;
         
-        storageCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(storageCapacityComponent.capacities));
+        storageCurrencyDisplay.DisplayCurrencyAmount(storageCapacityComponent.capacities);
     }
 
     public void Cleanup()

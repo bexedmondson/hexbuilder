@@ -29,6 +29,9 @@ public partial class UnlockedCellPopup : Popup
     private Control autoUpgradeTab;
 
     [Export]
+    private Control timedTasksTab;
+
+    [Export]
     private Control buildTab;
 
     [ExportGroup("Resources Tab")]
@@ -50,6 +53,10 @@ public partial class UnlockedCellPopup : Popup
     [ExportGroup("AutoUpgrade Tab")]
     [Export]
     private UnlockedCellPopup_AutoUpgrade autoUpgradeDisplay;
+    
+    [ExportGroup("Timed Tasks Tab")]
+    [Export]
+    private UnlockedCellPopup_TimedTasks timedTasksDisplay;
     
     [ExportGroup("BuildTab")]
     [Export]
@@ -123,6 +130,8 @@ public partial class UnlockedCellPopup : Popup
         SetupResidents();
         
         SetupAutoUpgradeTab();
+        
+        SetupTimedTasksTab();
 
         SetupTileSelector();
 
@@ -185,6 +194,14 @@ public partial class UnlockedCellPopup : Popup
         
         autoUpgradeDisplay.Setup(cellCustomTileData, cell);
         tabContainer.SetTabHidden(autoUpgradeTab.GetIndex(), !hasAutoUpgrade);
+    }
+
+    private void SetupTimedTasksTab()
+    {
+        bool hasTimedTasks = cellCustomTileData.TryGetComponent(out TileTimedTasksComponent _);
+        
+        timedTasksDisplay.Setup(cellCustomTileData, cell);
+        tabContainer.SetTabHidden(timedTasksTab.GetIndex(), !hasTimedTasks);
     }
 
     private void SetupTileSelector()

@@ -120,7 +120,7 @@ public partial class EncyclopediaPopup : Popup
         var selectedTileData = selectedOption.tileInfo.tileData;
 
         tileNameLabel.Text = selectedTileData.GetFileName();
-        defaultEffectDisplay.DisplayCurrencyAmount(new CurrencySum(selectedTileData.baseTurnCurrencyChange));
+        defaultEffectDisplay.DisplayCurrencyAmount(selectedTileData.baseTurnCurrencyChange);
 
         SetupWorkerCountDisplay(selectedTileData);
         SetupMaxBonus(selectedTileData);
@@ -167,7 +167,7 @@ public partial class EncyclopediaPopup : Popup
         if (!hasMaxBonus)
             return;
         
-        maxBonusCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(maxBonusComponent.extraBaseProduction));
+        maxBonusCurrencyDisplay.DisplayCurrencyAmount(maxBonusComponent.extraBaseProduction);
     }
 
     private void SetupUnlockRequirements(CustomTileData tileData)
@@ -198,7 +198,7 @@ public partial class EncyclopediaPopup : Popup
         if (tileData.buildPrice != null && tileData.buildPrice.Count > 0)
         {
             buildPriceContainer.Visible = true;
-            buildPriceDisplay.DisplayCurrencyAmount(new CurrencySum(tileData.buildPrice));
+            buildPriceDisplay.DisplayCurrencyAmount(tileData.buildPrice);
         }
         else
         {

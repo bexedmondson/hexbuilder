@@ -6,25 +6,25 @@ public partial class PlayerInitiatedTimedTaskUI : Control
     private Label taskNameLabel;
     
     [Export]
-    private Label workerCountLabel;
-    
-    [Export]
     private Button goButton;
 
     [Export]
     private AbstractTimedTaskCompleteActionUI changeTileActionUI;
 
     [Export]
-    private AbstractTimedTaskCompleteActionUI currencyDeltaActionUI; 
+    private AbstractTimedTaskCompleteActionUI currencyDeltaActionUI;
     
     public void Setup(PlayerInitiatedTimedTaskConfig config, Vector2I cell)
     {
         taskNameLabel.Text = config.jobName;
-        workerCountLabel.Text = $"x{config.workersNeeded}";
+        goButton.Text = $"x{config.workersNeeded}";
         
         var residentManager = InjectionManager.Get<ResidentManager>();
-        int availableResidents = residentManager.GetNotBusyResidentCount();
-        goButton.Disabled = config.workersNeeded < availableResidents;
+        bool notEnoughWorkers = residentManager.GetNotBusyResidentCount() < config.workersNeeded;
+        goButton.Disabled = notEnoughWorkers;
+
+        changeTileActionUI.Visible = false;
+        currencyDeltaActionUI.Visible = false;
         
         foreach (var configCompleteAction in config.completeActions)
         {

@@ -14,25 +14,11 @@ public partial class CurrencyDisplay : Control
 
     private Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
 
-    public virtual void DisplayCurrencyAmount(CurrencySum currencySum)
+    public virtual void DisplayCurrencyAmount(IDictionary<CurrencyType, int> currencySum)
     {
         foreach (var kvp in currencySum)
         {
-            var currencyType = kvp.Key;
-            var amount = kvp.Value;
-            
-            var hasDisplay = currencyDisplays.TryGetValue(currencyType, out var existingSingleCurrencyDisplay);
-
-            if (!hasDisplay)
-            {
-                existingSingleCurrencyDisplay = singleCurrencyDisplayScene.Instantiate<SingleCurrencyDisplay>();
-                existingSingleCurrencyDisplay.SetIconColor(iconColor);
-                currencyDisplays[currencyType] = existingSingleCurrencyDisplay;
-                this.AddChild(existingSingleCurrencyDisplay);
-            }
-            
-            existingSingleCurrencyDisplay.SetCurrencyIcon(currencyType);
-            existingSingleCurrencyDisplay.SetCurrencyAmount(amount, displayAsDelta);
+            DisplaySingleCurrency(kvp.Key, kvp.Value);
         }
 
         List<CurrencyType> toRemove = new();
@@ -48,6 +34,22 @@ public partial class CurrencyDisplay : Control
         {
             currencyDisplays.Remove(currencyTypeToRemove);
         }
+    }
+
+    private void DisplaySingleCurrency(CurrencyType currencyType, int amount)
+    {
+        var hasDisplay = currencyDisplays.TryGetValue(currencyType, out var existingSingleCurrencyDisplay);
+
+        if (!hasDisplay)
+        {
+            existingSingleCurrencyDisplay = singleCurrencyDisplayScene.Instantiate<SingleCurrencyDisplay>();
+            existingSingleCurrencyDisplay.SetIconColor(iconColor);
+            currencyDisplays[currencyType] = existingSingleCurrencyDisplay;
+            this.AddChild(existingSingleCurrencyDisplay);
+        }
+            
+        existingSingleCurrencyDisplay.SetCurrencyIcon(currencyType);
+        existingSingleCurrencyDisplay.SetCurrencyAmount(amount, displayAsDelta);
     }
 
     public void Cleanup()

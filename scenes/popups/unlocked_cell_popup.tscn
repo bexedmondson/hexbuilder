@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://bnqf6wpfno1gv" path="res://assets/icons/icon_lock.tres" id="22_do4d2"]
 [ext_resource type="Script" uid="uid://brpwebha3xuam" path="res://scripts/ui/popups/TileLockedFilterToggleButton.cs" id="23_7ubyd"]
 [ext_resource type="Script" uid="uid://c4yplprbhffky" path="res://scripts/ui/popups/TileSelectorList.cs" id="24_lpq16"]
+[ext_resource type="Script" uid="uid://dl4ai34rknu3q" path="res://scripts/ui/popups/UnlockedCellPopup_TimedTasks.cs" id="25_52jpo"]
+[ext_resource type="PackedScene" uid="uid://db6c2nq5kt87u" path="res://scenes/timed_task_ui.tscn" id="26_52jpo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_822nj"]
 atlas = ExtResource("4_431u3")
@@ -41,16 +43,16 @@ texture_margin_right = 8.0
 texture_margin_bottom = 13.0
 expand_margin_bottom = 3.0
 
-[node name="UnlockedCellPopup" type="Panel" unique_id=860641421 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "autoUpgradeTab", "buildTab", "resourcesDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "autoUpgradeDisplay", "tileSelector", "confirmButton")]
+[node name="UnlockedCellPopup" type="Panel" unique_id=860641421 node_paths=PackedStringArray("title", "selectedCellInfoButton", "tabContainer", "effectsTab", "residentTab", "workerTab", "storageTab", "autoUpgradeTab", "timedTasksTab", "buildTab", "resourcesDisplay", "storageInfoUI", "residentDetailsParent", "workplaceInfoUI", "autoUpgradeDisplay", "timedTasksDisplay", "tileSelector", "confirmButton")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 250.0
-offset_top = -350.0
-offset_right = 750.0
-offset_bottom = 350.0
+offset_left = 225.0
+offset_top = -400.0
+offset_right = 775.0
+offset_bottom = 400.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kp2wc")
@@ -62,12 +64,14 @@ residentTab = NodePath("TabContainer/Residents")
 workerTab = NodePath("TabContainer/Workers")
 storageTab = NodePath("TabContainer/Storage")
 autoUpgradeTab = NodePath("TabContainer/Upgrade")
+timedTasksTab = NodePath("TabContainer/Tasks")
 buildTab = NodePath("TabContainer/Build")
 resourcesDisplay = NodePath("TabContainer/Effects/InfoSubpanel")
 storageInfoUI = NodePath("TabContainer/Storage/StoragePanel")
 residentDetailsParent = NodePath("TabContainer/Residents/ResidentPanel/VBoxContainer")
 workplaceInfoUI = NodePath("TabContainer/Workers/InfoSubpanel/WorkplaceInfoUI")
 autoUpgradeDisplay = NodePath("TabContainer/Upgrade/AutoUpgradePanel")
+timedTasksDisplay = NodePath("TabContainer/Tasks/TasksPanel")
 tileSelector = NodePath("TabContainer/Build/Panel/ScrollPanel/ScrollContainer")
 tileScene = ExtResource("2_hbwvp")
 tileSelectionGroup = ExtResource("3_52jpo")
@@ -139,9 +143,10 @@ anchor_right = 0.95
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 6
 
 [node name="Effects" type="Button" parent="TabContainer" unique_id=1597467461]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -721,6 +726,39 @@ offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "OK"
+
+[node name="Tasks" type="Button" parent="TabContainer" unique_id=174698851]
+layout_mode = 2
+metadata/_tab_index = 6
+
+[node name="TasksPanel" type="Panel" parent="TabContainer/Tasks" unique_id=1977945249 node_paths=PackedStringArray("timedTasksUIContainer")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("25_52jpo")
+timedTasksUIContainer = NodePath("ScrollContainer/VBoxContainer")
+timedTaskScene = ExtResource("26_52jpo")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Tasks/TasksPanel" unique_id=676721973]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Tasks/TasksPanel/ScrollContainer" unique_id=713236793]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [connection signal="pressed" from="CloseButton" to="." method="Close"]
 [connection signal="pressed" from="InfoButton" to="." method="OnSelectedCellInfoButton"]

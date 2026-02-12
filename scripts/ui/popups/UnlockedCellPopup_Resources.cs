@@ -135,7 +135,7 @@ public partial class UnlockedCellPopup_Resources : Control
             return;
         
         InjectionManager.Get<EventDispatcher>().Add<WorkplaceUpdatedEvent>(OnWorkplaceUpdated);
-        maxBonusCurrencyDisplay.DisplayCurrencyAmount(new CurrencySum(maxBonusComponent.extraBaseProduction));
+        maxBonusCurrencyDisplay.DisplayCurrencyAmount(maxBonusComponent.extraBaseProduction);
     }
 
     private void OnWorkplaceUpdated(WorkplaceUpdatedEvent e)
