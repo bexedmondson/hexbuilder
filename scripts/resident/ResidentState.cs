@@ -73,7 +73,7 @@ public class ResidentState {
     }
     
     private WorkplaceManager workplaceManager;
-    private TimedJobManager timedJobManager;
+    private TimedTaskManager timedTaskManager;
     
     public bool IsBusy
     {
@@ -83,8 +83,8 @@ public class ResidentState {
             if (workplaceManager.TryGetWorkplaceForResident(this, out _))
                 return true;
 
-            timedJobManager ??= InjectionManager.Get<TimedJobManager>();
-            if (timedJobManager.TryGetTimedJobForResident(this, out _))
+            timedTaskManager ??= InjectionManager.Get<TimedTaskManager>();
+            if (timedTaskManager.TryGetTimedTaskForResident(this, out _))
                 return true;
 
             return false;
@@ -94,14 +94,14 @@ public class ResidentState {
     public string GetWorkplaceOrJobName()
     {
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
-        timedJobManager ??= InjectionManager.Get<TimedJobManager>();
+        timedTaskManager ??= InjectionManager.Get<TimedTaskManager>();
         if (workplaceManager.TryGetWorkplaceForResident(this, out var workplace))
         {
             return workplace.name;
         }
-        else if (timedJobManager.TryGetTimedJobForResident(this, out var timedJob))
+        else if (timedTaskManager.TryGetTimedTaskForResident(this, out var timedTask))
         {
-            return timedJob.description;
+            return timedTask.description;
         }
         else
         {

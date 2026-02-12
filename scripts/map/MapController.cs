@@ -29,7 +29,7 @@ public partial class MapController : Node2D, IInjectable
     private ResidentManager residentManager;
     private HousingManager housingManager;
     private WorkplaceManager workplaceManager;
-    private TimedJobManager timedJobManager;
+    private TimedTaskManager timedTaskManager;
     private EventDispatcher eventDispatcher;
     private CellStatusManager cellStatusManager;
     private AutoUpgradeManager autoUpgradeManager;
@@ -51,7 +51,7 @@ public partial class MapController : Node2D, IInjectable
         storageAnalyser = new MapStorageAnalyser(this);
         housingManager = new HousingManager(this);
         workplaceManager = new WorkplaceManager(this);
-        timedJobManager = new TimedJobManager(this);
+        timedTaskManager = new TimedTaskManager(this);
         residentManager = new ResidentManager(this);
         cellBuildStatsTracker = new CellBuildStatsTracker();
         autoUpgradeManager = new AutoUpgradeManager(this);
@@ -96,7 +96,7 @@ public partial class MapController : Node2D, IInjectable
             return;
 
         //already doing something here, don't try to start anything new
-        if (timedJobManager.TryGetTimedJobAt(cellToStartUnlock, out _))
+        if (timedTaskManager.TryGetTimedTaskAt(cellToStartUnlock, out _))
             return;
 
         //can't start the unlock if the cell isn't both visible and locked!
@@ -110,12 +110,12 @@ public partial class MapController : Node2D, IInjectable
 
         var workerCountRequirement = GetCellUnlockWorkerRequirement(cellToStartUnlock);
         
-        var cellUnlockTimedJobData = new CellUnlockTimedJobState(cellToStartUnlock, unlockTurnCount, workerCountRequirement);
-        timedJobManager.AddNewTimedJob(cellUnlockTimedJobData);
+        var cellUnlockTimedTaskData = new CellUnlockTimedTaskState(cellToStartUnlock, unlockTurnCount, workerCountRequirement);
+        timedTaskManager.AddNewTimedTask(cellUnlockTimedTaskData);
         
         for (int i = 0; i < workerCountRequirement; i++)
         {
-            timedJobManager.TryAssignResidentToTimedJob(cellUnlockTimedJobData);
+            timedTaskManager.TryAssignResidentToTimedTask(cellUnlockTimedTaskData);
         }
         
         cellStatusManager.OnCellUnlockInitiated(cellToStartUnlock);

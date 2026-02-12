@@ -1,6 +1,7 @@
 using Godot;
 
-public partial class PlayerInitiatedTimedJobConfig : TimedJobConfig
+[GlobalClass]
+public partial class PlayerInitiatedTimedTaskConfig : TimedTaskConfig
 {
     [Export]
     public int workersNeeded { get; private set; } = 1;

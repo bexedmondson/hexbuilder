@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public class AutoUpgradeTimedJobState(Vector2I location, int turnDuration, int workerCountRequirement) : TimedJobState(location, turnDuration, workerCountRequirement)
+public class AutoUpgradeTimedTaskState(Vector2I location, int turnDuration, int workerCountRequirement) : TimedTaskState(location, turnDuration, workerCountRequirement)
 {
     public override string description => "upgrading...";
 

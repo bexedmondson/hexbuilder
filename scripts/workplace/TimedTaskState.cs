@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-public abstract class TimedJobState(Vector2I location, int turnDuration, int workerCountRequirement)
+public abstract class TimedTaskState(Vector2I location, int turnDuration, int workerCountRequirement)
 {
     public Vector2I location { get; private set; } = location;
 

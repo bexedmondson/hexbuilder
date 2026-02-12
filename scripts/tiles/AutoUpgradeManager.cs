@@ -3,7 +3,7 @@ using Godot;
 public class AutoUpgradeManager : IInjectable
 {
     private MapController mapController;
-    private TimedJobManager timedJobManager;
+    private TimedTaskManager timedTaskManager;
     private TileDatabase tileDatabase;
     
     public AutoUpgradeManager(MapController mapController)
@@ -20,7 +20,7 @@ public class AutoUpgradeManager : IInjectable
 
     private void OnNextTurn(NextTurnEvent e)
     {
-        timedJobManager ??= InjectionManager.Get<TimedJobManager>();
+        timedTaskManager ??= InjectionManager.Get<TimedTaskManager>();
         tileDatabase ??= InjectionManager.Get<TileDatabase>();
         var usedCells = mapController.BaseMapLayer.GetUsedCells();
 
@@ -35,7 +35,7 @@ public class AutoUpgradeManager : IInjectable
                 continue;
 
             //already unlocking, continue
-            if (timedJobManager.TryGetTimedJobAt(usedCell, out _))
+            if (timedTaskManager.TryGetTimedTaskAt(usedCell, out _))
                 continue;
 
             var workplaceManager = InjectionManager.Get<WorkplaceManager>();
@@ -46,7 +46,7 @@ public class AutoUpgradeManager : IInjectable
                 continue;
             GD.PushWarning($"AutoUpgradeComponent: Starting upgrade at {usedCell} to {autoUpgradeComponent.afterUpgradeTile.GetFileName()}");
 
-            var autoUpgradeJob = new AutoUpgradeTimedJobState(usedCell, autoUpgradeComponent.upgradeDuration, 0);
+            var autoUpgradeJob = new AutoUpgradeTimedTaskState(usedCell, autoUpgradeComponent.upgradeDuration, 0);
 
             var tileInfo = tileDatabase.GetTileInfoForCustomTileData(autoUpgradeComponent.afterUpgradeTile);
             autoUpgradeJob.SetCompleteCallback(() =>
@@ -55,7 +55,7 @@ public class AutoUpgradeManager : IInjectable
                 mapController.BuildTileAtCell(usedCell, tileInfo);
             });
             
-            timedJobManager.AddNewTimedJob(autoUpgradeJob);
+            timedTaskManager.AddNewTimedTask(autoUpgradeJob);
         }
     }
 }

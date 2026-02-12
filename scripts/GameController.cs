@@ -12,7 +12,7 @@ public partial class GameController : Node2D
     private TileDatabase tileDatabase;
     private EventDispatcher eventDispatcher;
     private MapCurrencyChangeAnalyser mapCurrencyChangeAnalyser;
-    private TimedJobManager timedJobManager;
+    private TimedTaskManager timedTaskManager;
     private TurnCounter turnCounter;
 
     public override void _EnterTree()
@@ -51,8 +51,8 @@ public partial class GameController : Node2D
         
         InjectionManager.Get<ResidentManager>().OnNextTurn();
 
-        timedJobManager ??= InjectionManager.Get<TimedJobManager>();
-        timedJobManager.OnNextTurn();
+        timedTaskManager ??= InjectionManager.Get<TimedTaskManager>();
+        timedTaskManager.OnNextTurn();
         
         eventDispatcher.Dispatch(new NextTurnEvent());
     }

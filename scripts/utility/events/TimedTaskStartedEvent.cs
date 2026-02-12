@@ -1,8 +1,8 @@
 using Godot;
 
-public class TimedJobStartedEvent(TimedJobState timedJob, Vector2I location, int workerCount, int capacity) : IEvent
+public class TimedTaskStartedEvent(TimedTaskState timedTask, Vector2I location, int workerCount, int capacity) : IEvent
 {
-    public TimedJobState timedJob { get; private set; } = timedJob;
+    public TimedTaskState timedTask { get; private set; } = timedTask;
     public Vector2I location { get; private set; } = location;
 
     public int workerCount { get; private set; } = workerCount;

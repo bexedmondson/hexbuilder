@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public partial class TimedJobCellInfoUI : Control
+public partial class TimedTaskCellInfoUI : Control
 {
     [Export]
     private Label workerCountLabel;
