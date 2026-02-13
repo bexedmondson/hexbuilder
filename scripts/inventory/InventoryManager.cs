@@ -70,6 +70,12 @@ public partial class InventoryManager : Node2D, IInjectable
 
         return true;
     }
+
+    public void AwardCurrency(CurrencySum price)
+    {
+        inventory.Add(price);
+        mainInventoryDisplay.FullUpdate(inventory);
+    }
     
     public void SpendCurrency(CurrencySum price)
     {

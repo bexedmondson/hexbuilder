@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using Godot;
 
-public abstract class TimedTaskState(Vector2I location, int turnDuration, int workerCountRequirement)
+public abstract class TimedTaskState(Vector2I location, int turnDuration, int workerCountRequirement = 0)
 {
     public Vector2I location { get; private set; } = location;
 
     public abstract string description { get; }
 
-    private List<ResidentState> _workers = new();
+    protected List<ResidentState> _workers = new();
     public ResidentState[] workers => _workers.ToArray();
     public int workerCount => workers.Length;
-    public int workerCountRequirement { get; } = workerCountRequirement;
+    public virtual int workerCountRequirement { get; protected set; } = workerCountRequirement;
     
     public int turnDuration { get; } = turnDuration;
     public int turnsElapsed { get; private set; }

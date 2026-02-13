@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class PlayerInitiatedTimedTaskUI : Control
@@ -13,9 +14,16 @@ public partial class PlayerInitiatedTimedTaskUI : Control
 
     [Export]
     private AbstractTimedTaskCompleteActionUI currencyDeltaActionUI;
+
+    public Action OnTaskStarted;
+
+    private PlayerInitiatedTimedTaskConfig config;
+    private Vector2I cell;
     
     public void Setup(PlayerInitiatedTimedTaskConfig config, Vector2I cell)
     {
+        this.config = config;
+        this.cell = cell;
         taskNameLabel.Text = config.jobName;
         goButton.Text = $"x{config.workersNeeded}";
         
@@ -40,5 +48,20 @@ public partial class PlayerInitiatedTimedTaskUI : Control
                     break;
             }
         }
+    }
+
+    public void OnGoButton()
+    {
+        var timedTaskManager = InjectionManager.Get<TimedTaskManager>();
+        var task = new ConfigTimedTaskState(cell, config);
+        timedTaskManager.AddNewTimedTask(task);
+        
+        for (int i = 0; i < task.workerCountRequirement; i++)
+        {
+            timedTaskManager.TryAssignResidentToTimedTask(task);
+        }
+        
+        //TODO close popup, change tile state to...something that isn't unlocked, i guess. unlocking maybe?
+        OnTaskStarted?.Invoke();
     }
 }

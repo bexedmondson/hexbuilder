@@ -38,6 +38,7 @@ offset_left = -50.0
 offset_bottom = 2.0
 grow_horizontal = 0
 grow_vertical = 2
+mouse_filter = 1
 theme_override_constants/h_separation = 0
 theme_override_font_sizes/font_size = 32
 text = "x0"
@@ -96,3 +97,5 @@ size_flags_horizontal = 0
 script = ExtResource("7_6pl6o")
 singleCurrencyDisplayScene = ExtResource("8_vo2s6")
 displayAsDelta = true
+
+[connection signal="pressed" from="GoButton" to="." method="OnGoButton"]

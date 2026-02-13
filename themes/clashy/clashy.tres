@@ -137,6 +137,7 @@ FoldableContainer/styles/title_collapsed_panel = ExtResource("3_ih65r")
 FoldableContainer/styles/title_panel = ExtResource("22_cum72")
 GreenButton/base_type = &"Button"
 GreenButton/styles/hover = ExtResource("18_5k5bw")
+GreenButton/styles/hover_pressed = ExtResource("4_i7no0")
 GreenButton/styles/normal = ExtResource("19_bp2cy")
 GreenButton/styles/pressed = ExtResource("20_7xukr")
 HBoxContainer/constants/separation = 8

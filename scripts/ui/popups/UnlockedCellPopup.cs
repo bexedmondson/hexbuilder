@@ -200,7 +200,7 @@ public partial class UnlockedCellPopup : Popup
     {
         bool hasTimedTasks = cellCustomTileData.TryGetComponent(out TileTimedTasksComponent _);
         
-        timedTasksDisplay.Setup(cellCustomTileData, cell);
+        timedTasksDisplay.Setup(this, cellCustomTileData, cell);
         tabContainer.SetTabHidden(timedTasksTab.GetIndex(), !hasTimedTasks);
     }
 
@@ -213,15 +213,7 @@ public partial class UnlockedCellPopup : Popup
         TileDatabase tileDatabase = InjectionManager.Get<TileDatabase>();
         var compatibleTileInfos = tileDatabase.GetAllCompatibleTileInfos(cellCustomTileData);
         
-        compatibleTileInfos.Sort((lhs, rhs) =>
-        {
-            /*var lockedCompare = rhs.tileData.IsUnlocked().CompareTo(lhs.tileData.IsUnlocked());
-            if (lockedCompare == 0)
-                lockedCompare = lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName());
-
-            return lockedCompare;*/
-            return lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName());
-        });
+        compatibleTileInfos.Sort((lhs, rhs) => lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName()));
 
         foreach (var compatibleTileInfo in compatibleTileInfos)
         {
@@ -291,6 +283,7 @@ public partial class UnlockedCellPopup : Popup
         
         resourcesDisplay.Cleanup();
         autoUpgradeDisplay.Cleanup();
+        timedTasksDisplay.Cleanup();
 
         foreach (var residentInfo in residentDetailsParent.GetChildren())
         {

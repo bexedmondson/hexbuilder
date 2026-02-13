@@ -608,7 +608,7 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_type_variation = &"Button_Success"
+theme_type_variation = &"GreenButton"
 theme_override_constants/h_separation = 10
 theme_override_font_sizes/font_size = 24
 text = "Next turn"
@@ -789,6 +789,10 @@ visible = false
 encyclopediaTileGroup = SubResource("ButtonGroup_ufsem")
 
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
+[connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]
+[connection signal="pressed" from="CanvasLayer/UIMain/WorkplaceInfoButton" to="PopupLayer/WorkplaceInfoPopup" method="ShowPopup"]
+[connection signal="pressed" from="CanvasLayer/UIMain/ResidentInfoButton" to="PopupLayer/ResidentInfoPopup" method="ShowPopup"]
+[connection signal="pressed" from="CanvasLayer/UIMain/EncyclopediaButton" to="PopupLayer/EncyclopediaPopup" method="ShowPopup"]
 
 [editable path="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay"]
 [editable path="CanvasLayer/UIMain/MainInventoryDisplay/SingleCurrencyDisplay2"]

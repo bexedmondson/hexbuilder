@@ -23,6 +23,8 @@ public partial class MapController : Node2D, IInjectable
     private int defaultLockedTileSourceIndex = 0;
     private Vector2I defaultLockedTileAtlasCoords = Vector2I.Zero;
 
+    private TileDatabase tileDatabase;
+
     private MapHighlightController highlightController;
     private MapCurrencyChangeAnalyser currencyChangeAnalyser;
     private MapStorageAnalyser storageAnalyser;
@@ -46,6 +48,7 @@ public partial class MapController : Node2D, IInjectable
     {
         base._Ready();
         eventDispatcher = InjectionManager.Get<EventDispatcher>();
+        
         cellStatusManager = new CellStatusManager();
         currencyChangeAnalyser = new MapCurrencyChangeAnalyser(this);
         storageAnalyser = new MapStorageAnalyser(this);
@@ -56,7 +59,7 @@ public partial class MapController : Node2D, IInjectable
         cellBuildStatsTracker = new CellBuildStatsTracker();
         autoUpgradeManager = new AutoUpgradeManager(this);
         
-        var tileDatabase = InjectionManager.Get<TileDatabase>();
+        tileDatabase = InjectionManager.Get<TileDatabase>();
         tileDatabase ??= new TileDatabase();
         tileDatabase.AddTileSetTileData(baseMapLayer.TileSet);
         mapGenerator.Setup();
@@ -141,6 +144,12 @@ public partial class MapController : Node2D, IInjectable
         }
         
         eventDispatcher.Dispatch(new MapUpdatedEvent());
+    }
+
+    public void BuildTileAtCell(Vector2I cell, CustomTileData customTileData)
+    {
+        var tileInfo = tileDatabase.GetTileInfoForCustomTileData(customTileData);
+        BuildTileAtCell(cell, tileInfo);
     }
 
     public void BuildTileAtCell(Vector2I cell, TileDatabase.TileInfo tileToSet)

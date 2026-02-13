@@ -10,6 +10,7 @@ public partial class UnlockedCellPopup_TimedTasks : Control
     
     private MapController mapController;
 
+    private UnlockedCellPopup popup;
     private CustomTileData selectedCellTileData;
     private Vector2I selectedCell;
 
@@ -19,8 +20,9 @@ public partial class UnlockedCellPopup_TimedTasks : Control
         mapController = InjectionManager.Get<MapController>();
     }
 
-    public void Setup(CustomTileData cellTileData, Vector2I cell)
+    public void Setup(UnlockedCellPopup popup, CustomTileData cellTileData, Vector2I cell)
     {
+        this.popup = popup;
         Cleanup();
 
         if (!cellTileData.TryGetComponent(out TileTimedTasksComponent timedTasksComponent))
@@ -37,6 +39,7 @@ public partial class UnlockedCellPopup_TimedTasks : Control
             var timedTaskUI = timedTaskScene.Instantiate<PlayerInitiatedTimedTaskUI>();
             timedTaskUI.Setup(playerInitiatedTimedTaskConfig, cell);
             timedTasksUIContainer.AddChild(timedTaskUI);
+            timedTaskUI.OnTaskStarted += popup.Close;
         }
     }
     
