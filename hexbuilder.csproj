@@ -3,24 +3,4 @@
     <TargetFramework>net9.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
-    <PropertyGroup Condition=" '$(GodotTargetPlatform)' == 'android' And '$(Configuration)' == 'ExportRelease' ">
-        <PublishTrimmed>true</PublishTrimmed>
-        <TrimMode>partial</TrimMode>
-        <DebuggerSupport>false</DebuggerSupport>
-    </PropertyGroup>
-    
-    <Target Name="RemoveAndroidBloat" AfterTargets="Publish" Condition=" '$(GodotTargetPlatform)' == 'android' "> <!--And '$(Configuration)' == 'ExportRelease' -->
-        <ItemGroup>
-            <BloatFiles Include="$(PublishDir)\**\*.a" />
-            <BloatFiles Include="$(PublishDir)\**\libmono-component-debugger.so" />
-            <BloatFiles Include="$(PublishDir)\**\libmono-component-diagnostics_tracing.so" />
-            <BloatFiles Include="$(PublishDir)\**\libmono-component-hot_reload.so" />
-        </ItemGroup>
-        <Delete Files="@(BloatFiles)" />
-    </Target>
-    <ItemGroup>
-        <TrimmerRootAssembly Include="GodotSharp" />
-        <TrimmerRootAssembly Include="$(TargetName)" />
-    </ItemGroup>
-    <!-- Make Sure to paste this before </Project> -->
 </Project>
