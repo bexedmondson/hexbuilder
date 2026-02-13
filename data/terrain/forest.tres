@@ -29,6 +29,7 @@ metadata/_custom_type_script = "uid://dabk1yd0tblxc"
 script = ExtResource("12_5g1if")
 jobName = "clear trees"
 icon = ExtResource("11_qkbhl")
+turnDuration = 1
 completeActions = Array[ExtResource("6_atsum")]([SubResource("Resource_l81lm"), SubResource("Resource_e77c1")])
 metadata/_custom_type_script = "uid://h6i1gsu2h8be"
 

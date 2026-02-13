@@ -1,10 +1,10 @@
 using Godot;
 
-public class TimedTaskStartedEvent(TimedTaskState timedTask, Vector2I location, int workerCount, int capacity) : IEvent
+public class TimedTaskStartedEvent(TimedTaskState timedTask) : IEvent
 {
-    public TimedTaskState timedTask { get; private set; } = timedTask;
-    public Vector2I location { get; private set; } = location;
+    public TimedTaskState timedTask { get; } = timedTask;
+    public Vector2I location => timedTask.location;
 
-    public int workerCount { get; private set; } = workerCount;
-    public int capacity { get; private set; } = capacity;
+    public int workerCount => timedTask.workerCount;
+    public int capacity => timedTask.workerCountRequirement;
 }

@@ -10,6 +10,9 @@ public partial class PlayerInitiatedTimedTaskUI : Control
     private Button goButton;
 
     [Export]
+    private Label turnCount;
+
+    [Export]
     private AbstractTimedTaskCompleteActionUI changeTileActionUI;
 
     [Export]
@@ -30,6 +33,8 @@ public partial class PlayerInitiatedTimedTaskUI : Control
         var residentManager = InjectionManager.Get<ResidentManager>();
         bool notEnoughWorkers = residentManager.GetNotBusyResidentCount() < config.workersNeeded;
         goButton.Disabled = notEnoughWorkers;
+
+        turnCount.Text = config.turnDuration.ToString();
 
         changeTileActionUI.Visible = false;
         currencyDeltaActionUI.Visible = false;
@@ -54,12 +59,12 @@ public partial class PlayerInitiatedTimedTaskUI : Control
     {
         var timedTaskManager = InjectionManager.Get<TimedTaskManager>();
         var task = new ConfigTimedTaskState(cell, config);
-        timedTaskManager.AddNewTimedTask(task);
         
         for (int i = 0; i < task.workerCountRequirement; i++)
         {
             timedTaskManager.TryAssignResidentToTimedTask(task);
         }
+        timedTaskManager.AddNewTimedTask(task);
         
         //TODO close popup, change tile state to...something that isn't unlocked, i guess. unlocking maybe?
         OnTaskStarted?.Invoke();

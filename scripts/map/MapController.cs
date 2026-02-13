@@ -114,12 +114,12 @@ public partial class MapController : Node2D, IInjectable
         var workerCountRequirement = GetCellUnlockWorkerRequirement(cellToStartUnlock);
         
         var cellUnlockTimedTaskData = new CellUnlockTimedTaskState(cellToStartUnlock, unlockTurnCount, workerCountRequirement);
-        timedTaskManager.AddNewTimedTask(cellUnlockTimedTaskData);
         
         for (int i = 0; i < workerCountRequirement; i++)
         {
             timedTaskManager.TryAssignResidentToTimedTask(cellUnlockTimedTaskData);
         }
+        timedTaskManager.AddNewTimedTask(cellUnlockTimedTaskData);
         
         cellStatusManager.OnCellUnlockInitiated(cellToStartUnlock);
     }

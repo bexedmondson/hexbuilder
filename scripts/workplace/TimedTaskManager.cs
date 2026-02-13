@@ -53,7 +53,7 @@ public class TimedTaskManager : IInjectable
         timedTaskDatas.Add(newTimedTask.location, newTimedTask);
         
         eventDispatcher ??= InjectionManager.Get<EventDispatcher>();
-        eventDispatcher.Dispatch(new TimedTaskStartedEvent(newTimedTask, newTimedTask.location, newTimedTask.workerCount, newTimedTask.workerCountRequirement));
+        eventDispatcher.Dispatch(new TimedTaskStartedEvent(newTimedTask));
     }
 
     public bool TryGetTimedTaskAt(Vector2I cell, out TimedTaskState timedTaskState)

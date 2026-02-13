@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bxfmoj4c3fv35" path="res://scripts/ui/popups/PlayerInitiatedTimedTaskUI.cs" id="1_xabqo"]
 [ext_resource type="Texture2D" uid="uid://dfd36mh1canns" path="res://assets/icons/icon_person.tres" id="2_jyxs3"]
+[ext_resource type="Texture2D" uid="uid://bjyqbsaq4dwhv" path="res://themes/clashy/graphics/panel-embedded-light.svg" id="2_o1wa6"]
+[ext_resource type="Texture2D" uid="uid://xrixc51vi7oj" path="res://assets/icons/icon_hourglass_low.tres" id="2_wxuhd"]
 [ext_resource type="Script" uid="uid://17rpg4qysdo8" path="res://scripts/ui/popups/ChangeTileTimedTaskCompleteActionUI.cs" id="4_o1wa6"]
 [ext_resource type="Texture2D" uid="uid://blnewmra3rg4j" path="res://assets/icons/icon_arrow_right_curve.tres" id="5_8fqpa"]
 [ext_resource type="Script" uid="uid://c5bqxlxkbiceu" path="res://scripts/ui/TileTextureRect.cs" id="5_wxuhd"]
@@ -10,12 +12,25 @@
 [ext_resource type="Script" uid="uid://d1wyy13hbsm5x" path="res://scripts/ui/CurrencyDisplay.cs" id="7_6pl6o"]
 [ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="8_vo2s6"]
 
-[node name="TaskPanel" type="Panel" unique_id=436770993 node_paths=PackedStringArray("taskNameLabel", "goButton", "changeTileActionUI", "currencyDeltaActionUI")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8fqpa"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+texture = ExtResource("2_o1wa6")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+modulate_color = Color(0.43529412, 0.7411765, 0.9843137, 1)
+
+[node name="TaskPanel" type="Panel" unique_id=436770993 node_paths=PackedStringArray("taskNameLabel", "goButton", "turnCount", "changeTileActionUI", "currencyDeltaActionUI")]
 custom_minimum_size = Vector2(0, 140)
 mouse_filter = 1
 script = ExtResource("1_xabqo")
 taskNameLabel = NodePath("NameLabel")
 goButton = NodePath("GoButton")
+turnCount = NodePath("PanelContainer/TurnCountLabel")
 changeTileActionUI = NodePath("HBoxContainer/ChangeTileCenterContainer")
 currencyDeltaActionUI = NodePath("HBoxContainer/CurrencyDeltaCenterContainer2")
 
@@ -27,25 +42,33 @@ offset_right = 100.0
 offset_bottom = 42.0
 text = "job name example"
 
-[node name="GoButton" type="Button" parent="." unique_id=536386485]
-custom_minimum_size = Vector2(80, 0)
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=685856958]
 layout_mode = 1
-anchors_preset = 11
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -50.0
-offset_bottom = 2.0
+offset_left = -150.0
+offset_top = 10.0
+offset_right = -90.0
+offset_bottom = 50.0
 grow_horizontal = 0
-grow_vertical = 2
 mouse_filter = 1
-theme_override_constants/h_separation = 0
-theme_override_font_sizes/font_size = 32
-text = "x0"
-icon = ExtResource("2_jyxs3")
-icon_alignment = 1
-vertical_icon_alignment = 0
-expand_icon = true
+theme_type_variation = &"PanelContainerEmbeddedLight"
+theme_override_styles/panel = SubResource("StyleBoxTexture_8fqpa")
+
+[node name="HourglassTextureRect" type="TextureRect" parent="PanelContainer" unique_id=317345967]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_wxuhd")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="TurnCountLabel" type="Label" parent="PanelContainer" unique_id=756640376]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=735965286]
 layout_mode = 1
@@ -97,5 +120,24 @@ size_flags_horizontal = 0
 script = ExtResource("7_6pl6o")
 singleCurrencyDisplayScene = ExtResource("8_vo2s6")
 displayAsDelta = true
+
+[node name="GoButton" type="Button" parent="." unique_id=536386485]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_bottom = 2.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 32
+text = "x0"
+icon = ExtResource("2_jyxs3")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
 [connection signal="pressed" from="GoButton" to="." method="OnGoButton"]
