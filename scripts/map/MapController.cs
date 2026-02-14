@@ -146,6 +146,16 @@ public partial class MapController : Node2D, IInjectable
         eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
+    public void SetCellBusy(Vector2I cell)
+    {
+        cellStatusManager.SetCellBusy(cell);
+    }
+
+    public void OnTimedTaskEnded(Vector2I cell)
+    {
+        cellStatusManager.SetCellUnlockedFromBusy(cell);
+    }
+
     public void BuildTileAtCell(Vector2I cell, CustomTileData customTileData)
     {
         var tileInfo = tileDatabase.GetTileInfoForCustomTileData(customTileData);

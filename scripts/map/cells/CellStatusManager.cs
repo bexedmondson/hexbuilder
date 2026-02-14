@@ -33,7 +33,22 @@ public class CellStatusManager
 
     public void OnCellUnlockInitiated(Vector2I cell)
     {
-        visibleCellUnlockStates[cell] = CellStatus.Unlocking;
+        SetCellBusy(cell);
+    }
+
+    public void SetCellBusy(Vector2I cell)
+    {
+        visibleCellUnlockStates[cell] = CellStatus.Busy;
+    }
+    
+    public void SetCellUnlockedFromBusy(Vector2I cell)
+    {
+        if (visibleCellUnlockStates.TryGetValue(cell, out var status) && status == CellStatus.Busy)
+            visibleCellUnlockStates[cell] = CellStatus.Unlocked;
+        else
+        {
+            GD.PushWarning($"CellStatusManager: trying to set {cell} to Unlocked from Busy, but not currently set as Busy!");
+        }
     }
     
     public CellStatus GetCellStatus(Vector2I cell)

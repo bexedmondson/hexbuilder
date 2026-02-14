@@ -45,26 +45,27 @@ public partial class MapInputProcessor : Node2D
         
         var cell = mapController.GetCellUnderMouse();
         var cellStatus = mapController.GetCellStatus(cell);
-        
-        if (cellStatus == CellStatus.Hidden)
-            return;
 
-        if (cellStatus == CellStatus.Locked)
+        switch (cellStatus)
         {
-            unlockedCellPopup.Close();
-            mapHighlightController.OnSelectCell(cell);
-            lockedCellPopup.ShowForCell(cell);
-        }
-        else //TODO handle what to do when in unlocking state
-        {
-            lockedCellPopup.Close();
-            mapHighlightController.OnSelectCell(cell);
-            
-            mapCameraController ??= InjectionManager.Get<MapCameraController>();
-            var offset = mapCameraController.Zoom.Length() == 0 ? 0 : Mathf.RoundToInt(500 / mapCameraController.Zoom.Length());
-            mapCameraController.FlyToCellWithOffset(cell, new Vector2I(offset, 0), 0.3f);
-            
-            unlockedCellPopup.ShowForCell(mapController.BaseMapLayer, cell);
+            case CellStatus.Hidden:
+            case CellStatus.Busy: //TODO do something better here?
+                return; 
+            case CellStatus.Locked:
+                unlockedCellPopup.Close();
+                mapHighlightController.OnSelectCell(cell);
+                lockedCellPopup.ShowForCell(cell);
+                break;
+            case CellStatus.Unlocked:
+                lockedCellPopup.Close();
+                mapHighlightController.OnSelectCell(cell);
+                
+                mapCameraController ??= InjectionManager.Get<MapCameraController>();
+                var offset = mapCameraController.Zoom.Length() == 0 ? 0 : Mathf.RoundToInt(500 / mapCameraController.Zoom.Length());
+                mapCameraController.FlyToCellWithOffset(cell, new Vector2I(offset, 0), 0.3f);
+                
+                unlockedCellPopup.ShowForCell(mapController.BaseMapLayer, cell);
+                break;
         }
     }
 }

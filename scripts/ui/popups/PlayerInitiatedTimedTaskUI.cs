@@ -66,7 +66,6 @@ public partial class PlayerInitiatedTimedTaskUI : Control
         }
         timedTaskManager.AddNewTimedTask(task);
         
-        //TODO close popup, change tile state to...something that isn't unlocked, i guess. unlocking maybe?
         OnTaskStarted?.Invoke();
     }
 }

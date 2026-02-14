@@ -42,6 +42,7 @@ public class TimedTaskManager : IInjectable
         foreach (var jobLocationPairToRemove in timedTaskLocationPairsToRemove)
         {
             timedTaskDatas.Remove(jobLocationPairToRemove.Key);
+            mapController.OnTimedTaskEnded(jobLocationPairToRemove.Key);
             
             eventDispatcher ??= InjectionManager.Get<EventDispatcher>();
             eventDispatcher.Dispatch(new TimedTaskEndedEvent(jobLocationPairToRemove.Value, jobLocationPairToRemove.Key));
@@ -51,6 +52,9 @@ public class TimedTaskManager : IInjectable
     public void AddNewTimedTask(TimedTaskState newTimedTask)
     {
         timedTaskDatas.Add(newTimedTask.location, newTimedTask);
+        
+        //TODO consider if this is what should always happen or not
+        mapController.SetCellBusy(newTimedTask.location);
         
         eventDispatcher ??= InjectionManager.Get<EventDispatcher>();
         eventDispatcher.Dispatch(new TimedTaskStartedEvent(newTimedTask));

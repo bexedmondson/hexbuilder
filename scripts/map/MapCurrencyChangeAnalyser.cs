@@ -40,6 +40,9 @@ public class MapCurrencyChangeAnalyser : IInjectable
     {
         CurrencySum sum = new();
         var changes = GetCellCurrencyChanges(cell);
+        if (changes == null)
+            return sum;
+        
         foreach (var change in changes)
         {
             sum += change;
