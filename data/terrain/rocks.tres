@@ -3,7 +3,38 @@
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="1_3bm2b"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_54yph"]
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_m1ggf"]
+[ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="4_pnsfy"]
+[ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="5_gxb1f"]
+[ext_resource type="Script" uid="uid://cdjmlq8cnhp54" path="res://scripts/data/timedtasks/AbstractTileAction.cs" id="6_hq11f"]
+[ext_resource type="Script" uid="uid://dabk1yd0tblxc" path="res://scripts/data/timedtasks/CurrencyDeltaTileAction.cs" id="7_rbrvw"]
+[ext_resource type="Script" uid="uid://bqwnjka0c5xjf" path="res://scripts/data/timedtasks/AbstractTimedTaskComponent.cs" id="8_d3xte"]
+[ext_resource type="Script" uid="uid://ou22ogqkqlfk" path="res://scripts/data/timedtasks/ChangeTileTypeTileAction.cs" id="8_hq11f"]
+[ext_resource type="Script" uid="uid://h6i1gsu2h8be" path="res://scripts/data/timedtasks/PlayerInitiatedTimedTaskConfig.cs" id="9_yrpbw"]
+
+[sub_resource type="Resource" id="Resource_p3c3n"]
+script = ExtResource("7_rbrvw")
+currencyDelta = Dictionary[int, int]({
+2: 1
+})
+metadata/_custom_type_script = "uid://dabk1yd0tblxc"
+
+[sub_resource type="Resource" id="Resource_d3xte"]
+script = ExtResource("8_hq11f")
+metadata/_custom_type_script = "uid://ou22ogqkqlfk"
+
+[sub_resource type="Resource" id="Resource_i6sp3"]
+script = ExtResource("9_yrpbw")
+jobName = "gather rocks"
+turnDuration = 1
+completeActions = Array[ExtResource("6_hq11f")]([SubResource("Resource_p3c3n"), SubResource("Resource_d3xte")])
+metadata/_custom_type_script = "uid://h6i1gsu2h8be"
+
+[sub_resource type="Resource" id="Resource_28v0r"]
+script = ExtResource("4_pnsfy")
+tileTimedTasks = Array[ExtResource("5_gxb1f")]([SubResource("Resource_i6sp3")])
+metadata/_custom_type_script = "uid://bajanuybps04x"
 
 [resource]
 script = ExtResource("1_54yph")
+components = Array[ExtResource("1_3bm2b")]([SubResource("Resource_28v0r")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

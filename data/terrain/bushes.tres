@@ -12,6 +12,20 @@
 [ext_resource type="Script" uid="uid://bqwnjka0c5xjf" path="res://scripts/data/timedtasks/AbstractTimedTaskComponent.cs" id="10_kevn0"]
 [ext_resource type="Script" uid="uid://h6i1gsu2h8be" path="res://scripts/data/timedtasks/PlayerInitiatedTimedTaskConfig.cs" id="11_eu8b4"]
 
+[sub_resource type="Resource" id="Resource_88rbh"]
+script = ExtResource("9_pvnxx")
+currencyDelta = Dictionary[int, int]({
+0: 1
+})
+metadata/_custom_type_script = "uid://dabk1yd0tblxc"
+
+[sub_resource type="Resource" id="Resource_ept50"]
+script = ExtResource("11_eu8b4")
+jobName = "forage for berries"
+turnDuration = 1
+completeActions = Array[ExtResource("6_wb1ny")]([SubResource("Resource_88rbh")])
+metadata/_custom_type_script = "uid://h6i1gsu2h8be"
+
 [sub_resource type="Resource" id="Resource_t6i8y"]
 script = ExtResource("7_usbc8")
 tileToChangeTo = ExtResource("8_4lhps")
@@ -34,7 +48,7 @@ metadata/_custom_type_script = "uid://h6i1gsu2h8be"
 
 [sub_resource type="Resource" id="Resource_6qcd3"]
 script = ExtResource("4_88rbh")
-tileTimedTasks = Array[ExtResource("5_ept50")]([SubResource("Resource_qe7j7")])
+tileTimedTasks = Array[ExtResource("5_ept50")]([SubResource("Resource_ept50"), SubResource("Resource_qe7j7")])
 metadata/_custom_type_script = "uid://bajanuybps04x"
 
 [resource]
