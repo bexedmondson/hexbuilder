@@ -8,6 +8,6 @@ public partial class ChangeTileTimedTaskCompleteActionUI : AbstractTimedTaskComp
     public override void Setup(AbstractTileAction completeAction, Vector2I cell)
     {
         var action = completeAction as ChangeTileTypeTileAction;
-        tileToChangeTo.SetTile(action.tileToChangeTo);
+        tileToChangeTo.SetTile(action.GetTileToChangeTo(cell));
     }
 }

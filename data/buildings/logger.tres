@@ -14,6 +14,9 @@
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="12_vw2no"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="13_ekmm3"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="13_vgfrp"]
+[ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="15_vgfrp"]
+[ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="16_utcxu"]
+[ext_resource type="Resource" uid="uid://dekee25m1njfp" path="res://data/tile_actions/return_to_nature_tile_action.tres" id="17_wb8cf"]
 
 [sub_resource type="Resource" id="Resource_kp0b5"]
 script = ExtResource("2_y08ay")
@@ -72,6 +75,11 @@ script = ExtResource("13_vgfrp")
 requirements = Array[ExtResource("9_jn3nt")]([SubResource("Resource_vgfrp"), SubResource("Resource_utcxu")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
+[sub_resource type="Resource" id="Resource_u73c6"]
+script = ExtResource("15_vgfrp")
+tileTimedTasks = Array[ExtResource("16_utcxu")]([ExtResource("17_wb8cf")])
+metadata/_custom_type_script = "uid://bajanuybps04x"
+
 [resource]
 script = ExtResource("9_vgfrp")
 canBePlacedOn = Array[ExtResource("9_vgfrp")]([ExtResource("11_ekmm3")])
@@ -83,5 +91,5 @@ baseTurnCurrencyChange = Dictionary[int, int]({
 1: 3
 })
 adjacencies = Array[ExtResource("2_y08ay")]([SubResource("Resource_kp0b5"), SubResource("Resource_rh5oq")])
-components = Array[ExtResource("6_jn3nt")]([SubResource("Resource_g5o2c"), SubResource("Resource_jn3nt"), SubResource("Resource_ekmm3"), SubResource("Resource_wb8cf")])
+components = Array[ExtResource("6_jn3nt")]([SubResource("Resource_g5o2c"), SubResource("Resource_jn3nt"), SubResource("Resource_ekmm3"), SubResource("Resource_wb8cf"), SubResource("Resource_u73c6")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlayerInitiatedTimedTaskConfig" format=3 uid="uid://dekee25m1njfp"]
+
+[ext_resource type="Script" uid="uid://cdjmlq8cnhp54" path="res://scripts/data/timedtasks/AbstractTileAction.cs" id="1_ott1m"]
+[ext_resource type="Script" uid="uid://g2qd0gs2oujl" path="res://scripts/data/timedtasks/ResetToGenerationTileAction.cs" id="2_75vid"]
+[ext_resource type="Script" uid="uid://bqwnjka0c5xjf" path="res://scripts/data/timedtasks/AbstractTimedTaskComponent.cs" id="3_ltuwr"]
+[ext_resource type="Script" uid="uid://h6i1gsu2h8be" path="res://scripts/data/timedtasks/PlayerInitiatedTimedTaskConfig.cs" id="4_cocma"]
+
+[sub_resource type="Resource" id="Resource_yc7ym"]
+script = ExtResource("2_75vid")
+metadata/_custom_type_script = "uid://g2qd0gs2oujl"
+
+[resource]
+script = ExtResource("4_cocma")
+jobName = "return to nature"
+turnDuration = 1
+completeActions = Array[ExtResource("1_ott1m")]([SubResource("Resource_yc7ym")])
+metadata/_custom_type_script = "uid://h6i1gsu2h8be"

@@ -11,6 +11,9 @@
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="6_5vt4n"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="7_uram4"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="8_uram4"]
+[ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="12_e4mfj"]
+[ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="13_8ssn6"]
+[ext_resource type="Resource" uid="uid://dekee25m1njfp" path="res://data/tile_actions/return_to_nature_tile_action.tres" id="14_g5b0d"]
 
 [sub_resource type="Resource" id="Resource_uram4"]
 script = ExtResource("3_hptau")
@@ -46,6 +49,11 @@ script = ExtResource("8_uram4")
 requirements = Array[ExtResource("5_q8v16")]([SubResource("Resource_qskiq"), SubResource("Resource_5vt4n")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
+[sub_resource type="Resource" id="Resource_u7wtp"]
+script = ExtResource("12_e4mfj")
+tileTimedTasks = Array[ExtResource("13_8ssn6")]([ExtResource("14_g5b0d")])
+metadata/_custom_type_script = "uid://bajanuybps04x"
+
 [resource]
 script = ExtResource("1_8nixi")
 canBePlacedOn = Array[ExtResource("1_8nixi")]([ExtResource("1_afrh2")])
@@ -55,5 +63,5 @@ buildPrice = Dictionary[int, int]({
 baseTurnCurrencyChange = Dictionary[int, int]({
 0: 2
 })
-components = Array[ExtResource("2_f21t2")]([SubResource("Resource_uram4"), SubResource("Resource_q8v16"), SubResource("Resource_wdgjh")])
+components = Array[ExtResource("2_f21t2")]([SubResource("Resource_uram4"), SubResource("Resource_q8v16"), SubResource("Resource_wdgjh"), SubResource("Resource_u7wtp")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

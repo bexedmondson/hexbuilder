@@ -15,6 +15,9 @@
 [ext_resource type="Script" uid="uid://begyr0mqsjkto" path="res://scripts/data/requirements/AllTimeTileBuildRequirement.cs" id="10_rxyhn"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="11_0jgd4"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="12_u7xsk"]
+[ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="16_00esu"]
+[ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="17_tyq42"]
+[ext_resource type="Resource" uid="uid://dekee25m1njfp" path="res://data/tile_actions/return_to_nature_tile_action.tres" id="18_7nw81"]
 
 [sub_resource type="Resource" id="Resource_kp0b5"]
 script = ExtResource("2_4sv2n")
@@ -81,6 +84,11 @@ script = ExtResource("12_u7xsk")
 requirements = Array[ExtResource("10_0jgd4")]([SubResource("Resource_00esu"), SubResource("Resource_tyq42")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
+[sub_resource type="Resource" id="Resource_lvlc1"]
+script = ExtResource("16_00esu")
+tileTimedTasks = Array[ExtResource("17_tyq42")]([ExtResource("18_7nw81")])
+metadata/_custom_type_script = "uid://bajanuybps04x"
+
 [resource]
 script = ExtResource("9_u7xsk")
 canBePlacedOn = Array[ExtResource("9_u7xsk")]([ExtResource("4_5p8kn")])
@@ -93,5 +101,5 @@ baseTurnCurrencyChange = Dictionary[int, int]({
 1: 5
 })
 adjacencies = Array[ExtResource("2_4sv2n")]([SubResource("Resource_kp0b5"), SubResource("Resource_rh5oq"), SubResource("Resource_masw2")])
-components = Array[ExtResource("6_33hju")]([SubResource("Resource_33hju"), SubResource("Resource_rxyhn"), SubResource("Resource_0jgd4"), SubResource("Resource_7nw81")])
+components = Array[ExtResource("6_33hju")]([SubResource("Resource_33hju"), SubResource("Resource_rxyhn"), SubResource("Resource_0jgd4"), SubResource("Resource_7nw81"), SubResource("Resource_lvlc1")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

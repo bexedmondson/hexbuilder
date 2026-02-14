@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Godot;
 
 public partial class MapGenerator : Node
@@ -175,7 +174,11 @@ public partial class MapGenerator : Node
         foreach (var affectedCell in allAffectedCells)
         {
             if (baseMapLayer.IsCellEmpty(affectedCell))
-                GenerateCell(affectedCell);
+            {
+                var atlasCoords = GenerateCellAtlasCoords(affectedCell);
+                
+                baseMapLayer.SetCell(affectedCell, 0, atlasCoords);
+            }
         }
         
         //var riverCells = FindRiverCells();
@@ -208,32 +211,28 @@ public partial class MapGenerator : Node
         baseMapLayer.EmitSignal("changed");
     }
 
-    private void GenerateCell(Vector2I cell)
+    public Vector2I GetDefaultGeneratedAtlasCoordsAtCell(Vector2I cell)
+    {
+        return GenerateCellAtlasCoords(cell);
+    }
+
+    private Vector2I GenerateCellAtlasCoords(Vector2I cell)
     {
         var height = GetPixelSample(heightNoiseImage, cell);
         var rockiness = GetPixelSample(rockyNoiseImage, cell);
                 
         if (height < heightWaterUpperThreshold)
-        {
-            SetWater(cell, rockiness);
-            return;
-        }
+            return SetWater(cell, rockiness);
         if (height > heightMountainLowerThreshold)
-        {
-            baseMapLayer.SetCell(cell, 0, mountainCoords);
-            return;
-        }
+            return mountainCoords;
         
         var vegetation = GetPixelSample(vegetationNoiseImage, cell);
         
         if (height > heightHillLowerThreshold)
-        {
-            SetHill(cell, vegetation);
-            return;
-        }
+            return SetHill(cell, vegetation);
         
         var sandiness = GetPixelSample(sandyNoiseImage, cell);
-        SetFlat(cell, rockiness, sandiness, vegetation);
+        return SetFlat(cell, rockiness, sandiness, vegetation);
     }
 
     private float GetPixelSample(Image image, Vector2I cell)
@@ -247,49 +246,45 @@ public partial class MapGenerator : Node
         return image.GetPixel(xSample, ySample).R; //r, g, b all identical with noise like this
     }
 
-    private void SetWater(Vector2I cell, float rockiness)
+    private Vector2I SetWater(Vector2I cell, float rockiness)
     {
         //TODO restore after fixing rivers?
         //bt.SetCell(cell, oceanTerrain);
-        baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? waterRocksCoords : waterCoords);
+        return rockiness < rockyUpperThreshold ? waterRocksCoords : waterCoords;
     }
 
-    private void SetHill(Vector2I cell, float vegetation)
+    private Vector2I SetHill(Vector2I cell, float vegetation)
     {
         if (vegetation < vegetationGrassLowerThreshold)
-            baseMapLayer.SetCell(cell, 0, hillRockCoords);
+            return hillRockCoords;
         
-        baseMapLayer.SetCell(cell, 0, vegetation > vegetationTreesLowerThreshold ? hillGrassCoords : hillForestCoords);
+        return vegetation > vegetationTreesLowerThreshold ? hillGrassCoords : hillForestCoords;
     }
 
-    private void SetFlat(Vector2I cell, float rockiness, float sandiness, float vegetation)
+    private Vector2I SetFlat(Vector2I cell, float rockiness, float sandiness, float vegetation)
     {
         if (sandiness < sandyUpperThreshold)
-        {
-            SetSand(cell, rockiness, vegetation);
-            return;
-        }
+            return SetSand(cell, rockiness, vegetation);
             
         if (vegetation < vegetationGrassLowerThreshold)
-            baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? stoneCoords : dirtCoords);
-        else if (vegetation > vegetationTreesLowerThreshold)
-            baseMapLayer.SetCell(cell, 0, forestCoords);
-        else if (vegetation > vegetationBushesLowerThreshold)
-            baseMapLayer.SetCell(cell, 0, bushesCoords);
-        else
-        {
-            bt.SetCell(cell, grassTerrain);
-        }
+            return rockiness < rockyUpperThreshold ? stoneCoords : dirtCoords;
+        if (vegetation > vegetationTreesLowerThreshold)
+            return forestCoords;
+        if (vegetation > vegetationBushesLowerThreshold)
+            return bushesCoords;
+        
+        bt.SetCell(cell, grassTerrain);
+        return grassCoords;
     }
 
-    private void SetSand(Vector2I cell, float rockiness, float vegetation)
+    private Vector2I SetSand(Vector2I cell, float rockiness, float vegetation)
     {
         bt.SetCell(cell, sandTerrain);
         
         if (vegetation > vegetationTreesLowerThreshold)
-            baseMapLayer.SetCell(cell, 0, sandPlantsCoords);
-        else
-            baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? sandRocksCoords : sandCoords);
+            return sandPlantsCoords;
+        
+        return rockiness < rockyUpperThreshold ? sandRocksCoords : sandCoords;
     }
     
     private List<Vector2I> FindRiverCells()

@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="5_3tutr"]
 [ext_resource type="Script" uid="uid://dqllhkfgxpx4b" path="res://scripts/data/tilecomponents/ResidentCapacityComponent.cs" id="6_3tutr"]
 [ext_resource type="Resource" uid="uid://cm2hn4sk7a8uj" path="res://data/terrain/bushes.tres" id="6_uls6c"]
+[ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="10_2q5m7"]
+[ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="11_6h735"]
+[ext_resource type="Resource" uid="uid://dekee25m1njfp" path="res://data/tile_actions/return_to_nature_tile_action.tres" id="12_h8qnb"]
 
 [sub_resource type="Resource" id="Resource_mlsau"]
 script = ExtResource("5_3tutr")
@@ -23,6 +26,11 @@ script = ExtResource("6_3tutr")
 capacity = 1
 metadata/_custom_type_script = "uid://dqllhkfgxpx4b"
 
+[sub_resource type="Resource" id="Resource_gp8ng"]
+script = ExtResource("10_2q5m7")
+tileTimedTasks = Array[ExtResource("11_6h735")]([ExtResource("12_h8qnb")])
+metadata/_custom_type_script = "uid://bajanuybps04x"
+
 [resource]
 script = ExtResource("4_3tutr")
 canBePlacedOn = Array[ExtResource("4_3tutr")]([ExtResource("1_jhxqr"), ExtResource("2_tfsah"), ExtResource("3_kt3v3"), ExtResource("6_uls6c")])
@@ -32,5 +40,5 @@ buildPrice = Dictionary[int, int]({
 baseTurnCurrencyChange = Dictionary[int, int]({
 0: -1
 })
-components = Array[ExtResource("4_kt3v3")]([SubResource("Resource_mlsau"), SubResource("Resource_uls6c")])
+components = Array[ExtResource("4_kt3v3")]([SubResource("Resource_mlsau"), SubResource("Resource_uls6c"), SubResource("Resource_gp8ng")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

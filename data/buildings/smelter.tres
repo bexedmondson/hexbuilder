@@ -12,6 +12,9 @@
 [ext_resource type="Script" uid="uid://c6o4h30wjk7j5" path="res://scripts/data/requirements/TileRequirementAmount.cs" id="8_8i360"]
 [ext_resource type="Script" uid="uid://b8yvq1vldnsav" path="res://scripts/data/requirements/CurrentTilePresenceCountRequirement.cs" id="9_fssqy"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="10_8i360"]
+[ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="13_a63ii"]
+[ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="14_buhf6"]
+[ext_resource type="Resource" uid="uid://dekee25m1njfp" path="res://data/tile_actions/return_to_nature_tile_action.tres" id="15_4mjhb"]
 
 [sub_resource type="Resource" id="Resource_mkh37"]
 script = ExtResource("2_ljri3")
@@ -49,6 +52,11 @@ script = ExtResource("10_8i360")
 requirements = Array[ExtResource("8_6gfrn")]([SubResource("Resource_f4a35")])
 metadata/_custom_type_script = "uid://7pquj0428dp5"
 
+[sub_resource type="Resource" id="Resource_wdnkf"]
+script = ExtResource("13_a63ii")
+tileTimedTasks = Array[ExtResource("14_buhf6")]([ExtResource("15_4mjhb")])
+metadata/_custom_type_script = "uid://bajanuybps04x"
+
 [resource]
 script = ExtResource("1_24cbf")
 canBePlacedOn = Array[ExtResource("1_24cbf")]([ExtResource("1_jshk8"), ExtResource("3_ljri3")])
@@ -59,5 +67,5 @@ baseTurnCurrencyChange = Dictionary[int, int]({
 2: 1
 })
 adjacencies = Array[ExtResource("2_ljri3")]([SubResource("Resource_mkh37")])
-components = Array[ExtResource("5_mkh37")]([SubResource("Resource_ojrr8"), SubResource("Resource_6gfrn"), SubResource("Resource_qvylr")])
+components = Array[ExtResource("5_mkh37")]([SubResource("Resource_ojrr8"), SubResource("Resource_6gfrn"), SubResource("Resource_qvylr"), SubResource("Resource_wdnkf")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

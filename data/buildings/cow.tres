@@ -10,6 +10,9 @@
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_ti833"]
 [ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="6_oj8fq"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="7_cmniw"]
+[ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="11_cmniw"]
+[ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="12_lawd2"]
+[ext_resource type="Resource" uid="uid://dekee25m1njfp" path="res://data/tile_actions/return_to_nature_tile_action.tres" id="13_kw60j"]
 
 [sub_resource type="Resource" id="Resource_ut87k"]
 script = ExtResource("3_15fkf")
@@ -34,6 +37,11 @@ extraBaseProduction = Dictionary[int, int]({
 })
 metadata/_custom_type_script = "uid://bt32fndy2yjlv"
 
+[sub_resource type="Resource" id="Resource_wsjhx"]
+script = ExtResource("11_cmniw")
+tileTimedTasks = Array[ExtResource("12_lawd2")]([ExtResource("13_kw60j")])
+metadata/_custom_type_script = "uid://bajanuybps04x"
+
 [resource]
 script = ExtResource("7_cmniw")
 canBePlacedOn = Array[ExtResource("7_cmniw")]([ExtResource("1_yudeu"), ExtResource("4_ti833")])
@@ -44,5 +52,5 @@ buildPrice = Dictionary[int, int]({
 baseTurnCurrencyChange = Dictionary[int, int]({
 0: 2
 })
-components = Array[ExtResource("2_ydoot")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi")])
+components = Array[ExtResource("2_ydoot")]([SubResource("Resource_1bw08"), SubResource("Resource_xbks7"), SubResource("Resource_nl4vi"), SubResource("Resource_wsjhx")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

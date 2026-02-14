@@ -4,10 +4,15 @@ using Godot;
 public partial class ChangeTileTypeTileAction : AbstractTileAction
 {
     [Export]
-    public CustomTileData tileToChangeTo { get; private set; }
+    private CustomTileData tileToChangeTo;
+
+    public virtual CustomTileData GetTileToChangeTo(Vector2I cell)
+    {
+        return tileToChangeTo;
+    }
 
     public override void DoAction(Vector2I cell)
     {
-        InjectionManager.Get<MapController>().BuildTileAtCell(cell, tileToChangeTo);
+        InjectionManager.Get<MapController>().BuildTileAtCell(cell, GetTileToChangeTo(cell));
     }
 }

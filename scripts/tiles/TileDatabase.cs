@@ -112,4 +112,14 @@ public class TileDatabase : IInjectable
         }
         return null;
     }
+
+    public TileInfo GetTileInfoForAtlasCoords(int sourceId, Vector2I atlasCoords)
+    {
+        foreach (var tileInfo in tileInfos)
+        {
+            if (tileInfo.sourceId == sourceId && tileInfo.tileCoords == atlasCoords)
+                return tileInfo;
+        }
+        return null;
+    }
 }

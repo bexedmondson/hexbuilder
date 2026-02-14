@@ -146,6 +146,12 @@ public partial class MapController : Node2D, IInjectable
         eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
+    public CustomTileData GetDefaultGeneratedTileAtCell(Vector2I cell)
+    {
+        var atlasCoords = mapGenerator.GetDefaultGeneratedAtlasCoordsAtCell(cell);
+        return tileDatabase.GetTileInfoForAtlasCoords(0, atlasCoords).tileData; //TODO make the source id not just a random hardcoded 0
+    }
+
     public void SetCellBusy(Vector2I cell)
     {
         cellStatusManager.SetCellBusy(cell);
