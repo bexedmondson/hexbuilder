@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="3_15fkf"]
 [ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="3_ydoot"]
 [ext_resource type="Script" uid="uid://7pquj0428dp5" path="res://scripts/data/tilecomponents/UnlockRequirementsComponent.cs" id="4_pbxqo"]
+[ext_resource type="Resource" uid="uid://cm2hn4sk7a8uj" path="res://data/terrain/bushes.tres" id="4_ti833"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="5_ti833"]
 [ext_resource type="Script" uid="uid://bt32fndy2yjlv" path="res://scripts/data/tilecomponents/MaximumWorkerProductionBonusComponent.cs" id="6_oj8fq"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="7_cmniw"]
@@ -35,7 +36,7 @@ metadata/_custom_type_script = "uid://bt32fndy2yjlv"
 
 [resource]
 script = ExtResource("7_cmniw")
-canBePlacedOn = Array[ExtResource("7_cmniw")]([ExtResource("1_yudeu")])
+canBePlacedOn = Array[ExtResource("7_cmniw")]([ExtResource("1_yudeu"), ExtResource("4_ti833")])
 buildPrice = Dictionary[int, int]({
 0: 2,
 1: 4

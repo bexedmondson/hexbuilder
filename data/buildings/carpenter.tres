@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://bu8ba7i0khny4" path="res://data/terrain/stone.tres" id="3_uj6n0"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="4_6h0c3"]
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="5_7lcep"]
+[ext_resource type="Resource" uid="uid://cm2hn4sk7a8uj" path="res://data/terrain/bushes.tres" id="6_d7yxr"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="6_x8y63"]
 [ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="7_6h0c3"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="7_d7yxr"]
@@ -44,7 +45,7 @@ metadata/_custom_type_script = "uid://7pquj0428dp5"
 
 [resource]
 script = ExtResource("9_x0u6n")
-canBePlacedOn = Array[ExtResource("9_x0u6n")]([ExtResource("5_7lcep"), ExtResource("4_6h0c3"), ExtResource("3_uj6n0")])
+canBePlacedOn = Array[ExtResource("9_x0u6n")]([ExtResource("5_7lcep"), ExtResource("4_6h0c3"), ExtResource("3_uj6n0"), ExtResource("6_d7yxr")])
 buildPrice = Dictionary[int, int]({
 1: 10,
 2: 5

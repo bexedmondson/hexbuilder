@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CustomTileData" format=3 uid="uid://cm2hn4sk7a8uj"]
+
+[ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_8qpgk"]
+[ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="2_jrv6q"]
+[ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_f0jxd"]
+[ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="4_88rbh"]
+[ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="5_ept50"]
+[ext_resource type="Script" uid="uid://cdjmlq8cnhp54" path="res://scripts/data/timedtasks/AbstractTileAction.cs" id="6_wb1ny"]
+[ext_resource type="Script" uid="uid://ou22ogqkqlfk" path="res://scripts/data/timedtasks/ChangeTileTypeTileAction.cs" id="7_usbc8"]
+[ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="8_4lhps"]
+[ext_resource type="Script" uid="uid://dabk1yd0tblxc" path="res://scripts/data/timedtasks/CurrencyDeltaTileAction.cs" id="9_pvnxx"]
+[ext_resource type="Script" uid="uid://bqwnjka0c5xjf" path="res://scripts/data/timedtasks/AbstractTimedTaskComponent.cs" id="10_kevn0"]
+[ext_resource type="Script" uid="uid://h6i1gsu2h8be" path="res://scripts/data/timedtasks/PlayerInitiatedTimedTaskConfig.cs" id="11_eu8b4"]
+
+[sub_resource type="Resource" id="Resource_t6i8y"]
+script = ExtResource("7_usbc8")
+tileToChangeTo = ExtResource("8_4lhps")
+metadata/_custom_type_script = "uid://ou22ogqkqlfk"
+
+[sub_resource type="Resource" id="Resource_tehv3"]
+script = ExtResource("9_pvnxx")
+currencyDelta = Dictionary[int, int]({
+0: 3
+})
+metadata/_custom_type_script = "uid://dabk1yd0tblxc"
+
+[sub_resource type="Resource" id="Resource_qe7j7"]
+script = ExtResource("11_eu8b4")
+jobName = "gather all"
+turnDuration = 1
+completeActions = Array[ExtResource("6_wb1ny")]([SubResource("Resource_t6i8y"), SubResource("Resource_tehv3")])
+components = Array[ExtResource("10_kevn0")]([null])
+metadata/_custom_type_script = "uid://h6i1gsu2h8be"
+
+[sub_resource type="Resource" id="Resource_6qcd3"]
+script = ExtResource("4_88rbh")
+tileTimedTasks = Array[ExtResource("5_ept50")]([SubResource("Resource_qe7j7")])
+metadata/_custom_type_script = "uid://bajanuybps04x"
+
+[resource]
+script = ExtResource("2_jrv6q")
+components = Array[ExtResource("3_f0jxd")]([SubResource("Resource_6qcd3")])
+metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

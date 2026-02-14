@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://cpjli52gvelmb" path="res://data/terrain/forest.tres" id="2_oqk2a"]
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="3_jits7"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="4_kp0b5"]
+[ext_resource type="Resource" uid="uid://cm2hn4sk7a8uj" path="res://data/terrain/bushes.tres" id="6_2kkut"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="6_kp0b5"]
 [ext_resource type="Script" uid="uid://be4uqqgw38s0q" path="res://scripts/data/tilecomponents/StorageCapacityDataComponent.cs" id="7_rh5oq"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="8_2kkut"]
@@ -31,7 +32,7 @@ metadata/_custom_type_script = "uid://d1xw3ed0jek8r"
 
 [resource]
 script = ExtResource("4_kp0b5")
-canBePlacedOn = Array[ExtResource("4_kp0b5")]([ExtResource("1_whhrf"), ExtResource("2_oqk2a"), ExtResource("3_jits7")])
+canBePlacedOn = Array[ExtResource("4_kp0b5")]([ExtResource("1_whhrf"), ExtResource("2_oqk2a"), ExtResource("3_jits7"), ExtResource("6_2kkut")])
 baseTurnCurrencyChange = Dictionary[int, int]({
 1: 3
 })

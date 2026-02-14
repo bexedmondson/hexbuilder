@@ -26,6 +26,8 @@ public partial class MapGenerator : Node
     [Export(PropertyHint.Range, "0.0,1.0,")]
     private float vegetationGrassLowerThreshold = 0.3f;
     [Export(PropertyHint.Range, "0.0,1.0,")]
+    private float vegetationBushesLowerThreshold = 0.7f;
+    [Export(PropertyHint.Range, "0.0,1.0,")]
     private float vegetationTreesLowerThreshold = 0.8f;
     
     [ExportSubgroup("Height")]
@@ -46,6 +48,8 @@ public partial class MapGenerator : Node
     [ExportSubgroup("Vegetation")]
     [Export]
     private Vector2I grassCoords;
+    [Export]
+    private Vector2I bushesCoords;
     [Export]
     private Vector2I forestCoords;
     
@@ -270,6 +274,8 @@ public partial class MapGenerator : Node
             baseMapLayer.SetCell(cell, 0, rockiness < rockyUpperThreshold ? stoneCoords : dirtCoords);
         else if (vegetation > vegetationTreesLowerThreshold)
             baseMapLayer.SetCell(cell, 0, forestCoords);
+        else if (vegetation > vegetationBushesLowerThreshold)
+            baseMapLayer.SetCell(cell, 0, bushesCoords);
         else
         {
             bt.SetCell(cell, grassTerrain);
