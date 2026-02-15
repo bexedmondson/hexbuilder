@@ -14,3 +14,6 @@ alignment = 1
 
 [node name="PanelContainer" parent="MarginContainer/Container/VBoxContainer" index="1" unique_id=448592025]
 visible = false
+
+[node name="InfoButton" parent="." index="1" unique_id=597461691]
+visible = false
