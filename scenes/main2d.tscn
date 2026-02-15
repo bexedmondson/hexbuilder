@@ -770,9 +770,10 @@ toastLabelScene = SubResource("PackedScene_mgx77")
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=2131027680]
 layer = 2
 
-[node name="UnlockedCellPopup" parent="PopupLayer" unique_id=860641421 instance=ExtResource("50_bi4yo")]
+[node name="UnlockedCellPopup" parent="PopupLayer" unique_id=860641421 node_paths=PackedStringArray("encyclopediaPopup") instance=ExtResource("50_bi4yo")]
 visible = false
 tileSelectionGroup = SubResource("ButtonGroup_bi4yo")
+encyclopediaPopup = NodePath("../EncyclopediaPopup")
 
 [node name="LockedCellPopup" parent="PopupLayer" unique_id=1463822280 instance=ExtResource("51_ufsem")]
 visible = false
