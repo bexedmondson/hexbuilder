@@ -6,6 +6,8 @@ public class CellStatusManager
 {
     private Dictionary<Vector2I, CellStatus> visibleCellUnlockStates = new();
 
+    private EventDispatcher eventDispatcher;
+
     public void OnNewGame()
     {
         visibleCellUnlockStates.Clear();
@@ -39,6 +41,7 @@ public class CellStatusManager
     public void SetCellBusy(Vector2I cell)
     {
         visibleCellUnlockStates[cell] = CellStatus.Busy;
+        
     }
     
     public void SetCellUnlockedFromBusy(Vector2I cell)

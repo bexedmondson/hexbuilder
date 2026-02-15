@@ -41,6 +41,7 @@ public class TimedTaskManager : IInjectable
 
         foreach (var jobLocationPairToRemove in timedTaskLocationPairsToRemove)
         {
+            GD.Print($"TimedTaskManager: removing timed task {jobLocationPairToRemove.Value.description} at {jobLocationPairToRemove.Key}");
             timedTaskDatas.Remove(jobLocationPairToRemove.Key);
             mapController.OnTimedTaskEnded(jobLocationPairToRemove.Key);
             
@@ -51,6 +52,7 @@ public class TimedTaskManager : IInjectable
 
     public void AddNewTimedTask(TimedTaskState newTimedTask)
     {
+        GD.Print($"TimedTaskManager: creating timed task {newTimedTask.description} at {newTimedTask.location}");
         timedTaskDatas.Add(newTimedTask.location, newTimedTask);
         
         //TODO consider if this is what should always happen or not

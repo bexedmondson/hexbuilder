@@ -122,6 +122,8 @@ public partial class MapController : Node2D, IInjectable
         timedTaskManager.AddNewTimedTask(cellUnlockTimedTaskData);
         
         cellStatusManager.OnCellUnlockInitiated(cellToStartUnlock);
+        
+        eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
     public void UnlockCell(Vector2I cell)
@@ -173,11 +175,15 @@ public partial class MapController : Node2D, IInjectable
     public void SetCellBusy(Vector2I cell)
     {
         cellStatusManager.SetCellBusy(cell);
+        
+        eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
     public void OnTimedTaskEnded(Vector2I cell)
     {
         cellStatusManager.SetCellUnlockedFromBusy(cell);
+        
+        eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
     public void BuildTileAtCell(Vector2I cell, CustomTileData customTileData)

@@ -58,7 +58,7 @@ public partial class UnlockedCellPopup : Popup
     [Export]
     private UnlockedCellPopup_TimedTasks timedTasksDisplay;
     
-    [ExportGroup("BuildTab")]
+    [ExportGroup("Build Tab")]
     [Export]
     private TileSelectorList tileSelector;
 
