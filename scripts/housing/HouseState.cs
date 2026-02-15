@@ -30,17 +30,21 @@ public class HouseState
     public void UpdateResidenceType(CustomTileData newTileData, out List<ResidentState> kickedOutResidents)
     {
         kickedOutResidents = new();
+
+        var newTileDataHasResidentCapacity = newTileData.TryGetComponent<ResidentCapacityComponent>(out var newResidentCapacity);
         
-        if (!newTileData.TryGetComponent<ResidentCapacityComponent>(out var newResidentCapacity) 
-            || capacity <= newResidentCapacity.capacity)
+        //if we increased the resident capacity on this tile, save the new tile data and carry on
+        if (newTileDataHasResidentCapacity && capacity <= newResidentCapacity.capacity)
         {
             tileData = newTileData;
             return;
         }
+
+        var newCapacity = newTileDataHasResidentCapacity ? newResidentCapacity.capacity : 0;
         
         //get sublist of _occupants from {newCapacity}th index to end
-        kickedOutResidents.AddRange(_occupants[newResidentCapacity.capacity..]);
-        _occupants.RemoveRange(newResidentCapacity.capacity, capacity - newResidentCapacity.capacity);
+        kickedOutResidents.AddRange(_occupants[newCapacity..]);
+        _occupants.RemoveRange(newCapacity, capacity - newCapacity);
         tileData = newTileData;
     }
 }

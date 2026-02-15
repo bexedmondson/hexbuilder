@@ -61,7 +61,8 @@ public class HousingManager : IInjectable
 
         foreach (var cell in usedCells)
         {
-            if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
+            var cellStatus = mapController.GetCellStatus(cell);
+            if (cellStatus != CellStatus.Unlocked && cellStatus != CellStatus.Busy)
                 continue;
 
             var cellData = mapController.BaseMapLayer.GetCellCustomData(cell);
@@ -72,8 +73,8 @@ public class HousingManager : IInjectable
                 continue;
             }
 
-            var houseExistsOnCell = !cellData.TryGetComponent<ResidentCapacityComponent>(out var cellDataResidentCapacity)
-                                    || cellDataResidentCapacity.capacity == 0;
+            var houseExistsOnCell = cellData.TryGetComponent<ResidentCapacityComponent>(out var cellDataResidentCapacity)
+                                    && cellDataResidentCapacity.capacity != 0;
 
             //if we already have some record of a residence at this cell, and if the current customTileData at this cell 
             //is different to the tile data stored in the record we have of this residence, we should update it.
