@@ -41,6 +41,9 @@ metadata/_custom_type_script = "uid://bajanuybps04x"
 [resource]
 script = ExtResource("4_kp0b5")
 canBePlacedOn = Array[ExtResource("4_kp0b5")]([ExtResource("1_whhrf"), ExtResource("2_oqk2a"), ExtResource("3_jits7"), ExtResource("6_2kkut")])
+buildPrice = Dictionary[int, int]({
+1: 1
+})
 baseTurnCurrencyChange = Dictionary[int, int]({
 1: 3
 })
