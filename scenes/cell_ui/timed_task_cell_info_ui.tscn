@@ -23,7 +23,7 @@ load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.
 atlas = SubResource("CompressedTexture2D_22lh2")
 region = Rect2(1280, 384, 128, 128)
 
-[sub_resource type="Animation" id="Animation_5df6q"]
+[sub_resource type="Animation" id="Animation_wdm2l"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -172,38 +172,83 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("CheckmarkLabel:scale")
+tracks/12/path = NodePath("Hourglass:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [false]
 }
-tracks/13/type = "value"
+tracks/13/type = "bezier"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("CheckmarkLabel:position:y")
+tracks/13/path = NodePath("CheckmarkLabel:scale:x")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-45.0]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/14/type = "value"
+tracks/14/type = "bezier"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Hourglass:visible")
+tracks/14/path = NodePath("CheckmarkLabel:scale:y")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/15/type = "bezier"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("CheckmarkLabel:position:y")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-45, 0, 0, 0, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("HBoxContainer2:modulate:a")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [1.0]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("HBoxContainer2:scale")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("HBoxContainer:scale")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_oshs8"]
@@ -330,9 +375,9 @@ tracks/9/keys = {
 "values": [-40.0, -61.89]
 }
 
-[sub_resource type="Animation" id="Animation_qqk1h"]
+[sub_resource type="Animation" id="Animation_mb6op"]
 resource_name = "job_complete"
-length = 1.5
+length = 1.25
 step = 0.0333333
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -349,7 +394,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HBoxContainer2:self_modulate:a")
+tracks/1/path = NodePath("HBoxContainer2:modulate:a")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -397,38 +442,47 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("CheckmarkLabel:scale")
+tracks/5/path = NodePath("Hourglass:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.3861133, 0.5054688, 0.63958985, 0.87923837, 1.0269531, 1.2166213, 1.3912306),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 2),
-"update": 0,
-"values": [Vector2(0, 0.5), Vector2(0.8, 1.2), Vector2(1.1, 0.9), Vector2(1, 1), Vector2(1, 1), Vector2(1.2, 0.9), Vector2(1, 1), Vector2(0, 2)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("CheckmarkLabel:position:y")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.28996092, 0.4726562, 1.2194338, 1.4085745),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 2),
-"update": 0,
-"values": [-45.0, -60.0, -45.0, -45.0, -90.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Hourglass:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CheckmarkLabel:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0.8, -0.064352214, -0.16088054, 0.01898112, 0.0474528, 1.25, -0.01898112, -0.014976626, 0.023264974, 0.018356707, 1, -0.017, 0, 0, 0, 1, 0, 0, 0.032, 0, 1.2, -0.024619123, 0, 0.031611364, 0, 1, -0.031611364, 0.10413391, 0.02910155, -0.09586611, 0, -0.037, 0.556, 0, 0),
+"times": PackedFloat32Array(0, 0.28792703, 0.40181375, 0.5414036, 0.80239695, 0.9501116, 1.0764618, 1.25)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CheckmarkLabel:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.5, 0, 0.009610653, 0, 0, 1.2, -0.064352214, -0.042791694, 0.01898112, 0.0126217, 0.85, -0.01898112, 0.014976631, 0.023264974, -0.018356713, 1, -0.035, -0.053, 0.035, 0.053, 1, -0.007465529, 0, 0.03247589, 0, 1, -0.079882845, 0, 0.049238246, 0, 0.9, -0.024619123, 0, 0.031611364, 0, 1, -0.032338496, -0.054470923, 0.039639592, 0.066768885, 2.0258462, -0.023116231, -0.6495184, 0, 0),
+"times": PackedFloat32Array(0, 0.28792703, 0.40181375, 0.5414036, 0.5858904, 0.80239695, 0.9501116, 1.0764618, 1.25)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CheckmarkLabel:position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-45, 0, 0, 0.04904822, -6.103222, -65.043785, -0.11374388, -1.3927153, 0.11005142, 1.3475037, -45, -0.029, -0.017, 0.12111261, 0.07099705, -45, -0.12860395, 0.9815639, 0.101, 0, -115.12046, -0.0028055906, 29.183235, 0, 0),
+"times": PackedFloat32Array(0, 0.18565613, 0.37446994, 1.1212475, 1.25)
 }
 
 [sub_resource type="Animation" id="Animation_v50an"]
@@ -574,9 +628,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j1phq"]
 _data = {
-&"RESET": SubResource("Animation_5df6q"),
+&"RESET": SubResource("Animation_wdm2l"),
 &"auto_upgrade": SubResource("Animation_oshs8"),
-&"job_complete": SubResource("Animation_qqk1h"),
+&"job_complete": SubResource("Animation_mb6op"),
 &"open_lock": SubResource("Animation_v50an"),
 &"turn_hourglass": SubResource("Animation_22lh2")
 }
@@ -609,7 +663,6 @@ offset_left = -32.0
 offset_right = 32.0
 offset_bottom = 27.0
 grow_horizontal = 2
-scale = Vector2(1e-05, 1e-05)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 theme_override_constants/separation = 0
@@ -639,7 +692,6 @@ offset_top = -41.43
 offset_right = 36.0
 offset_bottom = -1.4300003
 grow_horizontal = 2
-scale = Vector2(1e-05, 1e-05)
 pivot_offset_ratio = Vector2(0.5, 1)
 mouse_filter = 2
 theme_override_constants/separation = -4
@@ -660,6 +712,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Hourglass" type="TextureRect" parent="." unique_id=604358792]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -672,6 +725,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(20, 20)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("2_oshs8")
 expand_mode = 3

@@ -70,10 +70,10 @@ public partial class TimedTaskCellInfoUIContainer : Control
         {
             case AutoUpgradeTimedTaskState _:
                 return "auto_upgrade";
-            case ConfigTimedTaskState configTimedTaskState:
-                // do something here!
             case CellUnlockTimedTaskState _:
                 return "open_lock";
+            case ConfigTimedTaskState configTimedTaskState:
+                //do something different here?
             default:
                 return "job_complete";
         }
