@@ -68,8 +68,12 @@ public partial class TimedTaskCellInfoUIContainer : Control
     {
         switch (timedTaskEndedEvent.timedTask)
         {
-            case AutoUpgradeTimedTaskState autoUpgradeTimedTask:
+            case AutoUpgradeTimedTaskState _:
                 return "auto_upgrade";
+            case ConfigTimedTaskState configTimedTaskState:
+                // do something here!
+            case CellUnlockTimedTaskState _:
+                return "open_lock";
             default:
                 return "job_complete";
         }

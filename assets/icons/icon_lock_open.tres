@@ -1,0 +1,9 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://c8h64gfwvweou"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_22lh2"]
+load_path = "res://.godot/imported/uiIcons.png-333320fe0782f3747298b302846a6c74.ctex"
+
+[resource]
+atlas = SubResource("CompressedTexture2D_22lh2")
+region = Rect2(1152, 384, 128, 128)
+filter_clip = true

@@ -54,7 +54,7 @@
 [ext_resource type="Resource" uid="uid://cngmx1jbtbgou" path="res://data/terrain/river.tres" id="46_sn60b"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_67nna"]
-tile_data = PackedInt32Array(65536, 196609, 4, 1, 196608, 0, 65537, 65536, 3)
+tile_data = PackedInt32Array(0, 196609, 4, 65536, 65536, 3, 1, 196608, 0)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o04i8"]
 resource_name = "terrain"
