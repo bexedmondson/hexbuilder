@@ -12,10 +12,10 @@ public partial class MapController : Node2D, IInjectable
 
     [ExportCategory("Default Setup")]
     [Export]
-    private int defaultCentreTileSourceIndex;
+    private int plainGrassTileSourceIndex;
     
     [Export]
-    private Vector2I defaultCentreTileCoords;
+    private Vector2I plainGrassTileCoords;
     
     [Export]
     private int defaultResidentCount;
@@ -148,6 +148,24 @@ public partial class MapController : Node2D, IInjectable
 
     public CustomTileData GetDefaultGeneratedTileAtCell(Vector2I cell)
     {
+        //if in the starting set of tiles, revert to that rather than what would've generated under it
+        //and been overwritten by the pattern - UNLESS it's a starting building, in which case just revert to grass
+        var startPattern = baseMapLayer.TileSet.GetPattern(0);
+        var usedCells = startPattern.GetUsedCells();
+        foreach (var startCell in usedCells)
+        {
+            if (startCell != cell)
+                continue;
+
+            if (startPattern.GetCellSourceId(startCell) != plainGrassTileSourceIndex) //i.e. if not a terrain cell
+            {
+                return tileDatabase.GetTileInfoForAtlasCoords(plainGrassTileSourceIndex, plainGrassTileCoords).tileData;
+            }
+
+            var patternAtlasCoords = startPattern.GetCellAtlasCoords(startCell);
+            return tileDatabase.GetTileInfoForAtlasCoords(0, patternAtlasCoords).tileData;
+        }
+        
         var atlasCoords = mapGenerator.GetDefaultGeneratedAtlasCoordsAtCell(cell);
         return tileDatabase.GetTileInfoForAtlasCoords(0, atlasCoords).tileData; //TODO make the source id not just a random hardcoded 0
     }

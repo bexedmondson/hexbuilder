@@ -58,30 +58,32 @@ public class HousingManager : IInjectable
     {
         bool housesChanged = false;
         var usedCells = mapController.BaseMapLayer.GetUsedCells();
-        
-        List<Vector2I> existingMapHouseCoords = new();
-        
+
         foreach (var cell in usedCells)
         {
             if (mapController.GetCellStatus(cell) != CellStatus.Unlocked)
                 continue;
-            
+
             var cellData = mapController.BaseMapLayer.GetCellCustomData(cell);
-            
+
             if (cellData == null)
             {
                 GD.Print($"cell at {cell} has null custom data??");
                 continue;
             }
-                
-            if (!cellData.TryGetComponent<ResidentCapacityComponent>(out var cellDataResidentCapacity) 
-                || cellDataResidentCapacity.capacity == 0)
-                continue;
-            
-            existingMapHouseCoords.Add(cell);
 
+            var houseExistsOnCell = !cellData.TryGetComponent<ResidentCapacityComponent>(out var cellDataResidentCapacity)
+                                    || cellDataResidentCapacity.capacity == 0;
+
+            //if we already have some record of a residence at this cell, and if the current customTileData at this cell 
+            //is different to the tile data stored in the record we have of this residence, we should update it.
+            //we should update it even if this residence should no longer exist at this cell, because in that case
+            //we'll need to update the residents' state
             if (houseDatas.TryGetValue(cell, out var existingHouseData))
             {
+                if (existingHouseData.tileData == cellData)
+                    continue;
+
                 existingHouseData.UpdateResidenceType(cellData, out List<ResidentState> kickedOutResidents);
 
                 foreach (var kickedOutResident in kickedOutResidents)
@@ -89,23 +91,19 @@ public class HousingManager : IInjectable
                     residentHousingMap.Remove(kickedOutResident);
                     InjectionManager.Get<EventDispatcher>().Dispatch(new ResidentHouseStateUpdatedEvent(kickedOutResident));
                 }
-                
-                housesChanged = true;
 
+                //had to kick the residents out so their state could be updated before removing the house from the list as mentioned above
+                if (!houseExistsOnCell)
+                    houseDatas.Remove(cell);
+
+                housesChanged = true;
             }
-            else
+            else if (houseExistsOnCell) //otherwise if we have no record of a residence here but there should be one, add a record
             {
                 houseDatas[cell] = new HouseState(cell, cellData);
                 housesChanged = true;
             }
-        }
-
-        foreach (var houseData in houseDatas)
-        {
-            if (existingMapHouseCoords.Contains(houseData.Key))
-                continue;
-
-            housesChanged = true;
+            //if we don't have a record of a residence at this cell and there shouldn't be one, don't do anything :)
         }
 
         if (housesChanged)

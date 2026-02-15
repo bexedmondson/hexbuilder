@@ -205,8 +205,7 @@ y_sort_enabled = true
 script = ExtResource("2_m3sjc")
 baseMapLayer = NodePath("BaseTileMapLayer")
 mapGenerator = NodePath("MapGenerator")
-defaultCentreTileSourceIndex = 1
-defaultCentreTileCoords = Vector2i(3, 4)
+plainGrassTileCoords = Vector2i(1, 1)
 defaultResidentCount = 1
 
 [node name="BaseTileMapLayer" type="TileMapLayer" parent="MapController" unique_id=119494748]
