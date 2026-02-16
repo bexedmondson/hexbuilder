@@ -105,12 +105,12 @@ public partial class MapGenerator : Node
     private NoiseTexture2D vegetationNoise;
     private Image vegetationNoiseImage;
 
-    private BetterTerrain bt;
+    //private BetterTerrain bt;
     private MapController mapController;
 
     public void Setup()
     {
-        bt = new BetterTerrain(baseMapLayer);
+        //bt = new BetterTerrain(baseMapLayer);
         
         int seedChange = GD.RandRange(0, 1000);
 
@@ -207,7 +207,7 @@ public partial class MapGenerator : Node
         }
         GD.Print(sb2.ToString());*/
         
-        bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate), false);
+        //bt.UpdateTerrainCells(new Godot.Collections.Array<Vector2I>(allCellsToUpdate), false);
         baseMapLayer.EmitSignal("changed");
     }
 
@@ -273,13 +273,13 @@ public partial class MapGenerator : Node
         if (vegetation > vegetationBushesLowerThreshold)
             return bushesCoords;
         
-        bt.SetCell(cell, grassTerrain);
+        //bt.SetCell(cell, grassTerrain);
         return grassCoords;
     }
 
     private Vector2I SetSand(Vector2I cell, float rockiness, float vegetation)
     {
-        bt.SetCell(cell, sandTerrain);
+        //bt.SetCell(cell, sandTerrain);
         
         if (vegetation > vegetationTreesLowerThreshold)
             return sandPlantsCoords;
@@ -287,7 +287,7 @@ public partial class MapGenerator : Node
         return rockiness < rockyUpperThreshold ? sandRocksCoords : sandCoords;
     }
     
-    private List<Vector2I> FindRiverCells()
+    /*private List<Vector2I> FindRiverCells()
     {
         var usedCells = baseMapLayer.GetUsedCells();
 
@@ -336,9 +336,9 @@ public partial class MapGenerator : Node
             if (terrainRiverCells.Contains(baseMapLayer.GetCellTileData(riverCell)))
                 continue;
             
-            bt.SetCell(riverCell, riverTerrain);
+            //bt.SetCell(riverCell, riverTerrain);
         }
 
         return riverCells;
-    }
+    }*/
 }

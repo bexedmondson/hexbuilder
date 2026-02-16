@@ -15,10 +15,6 @@ run/main_scene="uid://decrhuj8ncsgc"
 config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://icon.svg"
 
-[autoload]
-
-BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
-
 [display]
 
 window/size/viewport_width=1920
