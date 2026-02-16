@@ -119,6 +119,11 @@ public class ResidentManager : IInjectable
         }
     }
 
+    public CurrencySum GetTotalResidentFoodConsumption()
+    {
+        return new CurrencySum(CurrencyType.Food, AllResidents.Length);
+    }
+
     public ResidentState[] GetNotBusyResidents()
     {
         List<ResidentState> unemployedResidents = new();

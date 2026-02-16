@@ -36,9 +36,6 @@ buildPrice = Dictionary[int, int]({
 1: 8,
 2: 18
 })
-baseTurnCurrencyChange = Dictionary[int, int]({
-0: -4
-})
 adjacencies = Array[ExtResource("2_uw7xw")]([SubResource("Resource_s5lrj"), SubResource("Resource_uw7xw")])
 components = Array[ExtResource("4_f5q5i")]([SubResource("Resource_f6x7t"), SubResource("Resource_7dalm")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

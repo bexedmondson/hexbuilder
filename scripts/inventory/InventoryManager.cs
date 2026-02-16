@@ -55,6 +55,11 @@ public partial class InventoryManager : Node2D, IInjectable
         return currencyIcons[currencyType];
     }
 
+    public int GetCurrentCurrencyQuantity(CurrencyType currencyType)
+    {
+        return inventory.GetValueOrDefault(currencyType, 0);
+    }
+
     public int GetCurrencyCapacity(CurrencyType currencyType)
     {
         return capacities.GetValueOrDefault(currencyType, 0);

@@ -16,7 +16,7 @@ public class MapCurrencyChangeAnalyser : IInjectable
         housingManager ??= InjectionManager.Get<HousingManager>();
     }
 
-    public List<CurrencySum> GetFullCurrencyTurnDeltas()
+    public List<CurrencySum> GetFullCellCurrencyTurnDeltas()
     {
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
         housingManager ??= InjectionManager.Get<HousingManager>();
@@ -215,9 +215,9 @@ public class MapCurrencyChangeAnalyser : IInjectable
         return adjacencyEffects;
     }
 
-    public CurrencySum GetOverallTurnDelta()
+    public CurrencySum GetOverallMapTurnDelta()
     {
-        var fullCurrencyTurnDeltas = GetFullCurrencyTurnDeltas();
+        var fullCurrencyTurnDeltas = GetFullCellCurrencyTurnDeltas();
         
         CurrencySum turnChange = new();
         foreach (var turnDelta in fullCurrencyTurnDeltas)

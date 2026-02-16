@@ -54,7 +54,8 @@ public partial class MainInventoryDisplay : Control
             kvp.Value.Text = $"/ {inventoryManager.GetCurrencyCapacity(kvp.Key)}";
         }
         
-        CurrencySum turnChange = mapCurrencyChangeAnalyser.GetOverallTurnDelta();
+        CurrencySum turnChange = mapCurrencyChangeAnalyser.GetOverallMapTurnDelta();
+        turnChange.Add(InjectionManager.Get<ResidentManager>().GetTotalResidentFoodConsumption());
 
         foreach (var kvp in currencyDeltas)
         {
@@ -99,7 +100,7 @@ public partial class MainInventoryDisplay : Control
 
     private void OnCurrencyChangePossiblyUpdated(IEvent _)
     {
-        var turnChange = mapCurrencyChangeAnalyser.GetOverallTurnDelta();
+        var turnChange = mapCurrencyChangeAnalyser.GetOverallMapTurnDelta();
 
         foreach (var kvp in currencyDeltas)
         {

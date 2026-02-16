@@ -74,7 +74,7 @@ buildPrice = Dictionary[int, int]({
 2: 8
 })
 baseTurnCurrencyChange = Dictionary[int, int]({
-0: -1
+2: -1
 })
 adjacencies = Array[ExtResource("2_wx0d3")]([SubResource("Resource_fq1lg")])
 components = Array[ExtResource("4_305jr")]([SubResource("Resource_uqrft"), SubResource("Resource_5sslw"), SubResource("Resource_wx0d3"), SubResource("Resource_qjms0")])

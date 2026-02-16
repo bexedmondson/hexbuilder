@@ -58,7 +58,6 @@ buildPrice = Dictionary[int, int]({
 1: 6
 })
 baseTurnCurrencyChange = Dictionary[int, int]({
-0: -2,
 1: -2
 })
 components = Array[ExtResource("3_joiki")]([SubResource("Resource_1nllx"), SubResource("Resource_16rmr"), SubResource("Resource_8awr6"), SubResource("Resource_pwji4")])

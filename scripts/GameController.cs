@@ -12,6 +12,7 @@ public partial class GameController : Node2D
     private TileDatabase tileDatabase;
     private EventDispatcher eventDispatcher;
     private MapCurrencyChangeAnalyser mapCurrencyChangeAnalyser;
+    private ResidentManager residentManager;
     private TimedTaskManager timedTaskManager;
     private TurnCounter turnCounter;
 
@@ -42,7 +43,10 @@ public partial class GameController : Node2D
     public void NextTurn()
     {
         mapCurrencyChangeAnalyser ??= InjectionManager.Get<MapCurrencyChangeAnalyser>();
-        List<CurrencySum> allCurrencyChanges = mapCurrencyChangeAnalyser.GetFullCurrencyTurnDeltas();
+        List<CurrencySum> allCurrencyChanges = mapCurrencyChangeAnalyser.GetFullCellCurrencyTurnDeltas();
+
+        residentManager ??= InjectionManager.Get<ResidentManager>();
+        allCurrencyChanges.Add(residentManager.GetTotalResidentFoodConsumption());
         
         turnCounter.OnNextTurn();
         

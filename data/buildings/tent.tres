@@ -37,8 +37,5 @@ canBePlacedOn = Array[ExtResource("4_3tutr")]([ExtResource("1_jhxqr"), ExtResour
 buildPrice = Dictionary[int, int]({
 1: 1
 })
-baseTurnCurrencyChange = Dictionary[int, int]({
-0: -1
-})
 components = Array[ExtResource("4_kt3v3")]([SubResource("Resource_mlsau"), SubResource("Resource_uls6c"), SubResource("Resource_gp8ng")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
