@@ -27,4 +27,9 @@ public partial class SingleCurrencyDisplay : Control
     {
         icon.SelfModulate = color;
     }
+
+    public void SetTextColor(Color color)
+    {
+        quantityLabel.SelfModulate = color;
+    }
 }

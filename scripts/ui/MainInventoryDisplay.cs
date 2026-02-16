@@ -10,6 +10,12 @@ public partial class MainInventoryDisplay : Control
     private Color iconColor = Colors.Black;
 
     [Export]
+    private Color negativeColor = Colors.Crimson;
+
+    [Export]
+    private Color positiveColor = Colors.LawnGreen;
+
+    [Export]
     private Godot.Collections.Dictionary<CurrencyType, SingleCurrencyDisplay> currencyDisplays = new();
     
     [Export]
@@ -35,7 +41,12 @@ public partial class MainInventoryDisplay : Control
             if (!inventory.ContainsKey(kvp.Key))
                 GD.PushError($"[MainInventoryDisplay] No inventory currency display found for {kvp.Key}!");
             else
-                kvp.Value.SetCurrencyAmount(inventory.GetValueOrDefault(kvp.Key, 0));
+            {
+                var amount = inventory.GetValueOrDefault(kvp.Key, 0);
+                kvp.Value.SetCurrencyAmount(amount);
+                kvp.Value.SetIconColor(amount < 0 ? negativeColor : iconColor);
+                kvp.Value.SetTextColor(amount < 0 ? negativeColor : iconColor);
+            }
         }
         
         foreach (var kvp in capacityLabels)
@@ -71,6 +82,19 @@ public partial class MainInventoryDisplay : Control
             return;
         
         deltaDisplay.Text = $"({(delta < 0 ? string.Empty : plusPrefix)}{delta})";
+
+        switch (delta)
+        {
+            case > 0:
+                deltaDisplay.SelfModulate = positiveColor;
+                break;
+            case < 0:
+                deltaDisplay.SelfModulate = negativeColor;
+                break;
+            default:
+                deltaDisplay.SelfModulate = iconColor;
+                break;
+        }
     }
 
     private void OnCurrencyChangePossiblyUpdated(IEvent _)
