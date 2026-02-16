@@ -5,6 +5,7 @@
 
 [node name="WorkplaceInfo" type="Panel" unique_id=509068780 node_paths=PackedStringArray("workplaceInfoLabel", "workplaceIcon", "workerNamesLabel", "workerCountLabel", "minusButton", "plusButton")]
 custom_minimum_size = Vector2(0, 80)
+mouse_filter = 1
 theme_type_variation = &"PanelEmbedded"
 script = ExtResource("1_bn0rj")
 workplaceInfoLabel = NodePath("HBoxContainer/InfoLabel")
