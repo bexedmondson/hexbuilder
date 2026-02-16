@@ -121,7 +121,7 @@ public class ResidentManager : IInjectable
 
     public CurrencySum GetTotalResidentFoodConsumption()
     {
-        return new CurrencySum(CurrencyType.Food, AllResidents.Length);
+        return new CurrencySum(CurrencyType.Food, -1 * AllResidents.Length);
     }
 
     public ResidentState[] GetNotBusyResidents()
