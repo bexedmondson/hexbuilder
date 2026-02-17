@@ -39,6 +39,7 @@ enabled=PackedStringArray("res://addons/anim_track_converter/plugin.cfg", "res:/
 [gui]
 
 theme/default_font_multichannel_signed_distance_field=true
+common/default_scroll_deadzone=3
 theme/custom="uid://c42r8558dvmyi"
 
 [input]
