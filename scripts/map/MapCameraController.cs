@@ -3,6 +3,9 @@ using Godot;
 public partial class MapCameraController : Camera2D, IInjectable
 {
     [Export]
+    private float defaultZoom = 1.0f;
+    
+    [Export]
     private float minZoom;
     
     [Export]
@@ -15,6 +18,7 @@ public partial class MapCameraController : Camera2D, IInjectable
     private Curve flyCurve;
 
     private Tween activeFlyTween;
+    private Tween activeZoomTween;
 
     public override void _Ready()
     {
@@ -46,6 +50,8 @@ public partial class MapCameraController : Camera2D, IInjectable
     private void HandleZoom(float factor)
     {
         var zoomScale = Zoom.X; //both dimensions should be the same here
+        
+        GD.Print($"[MapCameraController] HandleZoom: current zoomScale is {zoomScale}, factor is {factor}");
             
         if (factor < 0)
             zoomScale = Mathf.Max(zoomScale + factor, minZoom);
@@ -53,6 +59,25 @@ public partial class MapCameraController : Camera2D, IInjectable
             zoomScale = Mathf.Min(zoomScale + factor, maxZoom);
 
         Zoom = Vector2.One * zoomScale;
+    }
+
+    public void ResetZoom(float flyDuration = 0.5f)
+    {
+        if (Zoom == Vector2.One * defaultZoom)
+            return;
+        
+        TweenZoomTo(Vector2.One * defaultZoom, flyDuration);
+    }
+
+    private void TweenZoomTo(Vector2 targetZoom, float duration = 0.5f)
+    {
+        if (activeZoomTween != null && activeZoomTween.IsRunning())
+            activeZoomTween.Kill();
+        
+        activeZoomTween = CreateTween();
+        activeZoomTween.SetEase(Tween.EaseType.InOut);
+        activeZoomTween.TweenProperty(this, "zoom", targetZoom, duration);
+        activeZoomTween.Play();
     }
 
     public void FlyToCellWithOffset(Vector2I cell, Vector2I screenOffset, float duration = 0.5f)
