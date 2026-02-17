@@ -28,7 +28,7 @@ public class TimedTaskManager : IInjectable
             if (!timedTaskData.HasFinished)
             {
                 eventDispatcher.Dispatch(new TimedTaskUpdatedEvent(timedTaskData, kvp.Key));
-                return;
+                continue;
             }
             
             timedTaskData.CompleteJob();

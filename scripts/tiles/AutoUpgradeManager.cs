@@ -52,7 +52,6 @@ public class AutoUpgradeManager : IInjectable
             {
                 GD.PushWarning($"AutoUpgradeComponent: Finishing upgrade at {usedCell} to {autoUpgradeComponent.afterUpgradeTile.GetFileName()}");
                 mapController.BuildTileAtCell(usedCell, autoUpgradeComponent.afterUpgradeTile);
-                //TODO change tile state to...something that isn't unlocked, i guess. unlocking maybe?
             });
             
             timedTaskManager.AddNewTimedTask(autoUpgradeJob);

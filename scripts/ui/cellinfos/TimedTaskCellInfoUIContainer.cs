@@ -23,6 +23,7 @@ public partial class TimedTaskCellInfoUIContainer : Control
     {
         if (timedTaskCellInfoUis.ContainsKey(timedTaskStartedEvent.location))
         {
+            //TODO this probably happened due to an auto-upgrade happening too fast. will need to fix! 
             GD.PushError("how did this happen");
             return;
         }
