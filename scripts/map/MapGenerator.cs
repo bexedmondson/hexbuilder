@@ -177,6 +177,7 @@ public partial class MapGenerator : Node
             {
                 var atlasCoords = GenerateCellAtlasCoords(affectedCell);
                 
+                GD.Print($"[MapGenerator] setting cell {affectedCell} to terrain atlas coords {atlasCoords}");
                 baseMapLayer.SetCell(affectedCell, 0, atlasCoords);
             }
         }

@@ -89,16 +89,16 @@ public partial class UnlockedCellPopup : Popup
         selectedCellInfoButton.Visible = false;
     }
     
-    public void ShowForCell(TileMapLayer baseMapLayer, Vector2I setCell)
+    public void ShowForCell(TileMapLayer baseMapLayer, Vector2I selectedCell)
     {
-        if (setCell == cell)
+        if (selectedCell == cell)
             return;
         
         inventoryManager ??= InjectionManager.Get<InventoryManager>();
         workplaceManager ??= InjectionManager.Get<WorkplaceManager>();
         confirmButton.Disabled = true;
         
-        cell = setCell;
+        cell = selectedCell;
         cellCustomTileData = baseMapLayer.GetCellTileData(cell).GetCustomData("data").Obj as CustomTileData;
         
         TileDatabase tileDatabase = InjectionManager.Get<TileDatabase>();

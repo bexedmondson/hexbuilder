@@ -23,15 +23,15 @@ public partial class LockedCellPopup : Popup
         residentManager = InjectionManager.Get<ResidentManager>();
     }
 
-    public void ShowForCell(Vector2I setCell)
+    public void ShowForCell(Vector2I selectedCell)
     {
-        cell = setCell;
+        cell = selectedCell;
         int requiredWorkerCount = mapController.GetCellUnlockWorkerRequirement(cell);
         int availableResidents = residentManager.GetNotBusyResidentCount();
         
         workerCountLabel.Text = $"x{requiredWorkerCount}";
 
-        if (mapController.BaseMapLayer.GetCellCustomData(setCell)?.TryGetComponent(out TerrainUnlockTimeComponent unlockTimeComponent) == true)
+        if (mapController.BaseMapLayer.GetCellCustomData(selectedCell)?.TryGetComponent(out TerrainUnlockTimeComponent unlockTimeComponent) == true)
             turnCountLabel.Text = $"x{unlockTimeComponent.turnCount}";
         else
             turnCountLabel.Text = "x1";

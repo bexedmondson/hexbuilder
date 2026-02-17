@@ -133,7 +133,10 @@ public partial class MapController : Node2D, IInjectable
         int cellSourceId = baseMapLayer.GetCellSourceId(cell);
         Vector2I cellAtlasCoords = baseMapLayer.GetCellAtlasCoords(cell);
         if (cellSourceId != -1 && cellAtlasCoords != Vector2I.One * -1)
+        {
+            GD.Print($"[MapGenerator] setting cell {cell} to source ID {cellSourceId}, atlas coords {cellAtlasCoords}");
             baseMapLayer.SetCell(cell, cellSourceId, cellAtlasCoords, 0); //setting to the default (i.e. not greyed out) version of the tile
+        }
         
         List<Vector2I> newlyShownCells = cellStatusManager.OnCellUnlocked(cell, baseMapLayer.GetSurroundingCells(cell));
 
@@ -142,7 +145,10 @@ public partial class MapController : Node2D, IInjectable
             int newlyShownCellSourceId = baseMapLayer.GetCellSourceId(newlyShownCell);
             Vector2I newlyShownCellAtlasCoords = baseMapLayer.GetCellAtlasCoords(newlyShownCell);
             if (baseMapLayer.TileSet.GetSource(newlyShownCellSourceId).HasAlternativeTile(newlyShownCellAtlasCoords, 1))
+            {
+                GD.Print($"[MapGenerator] setting cell {newlyShownCell} to terrain atlas coords {newlyShownCellAtlasCoords}");
                 baseMapLayer.SetCell(newlyShownCell, baseMapLayer.GetCellSourceId(newlyShownCell), baseMapLayer.GetCellAtlasCoords(newlyShownCell), 1); //where 1 is the modulated (darkened) version of the cell
+            }
         }
         
         eventDispatcher.Dispatch(new MapUpdatedEvent());
@@ -194,6 +200,7 @@ public partial class MapController : Node2D, IInjectable
 
     public void BuildTileAtCell(Vector2I cell, TileDatabase.TileInfo tileToSet)
     {
+        GD.Print($"[MapGenerator] setting cell {cell} to {tileToSet.tileData.GetFileName()}, source id {tileToSet.sourceId}, atlas coords {tileToSet.tileCoords}");
         baseMapLayer.SetCell(cell, baseMapLayer.TileSet.GetSourceId(tileToSet.sourceId), tileToSet.tileCoords);
 
         cellBuildStatsTracker.OnCellTileBuilt(tileToSet.tileData);
