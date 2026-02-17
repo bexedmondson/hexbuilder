@@ -574,7 +574,7 @@ script = ExtResource("23_7ubyd")
 visible = false
 layout_mode = 2
 
-[node name="ScrollPanel" type="Panel" parent="TabContainer/Build/Panel" unique_id=641911135]
+[node name="ScrollPanel" type="Panel" parent="TabContainer/Build/Panel" unique_id=641911135 node_paths=PackedStringArray("noneIndicator", "listParent")]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.03
@@ -587,6 +587,20 @@ offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"PanelEmbedded"
+script = ExtResource("7_nsrx4")
+noneIndicator = NodePath("NoBuildOptionsLabel")
+listParent = NodePath("ScrollContainer/TileSelectionGrid")
+
+[node name="NoBuildOptionsLabel" type="Label" parent="TabContainer/Build/Panel/ScrollPanel" unique_id=1428741117]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_type_variation = &"LightOutlineLabel"
+text = "no build options found"
+horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Build/Panel/ScrollPanel" unique_id=1566065985 node_paths=PackedStringArray("tileOptionParent", "filterToggles")]
 layout_mode = 1

@@ -43,13 +43,42 @@ public partial class ListContainerNoneIndicator : Control
 
     private void OnChildEntered(Node n)
     {
-        noneIndicator.Visible = false;
+        if (n is Control c)
+        {
+            if (c.Visible)
+                noneIndicator.Visible = false;
+            
+            c.VisibilityChanged += OnChildVisibilityChanged;
+        }
+        else
+        {
+            noneIndicator.Visible = false;
+        }
     }
     
     private void OnChildExited(Node n)
     {
+        if (n is Control c)
+            c.VisibilityChanged -= OnChildVisibilityChanged;
+        
         var prevChildCount = listParent?.GetChildCount() ?? GetChildCount();
         if (prevChildCount <= 1)
             noneIndicator.Visible = true;
+        
+        OnChildVisibilityChanged();
+    }
+
+    private void OnChildVisibilityChanged()
+    {
+        foreach (var child in listParent?.GetChildren() ?? GetChildren())
+        {
+            if (child is not Control c || c.Visible)
+            {
+                noneIndicator.Visible = false;
+                return;
+            }
+        }
+
+        noneIndicator.Visible = true;
     }
 }

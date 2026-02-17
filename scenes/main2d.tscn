@@ -172,9 +172,9 @@ _bundled = {
 atlas = ExtResource("15_nkuak")
 region = Rect2(2432, 1536, 128, 128)
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_bi4yo"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_yi10l"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_ufsem"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_bnbf5"]
 
 [node name="Main2d" type="Node2D" unique_id=1053819598 node_paths=PackedStringArray("mapController", "inventoryManager")]
 script = ExtResource("1_vlfvj")
@@ -815,7 +815,7 @@ layer = 2
 
 [node name="UnlockedCellPopup" parent="PopupLayer" unique_id=860641421 node_paths=PackedStringArray("encyclopediaPopup") instance=ExtResource("50_bi4yo")]
 visible = false
-tileSelectionGroup = SubResource("ButtonGroup_bi4yo")
+tileSelectionGroup = SubResource("ButtonGroup_yi10l")
 encyclopediaPopup = NodePath("../EncyclopediaPopup")
 
 [node name="LockedCellPopup" parent="PopupLayer" unique_id=1463822280 instance=ExtResource("51_ufsem")]
@@ -831,7 +831,7 @@ visible = false
 
 [node name="EncyclopediaPopup" parent="PopupLayer" unique_id=1275043952 instance=ExtResource("55_hs41i")]
 visible = false
-encyclopediaTileGroup = SubResource("ButtonGroup_ufsem")
+encyclopediaTileGroup = SubResource("ButtonGroup_bnbf5")
 
 [connection signal="pressed" from="CanvasLayer/UIMain/NextTurnButton" to="." method="NextTurn"]
 [connection signal="pressed" from="CanvasLayer/UIMain/HousingInfoButton" to="PopupLayer/HousingInfoPopup" method="ShowPopup"]
