@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_2vsbt"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="1_24cbf"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="1_ku54e"]
+[ext_resource type="Resource" uid="uid://b26b1kiyr2vjc" path="res://data/buildings/mine.tres" id="2_tm11l"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="2_xbjma"]
+[ext_resource type="Resource" uid="uid://d2ks5o3lef3w2" path="res://data/buildings/pit_mine.tres" id="3_kgcit"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="3_ut87k"]
 [ext_resource type="Script" uid="uid://bih1b7mm4mmtf" path="res://scripts/data/requirements/Requirement.cs" id="4_p10oh"]
 [ext_resource type="Script" uid="uid://cna1dhkk0j7sa" path="res://scripts/data/requirements/LifetimeGainedRequirement.cs" id="4_ut87k"]
@@ -11,6 +13,22 @@
 [ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="9_488m4"]
 [ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="10_il1e2"]
 [ext_resource type="Resource" uid="uid://dekee25m1njfp" path="res://data/tile_actions/return_to_nature_tile_action.tres" id="11_tm11l"]
+
+[sub_resource type="Resource" id="Resource_7vw84"]
+script = ExtResource("1_2vsbt")
+requiredTile = ExtResource("2_tm11l")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+0: -1
+})
+
+[sub_resource type="Resource" id="Resource_elc11"]
+script = ExtResource("1_2vsbt")
+requiredTile = ExtResource("3_kgcit")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+0: -1
+})
 
 [sub_resource type="Resource" id="Resource_2vsbt"]
 script = ExtResource("3_ut87k")
@@ -40,8 +58,9 @@ buildPrice = Dictionary[int, int]({
 1: 2
 })
 baseTurnCurrencyChange = Dictionary[int, int]({
-0: 3,
+0: 2,
 3: 1
 })
+adjacencies = Array[ExtResource("1_2vsbt")]([SubResource("Resource_7vw84"), SubResource("Resource_elc11")])
 components = Array[ExtResource("2_xbjma")]([SubResource("Resource_2vsbt"), SubResource("Resource_r5dkk"), SubResource("Resource_kgcit")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"

@@ -3,13 +3,28 @@
 [ext_resource type="Script" uid="uid://cwg8cx0ec2cbs" path="res://scripts/data/AdjacencyConfig.cs" id="1_k7c6n"]
 [ext_resource type="Resource" uid="uid://dfl5uijhqbtt3" path="res://data/terrain/dirt.tres" id="1_yw51q"]
 [ext_resource type="Resource" uid="uid://ckghrlsbr2sq5" path="res://data/terrain/grass.tres" id="2_7s1am"]
+[ext_resource type="Resource" uid="uid://d2ks5o3lef3w2" path="res://data/buildings/pit_mine.tres" id="2_o12db"]
 [ext_resource type="Script" uid="uid://dd6vtfltu5uqf" path="res://scripts/data/CustomTileData.cs" id="3_2xlp4"]
 [ext_resource type="Script" uid="uid://v1k4imvy0e0u" path="res://scripts/data/tilecomponents/AbstractTileDataComponent.cs" id="3_k7c6n"]
+[ext_resource type="Resource" uid="uid://b26b1kiyr2vjc" path="res://data/buildings/mine.tres" id="3_v3etj"]
 [ext_resource type="Script" uid="uid://d1xw3ed0jek8r" path="res://scripts/data/tilecomponents/WorkerCapacityComponent.cs" id="4_a05l5"]
 [ext_resource type="Resource" uid="uid://cm2hn4sk7a8uj" path="res://data/terrain/bushes.tres" id="5_a05l5"]
 [ext_resource type="Script" uid="uid://bajanuybps04x" path="res://scripts/data/tilecomponents/TileTimedTasksComponent.cs" id="8_3fxsg"]
 [ext_resource type="Script" uid="uid://by81c1aj320jt" path="res://scripts/data/timedtasks/TimedTaskConfig.cs" id="9_o12db"]
 [ext_resource type="Resource" uid="uid://dekee25m1njfp" path="res://data/tile_actions/return_to_nature_tile_action.tres" id="10_v3etj"]
+
+[sub_resource type="Resource" id="Resource_v3etj"]
+script = ExtResource("1_k7c6n")
+requiredTile = ExtResource("2_o12db")
+distance = 1
+currencyEffect = Dictionary[int, int]({
+0: -1
+})
+
+[sub_resource type="Resource" id="Resource_v4lof"]
+script = ExtResource("1_k7c6n")
+requiredTile = ExtResource("3_v3etj")
+distance = 1
 
 [sub_resource type="Resource" id="Resource_8pu6x"]
 script = ExtResource("4_a05l5")
@@ -30,5 +45,6 @@ buildPrice = Dictionary[int, int]({
 baseTurnCurrencyChange = Dictionary[int, int]({
 0: 3
 })
+adjacencies = Array[ExtResource("1_k7c6n")]([SubResource("Resource_v3etj"), SubResource("Resource_v4lof")])
 components = Array[ExtResource("3_k7c6n")]([SubResource("Resource_8pu6x"), SubResource("Resource_ibtg4")])
 metadata/_custom_type_script = "uid://dd6vtfltu5uqf"
