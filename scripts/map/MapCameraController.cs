@@ -28,6 +28,7 @@ public partial class MapCameraController : Camera2D, IInjectable
 
     public override void _UnhandledInput(InputEvent @event)
     {
+        GD.Print("camera " + @event);
         if (@event is InputEventScreenDrag dragEvent)
         {
             Position -= dragEvent.ScreenRelative;
@@ -36,7 +37,8 @@ public partial class MapCameraController : Camera2D, IInjectable
         else if (@event is InputEventMagnifyGesture pinchGesture)
         {
             GD.Print(pinchGesture);
-            HandleZoom(pinchGesture.Factor);
+            HandleZoom(pinchGesture.Factor - 1);
+            this.GetViewport().SetInputAsHandled();
         }
         else if (@event is InputEventMouseButton mouseWheelEvent && mouseWheelEvent.Pressed)
         {

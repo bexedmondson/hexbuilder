@@ -208,9 +208,9 @@ public partial class MapController : Node2D, IInjectable
         eventDispatcher.Dispatch(new MapUpdatedEvent());
     }
 
-    public Vector2I GetCellUnderMouse()
+    public Vector2I GetCellUnderMouse(Vector2 screenPosition)
     {
-        return baseMapLayer.LocalToMap(baseMapLayer.GetLocalMousePosition());
+        return baseMapLayer.LocalToMap(baseMapLayer.MakeCanvasPositionLocal(screenPosition));
     }
 
     public CellStatus GetCellStatus(Vector2I cell)
