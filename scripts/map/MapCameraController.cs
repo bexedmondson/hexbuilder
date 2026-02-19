@@ -28,7 +28,7 @@ public partial class MapCameraController : Camera2D, IInjectable
 
     public override void _UnhandledInput(InputEvent @event)
     {
-        GD.Print("camera " + @event);
+        //GD.Print("camera " + @event);
         if (@event is InputEventScreenDrag dragEvent)
         {
             Position -= dragEvent.ScreenRelative;
@@ -53,7 +53,7 @@ public partial class MapCameraController : Camera2D, IInjectable
     {
         var zoomScale = Zoom.X; //both dimensions should be the same here
         
-        GD.Print($"[MapCameraController] HandleZoom: current zoomScale is {zoomScale}, factor is {factor}");
+        //GD.Print($"[MapCameraController] HandleZoom: current zoomScale is {zoomScale}, factor is {factor}");
             
         if (factor < 0)
             zoomScale = Mathf.Max(zoomScale + factor, minZoom);
