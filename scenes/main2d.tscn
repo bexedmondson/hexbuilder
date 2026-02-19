@@ -44,7 +44,7 @@
 [ext_resource type="Script" uid="uid://bgcy7oymph28e" path="res://scripts/ui/toasts/ToastStack.cs" id="43_otuox"]
 [ext_resource type="Script" uid="uid://c2d6td5kvw1hw" path="res://scripts/ui/toasts/ToastLabel.cs" id="43_tw5gc"]
 [ext_resource type="Texture2D" uid="uid://ceqvtlo77pcfy" path="res://assets/icons/icon_wood.tres" id="44_3kpmb"]
-[ext_resource type="StyleBox" uid="uid://blt5gbhfsd0p5" path="res://scenes/toast_label_style.tres" id="44_7jl01"]
+[ext_resource type="StyleBox" uid="uid://blt5gbhfsd0p5" path="res://themes/clashy/panels/toast_label_style.tres" id="44_7jl01"]
 [ext_resource type="Texture2D" uid="uid://brlsqbuytsi4t" path="res://assets/icons/icon_stone.tres" id="45_5n6k3"]
 [ext_resource type="Texture2D" uid="uid://1g1gvjwkcrki" path="res://assets/icons/icon_fabric.tres" id="46_t4767"]
 [ext_resource type="PackedScene" uid="uid://bjdcf535b0agr" path="res://scenes/single_currency_display.tscn" id="47_hxced"]

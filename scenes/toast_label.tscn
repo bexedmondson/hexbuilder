@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dugii0837nslt"]
 
-[ext_resource type="StyleBox" uid="uid://blt5gbhfsd0p5" path="res://scenes/toast_label_style.tres" id="1_0l35p"]
+[ext_resource type="StyleBox" uid="uid://blt5gbhfsd0p5" path="res://themes/clashy/panels/toast_label_style.tres" id="1_0l35p"]
 [ext_resource type="Script" uid="uid://c2d6td5kvw1hw" path="res://scripts/ui/toasts/ToastLabel.cs" id="3_7awoi"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xkd57"]
