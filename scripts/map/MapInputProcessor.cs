@@ -29,9 +29,7 @@ public partial class MapInputProcessor : Node2D
     public override void _UnhandledInput(InputEvent @event)
     {
         //GD.Print("map input " + @event + " " + (@event is InputEventScreenTouch i && i.Pressed ? "pressed" : "not pressed"));
-        //if (@event is not InputEventMouseMotion)
-            //GD.Print($"{System.DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt")} {@event}");
-
+        
         if (@event is not InputEventScreenTouch eventMouseButton)
             return;
 
