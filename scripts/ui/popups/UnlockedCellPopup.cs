@@ -135,6 +135,12 @@ public partial class UnlockedCellPopup : Popup
 
         SetupTileSelector();
 
+        //if there's a tasks tab and if the build tab is currently empty (except for unlocks), hide the build tab
+        if (!tabContainer.IsTabHidden(timedTasksTab.GetIndex()))
+        {
+            tabContainer.SetTabHidden(buildTab.GetIndex(), tileSelector.GetVisibleTileOptionCount() == 0);
+        }
+
         tabContainer.SetCurrentTab(0);
         if (tabContainer.IsTabHidden(0))
             tabContainer.SelectNextAvailable();

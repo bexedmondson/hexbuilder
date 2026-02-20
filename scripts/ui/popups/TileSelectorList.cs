@@ -72,6 +72,17 @@ public partial class TileSelectorList : ScrollContainer
         FocusSelected();
     }
 
+    public int GetVisibleTileOptionCount()
+    {
+        int count = 0;
+        foreach (var child in tileOptionParent.GetChildren())
+        {
+            if (child is TileOptionUI tileOptionUI && tileOptionUI.tileInfo.tileData.IsUnlocked())
+                count++;
+        }
+        return count;
+    }
+
     public void Cleanup()
     {
         for (int i = tileOptionParent.GetChildren().Count - 1; i >= 0; i--)
