@@ -207,25 +207,33 @@ public partial class UnlockedCellPopup : Popup
     private void SetupTileSelector()
     {
         tileSelector.Cleanup();
-        
+
         tabContainer.SetTabHidden(buildTab.GetIndex(), false); //TODO change?
-        
+
         TileDatabase tileDatabase = InjectionManager.Get<TileDatabase>();
         var compatibleTileInfos = tileDatabase.GetAllCompatibleTileInfos(cellCustomTileData);
-        
+
         compatibleTileInfos.Sort((lhs, rhs) => lhs.tileData.GetFileName().CompareTo(rhs.tileData.GetFileName()));
 
+        int buildableOptionCount = 0;
         foreach (var compatibleTileInfo in compatibleTileInfos)
         {
             if (compatibleTileInfo.tileData.TryGetComponent(out HideInBuildTabComponent _))
                 continue;
-            
+
             var tileOptionUI = tileScene.Instantiate<TileOptionUI>();
             tileOptionUI.SetTile(compatibleTileInfo);
             tileOptionUI.SetButtonGroup(tileSelectionGroup);
             tileOptionUI.SetupInfoButton(true, OnInfoButton);
             tileSelector.AddTileOptionUI(tileOptionUI);
+
+            if (compatibleTileInfo.tileData.IsUnlocked() && !tileOptionUI.Disabled)
+                buildableOptionCount++;
         }
+
+        string buildTabTitle = $"Build {(buildableOptionCount == 0 ? string.Empty : $" ({buildableOptionCount})")}";
+
+        tabContainer.SetTabTitle(buildTab.GetIndex(), buildTabTitle);
 
         if (tileSelectionGroup.GetSignalConnectionList(ButtonGroup.SignalName.Pressed).Count == 0)
             tileSelectionGroup.Pressed += OnSelectionChanged;
