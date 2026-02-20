@@ -49,6 +49,7 @@ public partial class UnlockedCellAdjacencyUI : Control
         if (workplaceManager.TryGetWorkplaceAtLocation(adjacentCell, out var adjacentWorkplace))
         {
             noWorkerIndicator.Visible = adjacentWorkplace.workerCount == 0;
+            centreCellNoEffects = centreCellNoEffects || adjacentWorkplace.workerCount == 0;
         }
         else
         {
